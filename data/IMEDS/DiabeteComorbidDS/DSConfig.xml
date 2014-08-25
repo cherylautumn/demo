@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<Index_Diagnoses>
+		<Diagnose>Diabetes</Diagnose>
+		<Diagnose>Rheumatologic Disease</Diagnose>
+		<Diagnose>Mild Liver Disease</Diagnose>
+	</Index_Diagnoses>
+
+
+	<target>
+		<fileName>trainDS.csv</fileName>
+		<columns>
+			<col>ID</col>
+			<col>Label</col>
+			<col>Gender</col>
+			<col>Race</col>
+			<col>Myocardial Infarction</col>
+			<col>Congestive Heart Failure</col>
+			<col>Peripheral Vascular Disease</col>
+			<col>Cerebrovascular Disease</col>
+			<col>Dementia</col>
+			<col>Chronic Pulmonary Disease</col>
+			<col>Rheumatologic Disease</col>
+			<col>Peptic Ulcer Disease</col>
+			<col>Mild Liver Disease</col>
+	 		<col>Diabetes</col> 
+			<col>Diabetes with Chronic Complications</col>
+			<col>Hemiplegia or Paraplegia</col>
+			<col>Renal Disease</col>
+			<col>Moderate or Severe Liver Disease</col>
+			<col>AIDS</col>
+		</columns>
+	</target>
+	 
+</root>

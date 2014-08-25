@@ -69,11 +69,6 @@
   			<artifactId>jama</artifactId>
   			<version>1.0.3</version>
   		</dependency>
-  		<dependency>
-	  		 <groupId>org.apache.commons</groupId>
-	    	 <artifactId>commons-csv</artifactId>
-	    	 <version>1.0</version>
-	    </dependency>	 
   	</dependencies>
   </dependencyManagement>
   <build>
@@ -100,6 +95,11 @@
         </plugin>
       </plugins>    
     </pluginManagement>
-
+    <plugins>
+    	<plugin>
+    		<groupId>org.apache.maven.plugins</groupId>
+    		<artifactId>maven-assembly-plugin</artifactId>
+    	</plugin>
+    </plugins>
   </build>
 </project>
