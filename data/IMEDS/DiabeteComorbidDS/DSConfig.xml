@@ -12,8 +12,10 @@
 		<columns>
 			<col>ID</col>
 			<col>Label</col>
-			<col>Gender</col>
+			<col>Gender</col>						
+			<col>Age</col>
 			<col>Race</col>
+			<col>Ethinity</col>			
 			<col>Myocardial Infarction</col>
 			<col>Congestive Heart Failure</col>
 			<col>Peripheral Vascular Disease</col>

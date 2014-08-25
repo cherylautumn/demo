@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 public class CCIcode extends DIScode{
 	
 	protected ArrayList<IcdPair> icdDouble = new ArrayList<IcdPair>();
+	private ArrayList<Integer> icdCptId = new ArrayList<Integer>();
 	private String icdList="";
 	public CCIcode() {
 		// TODO Auto-generated constructor stub
@@ -22,6 +23,12 @@ public class CCIcode extends DIScode{
 	
 	public ArrayList<IcdPair> getIcdDouble() {
 		return icdDouble;
+	}
+	public ArrayList<Integer> getIcdCptId() {
+		return icdCptId;
+	}
+	public void setIcdCptId(ArrayList<Integer> icdCptId) {
+		this.icdCptId = icdCptId;
 	}
 	public void setIcdDouble(ArrayList<IcdPair> icdDouble) {
 		this.icdDouble = icdDouble;
