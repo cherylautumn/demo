@@ -22,15 +22,15 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/hchiu/workspace/spark-cdh4/spark-1.0.0-bin-cdh4/spark-1.0.0-bin-cdh4/lib/datanucleus-api-jdo-3.2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hchiu/workspace/spark-cdh4/spark-1.0.0-bin-cdh4/spark-1.0.0-bin-cdh4/lib/datanucleus-core-3.2.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hchiu/workspace/spark-cdh4/spark-1.0.0-bin-cdh4/spark-1.0.0-bin-cdh4/lib/datanucleus-rdbms-3.2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hchiu/workspace/spark-cdh4/spark-1.0.0-bin-cdh4/spark-1.0.0-bin-cdh4/lib/spark-assembly-1.0.0-hadoop2.0.0-mr1-cdh4.2.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/hchiu/workspace/spark-cdh4/spark-1.0.0-bin-cdh4/spark-1.0.0-bin-cdh4/lib/spark-examples-1.0.0-hadoop2.0.0-mr1-cdh4.2.0.jar"/>
 	<classpathentry kind="lib" path="lib/commons-csv-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/datanucleus-api-jdo-3.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/datanucleus-core-3.2.2.jar"/>
+	<classpathentry kind="lib" path="lib/datanucleus-rdbms-3.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/dom4j-2.0.0-ALPHA-2.jar"/>
 	<classpathentry kind="lib" path="lib/Jama-1.0.3.jar"/>
 	<classpathentry kind="lib" path="lib/la4j-0.4.9.jar"/>
-	<classpathentry kind="lib" path="lib/dom4j-2.0.0-ALPHA-2.jar"/>
 	<classpathentry kind="lib" path="lib/postgresql-9.3-1102.jdbc41.jar"/>
+	<classpathentry kind="lib" path="lib/spark-assembly-1.0.2-hadoop1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/spark-examples-1.0.2-hadoop1.0.4.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

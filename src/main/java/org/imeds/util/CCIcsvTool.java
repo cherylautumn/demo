@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -21,44 +22,36 @@ public class CCIcsvTool implements DocumentTool{
 	public CCIcsvTool() {
 		// TODO Auto-generated constructor stub
 	}
-	public void createDoc(String fileName, ArrayList<String> arrayList, HashMap<Integer, Double[]> features) {
+	public void ComorbidDataSetCreateDoc(String fileName, ArrayList<String> arrayList, HashMap<Long, ArrayList<Double>> features) {
 	
 		//CSV Write Example using CSVPrinter
 		CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
 		
-        CSVPrinter printer;
+       
 		try {
-			printer = new CSVPrinter(new FileWriter(fileName), format);
+			
+			CSVPrinter printer = new CSVPrinter(new FileWriter(fileName, true), format);
 
-	        Iterator<Entry<Integer, Double[]>> iter =features.entrySet().iterator();
+	        Iterator<Entry<Long, ArrayList<Double>>> iter =features.entrySet().iterator();
 	        
 	        printer.printRecord(arrayList);
 	        
 			while (iter.hasNext()) { 
-				Entry<Integer, Double[]> entry = iter.next(); 
-				 Double[] key = entry.getValue();
-				 printer.printRecord(key);
+				Entry<Long, ArrayList<Double>> entry = iter.next(); 
+				 ArrayList<Double> feature = entry.getValue();
+				 printer.print(entry.getKey());
+				 feature.remove(0);
+				 
+				 printer.printRecord(feature);
 			}
 			 printer.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-//        System.out.println("********");
-//        printer.printRecord("ID","Name","Role","Salary");
-//        for(Employee emp : emps){
-//            List<String> empData = new ArrayList<String>();
-//            empData.add(emp.getId());
-//            empData.add(emp.getName());
-//            empData.add(emp.getRole());
-//            empData.add(emp.getSalary());
-//            printer.printRecord(empData);
-//        }
-        //close the printer
-       
+		}       
 	}
 
-	public void parserDoc(String fileName, HashMap<String, CCIcode>  codeList) {
+	public void DeyoCCIparserDoc(String fileName, HashMap<String, CCIcode>  codeList) {
 		// TODO Auto-generated method stub
 		 //Create the CSVFormat object
 		
@@ -99,5 +92,5 @@ public class CCIcsvTool implements DocumentTool{
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 }

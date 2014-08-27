@@ -1,5 +1,6 @@
 package org.imeds.data.common;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,9 +10,14 @@ public class CCIcode extends DIScode{
 	protected ArrayList<IcdPair> icdDouble = new ArrayList<IcdPair>();
 	private ArrayList<Integer> icdCptId = new ArrayList<Integer>();
 	private String icdList="";
+	
+	private NumberFormat numberFormat = NumberFormat.getNumberInstance(); 
+	
 	public CCIcode() {
 		// TODO Auto-generated constructor stub
 		super();
+		numberFormat.setMaximumFractionDigits(2);  
+		numberFormat.setMinimumIntegerDigits(3);
 	}
 	public String getIcdList() {
 		return icdList;
@@ -55,9 +61,11 @@ public class CCIcode extends DIScode{
 		IcdPair ipr = new IcdPair();
 		if(st.trim()!=null && ed.trim()!=null){
 			
-			if(!isContainLetter(st) && !isContainLetter(ed)){
+			if(!isContainLetter(st) && !isContainLetter(ed)){				
 				ipr.setStart(Double.parseDouble(st));
 				ipr.setEnd(getEndValue(Double.parseDouble(ed)));								
+				ipr.setSStart(numberFormat.format(Double.parseDouble(st)));
+				ipr.setSEnd( numberFormat.format(getEndValue(Double.parseDouble(ed))));
 			}else{
 				//TODO ADD ICD9 CODE WITH LETTER
 			}
@@ -71,6 +79,9 @@ public class CCIcode extends DIScode{
 		if(!isContainLetter(str)){			
 			ipr.setStart(Double.parseDouble(str));
 			ipr.setEnd(getEndValue(Double.parseDouble(str)));
+			ipr.setSStart(numberFormat.format(Double.parseDouble(str)));
+			ipr.setSEnd( numberFormat.format(getEndValue(Double.parseDouble(str))));
+			
 		}else{
 			//TODO ADD ICD9 CODE WITH LETTER
 		}

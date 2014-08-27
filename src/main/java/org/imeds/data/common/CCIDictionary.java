@@ -49,7 +49,7 @@ public class CCIDictionary {
 		this.cptCat = cptCat;
 	}
 	public void buildDictionary(){
-		this.csvCCI.parserDoc(this.CCIfileName, this.codeList);
+		this.csvCCI.DeyoCCIparserDoc(this.CCIfileName, this.codeList);
 		Iterator<Entry<String, CCIcode>> iter = codeList.entrySet().iterator(); 
 		while (iter.hasNext()) { 
 			Entry<String, CCIcode> entry = iter.next(); 
@@ -64,26 +64,28 @@ public class CCIDictionary {
 	
 	public void buildCptMap() throws Exception{
 		Iterator<Entry<String, CCIcode>> iter = codeList.entrySet().iterator(); 
-		ArrayList<Integer> cptTmp;
+
 		while (iter.hasNext()) { 
+			ArrayList<Integer> cptTmp = new ArrayList<Integer>();
 			Entry<String, CCIcode> entry = iter.next(); 
 		    CCIcode code = (CCIcode) entry.getValue(); 
 			
 		    String range = getRangeStr(code.getIcdDouble());
-		    System.out.println(code.getID()+" "+code.getName());	
+		
 		    cptTmp = ImedDB.getCptCatMap(range);		    
 		    code.setIcdCptId(cptTmp);
-		    for(Integer cid:cptTmp) this.cptCat.put(cid, code.getID());
-//		    System.out.println(entry.toString());
+		    
+		    for(Integer cid:cptTmp){
+		    	this.cptCat.put(cid, code.getID());
+		    }
 		} 
 	}
 	
 	public String getRangeStr(ArrayList<IcdPair> pair){
-//		 WHERE (source_concept_code >= '250.00' AND source_concept_code <= '250.39' ) OR
-//	 		(source_concept_code >= '250.70' AND source_concept_code <= '250.79')\
+
 		StringBuffer str = new StringBuffer();
 		for(IcdPair ipr:pair){
-			str.append(" (source_concept_code >= '"+ipr.getStart()+"' AND source_concept_code < '"+ipr.getEnd()+"')	OR ");			
+			str.append(" (source_concept_code >= '"+ipr.getSStart()+"' AND source_concept_code < '"+ipr.getSEnd()+"')	OR ");			
 		}
 		
 		str.delete(str.lastIndexOf("OR"), str.length()-1);
