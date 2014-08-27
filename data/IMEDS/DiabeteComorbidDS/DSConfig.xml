@@ -2,20 +2,20 @@
 <root>
 	<Index_Diagnoses>
 		<Diagnose>Diabetes</Diagnose>
-		<Diagnose>Rheumatologic Disease</Diagnose>
-		<Diagnose>Mild Liver Disease</Diagnose>
+		<!-- <Diagnose>Rheumatologic Disease</Diagnose>
+		 <Diagnose>Mild Liver Disease</Diagnose>  --> 
 	</Index_Diagnoses>
 
 
 	<target>
-		<fileName>trainDS.csv</fileName>
+		<fileName>data\IMEDS\DiabeteComorbidDS\trainDS.csv</fileName>
 		<columns>
 			<col>ID</col>
 			<col>Label</col>
 			<col>Gender</col>						
 			<col>Age</col>
 			<col>Race</col>
-			<col>Ethinity</col>			
+			<col>Ethnicity</col>			
 			<col>Myocardial Infarction</col>
 			<col>Congestive Heart Failure</col>
 			<col>Peripheral Vascular Disease</col>
