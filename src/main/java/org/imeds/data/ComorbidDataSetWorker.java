@@ -16,7 +16,7 @@ import org.imeds.db.ImedDB;
 import org.imeds.util.CCIcsvTool;
 import org.imeds.util.ComorbidDSxmlTool;
 
-public class ComorbidDataSetWorker extends DataSet {
+public class ComorbidDataSetWorker extends DataSetWorker {
 	private String configFile="";
 	private ComorbidDataSetConfig cdsc = new ComorbidDataSetConfig();
 	private ComorbidDSxmlTool cfgparser = new ComorbidDSxmlTool();

@@ -23,7 +23,6 @@ public class CCIcsvTool implements DocumentTool{
 	}
 	public void createDoc(String fileName, ArrayList<String> arrayList, HashMap<Integer, Double[]> features) {
 	
-		// TODO Auto-generated method stub
 		//CSV Write Example using CSVPrinter
 		CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
 		
