@@ -13,4 +13,7 @@ public abstract class DataSetWorker {
 	public abstract void ready();
 	
 	public abstract void go();
-	}
+	
+	public abstract void done();
+}
+

@@ -4,7 +4,6 @@ import org.la4j.inversion.GaussJordanInverter;
 import org.la4j.matrix.dense.Basic2DMatrix;
 import org.la4j.matrix.sparse.CCSMatrix;
 
-import Jama.Matrix;
 
 
 
@@ -33,6 +32,7 @@ public class matrixTest {
 			}
 		}
 	}
+	/**
 	public static void JamaTest(){
 		Matrix mX = new Matrix(dx);
 		Matrix mV = new Matrix(dv);
@@ -62,6 +62,7 @@ public class matrixTest {
 		}
 		
 	}
+	**/
 	public static void la4jTest(){
 		Basic2DMatrix mX = new Basic2DMatrix(dx);
 		CCSMatrix mV = new CCSMatrix(dv);
@@ -85,7 +86,7 @@ public class matrixTest {
     {
     	matrixTest mt = new matrixTest();
     	System.out.println("Jama test");
-    	mt.JamaTest();
+    //	mt.JamaTest();
     	System.out.println("la4j teset");
     	mt.la4jTest();
     	System.out.println("end");

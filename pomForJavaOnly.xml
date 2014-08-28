@@ -20,25 +20,26 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-    	<groupId>org.la4j</groupId>
-    	<artifactId>la4j</artifactId>
-    </dependency>
-    <dependency>
     	<groupId>org.apache.spark</groupId>
     	<artifactId>spark-core_2.10</artifactId>
     </dependency>
     <dependency>
-    	<groupId>dom4j</groupId>
-    	<artifactId>dom4j-core</artifactId>
+    	<groupId>org.apache.spark</groupId>
+    	<artifactId>spark-sql_2.10</artifactId>
+    	<version>1.0.1</version>
     </dependency>
     <dependency>
     	<groupId>org.apache.spark</groupId>
     	<artifactId>spark-mllib_2.10</artifactId>
     </dependency>
     <dependency>
-    	<groupId>org.apache.commons</groupId>
-    	<artifactId>commons-csv</artifactId>
-    	<version>1.0</version>
+    	<groupId>org.la4j</groupId>
+    	<artifactId>la4j</artifactId>
+    </dependency>
+    <dependency>
+    	<groupId>gov.nist.math</groupId>
+    	<artifactId>jama</artifactId>
+    	<version>1.0.3</version>
     </dependency>
   </dependencies>
   <dependencyManagement>
@@ -69,19 +70,13 @@
   			<version>1.0.3</version>
   		</dependency>
   		<dependency>
-  			<groupId>dom4j</groupId>
-  			<artifactId>dom4j-core</artifactId>
-  			<version>1.4-dev-8</version>
-  		</dependency>
-  		<dependency>
-  			<groupId>org.apache.commons</groupId>
-  			<artifactId>commons-csv</artifactId>
-  			<version>1.0</version>
-  		</dependency>
+	  		 <groupId>org.apache.commons</groupId>
+	    	 <artifactId>commons-csv</artifactId>
+	    	 <version>1.0</version>
+	    </dependency>	 
   	</dependencies>
   </dependencyManagement>
   <build>
-  
     <pluginManagement>
       <plugins>
 
@@ -89,16 +84,14 @@
       		<groupId>org.apache.maven.plugins</groupId>
         	<artifactId>maven-assembly-plugin</artifactId>
         	<configuration>
- 
 	          	<descriptorRefs>
             		<descriptorRef>jar-with-dependencies</descriptorRef>
-          		</descriptorRefs>  
-
+          		</descriptorRefs>
         	</configuration>
         	<executions>
 	          <execution>
-	            <id>make-assembly</id> 
-	            <phase>package</phase>
+	            <id>make-assembly</id> <!-- this is used for inheritance merges -->
+	            <phase>package</phase> <!-- bind to the packaging phase -->
 	            <goals>
 	              <goal>single</goal>
 	            </goals>
@@ -106,15 +99,7 @@
 	        </executions>
         </plugin>
       </plugins>    
-    </pluginManagement>  
-   
-    <plugins>
-    	<plugin>
-    		<groupId>org.apache.maven.plugins</groupId>
-    		<artifactId>maven-assembly-plugin</artifactId>
-    	</plugin>
-    </plugins> 
+    </pluginManagement>
 
   </build>
-   
 </project>

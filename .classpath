@@ -30,7 +30,7 @@
 	<classpathentry kind="lib" path="lib/Jama-1.0.3.jar"/>
 	<classpathentry kind="lib" path="lib/la4j-0.4.9.jar"/>
 	<classpathentry kind="lib" path="lib/postgresql-9.3-1102.jdbc41.jar"/>
-	<classpathentry kind="lib" path="lib/spark-assembly-1.0.2-hadoop1.0.4.jar"/>
-	<classpathentry kind="lib" path="lib/spark-examples-1.0.2-hadoop1.0.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hchiu/workspace/demo/lib/spark-assembly-1.0.0-hadoop1.0.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hchiu/workspace/demo/lib/spark-examples-1.0.0-hadoop1.0.4.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -113,6 +113,13 @@ public class ComorbidDataSetWorker extends DataSetWorker {
 		// output patient feature csv
 		csvparser.ComorbidDataSetCreateDoc(this.cdsc.getTargetFileName(),this.cdsc.getColList(), features);
 	}
+		
+
+	@Override
+	public void done() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	public void MapFeature(){
 		List<String> colList = this.cdsc.getColList();
@@ -133,5 +140,4 @@ public class ComorbidDataSetWorker extends DataSetWorker {
 		} 
 		
 	}
-
 }
