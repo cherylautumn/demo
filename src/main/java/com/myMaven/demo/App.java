@@ -18,11 +18,12 @@ public class App
 {
     public static void main( String[] args ) throws Exception
     {
-    	String dbDriver = "org.postgresql.Driver";
-		String dbURL = "jdbc:postgresql://omop-datasets.cqlmv7nlakap.us-east-1.redshift.amazonaws.com:5439/truven";
-		String dbUser = "hchiu";
-		String dbPassword = "1QAZ2wsx";
-		String search_path = "ccae_cdm4";
+
+    	String dbDriver = "";
+		String dbURL = "";
+		String dbUser = "";
+		String dbPassword = "";
+		String search_path = "";
 		ImedDB.connDB(dbDriver, dbURL,dbUser, dbPassword, search_path);
 		
 
