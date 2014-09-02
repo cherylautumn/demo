@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -95,7 +96,7 @@ public class ImedDB {
 			labelCdt = " AND label >0 "; //death
 			break;
 		case ComorbidDataSetWorker.alive:
-			labelCdt = " AND label =0 "; //death
+			labelCdt = " AND label IS NULL "; //death
 			break;
 		default:
 			labelCdt ="";
@@ -114,7 +115,7 @@ public class ImedDB {
             	queryStr.append(" SELECT DISTINCT p.person_id as ID, p.gender_concept_id as Gender, year_of_birth as Age, race_concept_id as Race, ethnicity_concept_id as Ethnicity, location_id as Location, death.person_id as Label ");            	
             	queryStr.append(" FROM condition_occurrence co, person p LEFT OUTER JOIN death  ON (p.person_id = death.person_id) ");
             	queryStr.append(" WHERE p.person_id = co.person_id AND condition_concept_id IN ("+tranListIn(cptIdList)+")");
-            	//queryStr.append(" AND Label >0");
+
             	queryStr.append(Cdt);
             	
             	System.out.printf("Query Str :%s\n", queryStr.toString() );
@@ -126,12 +127,20 @@ public class ImedDB {
                    tmp.add(rs.getDouble("ID"));
         		   if(rs.getLong("Label")>0) tmp.add((double) 1);
                    else tmp.add((double) 0);
-        		   
-        		   if(colList.contains("Gender")){tmp.add((rs.getDouble("Gender")-8500)/10);}
-        		   if(colList.contains("Age")) tmp.add(rs.getDouble("Age")/10);
+        		   if(colList.contains("Gender")){tmp.add((rs.getDouble("Gender")-8500));}
+        		   if(colList.contains("Age")){
+            		   Date now = new Date();
+        			   Calendar cal = Calendar.getInstance();
+        			   cal.setTime(now);
+        			    int year = cal.get(Calendar.YEAR);
+        			   tmp.add((year-rs.getDouble("Age"))/10);
+        		   }
         		   if(colList.contains("Race")) tmp.add(rs.getDouble("Race"));
         		   if(colList.contains("Ethnicity")) tmp.add(rs.getDouble("Ethnicity"));
-        		   if(colList.contains("Location")) tmp.add(rs.getDouble("Location")/10000);
+        		   if(colList.contains("Location")){
+        			   if(rs.getDouble("Location")>0)
+        			   tmp.add(rs.getDouble("Location")/10000000);
+        		   }
                    
                   value.put(rs.getLong("ID"), tmp);
                 }

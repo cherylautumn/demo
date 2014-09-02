@@ -34,19 +34,20 @@
 			<col>AIDS</col>
 		</columns>
 	</target>
+	
 	<DataSetParas>
 		<sampleConfig>
 			<sample_id>s1</sample_id>
-			<sample_range>0,500</sample_range><!-- 0,100 -->	
+			<sample_range>0,2000</sample_range><!-- 0,100 -->	
 			<sample_label>alive</sample_label><!-- default None. alive, death, none -->
-			<sample_random>false</sample_random><!-- default false -->
-			<sample_append>false</sample_append> <!-- default false -->
+			<sample_random>true</sample_random><!-- default false -->
+			<sample_append>true</sample_append> <!-- default false -->
 		</sampleConfig>
 		<sampleConfig>
 			<sample_id>s2</sample_id>
-			<sample_range>0,500</sample_range><!-- 0,100 -->			
+			<sample_range>0,2000</sample_range><!-- 0,100 -->			
 			<sample_label>death</sample_label><!-- alive, death, none -->
-			<sample_random>false</sample_random>			
+			<sample_random>true</sample_random>			
 			<sample_append>true</sample_append>
 		</sampleConfig>
 	</DataSetParas>
@@ -56,12 +57,14 @@
 		<outputFolder>data\IMEDS\DiabeteComorbidDS\ol</outputFolder>
 		<threshold>0.0</threshold>
 		<SparkLRmodelDataSets>
-			<dataset>data\IMEDS\DiabeteComorbidDS\trainDSf.csv</dataset>
-			<dataset>data\IMEDS\DiabeteComorbidDS\trainDSg.csv</dataset>
+			<dataset>data\IMEDS\DiabeteComorbidDS\trainDS.csv</dataset>
+			
 		</SparkLRmodelDataSets>
 		<SparkLRmodelParas>
-			<para>1,300</para>
-			<para>1,3000</para>			
+			<para>1,500</para>
+			<para>1,5000</para>			
+			<para>10,500</para>
+			<para>10,5000</para>			
 		</SparkLRmodelParas>
 	</PearsonResidualOutlier>
 	 

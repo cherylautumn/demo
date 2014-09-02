@@ -54,17 +54,20 @@ public class ComorbidDataSetWorker extends DataSetWorker {
 	@Override
 	public void ready() {
 		Iterator<Entry<String, sampleConfig>> iterSampleCfg = this.cdsc.getSample_sets().entrySet().iterator();
+		//FIXME: not sure whether to generate header or not
+		boolean withHeader=false;
 		while (iterSampleCfg.hasNext()) {
 			sampleConfig sc = iterSampleCfg.next().getValue();
 			int sample_label=none;
 			if(sc.getSample_label().trim().equalsIgnoreCase("death")) sample_label=death;
 			if(sc.getSample_label().trim().equalsIgnoreCase("alive")) sample_label=alive;
 			
-			buildPatientFeature(sc.getSample_range_start(), sc.getSample_range_end(), sc.getSample_random(), sample_label, sc.getSample_append());
+			buildPatientFeature(sc.getSample_range_start(), sc.getSample_range_end(), sc.getSample_random(), sample_label, sc.getSample_append(), withHeader);
+			withHeader=false;
 		}
 	
 	}
-	public void buildPatientFeature(int sample_range_start, int sample_range_end,  Boolean sample_random, int sample_label, boolean append){
+	public void buildPatientFeature(int sample_range_start, int sample_range_end,  Boolean sample_random, int sample_label, boolean append, boolean withHeader){
 		try {	
 			//1. Select all patient with Diabetes
 			
@@ -110,7 +113,7 @@ public class ComorbidDataSetWorker extends DataSetWorker {
 				}
 			}
 //			this.features = patients;
-			csvparser.ComorbidDataSetCreateDoc(this.cdsc.getTargetFileName(),this.cdsc.getColList(), patients, append);
+			csvparser.ComorbidDataSetCreateDoc(this.cdsc.getTargetFileName(),this.cdsc.getColList(), patients, append, withHeader);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

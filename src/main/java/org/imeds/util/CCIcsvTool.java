@@ -26,10 +26,11 @@ public class CCIcsvTool implements DocumentTool{
 	public CCIcsvTool() {
 		// TODO Auto-generated constructor stub
 	}
-	public void ComorbidDataSetCreateDoc(String fileName, ArrayList<String> arrayList, HashMap<Long, ArrayList<Double>> features, boolean append) {
+	public void ComorbidDataSetCreateDoc(String fileName, ArrayList<String> arrayList, HashMap<Long, ArrayList<Double>> features, boolean append, boolean withTitle) {
 	
 		//CSV Write Example using CSVPrinter
-		CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
+//		CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
+		CSVFormat format = CSVFormat.RFC4180.withDelimiter(',');
 		
        
 		try {
@@ -38,7 +39,7 @@ public class CCIcsvTool implements DocumentTool{
 
 	        Iterator<Entry<Long, ArrayList<Double>>> iter =features.entrySet().iterator();
 	        
-	        printer.printRecord(arrayList);
+	        if(withTitle)printer.printRecord(arrayList);
 	        
 			while (iter.hasNext()) { 
 				Entry<Long, ArrayList<Double>> entry = iter.next(); 
