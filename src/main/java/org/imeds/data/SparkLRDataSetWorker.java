@@ -40,6 +40,7 @@ import org.apache.spark.mllib.classification.LogisticRegressionModel;
 import org.apache.spark.mllib.linalg.Vectors;
 import org.apache.spark.mllib.regression.LabeledPoint;
 import org.imeds.util.CCIcsvTool;
+import org.imeds.util.ComorbidDSxmlTool;
 import org.la4j.matrix.Matrix;
 
 import scala.Tuple2;
@@ -62,7 +63,11 @@ public class SparkLRDataSetWorker extends DataSetWorker implements Serializable 
 	private Double  threshold;
 	private List<DataPoint> result;
 	
-  public String getResIn() {
+
+	private String configFile="";
+	private transient ComorbidDataSetConfig cdsc = new ComorbidDataSetConfig();
+	private transient ComorbidDSxmlTool cfgparser = new ComorbidDSxmlTool();
+	public String getResIn() {
 		return resIn;
 	}
 
@@ -92,6 +97,30 @@ public class SparkLRDataSetWorker extends DataSetWorker implements Serializable 
 
 	public void setThreshold(Double threshold) {
 		this.threshold = threshold;
+	}
+	
+	public String getConfigFile() {
+		return configFile;
+	}
+
+	public void setConfigFile(String configFile) {
+		this.configFile = configFile;
+	}
+
+	public ComorbidDataSetConfig getCdsc() {
+		return cdsc;
+	}
+
+	public void setCdsc(ComorbidDataSetConfig cdsc) {
+		this.cdsc = cdsc;
+	}
+
+	public ComorbidDSxmlTool getCfgparser() {
+		return cfgparser;
+	}
+
+	public void setCfgparser(ComorbidDSxmlTool cfgparser) {
+		this.cfgparser = cfgparser;
 	}
   public static class DataPoint implements Serializable {
 	    long id;
@@ -189,7 +218,8 @@ public class SparkLRDataSetWorker extends DataSetWorker implements Serializable 
 		result =LRpredict(model, points);
 	//	System.out.println("result "+result.toString());
 		try {			
-			ToFile(result,this.resIn.substring(0, this.resIn.indexOf("."))+"_"+this.iterations+"_"+this.stepSize+".csv");
+		
+			ToFile(result,this.getCdsc().getPearsonResidualOutlierInputFolder()+this.resIn.substring(this.resIn.lastIndexOf("\\"), this.resIn.indexOf("."))+"_"+this.iterations+"_"+this.stepSize+".csv");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -256,36 +286,6 @@ public class SparkLRDataSetWorker extends DataSetWorker implements Serializable 
       List<DataPoint> result = predictPoints.collect();
       return result;
      
-      
- 
-//      System.out.println("train"+points.count());
-
-      //find outliers
-//      final Matrix hMatrix = calXtVX(result);
-//      System.out.println("HMatrix\n"+hMatrix.toString());
-      
-//      JavaRDD<Double> pearsonPoints =  predictPoints.map(new Function<DataPoint,Double>(){
-//
-//		public Double call(DataPoint v1) throws Exception {
-//			List<DataPoint> dl = new ArrayList<DataPoint>();
-//			dl.add(v1);
-//			Basic2DMatrix Xi = formMx(dl);
-//			Matrix Mi = Xi.multiply(hMatrix).multiply(Xi.transpose());
-//			Double Pi = v1.getPredictP();
-//			Double Hi = Pi*(1-Pi)*Mi.get(0, 0);
-//			if(Hi>1)System.out.println("Hi: "+Hi);
-//			
-//			Double Yi = v1.getTrainP().label();
-//			Double Ri = (Yi-Pi)/Math.pow((Pi*(1-Pi)*(1-Hi)),0.5);
-//			Ri = Math.abs(Ri);
-//			if(Ri>3)System.out.println("Ri: "+Ri+" / "+v1.getTrainP().features().toString());
-//  			return Hi;
-//		  }    	  
-//      	}
-//      );
-//      
-//      System.out.println("total:"+pearsonPoints.count());
-      
   }
   public static void ToFile(List<DataPoint> result, String fileName) throws IOException{
 	
@@ -301,7 +301,36 @@ public class SparkLRDataSetWorker extends DataSetWorker implements Serializable 
       //Close the output stream
       out.close();    
   }
- 
+  public void PROutlier(){
+	  JavaRDD<DataPoint> predictPoints =  sc.parallelize(result) ;
+		final Matrix hMatrix =  PearsonResidualOutlier.calXtVX(result);
+	    
+	    JavaPairRDD<Long, ArrayList<Double>> pearsonPoints = predictPoints.mapToPair(new PairFunction<DataPoint, Long, ArrayList<Double>>(){
+			public Tuple2<Long, ArrayList<Double>>  call(DataPoint v1) throws Exception {
+				Double Ri = PearsonResidualOutlier.isOutlier(hMatrix,v1);
+				ArrayList<Double> arr= new ArrayList<Double>();
+				arr.add(v1.getTrainP().label()); //original label
+				arr.add(v1.getPredictP());		 //predict score
+				arr.add(Ri);					 //residual
+				
+				return new Tuple2<Long, ArrayList<Double>>(v1.getId(),arr);
+			  }    	  
+	    	 }
+		).filter(new Function<Tuple2<Long,ArrayList<Double>>,Boolean>(){
+
+			public Boolean call(Tuple2<Long, ArrayList<Double>> v1) throws Exception {
+				if(v1._2.get(2) > getThreshold())return true;
+				return false;
+			}			
+		});
+	  Map<Long,ArrayList<Double>> pearsonOL = pearsonPoints.collectAsMap();
+	     
+	 
+	  String fileName =this.resIn.substring(this.resIn.lastIndexOf("\\"), this.resIn.indexOf("."))+"_"+this.iterations+"_"+this.stepSize+"_sol.csv";
+	  CCIcsvTool.OutlierCreateDoc(this.getCdsc().getPearsonResidualOutlierOutputFolder()+fileName,  pearsonOL);
+	 
+  }
+  /**
   public void PROutlier(){
 	  JavaRDD<DataPoint> predictPoints =  sc.parallelize(result) ;
 		final Matrix hMatrix =  PearsonResidualOutlier.calXtVX(result);
@@ -320,27 +349,43 @@ public class SparkLRDataSetWorker extends DataSetWorker implements Serializable 
 			}			
 		});
 	  Map<Long,Double> pearsonOL = pearsonPoints.collectAsMap();
-	    
+	     
 	 
 	  String fileName =this.resIn.substring(0, this.resIn.indexOf("."))+"_"+this.iterations+"_"+this.stepSize+"_sol.csv";
 	  CCIcsvTool.OutlierCreateDoc(fileName,  pearsonOL);
 	 
-  }
+  }**/
   public static void main(String[] args) {
-//    if (args.length !=3) {
-//      System.err.println("Usage: JavaLR <input_dir> <step_size> <niters>");
+	  //threshold -1 means do not run outlier
+//    if (args.length !=4) {
+//      System.err.println("Usage: JavaLR <input_file_path> <step_size> <niters> <threshold>");
 //      System.exit(1);
 //    }
     SparkLRDataSetWorker og = new SparkLRDataSetWorker();
-//    
-    og.paraInit(args[0]+","+args[1]+","+args[2]+","+args[3]);
-    
-   
-    
     og.prepare();
-    og.ready();
-    if(og.getThreshold()>0) og.go();
+    if(args.length==4){
+    	og.paraInit(args[0]+","+args[1]+","+args[2]+","+args[3]);
+    	
+        og.ready();
+        if(og.getThreshold()>=0) og.go();
+       
+    }else if(args.length==1){
+    	og.setConfigFile(args[0]);
+    	og.getCfgparser().parserDoc(og.getConfigFile(),og.getCdsc());
+    	for(String input_file_path:og.getCdsc().getSparkLRmodelDataSets()){
+    		for(String paras:og.getCdsc().getSparkLRmodelParas()){
+    			String[] para = paras.split(",");
+    			og.paraInit(input_file_path+","+para[0]+","+para[1]+","+og.getCdsc().getPearsonResidualThreshold());    	    	
+    	        og.ready();
+    	        if(og.getThreshold()>=0) og.go();
+    	       
+    		}
+    	}
+    }
+    
     og.done();
+    
+    
 
    // System.out.println("outlier test done!");
 

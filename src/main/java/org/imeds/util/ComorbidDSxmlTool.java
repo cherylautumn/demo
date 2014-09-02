@@ -56,9 +56,18 @@ public class ComorbidDSxmlTool implements DocumentTool{
 					cdsc.setTargetFileName(L1_emt.element("fileName").getText());
 					cdsc.setColList(L1_emt.element("columns").elements("col"));
 					//getTarget(L1_emt);
+				}else if(L1_emt.getName().equals("DataSetParas")){
+					cdsc.setSample_sets(L1_emt.elements("sampleConfig"));
 					
+				}else if(L1_emt.getName().equals("PearsonResidualOutlier")){
+					cdsc.setPearsonResidualOutlierInputFolder(L1_emt.element("inputFolder").getText());
+					cdsc.setPearsonResidualOutlierOutputFolder(L1_emt.element("outputFolder").getText());
+					cdsc.setPearsonResidualThreshold(Double.parseDouble(L1_emt.element("threshold").getText()));
+					cdsc.setSparkLRmodelParas(L1_emt.element("SparkLRmodelParas").elements("para"));
+					cdsc.setSparkLRmodelDataSets(L1_emt.element("SparkLRmodelDataSets").elements("dataset"));
+		
 				}else{
-
+					
 				}
 			}
 			

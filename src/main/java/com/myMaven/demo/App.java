@@ -24,7 +24,7 @@ public class App
 		String dbUser = "";
 		String dbPassword = "";
 		String search_path = "";
-		ImedDB.connDB(dbDriver, dbURL,dbUser, dbPassword, search_path);
+//		ImedDB.connDB(dbDriver, dbURL,dbUser, dbPassword, search_path);
 		
 
 //    	ComorbidDSxmlTool xh = new ComorbidDSxmlTool(new ComorbidDataSetConfig());
@@ -62,14 +62,14 @@ public class App
 		
 		CCIDictionary cdt = new CCIDictionary("data\\IMEDS\\DeyoCCI.csv");
     	cdt.buildDictionary();
-    	cdt.buildCptMap();
+//    	cdt.buildCptMap();
 
     	
     	ComorbidDataSetWorker cdsw = new ComorbidDataSetWorker("data\\IMEDS\\DiabeteComorbidDS\\DSConfig.xml", cdt);
     	cdsw.prepare();
-    	cdsw.ready();
-    	cdsw.go();
-    	ImedDB.closeDB();
-    	System.exit(0);
+//    	cdsw.ready();
+//    	cdsw.go();
+//    	ImedDB.closeDB();
+//    	System.exit(0);
     }
 }

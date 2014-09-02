@@ -26,7 +26,7 @@ public class CCIcsvTool implements DocumentTool{
 	public CCIcsvTool() {
 		// TODO Auto-generated constructor stub
 	}
-	public void ComorbidDataSetCreateDoc(String fileName, ArrayList<String> arrayList, HashMap<Long, ArrayList<Double>> features) {
+	public void ComorbidDataSetCreateDoc(String fileName, ArrayList<String> arrayList, HashMap<Long, ArrayList<Double>> features, boolean append) {
 	
 		//CSV Write Example using CSVPrinter
 		CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
@@ -34,7 +34,7 @@ public class CCIcsvTool implements DocumentTool{
        
 		try {
 			
-			CSVPrinter printer = new CSVPrinter(new FileWriter(fileName, true), format);
+			CSVPrinter printer = new CSVPrinter(new FileWriter(fileName, append), format);
 
 	        Iterator<Entry<Long, ArrayList<Double>>> iter =features.entrySet().iterator();
 	        
@@ -54,25 +54,31 @@ public class CCIcsvTool implements DocumentTool{
 			e.printStackTrace();
 		}       
 	}
-	public static void OutlierCreateDoc(String fileName,  Map<Long, Double> list) {
+	public static void OutlierCreateDoc(String fileName,  Map<Long, ArrayList<Double>> list) {
 		
 		//CSV Write Example using CSVPrinter
-		CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
+//		CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
+		CSVFormat format = CSVFormat.RFC4180.withDelimiter(',');
 		
        
 		try {
 			
 			CSVPrinter printer = new CSVPrinter(new FileWriter(fileName), format);
 			printer.print("Id");
+	        printer.print("TrainP");
+	        printer.print("PredictP");
 	        printer.print("Ri");
 	        printer.println();
 	        
-	        Iterator<Entry<Long, Double>> iter =list.entrySet().iterator();
+	        Iterator<Entry<Long, ArrayList<Double>>> iter =list.entrySet().iterator();
 		        
 			while (iter.hasNext()) { 
-				 Entry<Long, Double> entry = iter.next(); 
+				 Entry<Long, ArrayList<Double>> entry = iter.next(); 
 				 printer.print(entry.getKey());
-				 printer.print(entry.getValue());
+					
+				 printer.print(entry.getValue().get(0));
+				 printer.print(entry.getValue().get(1));
+				 printer.print(entry.getValue().get(2));
 				 printer.println();
 			}
 			 printer.close();

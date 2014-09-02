@@ -79,22 +79,24 @@ public class ImedDB {
 	}
 	
 	
-	public static HashMap<Long, ArrayList<Double>>  getPatientsWithIndexDiagnose(ArrayList<Integer> cptIdList, ArrayList<String> colList, Integer sample_size, boolean random,  int LabelType) throws Exception{
+	public static HashMap<Long, ArrayList<Double>>  getPatientsWithIndexDiagnose(ArrayList<Integer> cptIdList, ArrayList<String> colList, int sample_start, int sample_end, boolean random,  int LabelType) throws Exception{
 		String orderCdt="";
 		String labelCdt="";		
 		HashMap<Long, ArrayList<Double>> value = new  HashMap<Long, ArrayList<Double>>();
 		if(random){
-			orderCdt = " ORDER BY random() limit "+sample_size;			
+			orderCdt = " ORDER BY random() LIMIT "+(sample_end - sample_start)+" OFFSET "+sample_start;			
 		}else{
 			//TODO experiment sample method is waiting for further modify
-			orderCdt = " limit "+sample_size;
+			orderCdt = " LIMIT "+(sample_end - sample_start)+" OFFSET "+sample_start;	
 		}
 		
 		switch(LabelType){
 		case ComorbidDataSetWorker.death:
 			labelCdt = " AND label >0 "; //death
 			break;
-	
+		case ComorbidDataSetWorker.alive:
+			labelCdt = " AND label =0 "; //death
+			break;
 		default:
 			labelCdt ="";
 			break;
@@ -124,11 +126,12 @@ public class ImedDB {
                    tmp.add(rs.getDouble("ID"));
         		   if(rs.getLong("Label")>0) tmp.add((double) 1);
                    else tmp.add((double) 0);
-        		   if(colList.contains("Gender")) tmp.add(rs.getDouble("Gender"));
-        		   if(colList.contains("Age")) tmp.add(rs.getDouble("Age"));
+        		   
+        		   if(colList.contains("Gender")){tmp.add((rs.getDouble("Gender")-8500)/10);}
+        		   if(colList.contains("Age")) tmp.add(rs.getDouble("Age")/10);
         		   if(colList.contains("Race")) tmp.add(rs.getDouble("Race"));
         		   if(colList.contains("Ethnicity")) tmp.add(rs.getDouble("Ethnicity"));
-        		   if(colList.contains("Location")) tmp.add(rs.getDouble("Location"));
+        		   if(colList.contains("Location")) tmp.add(rs.getDouble("Location")/10000);
                    
                   value.put(rs.getLong("ID"), tmp);
                 }

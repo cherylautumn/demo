@@ -1,12 +1,22 @@
 package org.imeds.data;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.dom4j.Element;
 
 public class ComorbidDataSetConfig extends DataSetConfig {
 	private ArrayList<String> index_diagnoses = new ArrayList<String>();
+	private HashMap<String, sampleConfig> sample_sets = new HashMap<String, sampleConfig>(); 
+	
+	private String pearsonResidualOutlierInputFolder;
+	private String pearsonResidualOutlierOutputFolder;
+	private Double pearsonResidualThreshold;
+	private ArrayList<String> sparkLRmodelParas = new ArrayList<String>();
+	private ArrayList<String> sparkLRmodelDataSets = new ArrayList<String>();
+
+	
 	public ArrayList<String> getIndex_diagnoses() {
 		return index_diagnoses;
 	}
@@ -31,6 +41,77 @@ public class ComorbidDataSetConfig extends DataSetConfig {
 			}			
 		}
 
+	}
+
+	public HashMap<String, sampleConfig> getSample_sets() {
+		return sample_sets;
+	}
+	
+
+	public void setSample_sets(List<Element> sampleConfigList) {
+	
+		for(Element ele:sampleConfigList){
+			String sample_id=ele.element("sample_id").getText();
+			String sample_label=ele.elementText("sample_label");
+			String sample_random=ele.elementText("sample_random");
+			String sample_range_str = ele.elementText("sample_range");
+			String sample_append = ele.elementText("sample_append");
+			sampleConfig scfg = new sampleConfig(sample_id, sample_label, sample_random, sample_range_str, sample_append);
+			setSample_sets(sample_id, scfg);
+		}
+	}
+	public void setSample_sets(String sample_id, sampleConfig sample_config) {
+		this.sample_sets.put(sample_id, sample_config);
+	}
+	public String getPearsonResidualOutlierInputFolder() {
+		return pearsonResidualOutlierInputFolder;
+	}
+
+	public void setPearsonResidualOutlierInputFolder(
+			String pearsonResidualOutlierInputFolder) {
+		this.pearsonResidualOutlierInputFolder = pearsonResidualOutlierInputFolder;
+	}
+
+	public String getPearsonResidualOutlierOutputFolder() {
+		return pearsonResidualOutlierOutputFolder;
+	}
+
+	public void setPearsonResidualOutlierOutputFolder(
+			String pearsonResidualOutlierOutputFolder) {
+		this.pearsonResidualOutlierOutputFolder = pearsonResidualOutlierOutputFolder;
+	}
+
+	public Double getPearsonResidualThreshold() {
+		return pearsonResidualThreshold;
+	}
+
+	public void setPearsonResidualThreshold(Double pearsonResidualThreshold) {
+		this.pearsonResidualThreshold = pearsonResidualThreshold;
+	}
+
+	public ArrayList<String> getSparkLRmodelParas() {
+		return sparkLRmodelParas;
+	}
+
+	public void setSparkLRmodelParas(ArrayList<String> sparkLRmodelParas) {
+		this.sparkLRmodelParas = sparkLRmodelParas;
+	}
+	public void setSparkLRmodelParas(List<Element> colList) {
+		for(Element ele: colList){
+			this.sparkLRmodelParas.add(ele.getText());			
+		}
+	}
+	public ArrayList<String> getSparkLRmodelDataSets() {
+		return sparkLRmodelDataSets;
+	}
+
+	public void setSparkLRmodelDataSets(ArrayList<String> sparkLRmodelDataSets) {
+		this.sparkLRmodelDataSets = sparkLRmodelDataSets;
+	}
+	public void setSparkLRmodelDataSets(List<Element> colList) {
+		for(Element ele: colList){
+			this.sparkLRmodelDataSets.add(ele.getText());			
+		}
 	}
 	public ComorbidDataSetConfig() {
 		// TODO Auto-generated constructor stub

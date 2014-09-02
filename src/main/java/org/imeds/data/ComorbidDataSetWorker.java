@@ -21,22 +21,22 @@ public class ComorbidDataSetWorker extends DataSetWorker {
 
 	public static final int death = 0;
 	public static final int alive = 1;
-
+	public static final int none = -1;
 	private String configFile="";
 	private ComorbidDataSetConfig cdsc = new ComorbidDataSetConfig();
 	private ComorbidDSxmlTool cfgparser = new ComorbidDSxmlTool();
 	private CCIcsvTool csvparser = new CCIcsvTool();
 	private HashMap<Integer,Integer> featureIdx = new HashMap<Integer, Integer>();
-	
-	
-	private HashMap<Long, ArrayList<Double>> features = new HashMap<Long, ArrayList<Double>>();
+//	private HashMap<Long, ArrayList<Double>> features = new HashMap<Long, ArrayList<Double>>();
 	
 	private CCIDictionary ccid;
 	//TODO Experiment sample pick methods.
-	private Integer sample_size = 500;
-	private Integer sample_Kfold = 0;
-	private boolean sample_random = false;
-	private int sample_label=alive;
+//	private Integer sample_size = 500;
+//	private boolean sample_random = false;
+//	private int sample_label=alive;
+//	private boolean append = false;
+//	
+	
 	public ComorbidDataSetWorker(String configFile,  CCIDictionary ccid) {
 		this.configFile = configFile;
 		this.ccid = ccid;
@@ -46,12 +46,25 @@ public class ComorbidDataSetWorker extends DataSetWorker {
 	public void prepare() {
 		//Initialize config file
 		this.cfgparser.parserDoc(this.configFile,this.cdsc);
+		
 		//Map DeyoCCI ID to my config col id
 		MapFeature();
 	}
 
 	@Override
 	public void ready() {
+		Iterator<Entry<String, sampleConfig>> iterSampleCfg = this.cdsc.getSample_sets().entrySet().iterator();
+		while (iterSampleCfg.hasNext()) {
+			sampleConfig sc = iterSampleCfg.next().getValue();
+			int sample_label=none;
+			if(sc.getSample_label().trim().equalsIgnoreCase("death")) sample_label=death;
+			if(sc.getSample_label().trim().equalsIgnoreCase("alive")) sample_label=alive;
+			
+			buildPatientFeature(sc.getSample_range_start(), sc.getSample_range_end(), sc.getSample_random(), sample_label, sc.getSample_append());
+		}
+	
+	}
+	public void buildPatientFeature(int sample_range_start, int sample_range_end,  Boolean sample_random, int sample_label, boolean append){
 		try {	
 			//1. Select all patient with Diabetes
 			
@@ -62,7 +75,7 @@ public class ComorbidDataSetWorker extends DataSetWorker {
 					ArrayList<Integer> cptlist = this.ccid.getCodeList().get(dga).getIcdCptId();
 					if(cptlist.size()>0){
 						//TODO: modify, pick patient with specific label. Should be modified with sample methods
-						patients.putAll(ImedDB.getPatientsWithIndexDiagnose(cptlist, this.cdsc.getColList(), sample_size, sample_random,sample_label));
+						patients.putAll(ImedDB.getPatientsWithIndexDiagnose(cptlist, this.cdsc.getColList(), sample_range_start, sample_range_end,  sample_random, sample_label));
 						cptlistTotal.addAll(cptlist);
 					}					
 				}				
@@ -96,22 +109,18 @@ public class ComorbidDataSetWorker extends DataSetWorker {
 					}					
 				}
 			}
-			this.features = patients;
-		
+//			this.features = patients;
+			csvparser.ComorbidDataSetCreateDoc(this.cdsc.getTargetFileName(),this.cdsc.getColList(), patients, append);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
 		
-		//4. assign the outcome- first round witll be died vs not. 
-		
-		//5. estimate the logit to find the outliers
 	}
-	
 	@Override
 	public void go() {
 		// output patient feature csv
-		csvparser.ComorbidDataSetCreateDoc(this.cdsc.getTargetFileName(),this.cdsc.getColList(), features);
+//		csvparser.ComorbidDataSetCreateDoc(this.cdsc.getTargetFileName(),this.cdsc.getColList(), features,append);
 	}
 		
 

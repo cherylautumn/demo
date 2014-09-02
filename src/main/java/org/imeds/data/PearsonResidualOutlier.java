@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import org.imeds.data.SparkLRDataSetWorker.DataPoint;
 import org.imeds.util.CCIcsvTool;
+import org.imeds.util.ComorbidDSxmlTool;
 import org.la4j.inversion.GaussJordanInverter;
 import org.la4j.matrix.Matrix;
 import org.la4j.matrix.dense.Basic2DMatrix;
@@ -17,20 +18,46 @@ import org.la4j.matrix.dense.Basic2DMatrix;
 import scala.reflect.internal.Trees.This;
 
 public class PearsonResidualOutlier extends Outlier{
+	private String lrFolder;
+	private String olFolder;
 	private List<DataPoint> DataPointList;
-	private Map<Long,Double> OutlierList;
+	private Map<Long,ArrayList<Double>> OutlierList;
 	private Double threshold = 0.0;
 	private String outFileName;
 	
-	public PearsonResidualOutlier(String fileName, String outFileName, Double threshold) {
+	private String configFile="";
+	private ComorbidDataSetConfig cdsc = new ComorbidDataSetConfig();
+	private ComorbidDSxmlTool cfgparser = new ComorbidDSxmlTool();
+	public PearsonResidualOutlier() {
+		
+	}
+	public PearsonResidualOutlier(String configpath) {
+		this.configFile = configpath;
+		this.cfgparser.parserDoc(this.configFile,this.cdsc);
+		
+		this.lrFolder = this.cdsc.getPearsonResidualOutlierInputFolder();
+		this.olFolder = this.cdsc.getPearsonResidualOutlierOutputFolder();
+		this.threshold = this.cdsc.getPearsonResidualThreshold();
+		
+	}
+
+	public PearsonResidualOutlier(String lrFolder,String olFolder, Double threshold) {
+		
+		
+		this.lrFolder = lrFolder;
+		this.olFolder = olFolder;
+		this.threshold = threshold;
+	
+	}
+
+	public void init(String fileName, String outFileName, Double threshold) {
 		DataPointList = new ArrayList<DataPoint>();
-		OutlierList = new HashMap<Long,Double>();
+		OutlierList = new HashMap<Long,ArrayList<Double>>();
 		this.outFileName = outFileName;
 		this.threshold = threshold;
 		CCIcsvTool.LRPredictResultParserDoc(fileName, this.DataPointList);
 	
 	}
-	
 	public List<DataPoint> getDataPointList() {
 		return DataPointList;
 	}
@@ -40,27 +67,40 @@ public class PearsonResidualOutlier extends Outlier{
 	}
 
 
-	public Map<Long, Double> getOutlierList() {
+	public Map<Long, ArrayList<Double>> getOutlierList() {
 		return OutlierList;
 	}
 
-	public void setOutlierList(Map<Long, Double> outlierList) {
+	public void setOutlierList(Map<Long, ArrayList<Double>> outlierList) {
 		OutlierList = outlierList;
 	}
 
 	@Override
 	public void oulierGen() {
-		// TODO Auto-generated method stub
-		this.OutlierList.clear();
-		Matrix hMatrix = calXtVX(getDataPointList());
-		for(DataPoint dl:this.DataPointList){
-			Double Ri = isOutlier(hMatrix, dl);
-			
-			if(Ri>this.threshold){
-				this.OutlierList.put(dl.getId(), Ri);			
-			}						
+		File directory = new File(this.lrFolder);
+		File[] fList = directory.listFiles();
+		for (File file : fList){		
+			if (file.isFile()){
+				String filename = file.getName();		
+				
+				init(this.lrFolder+"\\"+filename, this.olFolder+"\\"+filename.substring(0, filename.indexOf("."))+"_prol.csv", this.threshold);
+				Matrix hMatrix = calXtVX(getDataPointList());
+				
+				for(DataPoint dl:this.DataPointList){
+					Double Ri = isOutlier(hMatrix, dl);
+					ArrayList<Double> arr= new ArrayList<Double>();
+					arr.add(dl.getTrainP().label()); //original label
+					arr.add(dl.getPredictP());		 //predict score
+					arr.add(Ri);					 //residual
+					
+					if(Ri>=this.threshold){
+						this.OutlierList.put(dl.getId(), arr);			
+					}						
+				}
+				CCIcsvTool.OutlierCreateDoc(this.outFileName,  (HashMap<Long, ArrayList<Double>>) this.OutlierList);
+			}
 		}
-		CCIcsvTool.OutlierCreateDoc(this.outFileName,  (HashMap<Long, Double>) this.OutlierList);
+		
 	}
 	
 	public static Double isOutlier(Matrix hMatrix,DataPoint v1){
@@ -133,10 +173,20 @@ public class PearsonResidualOutlier extends Outlier{
 		  return mV;
 	  }
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		PearsonResidualOutlier prlo = new PearsonResidualOutlier("data\\IMEDS\\DiabeteComorbidDS\\trainDSf_300_1.0.csv","data\\IMEDS\\DiabeteComorbidDS\\trainDSf_300_1.0_ol.csv", 1.0);
+//		PearsonResidualOutlier prlo = new PearsonResidualOutlier("data\\IMEDS\\DiabeteComorbidDS\\trainDSf_300_1.0.csv","data\\IMEDS\\DiabeteComorbidDS\\trainDSf_300_1.0_ol.csv", -1.0);
+		PearsonResidualOutlier prlo = new PearsonResidualOutlier();
+		if(args.length ==1){
+			 prlo = new PearsonResidualOutlier(args[0]);
+			 
+	    }else if(args.length==3){
+	    	 prlo = new PearsonResidualOutlier(args[0],args[1],Double.parseDouble(args[2]));
+	    }else{
+	      System.err.println("Usage: PearsonResidualOutlier <DSConfig_path> <output_dir> <threshold>");
+	      System.exit(1);
+	    }
+    
 		prlo.oulierGen();
-		System.out.println(prlo.getOutlierList().toString());
+//		System.out.println(prlo.getOutlierList().toString());
 	}
 
 	
