@@ -1,11 +1,16 @@
 package org.imeds.util;
 
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -88,6 +93,24 @@ public class CCIcsvTool implements DocumentTool{
 			e.printStackTrace();
 		}       
 	}
+	public static void SequenceDataSetCreateDoc(String fileName, ArrayList<ArrayList<String>> arrayList) {
+	
+		 FileWriter fstream;
+		try {
+				fstream = new FileWriter(fileName);
+		
+		      BufferedWriter out = new BufferedWriter(fstream);
+		      for(ArrayList<String> row:arrayList){
+					 for(String ri:row)out.write(ri);
+					 out.newLine();
+				}
+		      //Close the output stream
+		      out.close();    
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	/***********************
 	 * Csv Read
 	 * 
@@ -160,7 +183,38 @@ public class CCIcsvTool implements DocumentTool{
 		}
 		
 	}
+	public static void preSequenceDataParserDoc(String fileName,ArrayList<ArrayList<String>> DataPointList) {
 
+		 //Create the CSVFormat object
+		
+        CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
+         
+        //initialize the CSVParser object
+        CSVParser parser;
+		try {
+			parser = new CSVParser(new FileReader(fileName), format);
+			
+	        for(CSVRecord record : parser){
+	        	
+	        	ArrayList<String> row = new ArrayList<String>();
+	        	row.add(record.get("person_id").trim());
+	         	row.add(record.get("procedure_date").trim());
+	        	row.add(record.get("procedure_concept_id").trim());
+	       
+	        	DataPointList.add(row);
+	        }
+	        //close the parser
+	        parser.close();
+	     //   System.out.println(codeList);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	public void parserDoc(String fileName) {
 		// TODO Auto-generated method stub
 		

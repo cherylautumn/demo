@@ -22,7 +22,7 @@ public class MainTestPrefixSpan_AGP_saveToMemory {
      */
     public static void main(String[] args) throws IOException {
         // Load a sequence database
-        double support = (double) 180 / 360;
+        double support = 0.25;
 
         boolean keepPatterns = true;
         boolean verbose = false;
@@ -32,7 +32,8 @@ public class MainTestPrefixSpan_AGP_saveToMemory {
         SequenceDatabase sequenceDatabase = new SequenceDatabase(abstractionCreator);
 
         //sequenceDatabase.loadFile(fileToPath("salidaFormateadaCodificadaSinIDs.txt"), support);
-        sequenceDatabase.loadFile(fileToPath("contextPrefixSpan.txt"), support);
+//        sequenceDatabase.loadFile("data\\IMEDS\\DiabeteComorbidDS\\seqDS\\contextPrefixSpanString.txt", support);
+        sequenceDatabase.loadFile("data\\IMEDS\\DiabeteComorbidDS\\seqDS\\seq_pseq.csv", support);
 
         AlgoPrefixSpan_AGP algorithm = new AlgoPrefixSpan_AGP(support, abstractionCreator);
 

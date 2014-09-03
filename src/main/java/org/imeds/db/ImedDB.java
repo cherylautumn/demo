@@ -189,7 +189,30 @@ public class ImedDB {
         return value;
 	}
 	
-	
+	public static void getDisSemanticConcept(HashMap<Integer, String> cptmap) throws Exception{
+        ResultSet rs = null;
+        ArrayList<Integer> value = new ArrayList<Integer>();
+        try {
+            synchronized (ImedDB.class) {
+            	StringBuffer queryStr = new StringBuffer();
+            	String cptkeys = cptmap.keySet().toString();
+//                   queryStr.append(" SELECT DISTINCT  condition_concept_id FROM condition_occurrence "); 
+//                   queryStr.append(" WHERE person_id = "+pid+" AND condition_start_date <= '"+ new ImedDateFormat().format(IdxDisStart)+"'");
+//                   //System.out.printf("Query Str :%s\n", queryStr.toString() );
+//                   fs = stmt.executeQuery(queryStr.toString());
+//                   while(fs.next()){
+//                	   value.add( fs.getInt("condition_concept_id"));                	   
+//                   }
+//                   fs.close();
+// 
+        
+                rs.close();
+            }
+        }catch (Exception ex) {
+            throw ex;
+        }
+   
+	}
 	public static String tranListIn(ArrayList<Integer> lst){
 		StringBuffer str = new StringBuffer();
 		

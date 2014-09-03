@@ -26,16 +26,10 @@ public class ComorbidDataSetWorker extends DataSetWorker {
 	private ComorbidDataSetConfig cdsc = new ComorbidDataSetConfig();
 	private ComorbidDSxmlTool cfgparser = new ComorbidDSxmlTool();
 	private CCIcsvTool csvparser = new CCIcsvTool();
+
 	private HashMap<Integer,Integer> featureIdx = new HashMap<Integer, Integer>();
-//	private HashMap<Long, ArrayList<Double>> features = new HashMap<Long, ArrayList<Double>>();
-	
 	private CCIDictionary ccid;
-	//TODO Experiment sample pick methods.
-//	private Integer sample_size = 500;
-//	private boolean sample_random = false;
-//	private int sample_label=alive;
-//	private boolean append = false;
-//	
+
 	
 	public ComorbidDataSetWorker(String configFile,  CCIDictionary ccid) {
 		this.configFile = configFile;

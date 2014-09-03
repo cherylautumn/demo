@@ -17,7 +17,7 @@ public class PrefixSpanTest {
 	public static void main(String [] arg) throws IOException{    
 		// Load a sequence database
 		SequenceDatabase sequenceDatabase = new SequenceDatabase(); 
-		sequenceDatabase.loadFile("data\\seqptn\\contextPrefixSpanString.txt");
+		sequenceDatabase.loadFile("data\\IMEDS\\DiabeteComorbidDS\\seqDS\\seq_pseq.csv");
 		// print the database to console
 		sequenceDatabase.print();
 		

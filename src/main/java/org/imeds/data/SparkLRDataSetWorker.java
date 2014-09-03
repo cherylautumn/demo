@@ -218,8 +218,11 @@ public class SparkLRDataSetWorker extends DataSetWorker implements Serializable 
 		result =LRpredict(model, points);
 	//	System.out.println("result "+result.toString());
 		try {			
-		
-			ToFile(result,this.getCdsc().getPearsonResidualOutlierInputFolder()+this.resIn.substring(this.resIn.lastIndexOf("\\"), this.resIn.indexOf("."))+"_"+this.iterations+"_"+this.stepSize+".csv");
+			if(this.getCdsc()!=null && this.getCdsc().getPearsonResidualOutlierInputFolder().trim()!=null){			
+				ToFile(result,this.getCdsc().getPearsonResidualOutlierInputFolder()+this.resIn.substring(this.resIn.lastIndexOf("\\"), this.resIn.indexOf("."))+"_"+this.iterations+"_"+this.stepSize+".csv");				
+			}else{
+				ToFile(result,this.resIn.substring(0, this.resIn.indexOf("."))+"_"+this.iterations+"_"+this.stepSize+".csv");
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -229,7 +232,6 @@ public class SparkLRDataSetWorker extends DataSetWorker implements Serializable 
 	
 	@Override
   public void go() {
-		// TODO Auto-generated method stub
 		PROutlier();
 	}
   
@@ -330,42 +332,12 @@ public class SparkLRDataSetWorker extends DataSetWorker implements Serializable 
 	  CCIcsvTool.OutlierCreateDoc(this.getCdsc().getPearsonResidualOutlierOutputFolder()+fileName,  pearsonOL);
 	 
   }
-  /**
-  public void PROutlier(){
-	  JavaRDD<DataPoint> predictPoints =  sc.parallelize(result) ;
-		final Matrix hMatrix =  PearsonResidualOutlier.calXtVX(result);
-	    
-	    JavaPairRDD<Long, Double> pearsonPoints = predictPoints.mapToPair(new PairFunction<DataPoint, Long,Double>(){
-			public Tuple2<Long, Double>  call(DataPoint v1) throws Exception {
-				return new Tuple2<Long, Double>(v1.getId(),PearsonResidualOutlier.isOutlier(hMatrix,v1));
-			  }    	  
-	    	 }
-		).filter(new Function<Tuple2<Long,Double>,Boolean>(){
 
-			public Boolean call(Tuple2<Long, Double> v1) throws Exception {
-				// TODO Auto-generated method stub
-				if(v1._2 > getThreshold())return true;
-				return false;
-			}			
-		});
-	  Map<Long,Double> pearsonOL = pearsonPoints.collectAsMap();
-	     
-	 
-	  String fileName =this.resIn.substring(0, this.resIn.indexOf("."))+"_"+this.iterations+"_"+this.stepSize+"_sol.csv";
-	  CCIcsvTool.OutlierCreateDoc(fileName,  pearsonOL);
-	 
-  }**/
   public static void main(String[] args) {
-	  //threshold -1 means do not run outlier
-//    if (args.length !=4) {
-//      System.err.println("Usage: JavaLR <input_file_path> <step_size> <niters> <threshold>");
-//      System.exit(1);
-//    }
     SparkLRDataSetWorker og = new SparkLRDataSetWorker();
     og.prepare();
     if(args.length==4){
-    	og.paraInit(args[0]+","+args[1]+","+args[2]+","+args[3]);
-    	
+    	og.paraInit(args[0]+","+args[1]+","+args[2]+","+args[3]);    	
         og.ready();
         if(og.getThreshold()>=0) og.go();
        
