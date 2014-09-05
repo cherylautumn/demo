@@ -40,7 +40,6 @@
     <dependency>
 		<groupId>org.spmflabs</groupId>
 		<artifactId>spmf</artifactId>
-		<version>0.9.6</version>
 		<scope>system</scope>
 		<systemPath>${project.basedir}/lib/spmf.jar</systemPath>
 	</dependency>

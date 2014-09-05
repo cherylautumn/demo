@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import org.imeds.db.ImedDB;
 import org.imeds.util.CCIcsvTool;
 
 import ca.pfv.spmf.algorithms.sequentialpatterns.prefixSpan_AGP.items.Itemset;
@@ -22,14 +23,26 @@ public class seqRSinterpreter {
 	private ArrayList<ArrayList<String>> outdataList = new ArrayList<ArrayList<String>>();
 	public seqRSinterpreter() {
 		// TODO Auto-generated constructor stub
+		String dbDriver = "org.postgresql.Driver";
+		String dbURL = "jdbc:postgresql://omop-datasets.cqlmv7nlakap.us-east-1.redshift.amazonaws.com:5439/truven";
+		String dbUser = "hchiu";
+		String dbPassword = "1QAZ2wsx";
+		String search_path = "ccae_cdm4";
+
+		try {
+			ImedDB.connDB(dbDriver, dbURL,dbUser, dbPassword, search_path);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	private void processFile(String infolderName, String outfolderName) throws FileNotFoundException{
+	private void processFile(String infolderName, String outfolderName) throws Exception{
 		File directory = new File(infolderName);
 		File[] fList = directory.listFiles();
 		for (File file : fList){		
 			if (file.isFile()){
 				readFile(infolderName+"\\"+file.getName());
-				
+				ImedDB.getDisSemanticConcept(cptmap);
 				writeFile(outfolderName+"\\semantic_"+file.getName());				 
 			}
 		}
@@ -50,8 +63,9 @@ public class seqRSinterpreter {
 			idx++;
 			line = scanner.nextLine();
 			linesplit = line.split(" ");
+			ArrayList<Integer> itemarr = new ArrayList<Integer>();
 			for(int i=0;i<linesplit.length;i++){
-				ArrayList<Integer> itemarr = new ArrayList<Integer>();
+				
 				String itemtmp = linesplit[i].trim();
 				if(itemtmp!=null && !itemtmp.contains("SUP")){
 					Integer cpttmp = Integer.parseInt(itemtmp);
@@ -60,9 +74,9 @@ public class seqRSinterpreter {
 					}
 					itemarr.add(cpttmp);					
 				}
-				indataList.add(itemarr);
+				
 			}
-
+			indataList.add(itemarr);
 		}
 	}
 	
@@ -77,7 +91,7 @@ public class seqRSinterpreter {
 						 for(Integer ri:row){
 							 if(this.cptmap.containsKey(ri))
 							 {
-								 line = line + this.cptmap.get(ri)+" ";
+								 line = line + "'"+this.cptmap.get(ri)+"' ";
 							 }else{
 								 line = line + ri+" ";
 							 }
@@ -92,9 +106,11 @@ public class seqRSinterpreter {
 				e.printStackTrace();
 			}
 	}
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-
+		 seqRSinterpreter srsi = new  seqRSinterpreter();
+		 srsi.processFile("data\\IMEDS\\DiabeteComorbidDS\\seqptn", "data\\IMEDS\\DiabeteComorbidDS\\seqptnSemantic");
+		 ImedDB.closeDB();
 	}
 
 }

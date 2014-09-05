@@ -1,4 +1,4 @@
-..\spark-1.0.0-bin-hadoop1\spark-1.0.0-bin-hadoop1\bin\spark-submit --class org.imeds.data.SparkLRDataSetWorker --master local[4] target\demo-0.0.1-SNAPSHOT-jar-with-dependencies.jar data\IMEDS\DiabeteComorbidDS\DSConfig.xml
+..\spark-1.0.1-bin-hadoop1\spark-1.0.1-bin-hadoop1\bin\spark-submit --class org.imeds.data.SparkLRDataSetWorker --master local[4] target\demo-0.0.1-SNAPSHOT-jar-with-dependencies.jar data\IMEDS\DiabeteComorbidDS\DSConfig.xml
 
 rem    ..\spark-1.0.0-bin-hadoop1\spark-1.0.0-bin-hadoop1\bin\spark-submit --class org.imeds.data.SparkLRDataSetWorker --master local[4] target\demo-0.0.1-SNAPSHOT.jar data\IMEDS\DiabeteComorbidDS\trainDSf.csv 1 3000
 rem  ..\spark-1.0.0-bin-hadoop1\spark-1.0.0-bin-hadoop1\bin\spark-submit --class org.imeds.data.SparkLRDataSetWorker --master local[4] target\demo-0.0.1-SNAPSHOT-jar-with-dependencies.jar data\IMEDS\DiabeteComorbidDS\trainDSf.csv 1 300 0 >>300b.txt

@@ -84,23 +84,26 @@ public class ImedDB {
 		String orderCdt="";
 		String labelCdt="";		
 		HashMap<Long, ArrayList<Double>> value = new  HashMap<Long, ArrayList<Double>>();
-		if(random){
-			orderCdt = " ORDER BY random() LIMIT "+(sample_end - sample_start)+" OFFSET "+sample_start;			
-		}else{
-			//TODO experiment sample method is waiting for further modify
-			orderCdt = " LIMIT "+(sample_end - sample_start)+" OFFSET "+sample_start;	
-		}
+
 		
 		switch(LabelType){
 		case ComorbidDataSetWorker.death:
-			labelCdt = " AND label >0 "; //death
+			labelCdt = " WHERE label IS NOT NULL "; //death
 			break;
 		case ComorbidDataSetWorker.alive:
-			labelCdt = " AND label IS NULL "; //death
+			labelCdt = " WHERE label IS NULL "; //death
 			break;
 		default:
 			labelCdt ="";
 			break;
+		}
+		
+		if(random){
+
+			orderCdt = " ORDER BY random() LIMIT "+(sample_end - sample_start)+" OFFSET "+sample_start;			
+		}else{
+			//TODO experiment sample method is waiting for further modify
+			orderCdt = " LIMIT "+(sample_end - sample_start)+" OFFSET "+sample_start;	
 		}
 		value = getPatientsWithIndexDiagnose(cptIdList, colList, labelCdt+orderCdt);
 		return value;
@@ -110,13 +113,21 @@ public class ImedDB {
         HashMap<Long, ArrayList<Double>> value = new  HashMap<Long, ArrayList<Double>>();
         try {
             synchronized (ImedDB.class) {
-            	StringBuffer queryStr = new StringBuffer();
-            	
+//				SELECT * from (
+//				select p.person_id as ID, p.gender_concept_id as Gender, year_of_birth as Age, race_concept_id as Race, ethnicity_concept_id as Ethnicity, location_id as Location, death.person_id as Label
+//				FROM condition_occurrence co, person p LEFT OUTER JOIN death  ON (p.person_id = death.person_id)  
+//				WHERE p.person_id = co.person_id AND condition_concept_id 
+//
+//				IN (201820,201826,201254,40482801,40484648,443727,443734,439770,4096666,201530,201531,443592,443735,321822,443729,318712)
+//				) --WHERE label IS  NULL
+//				ORDER BY random()
+//				LIMIT 1000;
+            	StringBuffer queryStr = new StringBuffer();            	
+            	queryStr.append(" SELECT * FROM (");
             	queryStr.append(" SELECT DISTINCT p.person_id as ID, p.gender_concept_id as Gender, year_of_birth as Age, race_concept_id as Race, ethnicity_concept_id as Ethnicity, location_id as Location, death.person_id as Label ");            	
             	queryStr.append(" FROM condition_occurrence co, person p LEFT OUTER JOIN death  ON (p.person_id = death.person_id) ");
             	queryStr.append(" WHERE p.person_id = co.person_id AND condition_concept_id IN ("+tranListIn(cptIdList)+")");
-
-            	queryStr.append(Cdt);
+            	queryStr.append(" ) "+Cdt);
             	
             	System.out.printf("Query Str :%s\n", queryStr.toString() );
                 rs = stmt.executeQuery(queryStr.toString());
@@ -191,21 +202,19 @@ public class ImedDB {
 	
 	public static void getDisSemanticConcept(HashMap<Integer, String> cptmap) throws Exception{
         ResultSet rs = null;
-        ArrayList<Integer> value = new ArrayList<Integer>();
         try {
             synchronized (ImedDB.class) {
             	StringBuffer queryStr = new StringBuffer();
             	String cptkeys = cptmap.keySet().toString();
-//                   queryStr.append(" SELECT DISTINCT  condition_concept_id FROM condition_occurrence "); 
-//                   queryStr.append(" WHERE person_id = "+pid+" AND condition_start_date <= '"+ new ImedDateFormat().format(IdxDisStart)+"'");
-//                   //System.out.printf("Query Str :%s\n", queryStr.toString() );
-//                   fs = stmt.executeQuery(queryStr.toString());
-//                   while(fs.next()){
-//                	   value.add( fs.getInt("condition_concept_id"));                	   
-//                   }
-//                   fs.close();
-// 
-        
+            	cptkeys = cptkeys.substring(1, cptkeys.length()-1);
+            	queryStr.append(" SELECT concept_id, concept_name ");
+            	queryStr.append(" FROM  vocabulary.concept ");
+            	queryStr.append(" WHERE concept_id in ("+cptkeys+")");
+
+                   rs = stmt.executeQuery(queryStr.toString());
+                   while(rs.next()){
+                	   cptmap.put(rs.getInt("concept_id"), rs.getString("concept_name"));            	   
+                   }
                 rs.close();
             }
         }catch (Exception ex) {
