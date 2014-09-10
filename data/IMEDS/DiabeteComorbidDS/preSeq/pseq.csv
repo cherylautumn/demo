@@ -1,4 +1,4 @@
-person_id,procedure_date,procedure_concept_id
+person_id,date_t,concept_id
 593956701,2003-03-07,2211361
 593956701,2003-03-07,2211373
 593956701,2003-03-07,2614666

@@ -17,7 +17,7 @@ import org.imeds.util.CCIcsvTool;
 import org.imeds.util.ComorbidDSxmlTool;
 
 
-public class ComorbidDataSetWorker extends DataSetWorker {
+public class ComorbidDataSetWorker extends Worker {
 
 	public static final int death = 0;
 	public static final int alive = 1;

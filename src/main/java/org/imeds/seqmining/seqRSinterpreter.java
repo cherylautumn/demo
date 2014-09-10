@@ -67,9 +67,9 @@ public class seqRSinterpreter {
 			for(int i=0;i<linesplit.length;i++){
 				
 				String itemtmp = linesplit[i].trim();
-				if(itemtmp!=null && !itemtmp.contains("SUP")){
+				if(itemtmp!=null && (!itemtmp.contains("SUP")||!itemtmp.contains("GAIN"))){
 					Integer cpttmp = Integer.parseInt(itemtmp);
-					if(cpttmp>100){
+					if(cpttmp>10000){
 						cptmap.put(cpttmp,"");
 					}
 					itemarr.add(cpttmp);					

@@ -26,6 +26,8 @@ import org.apache.spark.mllib.regression.LabeledPoint;
 import org.imeds.data.SparkLRDataSetWorker.DataPoint;
 import org.imeds.data.common.CCIcode;
 
+import ca.pfv.spmf.algorithms.sequentialpatterns.prefixSpan_AGP.items.Itemset;
+
 public class CCIcsvTool implements DocumentTool{ 
 
 	public CCIcsvTool() {
@@ -93,6 +95,28 @@ public class CCIcsvTool implements DocumentTool{
 			e.printStackTrace();
 		}       
 	}
+	public static void SequenceDataSetCreateDoc(String fileName, HashMap<Long, ArrayList<String>> mapList) {
+		
+		SequenceDataSetCreateDoc(fileName,new ArrayList<ArrayList<String>>(mapList.values()));
+		FileWriter fstream;
+		try {
+			 fstream = new FileWriter(fileName.substring(0,fileName.indexOf("."))+"_withId.csv");
+		
+		      BufferedWriter out = new BufferedWriter(fstream);
+		      Iterator<Entry<Long, ArrayList<String>>> itemIter = mapList.entrySet().iterator();
+		      while(itemIter.hasNext()){
+		    	  Entry<Long, ArrayList<String>> item = itemIter.next();	
+		    	  out.write(item.getKey()+",");
+		    	  for(String row:item.getValue())out.write(row);
+		    	  out.newLine();
+		      }
+		      //Close the output stream
+		      out.close();    
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public static void SequenceDataSetCreateDoc(String fileName, ArrayList<ArrayList<String>> arrayList) {
 	
 		 FileWriter fstream;
@@ -148,7 +172,7 @@ public class CCIcsvTool implements DocumentTool{
 	}
 	
 	public static void LRPredictResultParserDoc(String fileName,List<DataPoint> DataPointList) {
-		// TODO Auto-generated method stub
+		
 		 //Create the CSVFormat object
 		
         CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
@@ -198,8 +222,8 @@ public class CCIcsvTool implements DocumentTool{
 	        	
 	        	ArrayList<String> row = new ArrayList<String>();
 	        	row.add(record.get("person_id").trim());
-	         	row.add(record.get("procedure_date").trim());
-	        	row.add(record.get("procedure_concept_id").trim());
+	        	row.add(record.get("date_t").trim());
+	        	row.add(record.get("concept_id").trim());
 	       
 	        	DataPointList.add(row);
 	        }
@@ -214,6 +238,36 @@ public class CCIcsvTool implements DocumentTool{
 			e.printStackTrace();
 		}
 		
+	}
+	public static HashMap<Long,Integer> OutlierParserDoc(String fileName) {
+		return OutlierParserDoc(fileName, 0.0);
+	}
+	public static HashMap<Long, Integer> OutlierParserDoc(String fileName, Double threshold) {
+		HashMap<Long,Integer> labelItemSet = new HashMap<Long,Integer>();
+		 CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
+         
+	        //initialize the CSVParser object
+	        CSVParser parser;
+			try {
+				parser = new CSVParser(new FileReader(fileName), format);
+				
+		        for(CSVRecord record : parser){
+		        	Long id = Long.parseLong(record.get("Id"));
+		        	if( Double.parseDouble(record.get("Ri"))>=threshold)labelItemSet.put(id, 1);
+		        	else labelItemSet.put(id, 0);
+		        }
+		        //close the parser
+		        parser.close();
+		     //   System.out.println(codeList);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return labelItemSet;
+   
 	}
 	public void parserDoc(String fileName) {
 		// TODO Auto-generated method stub

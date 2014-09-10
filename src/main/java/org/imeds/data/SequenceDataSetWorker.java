@@ -21,7 +21,7 @@ import ca.pfv.spmf.algorithms.sequentialpatterns.prefixSpan_AGP.items.ItemFactor
 import ca.pfv.spmf.algorithms.sequentialpatterns.prefixSpan_AGP.items.Itemset;
 
 
-public class SequenceDataSetWorker extends DataSetWorker {
+public class SequenceDataSetWorker extends Worker {
 	
 	private SequenceDataSetConfig cdsc = new SequenceDataSetConfig();
 	private ComorbidDSxmlTool cfgparser = new ComorbidDSxmlTool();
@@ -50,11 +50,18 @@ public class SequenceDataSetWorker extends DataSetWorker {
 				ArrayList<ArrayList<String>> DataPointList = new ArrayList<ArrayList<String>>();
 				CCIcsvTool.preSequenceDataParserDoc(this.cdsc.getInputFolder()+"\\"+file.getName(),DataPointList);
 				HashMap<Long, HashMap<Date, Itemset>> sequences = processSequence(DataPointList);
-				ArrayList<ArrayList<String>> seqTocsv = transSequencesToList(sequences);
-				CCIcsvTool.SequenceDataSetCreateDoc(this.cdsc.getOutputFolder()+"\\seq_"+file.getName(), seqTocsv); 
+				
+				
+				HashMap<Long, ArrayList<String>> seqList = transSequencesToList(sequences);
+				CCIcsvTool.SequenceDataSetCreateDoc(this.cdsc.getOutputFolder()+"\\seq_"+file.getName(), seqList);
+//				ArrayList<ArrayList<String>> seqTocsv = new ArrayList<ArrayList<String>>(seqList.values());
+				
+//				ArrayList<ArrayList<String>> seqTocsv = transSequencesToList(sequences);
+//				CCIcsvTool.SequenceDataSetCreateDoc(this.cdsc.getOutputFolder()+"\\seq_"+file.getName(), seqTocsv); 
 			}
 		}
 	}
+
 	public  HashMap<Long, HashMap<Date, Itemset>> processSequence(ArrayList<ArrayList<String>> DataPointList) {	    
 	    HashMap<Long, HashMap<Date, Itemset>> sequences = new  HashMap<Long, HashMap<Date, Itemset>>();
 	    ItemFactory<Integer> itemFactory = new ItemFactory<Integer>();
@@ -87,6 +94,32 @@ public class SequenceDataSetWorker extends DataSetWorker {
 		return sequences;
 	}
 
+	public  HashMap<Long,ArrayList<String>> transSequencesToList(HashMap<Long, HashMap<Date, Itemset>> sequences ){
+		 HashMap<Long, ArrayList<String>> csvlist = new HashMap<Long,ArrayList<String>>();
+		Iterator<Entry<Long, HashMap<Date, Itemset>>> iter = sequences.entrySet().iterator();
+		
+		while (iter.hasNext()) {
+			
+			Entry<Long, HashMap<Date, Itemset>> sequence = iter.next();			
+			HashMap<Date, Itemset> itemSets =  sequence.getValue();
+			Map<Date, Itemset> itemTree = new TreeMap<Date, Itemset>(itemSets);
+			Iterator<Entry<Date,Itemset>> itemIter = itemTree.entrySet().iterator();
+			
+			ArrayList<String> itemStr = new ArrayList<String>();
+			
+			while(itemIter.hasNext()){
+				Entry<Date, Itemset> item = itemIter.next();				
+//				itemStr.add("<"+new ImedDateFormat().format(item.getKey())+"> ");
+				itemStr.add(item.getValue().toString());
+				itemStr.add("-1 ");
+			}
+			itemStr.add("-2");
+			csvlist.put(sequence.getKey(), itemStr);
+		}
+		
+		return csvlist;
+	}
+	/**
 	public ArrayList<ArrayList<String>> transSequencesToList(HashMap<Long, HashMap<Date, Itemset>> sequences ){
 		ArrayList<ArrayList<String>> csvlist = new ArrayList<ArrayList<String>>();
 		Iterator<Entry<Long, HashMap<Date, Itemset>>> iter = sequences.entrySet().iterator();
@@ -112,6 +145,7 @@ public class SequenceDataSetWorker extends DataSetWorker {
 		
 		return csvlist;
 	}
+	**/
 	@Override
 	public void go() {
 		// TODO Auto-generated method stub

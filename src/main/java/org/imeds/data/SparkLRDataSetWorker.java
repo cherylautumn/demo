@@ -50,7 +50,7 @@ import scala.Tuple2;
  * Purpose: find out outlier set which classified by Logistic regression
  * Logistic regression based classification using ML Lib.
  */
-public class SparkLRDataSetWorker extends DataSetWorker implements Serializable {
+public class SparkLRDataSetWorker extends Worker implements Serializable {
 
 	private static final long serialVersionUID = 7572888959583425286L;
 	private static final int idIdx		= 0; //id column

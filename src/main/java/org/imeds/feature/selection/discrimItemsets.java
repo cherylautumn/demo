@@ -1,0 +1,114 @@
+package org.imeds.feature.selection;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.TreeSet;
+
+public class discrimItemsets implements Comparable<discrimItemsets>{ 
+	public static final int TYPE_INFO_GAIN					= 0001;
+	public static final int TYPE_FISHER_GAIN				= 0002;
+	private basicItemsets<Integer> itemsets = new basicItemsets<Integer>(); 
+	private HashMap<Integer, ArrayList<Long>> inlabelCount = new  HashMap<Integer, ArrayList<Long>>();
+	private HashMap<Integer, ArrayList<Long>> outlabelCount = new  HashMap<Integer, ArrayList<Long>>();
+	private ArrayList<label> datapoints = new ArrayList<label>();
+	private Double gain;
+	public discrimItemsets() {
+		super();
+	}
+
+	public void addLabelCount(Integer label, Long itemsetId, Boolean in){
+		HashMap<Integer, ArrayList<Long>> labelCount;
+		if(in) labelCount = this.inlabelCount;
+		else   labelCount = this.outlabelCount;
+		
+		if(!labelCount.containsKey(label)) labelCount.put(label, new ArrayList<Long>());
+		labelCount.get(label).add(itemsetId);
+	}
+	public ArrayList<label> getDatapoints() {
+		return datapoints;
+	}
+
+	public void setDatapoints(ArrayList<label> datapoints) {
+		this.datapoints = datapoints;
+	}
+	public void addDatapoints(label data){
+		this.datapoints.add(data);
+	}
+	public Double getGain(Integer gainType){
+		
+		switch(gainType){
+		case TYPE_INFO_GAIN:
+			
+			break;
+		case TYPE_FISHER_GAIN:
+			this.gain = genFisherScore();
+			break;
+		}
+		return this.gain;
+	}
+
+	
+	public Double getGain() {
+		return this.gain;
+	}
+	public void setGain(Double gain) {
+		this.gain = gain;
+	}
+	
+	
+	public Double genFisherScore(){
+		HashMap<Integer, statInfo> class_stat = new HashMap<Integer, statInfo>();
+		statInfo sinfo;
+		for(label lb: this.datapoints){
+			if(!class_stat.containsKey(lb.getClass_id())) class_stat.put(lb.getClass_id(), new statInfo());
+			sinfo = class_stat.get(lb.getClass_id());
+			sinfo.addCnt();
+			sinfo.addSum(lb.getFeature_v());
+			sinfo.addSumSquare(lb.getFeature_v());
+		}
+		
+		Iterator<Entry<Integer,statInfo>> itr = class_stat.entrySet().iterator();
+		Double sum=0.0, cnt=0.0, mu=0.0, nom=0.0, denom=0.0;
+		
+		while (itr.hasNext()) {
+			Entry<Integer, statInfo> entry = itr.next();
+			cnt = cnt + entry.getValue().getCnt();
+			sum  = sum  + entry.getValue().getSum();
+		}
+		mu = sum/cnt;
+		itr = class_stat.entrySet().iterator();
+		while (itr.hasNext()) {
+			Entry<Integer, statInfo> entry = itr.next();
+			nom	  = nom+(entry.getValue().getCnt()*Math.pow((entry.getValue().getMean()-mu), 2));
+			denom = denom+(entry.getValue().getCnt()*entry.getValue().getVar());
+		}
+		return (nom/denom);
+	}
+	public int compareTo(discrimItemsets bf) {
+		 
+		Double compareGain = (Double)bf.getGain();
+		//descending order
+		if( (compareGain -this.gain)>0 )
+			return 1;
+		else
+			return 0;
+	}
+
+	public basicItemsets<Integer> getItemsets() {
+		return itemsets;
+	}
+	public void setItemsets(basicItemsets<Integer> itemsets) {
+		this.itemsets = itemsets;
+	}
+
+	@Override
+	public String toString() {
+//		return "discrimItemsets [itemsets=" + itemsets.toString() + ", datapoints="
+//				+ datapoints.toString() + ", gain=" + gain + "]";
+		return "discrimItemsets [itemsets=" + itemsets.toString()  + ", gain=" + gain + "]";
+	}	
+
+
+}
