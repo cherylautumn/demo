@@ -67,8 +67,11 @@ public class seqRSinterpreter {
 			for(int i=0;i<linesplit.length;i++){
 				
 				String itemtmp = linesplit[i].trim();
-				if(itemtmp!=null && (!itemtmp.contains("SUP")||!itemtmp.contains("GAIN"))){
+				if(itemtmp!=null && !itemtmp.equals("")&& 
+				  !itemtmp.contains("SUP")&& !itemtmp.contains("GAIN:") && !itemtmp.contains(".")){
+					//FIXME: fix here to regular expression
 					Integer cpttmp = Integer.parseInt(itemtmp);
+					//FIXME: fix cmptmp>10000
 					if(cpttmp>10000){
 						cptmap.put(cpttmp,"");
 					}

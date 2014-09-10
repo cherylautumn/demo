@@ -1,0 +1,132 @@
+'HEPARIN, BEEF' -1 449 
+'Fluconazole' -1 432 
+'Doxycycline' -1 433 
+'Metronidazole' -1 360 
+'atorvastatin' -1 602 
+'Insulin, Glargine, Human' -1 501 
+'Thyroxine' -1 421 
+'Amlodipine' -1 547 
+'Ibuprofen' -1 466 
+'Guaifenesin' -1 421 
+'Propoxyphene' -1 405 
+'fluticasone' -1 582 
+'Ketorolac' -1 365 
+'Diphenhydramine' -1 378 
+'Morphine' -1 407 
+'Tramadol' -1 407 
+'Lidocaine' -1 411 
+'Hydrocortisone' -1 400 
+'Omeprazole' -1 468 
+'Metoclopramide' -1 412 
+'Triamcinolone' -1 635 
+'gabapentin' -1 385 
+'Lorazepam' -1 450 
+'Alprazolam' -1 365 
+'cyclobenzaprine' -1 460 
+'zolpidem' -1 437 
+'pneumococcal polysaccharides (23)' -1 364 
+'Influenza virus vaccine' -1 'Influenza virus vaccine' -1 495 
+'Amoxicillin' -1 'Influenza virus vaccine' -1 370 
+'Metformin' -1 'Influenza virus vaccine' -1 407 
+'Potassium Chloride' -1 'Hydrocodone' -1 411 
+'Potassium Chloride' -1 'Acetaminophen' -1 473 
+'Azithromycin' -1 'Azithromycin' -1 472 
+'Amoxicillin' -1 'Azithromycin' -1 422 
+'Azithromycin' -1 'Amoxicillin' -1 424 
+'Amoxicillin' -1 'Amoxicillin' -1 560 
+'Metformin' -1 'Azithromycin' -1 384 
+'Metformin' -1 'Amoxicillin' -1 440 
+'Simvastatin' -1 'Simvastatin' -1 382 
+'Ciprofloxacin' -1 'Hydrocodone' -1 410 
+'Cephalexin' -1 'Hydrocodone' -1 400 
+'Hydrocodone' -1 'Cephalexin' -1 414 
+'Ciprofloxacin' -1 'Acetaminophen' -1 473 
+'Levofloxacin' -1 'Hydrocodone' -1 414 
+'Acetaminophen' -1 'Cephalexin' -1 477 
+'Cephalexin' -1 'Acetaminophen' -1 450 
+'Levofloxacin' -1 'Acetaminophen' -1 457 
+'Hydrocodone' -1 'Prednisone' -1 373 
+'Hydrocodone' -1 'Dexamethasone' -1 406 
+'Methylprednisolone' -1 'Hydrocodone' -1 381 
+'Hydrocodone' -1 'Methylprednisolone' -1 362 
+'Acetaminophen' -1 'Prednisone' -1 423 
+'Prednisone' -1 'Acetaminophen' -1 393 
+'Simvastatin' -1 'Acetaminophen' -1 402 
+'Acetaminophen' -1 'Simvastatin' -1 364 
+'Dexamethasone' -1 'Acetaminophen' -1 380 
+'Acetaminophen' -1 'Dexamethasone' -1 479 
+'Acetaminophen' -1 'Methylprednisolone' -1 414 
+'Methylprednisolone' -1 'Acetaminophen' -1 424 
+'Lisinopril' -1 'Lisinopril' -1 375 
+'Lisinopril' -1 'Hydrocodone' -1 380 
+'Hydrochlorothiazide' -1 'Metformin' -1 361 
+'Lisinopril' -1 'Acetaminophen' -1 445 
+'Acetaminophen' -1 'Lisinopril' -1 395 
+'Metoprolol' -1 'Acetaminophen' -1 370 
+'Hydrocodone' -1 'Albuterol' -1 386 
+'Albuterol' -1 'Hydrocodone' -1 379 
+'Hydrocodone' -1 'Promethazine' -1 382 
+'Acetaminophen' -1 'Codeine' -1 381 
+'Codeine' -1 'Acetaminophen' -1 371 
+'Albuterol' -1 'Acetaminophen' -1 426 
+'Acetaminophen' -1 'Albuterol' -1 441 
+'Acetaminophen' -1 'Fentanyl' -1 387 
+'Promethazine' -1 'Acetaminophen' -1 402 
+'Acetaminophen' -1 'Promethazine' -1 444 
+'Oxycodone' 'Acetaminophen' -1 442 
+'Oxycodone' -1 'Acetaminophen' -1 369 
+'Hydrocodone' -1 'Ondansetron' -1 361 
+'Hydrocodone' -1 'Hydrochlorothiazide' -1 365 
+'Hydrocodone' -1 'Furosemide' -1 373 
+'Acetaminophen' -1 'Ondansetron' -1 417 
+'Acetaminophen' -1 'Hydrochlorothiazide' -1 417 
+'Acetaminophen' -1 'Furosemide' -1 441 
+'Furosemide' -1 'Acetaminophen' -1 369 
+'Sodium Chloride' 'POLYETHYLENE GLYCOL 3350' -1 367 
+'Hydrochlorothiazide' -1 'Hydrochlorothiazide' -1 459 
+'Furosemide' -1 'Furosemide' -1 366 
+'Midazolam' 'Fentanyl' -1 408 
+'Influenza virus vaccine' -1 'Acetaminophen' 'Hydrocodone' -1 363 
+'Acetaminophen' 'Hydrocodone' -1 'Influenza virus vaccine' -1 413 
+'Acetaminophen' 'Hydrocodone' -1 'Potassium Chloride' -1 420 
+'Acetaminophen' -1 'Trimethoprim' 'Sulfamethoxazole' -1 381 
+'Hydrocodone' -1 'Amoxicillin' 'Clavulanate' -1 360 
+'Acetaminophen' -1 'Amoxicillin' 'Clavulanate' -1 415 
+'Amoxicillin' 'Clavulanate' -1 'Acetaminophen' -1 384 
+'Metformin' -1 'Metformin' -1 'Metformin' -1 377 
+'Acetaminophen' 'Hydrocodone' -1 'Ciprofloxacin' -1 392 
+'Hydrocodone' -1 'Amoxicillin' -1 'Hydrocodone' -1 367 
+'Acetaminophen' 'Hydrocodone' -1 'Levofloxacin' -1 380 
+'Acetaminophen' 'Hydrocodone' -1 'Azithromycin' -1 451 
+'Azithromycin' -1 'Acetaminophen' 'Hydrocodone' -1 451 
+'Acetaminophen' 'Hydrocodone' -1 'Amoxicillin' -1 517 
+'Amoxicillin' -1 'Acetaminophen' 'Hydrocodone' -1 533 
+'Amoxicillin' -1 'Acetaminophen' -1 'Hydrocodone' -1 378 
+'Hydrocodone' -1 'Amoxicillin' -1 'Acetaminophen' -1 385 
+'Acetaminophen' -1 'Amoxicillin' -1 'Hydrocodone' -1 406 
+'Acetaminophen' -1 'Hydrocodone' -1 'Amoxicillin' -1 366 
+'Amoxicillin' -1 'Hydrocodone' -1 'Acetaminophen' -1 362 
+'Hydrocodone' -1 'Acetaminophen' -1 'Amoxicillin' -1 369 
+'Acetaminophen' -1 'Acetaminophen' -1 'Azithromycin' -1 385 
+'Acetaminophen' -1 'Azithromycin' -1 'Acetaminophen' -1 360 
+'Azithromycin' -1 'Acetaminophen' -1 'Acetaminophen' -1 361 
+'Acetaminophen' -1 'Acetaminophen' -1 'Amoxicillin' -1 415 
+'Amoxicillin' -1 'Acetaminophen' -1 'Acetaminophen' -1 414 
+'Acetaminophen' -1 'Amoxicillin' -1 'Acetaminophen' -1 457 
+'Acetaminophen' 'Hydrocodone' -1 'Metformin' -1 417 
+'Metformin' -1 'Acetaminophen' 'Hydrocodone' -1 487 
+'Acetaminophen' 'Hydrocodone' -1 'Oxycodone' -1 387 
+'Hydrochlorothiazide' -1 'Acetaminophen' 'Hydrocodone' -1 418 
+'Acetaminophen' -1 'Hydrocodone' -1 'Hydrocodone' -1 'Hydrocodone' -1 372 
+'Hydrocodone' -1 'Hydrocodone' -1 'Acetaminophen' -1 'Hydrocodone' -1 361 
+'Acetaminophen' -1 'Hydrocodone' -1 'Hydrocodone' -1 'Acetaminophen' -1 391 
+'Hydrocodone' -1 'Acetaminophen' -1 'Hydrocodone' -1 'Acetaminophen' -1 367 
+'Hydrocodone' -1 'Hydrocodone' -1 'Acetaminophen' -1 'Acetaminophen' -1 375 
+'Hydrocodone' -1 'Acetaminophen' -1 'Acetaminophen' -1 'Hydrocodone' -1 384 
+'Acetaminophen' -1 'Acetaminophen' -1 'Hydrocodone' -1 'Hydrocodone' -1 389 
+'Acetaminophen' -1 'Hydrocodone' -1 'Acetaminophen' -1 'Hydrocodone' -1 389 
+'Acetaminophen' -1 'Hydrocodone' -1 'Acetaminophen' -1 'Acetaminophen' -1 407 
+'Acetaminophen' -1 'Acetaminophen' -1 'Hydrocodone' -1 'Acetaminophen' -1 410 
+'Hydrocodone' -1 'Acetaminophen' -1 'Acetaminophen' -1 'Acetaminophen' -1 400 
+'Acetaminophen' -1 'Acetaminophen' -1 'Acetaminophen' -1 'Acetaminophen' 'Hydrocodone' -1 363 
+'Acetaminophen' 'Hydrocodone' -1 'Acetaminophen' 'Hydrocodone' -1 'Acetaminophen' 'Hydrocodone' -1 395 
