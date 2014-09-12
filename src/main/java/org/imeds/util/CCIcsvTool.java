@@ -253,6 +253,7 @@ public class CCIcsvTool implements DocumentTool{
 				
 		        for(CSVRecord record : parser){
 		        	Long id = Long.parseLong(record.get("Id"));
+		        	//FIXME: OUTLIERS IN THIS SET MAY NOT HAVE DRUG SEQ PTN 
 		        	if( Double.parseDouble(record.get("Ri"))>=threshold)labelItemSet.put(id, 1);
 		        	else labelItemSet.put(id, 0);
 		        }

@@ -1,0 +1,84 @@
+Microsoft Windows [Version 6.1.7601]
+Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
+
+C:\Users\hchiu\workspace\demo>
+
+C:\Users\hchiu\workspace\demo> Volume in drive C has no label.
+ Volume Serial Number is 7A90-4E31
+
+ Directory of C:\Users\hchiu\workspace\demo
+
+08/25/2014  09:13 AM    <DIR>          .
+08/25/2014  09:13 AM    <DIR>          ..
+08/21/2014  04:07 PM             2,049 .classpath
+08/01/2014  11:39 AM               556 .project
+08/01/2014  11:39 AM    <DIR>          .settings
+08/15/2014  04:47 PM           108,759 1.txt
+08/25/2014  09:13 AM                 0 1commit.txt
+08/21/2014  03:35 PM    <DIR>          data
+08/21/2014  04:06 PM    <DIR>          lib
+08/21/2014  03:58 PM             3,071 pom.xml
+08/15/2014  12:07 PM             3,075 pomForSpark.xml
+08/20/2014  03:54 PM    <DIR>          ref
+08/21/2014  03:21 PM             1,585 run.bat
+08/01/2014  11:39 AM    <DIR>          src
+08/21/2014  03:00 PM    <DIR>          target
+08/22/2014  09:34 AM               126 testxml.xml
+               8 File(s)        119,221 bytes
+               8 Dir(s)  43,181,654,016 bytes free
+
+C:\Users\hchiu\workspace\demo>
+
+C:\Users\hchiu\workspace\demo> Volume in drive C has no label.
+ Volume Serial Number is 7A90-4E31
+
+ Directory of C:\Users\hchiu\workspace\demo
+
+08/25/2014  09:13 AM    <DIR>          .
+08/25/2014  09:13 AM    <DIR>          ..
+08/21/2014  04:07 PM             2,049 .classpath
+08/01/2014  11:39 AM               556 .project
+08/01/2014  11:39 AM    <DIR>          .settings
+08/15/2014  04:47 PM           108,759 1.txt
+08/25/2014  09:13 AM                 0 1commit.txt
+08/21/2014  03:35 PM    <DIR>          data
+08/21/2014  04:06 PM    <DIR>          lib
+08/21/2014  03:58 PM             3,071 pom.xml
+08/15/2014  12:07 PM             3,075 pomForSpark.xml
+08/20/2014  03:54 PM    <DIR>          ref
+08/21/2014  03:21 PM             1,585 run.bat
+08/01/2014  11:39 AM    <DIR>          src
+08/21/2014  03:00 PM    <DIR>          target
+08/22/2014  09:34 AM               126 testxml.xml
+               8 File(s)        119,221 bytes
+               8 Dir(s)  43,181,649,920 bytes free
+
+C:\Users\hchiu\workspace\demo>
+
+C:\Users\hchiu\workspace\demo>C:\Users\hchiu\workspace\demo>C:\Users\hchiu\workspace\demo>C:\Users\hchiu\workspace\demo>C:\Users\hchiu\workspace\demo> Volume in drive C has no label.
+ Volume Serial Number is 7A90-4E31
+
+ Directory of C:\Users\hchiu\workspace\demo
+
+08/25/2014  09:13 AM    <DIR>          .
+08/25/2014  09:13 AM    <DIR>          ..
+08/21/2014  04:07 PM             2,049 .classpath
+08/01/2014  11:39 AM               556 .project
+08/01/2014  11:39 AM    <DIR>          .settings
+08/15/2014  04:47 PM           108,759 1.txt
+08/25/2014  09:13 AM                 0 1commit.txt
+08/21/2014  03:35 PM    <DIR>          data
+08/21/2014  04:06 PM    <DIR>          lib
+08/21/2014  03:58 PM             3,071 pom.xml
+08/15/2014  12:07 PM             3,075 pomForSpark.xml
+08/20/2014  03:54 PM    <DIR>          ref
+08/21/2014  03:21 PM             1,585 run.bat
+08/01/2014  11:39 AM    <DIR>          src
+08/21/2014  03:00 PM    <DIR>          target
+08/22/2014  09:34 AM               126 testxml.xml
+               8 File(s)        119,221 bytes
+               8 Dir(s)  43,181,649,920 bytes free
+
+C:\Users\hchiu\workspace\demo>
+
+C:\Users\hchiu\workspace\demo>

@@ -142,7 +142,6 @@ public class MMRFSworker extends Worker {
 
 	@Override
 	public void done() {
-		// TODO Auto-generated method stub
 		this.cfgparser.createFeatureFile(this.cdsc.getFeatureItemsetFileName(), this.featureSeqList);
 //		printNotCoveredSeq();
 	}

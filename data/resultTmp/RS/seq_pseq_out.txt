@@ -1,0 +1,81 @@
+=============  Algorithm VMSP - STATISTICS =============
+ Total time ~ 88906 ms
+ Frequent sequences count : 6586
+ Max memory (mb) : 14.183044433593756586
+minsup 11
+Intersection count 213733 
+===================================================
+
+=============  Algorithm - STATISTICS =============
+ Total time ~ 176216 ms
+ Frequent sequences count : 10334
+ Join count : 179577 Max memory (mb):140.04505157470703
+Content at file CM-ClaSP_out.txt
+===================================================
+
+=============  Algorithm - STATISTICS =============
+ Total time ~ 179966 ms
+ Frequent sequences count : 10334
+ Join count : 236726
+ Max memory (mb):123.93631744384766
+Content at file ClaSP_out.txt
+===================================================
+
+=============  Algorithm - STATISTICS =============
+ Total time ~ 177436 ms
+ Frequent sequences count : 10334
+ Join count : 285140
+ Max memory (mb):133.16891479492188
+Content at file SPAM_PostProcessingClosed_out.txt
+===================================================
+
+=============  Algorithm - STATISTICS =============
+ Total time ~ 294748 ms
+ Frequent sequences count : 10334
+ Max memory (mb):18.95465850830078
+Content at file PrefixSpan_PostProcessingClosed_out.txt
+
+===================================================
+
+=============  CM-SPADE -- Algorithm - STATISTICS =============
+ Total time ~ 4094 ms
+ Frequent sequences count : 54172
+ Join count : 141245
+ Max memory (mb):9.321060180664062
+Content at file CM-SPADE_out.txt
+===================================================
+
+=============  Algorithm - STATISTICS =============
+ Total time ~ 143453 ms
+ Frequent sequences count : 54172
+ Max memory (mb):5.7391510009765625
+Content at file PrefixSpan_AGP_out.txt
+===================================================
+
+=============  Algorithm - STATISTICS =============
+ Total time ~ 4719 ms
+ Frequent sequences count : 54172
+ Max memory (mb):4.5294647216796875
+Content at file SPAM_AGP_out.txt
+===================================================
+
+=============  Algorithm - STATISTICS =============
+ Total time ~ 4500 ms
+ Frequent sequences count : 54172
+ Join count : 172756
+ Max memory (mb):9.934112548828125
+Content at file SPADE_out.txt
+===================================================
+
+=============  Algorithm BIDE2 - STATISTICS =============
+ Total time ~ 47 ms
+ Closed sequential pattern count : 0
+ Max memory (mb):3.3807449340820312
+===================================================
+=============  Algorithm - STATISTICS =============
+ Total time ~ 5563 ms
+ Frequent sequences count : 54172
+ Join count : 0
+ Max memory (mb):68.69931030273438
+Content at file D:\Workbench\spmftest\SPADE_Parallized_out.txt
+===================================================

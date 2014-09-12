@@ -1,0 +1,17 @@
+,,,Success,Fail,Time(ms),Memory(mb),#of ptn,Minsup
+Max,BIDE+,,,X heap overflow,,,,
+,MaxSP,,,X did not run,,,,
+,VMSP,,O,,88906,14.183,6586,11
+,,,,,,,,
+Close,ClaSP,,O,,179966,123.936,10334,
+,CM-ClaSP,,O,,176216,140.045,10334,
+,PrefixSpan_Post,,O,,294748,18.954,10334,
+,SPAM_Post,,O,,177436,133.168,10334,
+,CloSpan,,,X heap overflow,,,,
+,,,,,,,,
+Complete,PrefixSpan,,O,,143453,5.739,54172,
+,SPAM,,O,,4719,4.529,54172,
+,SPADE,,O,,4500,9.934,,
+,CM-SPADE,,O,,4094,9.32,54172,
+,SPADE-Parallized,,O,,5563,68.699,,
+,GSP,,,X time too long,,,,

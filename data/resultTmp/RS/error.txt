@@ -1,0 +1,49 @@
+e.java:347)
+        at ca.pfv.spmf.algorithms.sequentialpatterns.clospan_AGP.items.trie.Trie.preorderTraversal(Tri
+e.java:347)
+        at ca.pfv.spmf.algorithms.sequentialpatterns.clospan_AGP.items.trie.Trie.preorderTraversal(Tri
+e.java:347)
+        at ca.pfv.spmf.algorithms.sequentialpatterns.clospan_AGP.items.trie.Trie.preorderTraversal(Tri
+e.java:347)
+        at ca.pfv.spmf.algorithms.sequentialpatterns.clospan_AGP.items.trie.Trie.preorderTraversal(Tri
+e.java:347)
+        at ca.pfv.spmf.algorithms.sequentialpatterns.clospan_AGP.items.trie.Trie.preorderTraversal(Tri
+e.java:347)
+        at ca.pfv.spmf.algorithms.sequentialpatterns.clospan_AGP.items.trie.Trie.preorderTraversal(Tri
+e.java:347)
+        at ca.pfv.spmf.algorithms.sequentialpatterns.clospan_AGP.items.trie.Trie.preorderTraversal(Tri
+e.java:347)
+        at ca.pfv.spmf.algorithms.sequentialpatterns.clospan_AGP.items.trie.Trie.preorderTraversal(Tri
+e.java:347)
+        at ca.pfv.spmf.algorithms.sequentialpatterns.clospan_AGP.items.trie.Trie.preorderTraversal(Tri
+e.java:347)
+        at ca.pfv.spmf.algorithms.sequentialpatterns.clospan_AGP.items.trie.Trie.preorderTraversal(Tri
+e.java:347)
+        at ca.pfv.spmf.algorithms.sequentialpatterns.clospan_AGP.items.trie.Trie.preorderTraversal(Tri
+e.java:347)
+        at ca.pfv.spmf.algorithms.sequentialpatterns.clospan_AGP.items.trie.Trie.preorderTraversal(Tri
+e.java:347)
+        at ca.pfv.spmf.algorithms.sequentialpatterns.clospan_AGP.items.trie.Trie.preorderTraversal(Tri
+e.java:347)
+        at ca.pfv.spmf.algorithms.sequentialpatterns.clospan_AGP.items.trie.Trie.preorderTraversal(Tri
+e.java:347)
+
+D:\Workbench\spmftest>java -Xmx1024m -jar spmf.jar run CM-ClaSP DS\seq_pseq.csv CM-ClaSP_out.txt 0.5
+1>>seq_pseq_out.txt
+Before removing NonClosed patterns there are 43912 patterns
+
+D:\Workbench\spmftest>5  1>>seq_pseq_out.txt
+'5' is not recognized as an internal or external command,
+operable program or batch file.
+
+D:\Workbench\spmftest>java -Xmx1024m -jar spmf.jar run ClaSP DS\seq_pseq.csv ClaSP_out.txt 0.5  1>>seq
+_pseq_out.txt
+Before removing NonClosed patterns there are 43912 patterns
+
+D:\Workbench\spmftest>java -Xmx1024m -jar spmf.jar run SPAM_PostProcessingClosed DS\seq_pseq.csv SPAM_
+PostProcessingClosed_out.txt 0.5  1>>seq_pseq_out.txt
+Before removing NonClosed patterns there are 54172 patterns
+
+D:\Workbench\spmftest>java -Xmx1024m -jar spmf.jar run PrefixSpan_PostProcessingClosed DS\seq_pseq.csv
+ PrefixSpan_PostProcessingClosed_out.txt 0.5  1>>seq_pseq_out.txt
+Before removing NonClosed patterns there are 54172 patterns

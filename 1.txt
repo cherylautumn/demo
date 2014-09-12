@@ -1,0 +1,2 @@
+basicItemsets [id=null, itemsets=[[1125315]],  referenceCount=0] total: 1808 pos: 1785 neg: 23 fisher: 9.675068076755917E-5
+3599/classify total 1808

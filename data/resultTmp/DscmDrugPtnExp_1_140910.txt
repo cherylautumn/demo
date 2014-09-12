@@ -1,0 +1,169 @@
+0.1
+[Console output redirected to file:C:\Users\hchiu\workspace\demo\1.txt]
+basicItemsets [id=null, itemsets=[[956874], [956874]],  referenceCount=0] total: 366 pos: 354 neg: 12 fisher: 0.004396169791402656
+basicItemsets [id=null, itemsets=[[1174888], [1125315], [1713332]],  referenceCount=0] total: 369 pos: 358 neg: 11 fisher: 0.0032701335933932236
+basicItemsets [id=null, itemsets=[[1125315], [956874]],  referenceCount=0] total: 441 pos: 429 neg: 12 fisher: 0.002932820120338764
+basicItemsets [id=null, itemsets=[[1125315], [1308216]],  referenceCount=0] total: 395 pos: 384 neg: 11 fisher: 0.002805510248544743
+basicItemsets [id=null, itemsets=[[1125315], [1125315], [1713332]],  referenceCount=0] total: 415 pos: 404 neg: 11 fisher: 0.0024936047376623383
+basicItemsets [id=null, itemsets=[[1125315], [1174888], [1713332]],  referenceCount=0] total: 366 pos: 356 neg: 10 fisher: 0.002410564519927057
+basicItemsets [id=null, itemsets=[[967823, 986417]],  referenceCount=0] total: 367 pos: 357 neg: 10 fisher: 0.0023949154495541353
+basicItemsets [id=null, itemsets=[[956874], [1125315]],  referenceCount=0] total: 369 pos: 359 neg: 10 fisher: 0.0023639161872848996
+basicItemsets [id=null, itemsets=[[1125315], [1125315], [1174888], [1174888]],  referenceCount=0] total: 389 pos: 379 neg: 10 fisher: 0.0020745588434292984
+basicItemsets [id=null, itemsets=[[1125315], [1174888], [1174888], [1125315]],  referenceCount=0] total: 391 pos: 381 neg: 10 fisher: 0.002047561440112285
+basicItemsets [id=null, itemsets=[[1786621], [1125315]],  referenceCount=0] total: 450 pos: 439 neg: 11 fisher: 0.0020260010223117184
+basicItemsets [id=null, itemsets=[[1125315], [1174888], [1125315], [1125315]],  referenceCount=0] total: 407 pos: 397 neg: 10 fisher: 0.0018431005329216348
+basicItemsets [id=null, itemsets=[[19049105], [1174888]],  referenceCount=0] total: 411 pos: 401 neg: 10 fisher: 0.0017950162230175191
+basicItemsets [id=null, itemsets=[[1125315], [1786621]],  referenceCount=0] total: 477 pos: 466 neg: 11 fisher: 0.0017217826408938881
+basicItemsets [id=null, itemsets=[[1174888], [1174888], [1125315], [1174888]],  referenceCount=0] total: 361 pos: 352 neg: 9 fisher: 0.0017027143285432238
+basicItemsets [id=null, itemsets=[[1332418]],  referenceCount=0] total: 547 pos: 535 neg: 12 fisher: 0.0016410114436203765
+basicItemsets [id=null, itemsets=[[1174888], [1713332], [1174888]],  referenceCount=0] total: 367 pos: 358 neg: 9 fisher: 0.0016291395085755347
+basicItemsets [id=null, itemsets=[[1201620], [1125315]],  referenceCount=0] total: 371 pos: 362 neg: 9 fisher: 0.0015817198052801643
+basicItemsets [id=null, itemsets=[[1125315], [1174888], [1174888], [1174888]],  referenceCount=0] total: 372 pos: 363 neg: 9 fisher: 0.001570062723387365
+basicItemsets [id=null, itemsets=[[1174888], [956874]],  referenceCount=0] total: 373 pos: 364 neg: 9 fisher: 0.0015584835275858119
+basicItemsets [id=null, itemsets=[[1308216], [1308216]],  referenceCount=0] total: 375 pos: 366 neg: 9 fisher: 0.0015355563451088766
+basicItemsets [id=null, itemsets=[[1308216], [1174888]],  referenceCount=0] total: 380 pos: 371 neg: 9 fisher: 0.0014795592174694711
+basicItemsets [id=null, itemsets=[[1174888], [1125315], [1125315], [1174888]],  referenceCount=0] total: 384 pos: 375 neg: 9 fisher: 0.0014360818779136167
+basicItemsets [id=null, itemsets=[[1308216], [1125315]],  referenceCount=0] total: 445 pos: 435 neg: 10 fisher: 0.001429412888213461
+basicItemsets [id=null, itemsets=[[1174888], [1713332], [1125315]],  referenceCount=0] total: 385 pos: 376 neg: 9 fisher: 0.0014253912545255946
+basicItemsets [id=null, itemsets=[[1125315], [1174888], [1125315], [1174888]],  referenceCount=0] total: 389 pos: 380 neg: 9 fisher: 0.0013833273972878029
+basicItemsets [id=null, itemsets=[[1125315, 1174888], [1713332]],  referenceCount=0] total: 517 pos: 506 neg: 11 fisher: 0.0013440613554019628
+basicItemsets [id=null, itemsets=[[1125315], [1713332], [1125315]],  referenceCount=0] total: 457 pos: 447 neg: 10 fisher: 0.0013168239256588627
+basicItemsets [id=null, itemsets=[[778711]],  referenceCount=0] total: 460 pos: 450 neg: 10 fisher: 0.0012898782589272114
+basicItemsets [id=null, itemsets=[[1125315], [1713332], [1174888]],  referenceCount=0] total: 406 pos: 397 neg: 9 fisher: 0.0012163650326140417
+basicItemsets [id=null, itemsets=[[1713332], [1125315, 1174888]],  referenceCount=0] total: 533 pos: 522 neg: 11 fisher: 0.001213675643896783
+basicItemsets [id=null, itemsets=[[1103314]],  referenceCount=0] total: 407 pos: 398 neg: 9 fisher: 0.0012071076713407243
+basicItemsets [id=null, itemsets=[[1125315], [1125315], [1174888], [1125315]],  referenceCount=0] total: 410 pos: 401 neg: 9 fisher: 0.001179692768638494
+basicItemsets [id=null, itemsets=[[1742253], [1174888]],  referenceCount=0] total: 414 pos: 405 neg: 9 fisher: 0.0011439573039924104
+basicItemsets [id=null, itemsets=[[1174888], [1786621]],  referenceCount=0] total: 414 pos: 405 neg: 9 fisher: 0.0011439573039924104
+basicItemsets [id=null, itemsets=[[1125315, 1174888], [19049105]],  referenceCount=0] total: 420 pos: 411 neg: 9 fisher: 0.0010920536285317823
+basicItemsets [id=null, itemsets=[[1125315], [1734104], [1125315]],  referenceCount=0] total: 360 pos: 352 neg: 8 fisher: 0.0010741965725197357
+basicItemsets [id=null, itemsets=[[1125315], [1125315], [1125315], [1125315, 1174888]],  referenceCount=0] total: 363 pos: 355 neg: 8 fisher: 0.0010467143869291066
+basicItemsets [id=null, itemsets=[[1154343], [1125315]],  referenceCount=0] total: 426 pos: 417 neg: 9 fisher: 0.0010421149398850305
+basicItemsets [id=null, itemsets=[[1713332], [1713332]],  referenceCount=0] total: 560 pos: 549 neg: 11 fisher: 0.0010166398185084784
+basicItemsets [id=null, itemsets=[[1174888], [1125315], [1174888], [1125315]],  referenceCount=0] total: 367 pos: 359 neg: 8 fisher: 0.0010109988479721805
+basicItemsets [id=null, itemsets=[[1307046], [1125315]],  referenceCount=0] total: 370 pos: 362 neg: 8 fisher: 9.84889372678236E-4
+basicItemsets [id=null, itemsets=[[1713332], [19121608]],  referenceCount=0] total: 370 pos: 362 neg: 8 fisher: 9.84889372678236E-4
+basicItemsets [id=null, itemsets=[[1125315], [1201620]],  referenceCount=0] total: 381 pos: 373 neg: 8 fisher: 8.938918071125408E-4
+basicItemsets [id=null, itemsets=[[1149380]],  referenceCount=0] total: 582 pos: 571 neg: 11 fisher: 8.751591050242646E-4
+basicItemsets [id=null, itemsets=[[1125315], [1125315], [1734104]],  referenceCount=0] total: 385 pos: 377 neg: 8 fisher: 8.62563425546289E-4
+basicItemsets [id=null, itemsets=[[1518254], [1125315]],  referenceCount=0] total: 380 pos: 379 neg: 1 fisher: 8.368213634435322E-4
+basicItemsets [id=null, itemsets=[[1503297], [1503297], [1503297]],  referenceCount=0] total: 377 pos: 376 neg: 1 fisher: 8.255935822572778E-4
+basicItemsets [id=null, itemsets=[[1551099], [1125315]],  referenceCount=0] total: 393 pos: 385 neg: 8 fisher: 8.02564984457519E-4
+basicItemsets [id=null, itemsets=[[1545958]],  referenceCount=0] total: 602 pos: 591 neg: 11 fisher: 7.597823114121309E-4
+basicItemsets [id=null, itemsets=[[1786621], [1174888]],  referenceCount=0] total: 400 pos: 392 neg: 8 fisher: 7.528399963652414E-4
+basicItemsets [id=null, itemsets=[[19049105], [1125315]],  referenceCount=0] total: 473 pos: 464 neg: 9 fisher: 7.106908738071053E-4
+basicItemsets [id=null, itemsets=[[989878]],  referenceCount=0] total: 411 pos: 403 neg: 8 fisher: 6.796109621626484E-4
+basicItemsets [id=null, itemsets=[[1125315, 1174888], [19121608]],  referenceCount=0] total: 413 pos: 405 neg: 8 fisher: 6.669112504079151E-4
+basicItemsets [id=null, itemsets=[[1125315], [1153013]],  referenceCount=0] total: 444 pos: 442 neg: 2 fisher: 6.268557859284014E-4
+basicItemsets [id=null, itemsets=[[1163944]],  referenceCount=0] total: 421 pos: 413 neg: 8 fisher: 6.179128785313183E-4
+basicItemsets [id=null, itemsets=[[1125315], [1154343]],  referenceCount=0] total: 441 pos: 433 neg: 8 fisher: 5.071976512952516E-4
+basicItemsets [id=null, itemsets=[[1174888], [1518254]],  referenceCount=0] total: 406 pos: 404 neg: 2 fisher: 5.016315105188363E-4
+basicItemsets [id=null, itemsets=[[1174888], [1174888], [1125315], [1125315]],  referenceCount=0] total: 375 pos: 368 neg: 7 fisher: 4.939408966442516E-4
+basicItemsets [id=null, itemsets=[[1125315], [1705674, 1836430]],  referenceCount=0] total: 381 pos: 374 neg: 7 fisher: 4.6140436670215465E-4
+basicItemsets [id=null, itemsets=[[1503297], [1734104]],  referenceCount=0] total: 384 pos: 382 neg: 2 fisher: 4.325590252872405E-4
+basicItemsets [id=null, itemsets=[[1742253], [1125315]],  referenceCount=0] total: 457 pos: 449 neg: 8 fisher: 4.296279228984604E-4
+basicItemsets [id=null, itemsets=[[1174888], [1153013]],  referenceCount=0] total: 382 pos: 380 neg: 2 fisher: 4.264139857182115E-4
+basicItemsets [id=null, itemsets=[[974166], [974166]],  referenceCount=0] total: 459 pos: 451 neg: 8 fisher: 4.2056527936884535E-4
+basicItemsets [id=null, itemsets=[[1503297], [1125315, 1174888]],  referenceCount=0] total: 487 pos: 484 neg: 3 fisher: 4.1206115614035073E-4
+basicItemsets [id=null, itemsets=[[1125315, 1174888], [1125315, 1174888], [1125315, 1174888]],  referenceCount=0] total: 395 pos: 388 neg: 7 fisher: 3.9160400553167526E-4
+basicItemsets [id=null, itemsets=[[1125315], [1518254]],  referenceCount=0] total: 479 pos: 476 neg: 3 fisher: 3.892877929362098E-4
+basicItemsets [id=null, itemsets=[[1174888], [1125315], [1125315], [1125315]],  referenceCount=0] total: 400 pos: 393 neg: 7 fisher: 3.686269834888834E-4
+basicItemsets [id=null, itemsets=[[1797513], [1125315]],  referenceCount=0] total: 473 pos: 465 neg: 8 fisher: 3.608171465314581E-4
+basicItemsets [id=null, itemsets=[[708298, 1154029]],  referenceCount=0] total: 408 pos: 401 neg: 7 fisher: 3.3386552508871115E-4
+basicItemsets [id=null, itemsets=[[903963]],  referenceCount=0] total: 635 pos: 625 neg: 10 fisher: 3.0901597235151104E-4
+basicItemsets [id=null, itemsets=[[974166], [1125315, 1174888]],  referenceCount=0] total: 418 pos: 411 neg: 7 fisher: 2.936973359316491E-4
+basicItemsets [id=null, itemsets=[[1734104], [1713332]],  referenceCount=0] total: 424 pos: 417 neg: 7 fisher: 2.712539340761506E-4
+basicItemsets [id=null, itemsets=[[1754994]],  referenceCount=0] total: 432 pos: 425 neg: 7 fisher: 2.4316196620555885E-4
+basicItemsets [id=null, itemsets=[[1734104], [1125315], [1125315]],  referenceCount=0] total: 361 pos: 355 neg: 6 fisher: 2.3696148806068396E-4
+basicItemsets [id=null, itemsets=[[1174888], [1000560]],  referenceCount=0] total: 361 pos: 355 neg: 6 fisher: 2.3696148806068396E-4
+basicItemsets [id=null, itemsets=[[1125315, 1174888], [1503297]],  referenceCount=0] total: 417 pos: 414 neg: 3 fisher: 2.276565601569013E-4
+basicItemsets [id=null, itemsets=[[744740]],  referenceCount=0] total: 437 pos: 430 neg: 7 fisher: 2.2662465710989027E-4
+basicItemsets [id=null, itemsets=[[1125315], [1539403]],  referenceCount=0] total: 364 pos: 358 neg: 6 fisher: 2.2609829675604196E-4
+basicItemsets [id=null, itemsets=[[781039]],  referenceCount=0] total: 365 pos: 359 neg: 6 fisher: 2.2255333437264747E-4
+basicItemsets [id=null, itemsets=[[1503297], [19121608]],  referenceCount=0] total: 407 pos: 404 neg: 3 fisher: 2.0434578135896704E-4
+basicItemsets [id=null, itemsets=[[1154343], [1174888]],  referenceCount=0] total: 379 pos: 373 neg: 6 fisher: 1.7673936344171805E-4
+basicItemsets [id=null, itemsets=[[1713332, 1759842], [1125315]],  referenceCount=0] total: 384 pos: 378 neg: 6 fisher: 1.6201836883815513E-4
+basicItemsets [id=null, itemsets=[[1125315], [1154029]],  referenceCount=0] total: 387 pos: 381 neg: 6 fisher: 1.5357819176616664E-4
+basicItemsets [id=null, itemsets=[[1129625]],  referenceCount=0] total: 378 pos: 375 neg: 3 fisher: 1.418411820628561E-4
+basicItemsets [id=null, itemsets=[[923645]],  referenceCount=0] total: 468 pos: 461 neg: 7 fisher: 1.400708610879384E-4
+basicItemsets [id=null, itemsets=[[1177480]],  referenceCount=0] total: 466 pos: 462 neg: 4 fisher: 1.2284639500722525E-4
+basicItemsets [id=null, itemsets=[[1539403], [1125315]],  referenceCount=0] total: 402 pos: 396 neg: 6 fisher: 1.155553750549562E-4
+basicItemsets [id=null, itemsets=[[19121608], [1125315, 1174888]],  referenceCount=0] total: 363 pos: 360 neg: 3 fisher: 1.128042611835731E-4
+basicItemsets [id=null, itemsets=[[1174888], [1506270]],  referenceCount=0] total: 362 pos: 359 neg: 3 fisher: 1.1095576199310547E-4
+basicItemsets [id=null, itemsets=[[974166], [1503297]],  referenceCount=0] total: 361 pos: 358 neg: 3 fisher: 1.0911857383657183E-4
+basicItemsets [id=null, itemsets=[[1707164]],  referenceCount=0] total: 360 pos: 357 neg: 3 fisher: 1.0729277077995304E-4
+basicItemsets [id=null, itemsets=[[1797513], [1174888]],  referenceCount=0] total: 410 pos: 404 neg: 6 fisher: 9.795544124922374E-5
+basicItemsets [id=null, itemsets=[[1713332], [1125315], [1125315]],  referenceCount=0] total: 414 pos: 408 neg: 6 fisher: 8.98120493762014E-5
+basicItemsets [id=null, itemsets=[[1125315], [974166]],  referenceCount=0] total: 417 pos: 411 neg: 6 fisher: 8.398223182182069E-5
+basicItemsets [id=null, itemsets=[[1125315], [1000560]],  referenceCount=0] total: 417 pos: 411 neg: 6 fisher: 8.398223182182069E-5
+basicItemsets [id=null, itemsets=[[1503297], [1713332]],  referenceCount=0] total: 440 pos: 436 neg: 4 fisher: 8.032872869976582E-5
+basicItemsets [id=null, itemsets=[[1713332], [1734104]],  referenceCount=0] total: 422 pos: 416 neg: 6 fisher: 7.478105441919806E-5
+basicItemsets [id=null, itemsets=[[1738521]],  referenceCount=0] total: 433 pos: 429 neg: 4 fisher: 7.014180192479712E-5
+basicItemsets [id=null, itemsets=[[1713332], [1174888], [1125315]],  referenceCount=0] total: 362 pos: 357 neg: 5 fisher: 4.4499442789333894E-5
+basicItemsets [id=null, itemsets=[[1124957, 1125315]],  referenceCount=0] total: 442 pos: 436 neg: 6 fisher: 4.4042744835554775E-5
+basicItemsets [id=null, itemsets=[[1174888], [974166]],  referenceCount=0] total: 365 pos: 360 neg: 5 fisher: 4.027595828643663E-5
+basicItemsets [id=null, itemsets=[[1136980]],  referenceCount=0] total: 365 pos: 360 neg: 5 fisher: 4.027595828643663E-5
+basicItemsets [id=null, itemsets=[[1502905]],  referenceCount=0] total: 501 pos: 496 neg: 5 fisher: 4.00414690890495E-5
+basicItemsets [id=null, itemsets=[[791967]],  referenceCount=0] total: 450 pos: 444 neg: 6 fisher: 3.428402016597555E-5
+basicItemsets [id=null, itemsets=[[1734104], [1125315, 1174888]],  referenceCount=0] total: 451 pos: 445 neg: 6 fisher: 3.316019069302398E-5
+basicItemsets [id=null, itemsets=[[1125315, 1174888], [1734104]],  referenceCount=0] total: 451 pos: 445 neg: 6 fisher: 3.316019069302398E-5
+basicItemsets [id=null, itemsets=[[1153013], [1125315]],  referenceCount=0] total: 402 pos: 398 neg: 4 fisher: 3.224132705603673E-5
+basicItemsets [id=null, itemsets=[[975125]],  referenceCount=0] total: 400 pos: 396 neg: 4 fisher: 3.023254230718353E-5
+basicItemsets [id=null, itemsets=[[1174888], [1551099]],  referenceCount=0] total: 373 pos: 368 neg: 5 fisher: 3.017489247537476E-5
+basicItemsets [id=null, itemsets=[[1713332], [1125315], [1174888]],  referenceCount=0] total: 378 pos: 373 neg: 5 fisher: 2.4686354099657193E-5
+basicItemsets [id=null, itemsets=[[1125315, 1174888], [1742253]],  referenceCount=0] total: 380 pos: 375 neg: 5 fisher: 2.266214114827248E-5
+basicItemsets [id=null, itemsets=[[797399]],  referenceCount=0] total: 385 pos: 380 neg: 5 fisher: 1.801746988686402E-5
+basicItemsets [id=null, itemsets=[[1174888], [1154343]],  referenceCount=0] total: 386 pos: 381 neg: 5 fisher: 1.7158485510762115E-5
+basicItemsets [id=null, itemsets=[[1125315, 1174888], [1124957]],  referenceCount=0] total: 387 pos: 382 neg: 5 fisher: 1.6322435973430043E-5
+basicItemsets [id=null, itemsets=[[1734104], [1734104]],  referenceCount=0] total: 472 pos: 467 neg: 5 fisher: 1.5171585341470006E-5
+basicItemsets [id=null, itemsets=[[1539403], [1539403]],  referenceCount=0] total: 382 pos: 378 neg: 4 fisher: 1.4793579162987268E-5
+basicItemsets [id=null, itemsets=[[1506270], [1174888]],  referenceCount=0] total: 381 pos: 377 neg: 4 fisher: 1.4081633161692253E-5
+basicItemsets [id=null, itemsets=[[1125315, 1174888], [1797513]],  referenceCount=0] total: 392 pos: 387 neg: 5 fisher: 1.2480661921895908E-5
+basicItemsets [id=null, itemsets=[[1124957], [1125315]],  referenceCount=0] total: 369 pos: 365 neg: 4 fisher: 6.820309876005133E-6
+basicItemsets [id=null, itemsets=[[1153664]],  referenceCount=0] total: 405 pos: 400 neg: 5 fisher: 5.020552938429828E-6
+basicItemsets [id=null, itemsets=[[586413]],  referenceCount=0] total: 364 pos: 360 neg: 4 fisher: 4.522961060646807E-6
+basicItemsets [id=null, itemsets=[[1110410]],  referenceCount=0] total: 407 pos: 402 neg: 5 fisher: 4.18274078421241E-6
+basicItemsets [id=null, itemsets=[[19055720]],  referenceCount=0] total: 449 pos: 444 neg: 5 fisher: 3.5247885728065403E-6
+basicItemsets [id=null, itemsets=[[1174888], [1713332, 1759842]],  referenceCount=0] total: 360 pos: 356 neg: 4 fisher: 3.0090668405524613E-6
+basicItemsets [id=null, itemsets=[[19121608], [19121608]],  referenceCount=0] total: 495 pos: 489 neg: 6 fisher: 2.8161335943564473E-6
+basicItemsets [id=null, itemsets=[[906780]],  referenceCount=0] total: 412 pos: 407 neg: 5 fisher: 2.434135312420417E-6
+basicItemsets [id=null, itemsets=[[1125315], [1506270]],  referenceCount=0] total: 414 pos: 409 neg: 5 fisher: 1.8704033044119484E-6
+basicItemsets [id=null, itemsets=[[1125315], [1713332, 1759842]],  referenceCount=0] total: 415 pos: 410 neg: 5 fisher: 1.6171238659057643E-6
+basicItemsets [id=null, itemsets=[[1501700]],  referenceCount=0] total: 421 pos: 416 neg: 5 fisher: 4.901395454313533E-7
+basicItemsets [id=null, itemsets=[[1125315], [1551099]],  referenceCount=0] total: 423 pos: 418 neg: 5 fisher: 2.6128655415360056E-7
+basicItemsets [id=null, itemsets=[[1506270], [1125315]],  referenceCount=0] total: 424 pos: 419 neg: 5 fisher: 1.738763627502617E-7
+3599/classify total 3120
+
+
+
+
+0.2
+[Console output redirected to file:C:\Users\hchiu\workspace\demo\1.txt]
+basicItemsets [id=null, itemsets=[[19049105]],  referenceCount=0] total: 955 pos: 935 neg: 20 fisher: 0.0026998341853750095
+basicItemsets [id=null, itemsets=[[956874]],  referenceCount=0] total: 792 pos: 775 neg: 17 fisher: 0.0023524446918559592
+basicItemsets [id=null, itemsets=[[1308216]],  referenceCount=0] total: 867 pos: 851 neg: 16 fisher: 0.0012681165049393383
+basicItemsets [id=null, itemsets=[[1786621]],  referenceCount=0] total: 747 pos: 733 neg: 14 fisher: 0.0011369616821691655
+basicItemsets [id=null, itemsets=[[1503297]],  referenceCount=0] total: 1276 pos: 1267 neg: 9 fisher: 0.0010160631452845392
+basicItemsets [id=null, itemsets=[[1154343]],  referenceCount=0] total: 744 pos: 731 neg: 13 fisher: 7.614905443647478E-4
+basicItemsets [id=null, itemsets=[[1174888], [1125315, 1174888]],  referenceCount=0] total: 746 pos: 733 neg: 13 fisher: 7.517797705695687E-4
+basicItemsets [id=null, itemsets=[[1125315, 1174888], [1125315]],  referenceCount=0] total: 822 pos: 808 neg: 14 fisher: 7.383386043221887E-4
+basicItemsets [id=null, itemsets=[[1125315, 1174888], [1174888]],  referenceCount=0] total: 753 pos: 740 neg: 13 fisher: 7.18463286480487E-4
+basicItemsets [id=null, itemsets=[[1000560]],  referenceCount=0] total: 768 pos: 755 neg: 13 fisher: 6.504878243870916E-4
+basicItemsets [id=null, itemsets=[[1742253]],  referenceCount=0] total: 793 pos: 780 neg: 13 fisher: 5.470004733293955E-4
+basicItemsets [id=null, itemsets=[[1518254]],  referenceCount=0] total: 828 pos: 822 neg: 6 fisher: 5.072041713178437E-4
+basicItemsets [id=null, itemsets=[[1125315], [1125315, 1174888]],  referenceCount=0] total: 807 pos: 794 neg: 13 fisher: 4.940835398618532E-4
+basicItemsets [id=null, itemsets=[[1713332]],  referenceCount=0] total: 1181 pos: 1164 neg: 17 fisher: 3.1447731859660154E-4
+basicItemsets [id=null, itemsets=[[1539403]],  referenceCount=0] total: 736 pos: 725 neg: 11 fisher: 2.3922731152951245E-4
+basicItemsets [id=null, itemsets=[[974166]],  referenceCount=0] total: 894 pos: 881 neg: 13 fisher: 2.363276922485597E-4
+basicItemsets [id=null, itemsets=[[19121608]],  referenceCount=0] total: 1221 pos: 1204 neg: 17 fisher: 2.2604536708448536E-4
+basicItemsets [id=null, itemsets=[[1124957]],  referenceCount=0] total: 744 pos: 737 neg: 7 fisher: 1.1554902111181577E-4
+basicItemsets [id=null, itemsets=[[1506270]],  referenceCount=0] total: 809 pos: 798 neg: 11 fisher: 9.337598749587139E-5
+basicItemsets [id=null, itemsets=[[1797513]],  referenceCount=0] total: 827 pos: 818 neg: 9 fisher: 1.60294878841853E-5
+basicItemsets [id=null, itemsets=[[1734104]],  referenceCount=0] total: 1062 pos: 1050 neg: 12 fisher: 4.981389838898762E-6
+3599/classify total 3278
+
+
+0.5
+[Console output redirected to file:C:\Users\hchiu\workspace\demo\1.txt]
+basicItemsets [id=null, itemsets=[[1125315]],  referenceCount=0] total: 1808 pos: 1785 neg: 23 fisher: 9.675068076755917E-5
+3599/classify total 1808

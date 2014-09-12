@@ -70,9 +70,8 @@ public class spmFuncTest {
 		System.out.println(bBig.isContained(bSmall));
 		
 	}
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	public static void fisherscoreTest(){
+		//This function has been verified in data\resultTmp\fisherscoreSimpleVerify.xlsx
 		discrimItemsets f1 = new discrimItemsets();
 		discrimItemsets f2 = new discrimItemsets();
 		
@@ -104,6 +103,10 @@ public class spmFuncTest {
 		System.out.println("f1 fisher: "+	f1.getGain(discrimItemsets.TYPE_FISHER_GAIN));
 		System.out.println("f2 fisher: "+	f2.getGain(discrimItemsets.TYPE_FISHER_GAIN));
 
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		spmFuncTest.fisherscoreTest();
 		
 		
 	}

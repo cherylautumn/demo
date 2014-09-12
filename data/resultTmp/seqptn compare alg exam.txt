@@ -1,0 +1,64 @@
+basicItemsets [id=0, itemsets=[[6], [7]],  referenceCount=0]
+basicItemsets [id=1, itemsets=[[1], [2], [3], [4], [5]],  referenceCount=0]
+false
+---error--
+basicItemsets [id=0, itemsets=[[5], [6], [7]],  referenceCount=0]
+basicItemsets [id=1, itemsets=[[1], [2], [3], [4], [5]],  referenceCount=0]
+true
+
+basicItemsets [id=0, itemsets=[[5], [6], [7]],  referenceCount=0]
+basicItemsets [id=1, itemsets=[[1], [2], [3], [4], [5]],  referenceCount=0]
+false
+
+----------
+basicItemsets [id=0, itemsets=[[5], [6], [7]],  referenceCount=0]
+basicItemsets [id=1, itemsets=[[1], [2], [3], [4], [5], [6], [7]],  referenceCount=0]
+true
+
+basicItemsets [id=0, itemsets=[[3], [5], [7]],  referenceCount=0]
+basicItemsets [id=1, itemsets=[[1], [2], [3], [4], [5], [6], [7]],  referenceCount=0]
+true
+
+basicItemsets [id=0, itemsets=[[3], [5], [8], [7]],  referenceCount=0]
+basicItemsets [id=1, itemsets=[[1], [2], [3], [4], [5], [6], [7]],  referenceCount=0]
+false
+
+basicItemsets [id=0, itemsets=[[3], [5], [8], [7], [9]],  referenceCount=0]
+basicItemsets [id=1, itemsets=[[1], [2], [3], [4], [5], [6], [7]],  referenceCount=0]
+false
+
+basicItemsets [id=0, itemsets=[[1], [2], [3], [4], []],  referenceCount=0]
+basicItemsets [id=1, itemsets=[[1], [2], [3], [4], [5], [6], [7]],  referenceCount=0]
+true
+
+basicItemsets [id=0, itemsets=[[1], [2], [3], [4], []],  referenceCount=0]
+basicItemsets [id=1, itemsets=[[], [], [], [4], [5], [6], [7]],  referenceCount=0]
+false
+
+basicItemsets [id=0, itemsets=[[1], [2], [3], [4]],  referenceCount=0]
+basicItemsets [id=1, itemsets=[[3], [4], [5], [6]],  referenceCount=0]
+false
+
+basicItemsets [id=0, itemsets=[[1], [2], [3], [4]],  referenceCount=0]
+basicItemsets [id=1, itemsets=[[3], [4], [], []],  referenceCount=0]
+false
+
+basicItemsets [id=0, itemsets=[[1], [2], [3], [4]],  referenceCount=0]
+basicItemsets [id=1, itemsets=[[3], [4]],  referenceCount=0]
+false
+
+basicItemsets [id=0, itemsets=[[1], [2], [3], [4]],  referenceCount=0]
+basicItemsets [id=1, itemsets=[[1], [2], [3], [4]],  referenceCount=0]
+true
+
+basicItemsets [id=0, itemsets=[[1], [2], [3], [4]],  referenceCount=0]
+basicItemsets [id=1, itemsets=[[1], [2], [3], [4]],  referenceCount=0]
+true
+
+basicItemsets [id=0, itemsets=[[5], [6], [7]],  referenceCount=0]
+basicItemsets [id=1, itemsets=[[1], [2], [3], [4], [5], [6]],  referenceCount=0]
+false
+
+basicItemsets [id=0, itemsets=[[6], [5], [4]],  referenceCount=0]
+basicItemsets [id=1, itemsets=[[1], [2], [3], [4], [5], [6]],  referenceCount=0]
+false
