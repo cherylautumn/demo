@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<MMRFSConfig>
+		<basicItemsetsFileName>data\IMEDS\DiabeteComorbidDS\seqDS\seq_drug_ingredient_only_withId.csv</basicItemsetsFileName>
+		<discrimItemsetsFileName>data\IMEDS\DiabeteComorbidDS\seqptn\seq_drug_ingredient_only_0.5_out.txt</discrimItemsetsFileName>
+		<labelDefineThreshold>2.0</labelDefineThreshold>
+		<coverageRate>1</coverageRate>
+		<outlierSource>data\IMEDS\DiabeteComorbidDS\outlier\trainDS_5000_1_0_sol.csv</outlierSource>
+		<outlierThreshold>2</outlierThreshold>
+		<featureItemsetFileName>data\IMEDS\DiabeteComorbidDS\seqptn\seq_drug_ingredient_only_0.5_dsmc.txt</featureItemsetFileName>
+	</MMRFSConfig>
+</root>	

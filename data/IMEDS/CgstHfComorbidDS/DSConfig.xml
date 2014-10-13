@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<!-- STAGE 1 -->
+	<Index_Diagnoses> <!-- This is the target disease we want to mined -->
+		<Diagnose>Congestive Heart Failure</Diagnose> <!-- this item has to be mapped with DeyoCCI.csv --> 
+	</Index_Diagnoses>
+
+	<target>
+		<fileName>data\IMEDS\CgstHfComorbidDS\trainDS.csv</fileName>
+		<columns>
+			<col>ID</col>
+			<col>Label</col>
+			<col>Gender</col>						
+			<col>Age</col>
+	<!--    <col>Race</col>
+			<col>Ethnicity</col>  -->		
+			<col>Location</col>			
+			<col>Myocardial Infarction</col>
+			<col>Congestive Heart Failure</col>
+			<col>Peripheral Vascular Disease</col>
+			<col>Cerebrovascular Disease</col>
+			<col>Dementia</col>
+			<col>Chronic Pulmonary Disease</col>
+			<col>Rheumatologic Disease</col>
+			<col>Peptic Ulcer Disease</col>
+			<col>Mild Liver Disease</col>
+	 		<col>Diabetes</col> 
+			<col>Diabetes with Chronic Complications</col>
+			<col>Hemiplegia or Paraplegia</col>
+			<col>Renal Disease</col>
+			<col>Moderate or Severe Liver Disease</col>
+			<col>AIDS</col>
+		</columns>
+	</target>
+	
+	<DataSetParas>
+		<sampleConfig>
+			<sample_id>s1</sample_id>
+			<sample_range>0,2000</sample_range><!-- 0,100 -->	
+			<sample_label>alive</sample_label><!-- default None. alive, death, none -->
+			<sample_random>true</sample_random><!-- default false -->
+			<sample_append>true</sample_append> <!-- default false -->
+		</sampleConfig>
+		<sampleConfig>
+			<sample_id>s2</sample_id>
+			<sample_range>0,2000</sample_range><!-- 0,100 -->			
+			<sample_label>death</sample_label><!-- alive, death, none -->
+			<sample_random>true</sample_random>			
+			<sample_append>true</sample_append>
+		</sampleConfig>
+	</DataSetParas>
+	
+	<!-- STAGE 2 -->
+	<PearsonResidualOutlier>
+		<SparkLRmodelDataSets>
+			<dataset>data\IMEDS\DiabeteComorbidDS\trainDS.csv</dataset> <!-- input the same from target filename -->		
+		</SparkLRmodelDataSets>
+		<SparkLRmodelParas>
+			<para>1,500</para>
+			<para>1,5000</para>			
+			<para>10,500</para>
+			<para>10,5000</para>			
+		</SparkLRmodelParas>
+		
+		<inputFolder>data\IMEDS\DiabeteComorbidDS\logisticRegressionPredict</inputFolder> <!-- for PearsonResidualOutlier only, does not need to run with spark. if null, then spark don't generate tmp file-->
+		<outputFolder>data\IMEDS\DiabeteComorbidDS\outlier</outputFolder>
+		<threshold>0.0</threshold><!-- 0: return all result. >0, filter out results which Ri lower than it. -->
+	</PearsonResidualOutlier>
+	
+	<SequenceDataSetConfig>
+		<inputFolder>data\IMEDS\DiabeteComorbidDS\preSeq</inputFolder>
+		<outputFolder>data\IMEDS\DiabeteComorbidDS\seqDS</outputFolder>
+		
+	</SequenceDataSetConfig>
+	 
+</root>

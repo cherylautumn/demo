@@ -12,9 +12,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
+import org.apache.log4j.Logger;
+import org.imeds.daemon.imedsDaemon;
 import org.imeds.data.ComorbidDataSetWorker;
 import org.imeds.data.common.CCIDictionary;
 import org.imeds.util.ImedDateFormat;
+import org.imeds.util.ImedStringFormat;
 
 public class ImedDB {
 
@@ -24,21 +27,21 @@ public class ImedDB {
 	protected static Connection conn = null;
 	protected static Statement stmt = null;
 	
-
+	private static Logger logger = Logger.getLogger(ImedDB.class);
 	public static void connDB(String dbDriver, String dbURL, String dbUser, String dbPassword, String search_path) throws Exception {
 	     
 		try{
 	            Class.forName(dbDriver);
 	       
 	            conn = DriverManager.getConnection(dbURL, dbUser, dbPassword);
-	            System.out.println("SQL Connection to database established!");
+	            logger.info("SQL Connection to database established!");
 	            stmt = conn.createStatement();
-	            System.out.println("SQL Statement is prepared!");
+	            logger.info("SQL Statement is prepared!");
 	            PreparedStatement s = conn.prepareStatement("set search_path to "+search_path+";"); 
 	            s.execute(); 
 	          
 	     } catch (SQLException e) {
-	            System.out.println("Connection Failed! Check output console");
+	            logger.error("Connection Failed! Check output console");
 	            throw e;
 	     }
 	        
@@ -49,7 +52,7 @@ public class ImedDB {
 	        {
 	            if(conn != null)conn.close();            
 	            if(stmt != null) stmt.close();
-	            System.out.println("Connection closed !!");
+	            logger.info("Connection closed !!");
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -91,7 +94,7 @@ public class ImedDB {
 			labelCdt = " WHERE label IS NOT NULL "; //death
 			break;
 		case ComorbidDataSetWorker.alive:
-			labelCdt = " WHERE label IS NULL "; //death
+			labelCdt = " WHERE label IS NULL "; //alive
 			break;
 		default:
 			labelCdt ="";
@@ -126,10 +129,10 @@ public class ImedDB {
             	queryStr.append(" SELECT * FROM (");
             	queryStr.append(" SELECT DISTINCT p.person_id as ID, p.gender_concept_id as Gender, year_of_birth as Age, race_concept_id as Race, ethnicity_concept_id as Ethnicity, location_id as Location, death.person_id as Label ");            	
             	queryStr.append(" FROM condition_occurrence co, person p LEFT OUTER JOIN death  ON (p.person_id = death.person_id) ");
-            	queryStr.append(" WHERE p.person_id = co.person_id AND condition_concept_id IN ("+tranListIn(cptIdList)+")");
+            	queryStr.append(" WHERE p.person_id = co.person_id AND condition_concept_id IN ("+ImedStringFormat.tranListIn(cptIdList)+")");
             	queryStr.append(" ) "+Cdt);
             	
-            	System.out.printf("Query Str :%s\n", queryStr.toString() );
+            	logger.info("Query getPatientsWithIndexDiagnose :"+ queryStr.toString()+"\n" );
                 rs = stmt.executeQuery(queryStr.toString());
                
                 while (rs.next()) {
@@ -173,9 +176,9 @@ public class ImedDB {
 
             	queryStr.append(" SELECT person_id, condition_start_date as START_TIME " );
             	queryStr.append(" FROM condition_occurrence co_d ");
-            	queryStr.append(" WHERE condition_concept_id IN ("+tranListIn(cptIdList)+") AND person_id ="+pid);
+            	queryStr.append(" WHERE condition_concept_id IN ("+ImedStringFormat.tranListIn(cptIdList)+") AND person_id ="+pid);
             	queryStr.append(" ORDER BY condition_start_date LIMIT 1");            	            	
-            	//System.out.printf("Query Str :%s\n", queryStr.toString() );
+            	logger.info("Query getPatientDisFeature "+queryStr.toString()+"\n");
                 rs = stmt.executeQuery(queryStr.toString());
                 
                 if (rs.next()) {
@@ -184,7 +187,8 @@ public class ImedDB {
                    Date IdxDisStart = rs.getTimestamp("START_TIME");                  
                    queryStr.append(" SELECT DISTINCT  condition_concept_id FROM condition_occurrence "); 
                    queryStr.append(" WHERE person_id = "+pid+" AND condition_start_date <= '"+ new ImedDateFormat().format(IdxDisStart)+"'");
-                   //System.out.printf("Query Str :%s\n", queryStr.toString() );
+                  
+                   logger.info("Query getPatientDisFeature "+queryStr.toString()+"\n");
                    fs = stmt.executeQuery(queryStr.toString());
                    while(fs.next()){
                 	   value.add( fs.getInt("condition_concept_id"));                	   
@@ -222,25 +226,14 @@ public class ImedDB {
         }
    
 	}
-	public static String tranListIn(ArrayList<Integer> lst){
-		StringBuffer str = new StringBuffer();
-		
-		for(Integer id: lst){
-			str.append(id+",");
-		}
-		str.delete(str.lastIndexOf(","), str.length());
-		return str.toString();
-	}
+//	public static String tranListIn(ArrayList<Integer> lst){
+//		StringBuffer str = new StringBuffer();
+//		
+//		for(Integer id: lst){
+//			str.append(id+",");
+//		}
+//		str.delete(str.lastIndexOf(","), str.length());
+//		return str.toString();
+//	}
 	
-	public static void main(String[] args) throws Exception {
-		// TODO Auto-generated method stub
-		String dbDriver = "org.postgresql.Driver";
-		String dbURL = "jdbc:postgresql://omop-datasets.cqlmv7nlakap.us-east-1.redshift.amazonaws.com:5439/truven";
-		String dbUser = "hchiu";
-		String dbPassword = "1QAZ2wsx";
-		String search_path = "ccae_cdm4";
-		connDB(dbDriver, dbURL,dbUser, dbPassword, search_path);
-		closeDB();
-	}
-
 }

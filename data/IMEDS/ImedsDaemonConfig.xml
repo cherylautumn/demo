@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<dbConfig>
+		<db_OMOPS>
+			<db_Driver>org.postgresql.Driver</db_Driver>
+			<dbURL>jdbc:postgresql://omop-datasets.cqlmv7nlakap.us-east-1.redshift.amazonaws.com:5439/truven</dbURL> 
+			<dbUser>hchiu</dbUser>
+			<dbPassword>1QAZ2wsx</dbPassword>
+			<search_path>ccae_cdm4</search_path>
+		</db_OMOPS>
+	</dbConfig>
+	<expConfig>
+		<!-- Stage 1: prepare patient features, train.csv -->>
+		<patientFeaturePrepare>		
+			<folder>data\IMEDS\CgstHfComorbidDS\</folder>
+	 	    <folder>data\IMEDS\DiabeteComorbidDS\</folder>  		
+		</patientFeaturePrepare>
+	</expConfig>
+</root>
