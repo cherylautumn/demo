@@ -36,21 +36,21 @@
 	<DataSetParas>
 		<sampleConfig>
 			<sample_id>s1</sample_id>
-			<sample_range>0,2000</sample_range><!-- 0,100 -->	
+			<sample_range>0,8000</sample_range><!-- 0,100 -->	
 			<sample_label>alive</sample_label><!-- default None. alive, death, none -->
 			<sample_random>true</sample_random><!-- default false -->
 			<sample_append>true</sample_append> <!-- default false -->
 		</sampleConfig>
 		<sampleConfig>
 			<sample_id>s2</sample_id>
-			<sample_range>0,2000</sample_range><!-- 0,100 -->			
+			<sample_range>0,8000</sample_range><!-- 0,100 -->			
 			<sample_label>death</sample_label><!-- alive, death, none -->
 			<sample_random>true</sample_random>			
 			<sample_append>true</sample_append>
 		</sampleConfig>
 	</DataSetParas>
 	
-	<!-- STAGE 2 -->
+	<!-- STAGE 2 Applying Logistic Regression to calculate outlier-->
 	<PearsonResidualOutlier>
 		<SparkLRmodelDataSets>
 			<dataset>data\IMEDS\DiabeteComorbidDS\trainDS.csv</dataset> <!-- input the same from target filename -->		
@@ -67,9 +67,13 @@
 		<threshold>0.0</threshold><!-- 0: return all result. >0, filter out results which Ri lower than it. -->
 	</PearsonResidualOutlier>
 	
+	<!-- STAGE 3 Transform patient vertical history into horizontal list-->
 	<SequenceDataSetConfig>
-		<inputFolder>data\IMEDS\DiabeteComorbidDS\preSeq</inputFolder>
-		<outputFolder>data\IMEDS\DiabeteComorbidDS\seqDS</outputFolder>
+		<!--<inputFolder>data\IMEDS\DiabeteComorbidDS\preSeq</inputFolder>
+		<outputFolder>data\IMEDS\DiabeteComorbidDS\seqDS</outputFolder> -->
+		
+		<inputFolder>preSeq</inputFolder>
+		<outputFolder>seqDS</outputFolder>
 		
 	</SequenceDataSetConfig>
 	 

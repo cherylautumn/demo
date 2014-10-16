@@ -56,7 +56,7 @@ public class imedsDaemon {
     
    
     public void service() {
-        logger.info("Start scheduling");
+        logger.info("Start scheduling.....");
     		manager = new ComorbidManager(DeyoCCIPath);
     		manager.run();
     }

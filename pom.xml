@@ -4,7 +4,7 @@
 
   <groupId>com.myMaven</groupId>
   <artifactId>demo</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.2-SNAPSHOT</version>
   <name>demo</name>
   <url>http://maven.apache.org</url>
 
@@ -135,10 +135,10 @@
     </pluginManagement>  
   
     <plugins>
-    	<plugin>
+  <!--  	<plugin>
     		<groupId>org.apache.maven.plugins</groupId>
     		<artifactId>maven-assembly-plugin</artifactId>
-    	</plugin>
+    	</plugin> -->
     </plugins> 
 
   </build>

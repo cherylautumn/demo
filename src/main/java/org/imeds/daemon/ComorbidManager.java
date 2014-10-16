@@ -31,7 +31,7 @@ public class ComorbidManager extends ImedsManager {
 		}
 	}
 	public void createtrainDS(String expFolderPath){
-		ComorbidDataSetWorker cdsw = new ComorbidDataSetWorker(expFolderPath+"DSConfig.xml", cdt, this.logger);
+		ComorbidDataSetWorker cdsw = new ComorbidDataSetWorker(expFolderPath+"DSConfig.xml", cdt);
     		cdsw.prepare();
     		cdsw.ready();
     		cdsw.go();

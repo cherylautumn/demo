@@ -15,6 +15,7 @@ import java.util.TreeMap;
 import org.imeds.util.CCIcsvTool;
 import org.imeds.util.ComorbidDSxmlTool;
 import org.imeds.util.ImedDateFormat;
+import org.imeds.util.OSValidator;
 
 import ca.pfv.spmf.algorithms.sequentialpatterns.prefixSpan_AGP.items.Item;
 import ca.pfv.spmf.algorithms.sequentialpatterns.prefixSpan_AGP.items.ItemFactory;
@@ -26,13 +27,17 @@ public class SequenceDataSetWorker extends Worker {
 	private SequenceDataSetConfig cdsc = new SequenceDataSetConfig();
 	private ComorbidDSxmlTool cfgparser = new ComorbidDSxmlTool();
 	private String configFile="";
+	private String folderpath="";
 	public SequenceDataSetWorker() {
 		// TODO Auto-generated constructor stub
 	}
 	public SequenceDataSetWorker(String configFile) {
 		this.configFile = configFile;
 	}
-
+	public SequenceDataSetWorker(String folderpath,String configFile) {
+		this.folderpath = folderpath;
+		this.configFile = folderpath+configFile;
+	}
 	@Override
 	public void prepare() {
 		
@@ -43,17 +48,21 @@ public class SequenceDataSetWorker extends Worker {
 
 	@Override
 	public void ready() {
-		File directory = new File(this.cdsc.getInputFolder());
+		String inputfolder = this.folderpath+this.cdsc.getInputFolder();
+		String outputfolder = this.folderpath+this.cdsc.getOutputFolder();
+		
+		File directory = new File(inputfolder);
 		File[] fList = directory.listFiles();
 		for (File file : fList){		
 			if (file.isFile()){
 				ArrayList<ArrayList<String>> DataPointList = new ArrayList<ArrayList<String>>();
-				CCIcsvTool.preSequenceDataParserDoc(this.cdsc.getInputFolder()+"\\"+file.getName(),DataPointList);
+				
+				CCIcsvTool.preSequenceDataParserDoc(inputfolder+OSValidator.getPathSep()+file.getName(),DataPointList);
 				HashMap<Long, HashMap<Date, Itemset>> sequences = processSequence(DataPointList);
 				
 				
 				HashMap<Long, ArrayList<String>> seqList = transSequencesToList(sequences);
-				CCIcsvTool.SequenceDataSetCreateDoc(this.cdsc.getOutputFolder()+"\\seq_"+file.getName(), seqList);
+				CCIcsvTool.SequenceDataSetCreateDoc(outputfolder+OSValidator.getPathSep()+"seq_"+file.getName(), seqList);
 //				ArrayList<ArrayList<String>> seqTocsv = new ArrayList<ArrayList<String>>(seqList.values());
 				
 //				ArrayList<ArrayList<String>> seqTocsv = transSequencesToList(sequences);

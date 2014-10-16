@@ -16,9 +16,9 @@ import org.imeds.data.ComorbidDataSetWorker;
 import org.imeds.data.common.CCIDictionary;
 import org.imeds.util.ImedDateFormat;
 
-public class ImedDB {
+public class ImedDB_old {
 
-	public ImedDB() {
+	public ImedDB_old() {
 		// TODO Auto-generated constructor stub
 	}
 	protected static Connection conn = null;

@@ -11,9 +11,15 @@
 	</dbConfig>
 	<expConfig>
 		<!-- Stage 1: prepare patient features, train.csv -->>
-		<patientFeaturePrepare>		
-			<folder>data\IMEDS\CgstHfComorbidDS\</folder>
-	 	    <folder>data\IMEDS\DiabeteComorbidDS\</folder>  		
+		<patientFeaturePrepare>	
+			<folder>data\IMEDS\MiComorbidDS\</folder>	
+		   <!--	<folder>data\IMEDS\CgstHfComorbidDS\</folder>  -->
+	 	   <!-- <folder>data\IMEDS\DiabeteComorbidDS\</folder> -->  		
 		</patientFeaturePrepare>
+		
+		<!-- Stage 3: prepare patient sequential features. From \\preSeq to seqDS -->>
+		<seqPtnPreparePrepare>		
+			<folder>data\IMEDS\CgstHfComorbidDS\</folder>  		
+		</seqPtnPreparePrepare>
 	</expConfig>
 </root>

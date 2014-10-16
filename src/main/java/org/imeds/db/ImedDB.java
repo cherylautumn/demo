@@ -1,5 +1,6 @@
 package org.imeds.db;
 
+import java.io.FileNotFoundException;
 import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,6 +19,8 @@ import org.imeds.data.ComorbidDataSetWorker;
 import org.imeds.data.common.CCIDictionary;
 import org.imeds.util.ImedDateFormat;
 import org.imeds.util.ImedStringFormat;
+
+import com.myMaven.demo.Log4jConfig;
 
 public class ImedDB {
 
@@ -139,8 +142,8 @@ public class ImedDB {
                    ArrayList<Double> tmp = new ArrayList<Double>();
  
                    tmp.add(rs.getDouble("ID"));
-        		   if(rs.getLong("Label")>0) tmp.add((double) 1);
-                   else tmp.add((double) 0);
+        		   if(rs.getLong("Label")>0) tmp.add((double) ComorbidDataSetWorker.death);  //means death
+                   else tmp.add((double) ComorbidDataSetWorker.alive);
         		   if(colList.contains("Gender")){tmp.add((rs.getDouble("Gender")-8500));}
         		   if(colList.contains("Age")){
             		   Date now = new Date();
@@ -235,5 +238,8 @@ public class ImedDB {
 //		str.delete(str.lastIndexOf(","), str.length());
 //		return str.toString();
 //	}
-	
+	public static void main(String[] args) throws FileNotFoundException {
+		
+		ImedDB.logger.info("test");
+	}
 }

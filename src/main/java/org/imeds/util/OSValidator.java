@@ -41,4 +41,8 @@ public class OSValidator {
 	        return (os.indexOf("nix") >= 0 || os.indexOf("nux") >= 0);
 	 
 	    }
+	    public static String getPathSep(){
+	    	if(isWindows())return "\\";
+	    	else return "//";
+	    }
 }

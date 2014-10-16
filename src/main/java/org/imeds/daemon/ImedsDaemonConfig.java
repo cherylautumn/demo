@@ -23,7 +23,8 @@ public class ImedsDaemonConfig {
 	 private static String omopDbPassword;
 	 private static String omopDbSearchPath;
 	 private static ArrayList<String> patientFeatureExpFolders = new ArrayList<String>();   
-	public static String getOmopDbName() {
+	 private static ArrayList<String> seqPtnPrepareFolders = new ArrayList<String>();
+	 public static String getOmopDbName() {
 		return omopDbName;
 	}
 	public static void setOmopDbName(String omopDbName) {
@@ -66,6 +67,14 @@ public class ImedsDaemonConfig {
 			ArrayList<String> patientFeatureExpFolders) {
 		ImedsDaemonConfig.patientFeatureExpFolders = patientFeatureExpFolders;
 	}
+	
+	public static ArrayList<String> getSeqPtnPrepareFolders() {
+		return seqPtnPrepareFolders;
+	}
+	public static void setSeqPtnPrepareFolders(
+			ArrayList<String> seqPtnPrepareFolders) {
+		ImedsDaemonConfig.seqPtnPrepareFolders = seqPtnPrepareFolders;
+	}
 	public ImedsDaemonConfig() {
 		// TODO Auto-generated constructor stub
 	}
@@ -87,12 +96,17 @@ public class ImedsDaemonConfig {
 					
 				}else if(L1_emt.getName().equals("expConfig")){
 					List<Element> expList = L1_emt.element("patientFeaturePrepare").elements("folder");
-					for(Element ele: expList){
-						String folderName=ele.getText();
-						
-						if(!OSValidator.isWindows()){folderName = folderName.replace("\\", "/");}
-						patientFeatureExpFolders.add(folderName);											
-					}
+					getFolderList(expList, patientFeatureExpFolders);
+					expList = L1_emt.element("patientFeaturePrepare").elements("folder");
+					getFolderList(expList,seqPtnPrepareFolders);
+//					for(Element ele: expList){
+//						String folderName=ele.getText();
+//						
+//						if(!OSValidator.isWindows()){folderName = folderName.replace("\\", "/");}
+//						patientFeatureExpFolders.add(folderName);											
+//					}
+					
+					
 				}else{
 					
 				}
@@ -104,6 +118,15 @@ public class ImedsDaemonConfig {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
+	}
+	public static void getFolderList(List<Element> expList, List folderlist){
+		
+		for(Element ele: expList){
+			String folderName=ele.getText();
+			
+			if(!OSValidator.isWindows()){folderName = folderName.replace("\\", "/");}
+			folderlist.add(folderName);											
+		}
 	}
 	public static String getConfigString() {
 		 
