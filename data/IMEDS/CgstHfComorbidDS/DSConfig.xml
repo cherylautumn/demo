@@ -53,18 +53,20 @@
 	<!-- STAGE 2 Applying Logistic Regression to calculate outlier-->
 	<PearsonResidualOutlier>
 		<SparkLRmodelDataSets>
-			<dataset>data\IMEDS\DiabeteComorbidDS\trainDS.csv</dataset> <!-- input the same from target filename -->		
+			<dataset>data\IMEDS\CgstHfComorbidDS\trainDS.csv</dataset> <!-- input the same from target filename -->		
 		</SparkLRmodelDataSets>
 		<SparkLRmodelParas>
 			<para>1,500</para>
-			<para>1,5000</para>			
+			<para>1,5000</para>	
+			<para>1,10000</para>				
 			<para>10,500</para>
-			<para>10,5000</para>			
+			<para>10,5000</para>
+			<para>10,10000</para>			
 		</SparkLRmodelParas>
 		
-		<inputFolder>data\IMEDS\DiabeteComorbidDS\logisticRegressionPredict</inputFolder> <!-- for PearsonResidualOutlier only, does not need to run with spark. if null, then spark don't generate tmp file-->
-		<outputFolder>data\IMEDS\DiabeteComorbidDS\outlier</outputFolder>
-		<threshold>0.0</threshold><!-- 0: return all result. >0, filter out results which Ri lower than it. -->
+		<inputFolder>data\IMEDS\CgstHfComorbidDS\logisticRegressionPredict</inputFolder> <!-- for PearsonResidualOutlier only, does not need to run with spark. if null, then spark don't generate tmp file-->
+		<outputFolder>data\IMEDS\CgstHfComorbidDS\outlier</outputFolder>
+		<threshold>-1</threshold><!-- 0: return all result. >0, filter out results which Ri lower than it. -->
 	</PearsonResidualOutlier>
 	
 	<!-- STAGE 3 Transform patient vertical history into horizontal list-->

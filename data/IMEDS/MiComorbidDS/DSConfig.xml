@@ -56,15 +56,18 @@
 			<dataset>data\IMEDS\MiComorbidDS\trainDS.csv</dataset> <!-- input the same from target filename -->		
 		</SparkLRmodelDataSets>
 		<SparkLRmodelParas>
-			<para>1,500</para>
-			<para>1,5000</para>			
-			<para>10,500</para>
-			<para>10,5000</para>			
+		<!--	<para>1,500</para> -->
+			<para>1,5000</para>
+			<para>1,10000</para>			
+		<!--	<para>10,500</para> -->
+			<para>10,5000</para>
+			<para>10,10000</para>			
 		</SparkLRmodelParas>
 		
 		<inputFolder>data\IMEDS\MiComorbidDS\logisticRegressionPredict</inputFolder> <!-- for PearsonResidualOutlier only, does not need to run with spark. if null, then spark don't generate tmp file-->
 		<outputFolder>data\IMEDS\MiComorbidDS\outlier</outputFolder>
-		<threshold>0.0</threshold><!-- 0: return all result. >0, filter out results which Ri lower than it. -->
+		<!-- if using spark to run pearson Residual outlier fail, generate prediction tmp file only. Run the pearson Residual independently by add java memory-->
+		<threshold>-1</threshold><!-- 0: return all result. >0, filter out results which Ri lower than it. '-1' do not use spark to generate outlier-->
 	</PearsonResidualOutlier>
 	
 	<!-- STAGE 3 Transform patient vertical history into horizontal list-->
