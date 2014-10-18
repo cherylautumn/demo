@@ -22,7 +22,8 @@ public class ImedsDaemonConfig {
 	 private static String omopDbUser;
 	 private static String omopDbPassword;
 	 private static String omopDbSearchPath;
-	 private static ArrayList<String> patientFeatureExpFolders = new ArrayList<String>();   
+	 private static ArrayList<String> patientFeatureExpFolders = new ArrayList<String>();  	
+	 private static ArrayList<String> pearsonOutlierExpFolders = new ArrayList<String>();  
 	 private static ArrayList<String> seqPtnPrepareFolders = new ArrayList<String>();
 	 public static String getOmopDbName() {
 		return omopDbName;
@@ -64,10 +65,16 @@ public class ImedsDaemonConfig {
 		return patientFeatureExpFolders;
 	}
 	public static void setPatientFeatureExpFolders(
-			ArrayList<String> patientFeatureExpFolders) {
+		ArrayList<String> patientFeatureExpFolders) {
 		ImedsDaemonConfig.patientFeatureExpFolders = patientFeatureExpFolders;
 	}
-	
+	public static ArrayList<String> getPearsonOutlierExpFolders() {
+		return pearsonOutlierExpFolders;
+	}
+	public static void setPearsonOutlierExpFolders(
+		ArrayList<String> pearsonOutlierExpFolders) {
+		ImedsDaemonConfig.pearsonOutlierExpFolders = pearsonOutlierExpFolders;
+	}
 	public static ArrayList<String> getSeqPtnPrepareFolders() {
 		return seqPtnPrepareFolders;
 	}
@@ -97,8 +104,12 @@ public class ImedsDaemonConfig {
 				}else if(L1_emt.getName().equals("expConfig")){
 					List<Element> expList = L1_emt.element("patientFeaturePrepare").elements("folder");
 					getFolderList(expList, patientFeatureExpFolders);
-					expList = L1_emt.element("patientFeaturePrepare").elements("folder");
+					expList = L1_emt.element("pearsonOutlier").elements("folder");
+					getFolderList(expList,pearsonOutlierExpFolders);
+					
+					expList = L1_emt.element("seqPtnPrepare").elements("folder");
 					getFolderList(expList,seqPtnPrepareFolders);
+					
 //					for(Element ele: expList){
 //						String folderName=ele.getText();
 //						

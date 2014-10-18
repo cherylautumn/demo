@@ -11,6 +11,7 @@ import java.util.Scanner;
 import org.imeds.data.SparkLRDataSetWorker.DataPoint;
 import org.imeds.util.CCIcsvTool;
 import org.imeds.util.ComorbidDSxmlTool;
+import org.imeds.util.OSValidator;
 import org.la4j.inversion.GaussJordanInverter;
 import org.la4j.matrix.Matrix;
 import org.la4j.matrix.dense.Basic2DMatrix;
@@ -36,7 +37,11 @@ public class PearsonResidualOutlier extends Outlier{
 		this.cfgparser.parserDoc(this.configFile,this.cdsc);
 		
 		this.lrFolder = this.cdsc.getPearsonResidualOutlierInputFolder();
+		if(!OSValidator.isWindows()){this.lrFolder = this.lrFolder.replace("\\", "/");}
+		
 		this.olFolder = this.cdsc.getPearsonResidualOutlierOutputFolder();
+		if(!OSValidator.isWindows()){this.olFolder = this.olFolder.replace("\\", "/");}
+		
 		this.threshold = this.cdsc.getPearsonResidualThreshold();
 		
 	}
@@ -83,7 +88,7 @@ public class PearsonResidualOutlier extends Outlier{
 			if (file.isFile()){
 				String filename = file.getName();		
 				
-				init(this.lrFolder+"\\"+filename, this.olFolder+"\\"+filename.substring(0, filename.indexOf("."))+"_prol.csv", this.threshold);
+				init(this.lrFolder+OSValidator.getPathSep()+filename, this.olFolder+OSValidator.getPathSep()+filename.substring(0, filename.indexOf("."))+"_prol.csv", this.threshold);
 				Matrix hMatrix = calXtVX(getDataPointList());
 				
 				for(DataPoint dl:this.DataPointList){

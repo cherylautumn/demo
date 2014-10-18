@@ -8,7 +8,6 @@ import org.imeds.data.common.CCIDictionary;
 import org.imeds.db.ImedDB;
 import org.imeds.util.OSValidator;
 
-import com.myMaven.demo.Log4jConfig;
 
 public class imedsDaemon {
 	/*####################################################################################*

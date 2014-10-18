@@ -56,12 +56,12 @@
 			<dataset>data\IMEDS\MiComorbidDS\trainDS.csv</dataset> <!-- input the same from target filename -->		
 		</SparkLRmodelDataSets>
 		<SparkLRmodelParas>
-		<!--	<para>1,500</para> -->
-			<para>1,5000</para>
-			<para>1,10000</para>			
-		<!--	<para>10,500</para> -->
-			<para>10,5000</para>
-			<para>10,10000</para>			
+			<para>1,500</para> 
+		<!--	<para>1,5000</para>
+			<para>1,10000</para>	-->		
+			<para>10,500</para> 
+		<!--	<para>10,5000</para>
+			<para>10,10000</para>			-->
 		</SparkLRmodelParas>
 		
 		<inputFolder>data\IMEDS\MiComorbidDS\logisticRegressionPredict</inputFolder> <!-- for PearsonResidualOutlier only, does not need to run with spark. if null, then spark don't generate tmp file-->

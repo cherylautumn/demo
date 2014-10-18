@@ -20,8 +20,6 @@ import org.imeds.data.common.CCIDictionary;
 import org.imeds.util.ImedDateFormat;
 import org.imeds.util.ImedStringFormat;
 
-import com.myMaven.demo.Log4jConfig;
-
 public class ImedDB {
 
 	public ImedDB() {
@@ -57,7 +55,8 @@ public class ImedDB {
 	            if(stmt != null) stmt.close();
 	            logger.info("Connection closed !!");
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	        	logger.error("connection close fail\n"+e.getMessage());
+	            
 	        }
 	}  
 
