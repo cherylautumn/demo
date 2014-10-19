@@ -58,6 +58,9 @@ public class imedsDaemon {
         logger.info("Start scheduling.....");
     		manager = new ComorbidManager(DeyoCCIPath);
     		manager.run();
+    		
+    		manager = new SeqptnManager();
+    		manager.run();
     }
 
 	public static void main(String[] args) {

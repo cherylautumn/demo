@@ -5,11 +5,11 @@ import org.imeds.data.ComorbidDataSetWorker;
 import org.imeds.data.SequenceDataSetWorker;
 
 public class SeqptnManager extends ImedsManager {
-	private static Logger logger = Logger.getLogger(ComorbidManager.class);
+	private static Logger logger = Logger.getLogger(SeqptnManager.class);
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-
+		SeqPtnDataPrepare();
 	}
 	public void SeqPtnDataPrepare(){
 		for(String folderP:ImedsDaemonConfig.getSeqPtnPrepareFolders()){

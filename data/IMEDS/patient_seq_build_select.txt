@@ -1,0 +1,14 @@
+select,fileid,count,filename
+0,10,7399,data\IMEDS\CgstHfComorbidDS\outlier\trainDS_500_10_prol.csv
+1,11,6501,data\IMEDS\CgstHfComorbidDS\outlier\trainDS_5000_10_prol.csv
+0,7,6204,data\IMEDS\CgstHfComorbidDS\outlier\trainDS_10000_10_prol.csv
+1,1,4396,data\IMEDS\CgstHfComorbidDS\outlier\trainDS_500_1_prol.csv
+1,9,12,data\IMEDS\CgstHfComorbidDS\outlier\trainDS_5000_1_prol.csv
+0,8,8,data\IMEDS\CgstHfComorbidDS\outlier\trainDS_10000_1_prol.csv
+
+0,5,4060,data\IMEDS\MiComorbidDS\outlier\trainDS_500_10_prol.csv
+1,6,3474,data\IMEDS\MiComorbidDS\outlier\trainDS_5000_10_prol.csv
+0,2,3183,data\IMEDS\MiComorbidDS\outlier\trainDS_10000_10_prol.csv
+1,0,1972,data\IMEDS\MiComorbidDS\outlier\trainDS_500_1_prol.csv
+1,4,42,data\IMEDS\MiComorbidDS\outlier\trainDS_5000_1_prol.csv
+0,3,40,data\IMEDS\MiComorbidDS\outlier\trainDS_10000_1_prol.csv

@@ -130,8 +130,9 @@ public class ImedsDaemonConfig {
 					expList = L1_emt.element("pearsonOutlierToDB").elements("folder");
 					getFolderList(expList,pearsonOutlierToDB);
 					
-					flush = Integer.parseInt(L1_emt.element("pearsonOutlierToDB").elementText("flush"));
-					
+					String flushstr = L1_emt.element("pearsonOutlierToDB").elementText("flush");
+					if(flushstr!=null && flushstr.trim()!="")flush = Integer.parseInt(flushstr);
+					else flush = 1;
 					expList = L1_emt.element("seqPtnPrepare").elements("folder");
 					getFolderList(expList,seqPtnPrepareFolders);
 					

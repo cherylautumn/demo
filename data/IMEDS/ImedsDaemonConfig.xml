@@ -11,7 +11,8 @@
 		</db_OMOPS>
 	</dbConfig>
 	<expConfig>
-		<!-- Stage 1: prepare patient features, train.csv -->>
+	   <!-- Here starts to be controlled by ComorbidManager -->
+		<!-- Stage 1: prepare patient features, train.csv -->
 		<patientFeaturePrepare>	
 		   <!--	<folder>data\IMEDS\MiComorbidDS\</folder>	-->
 		   <!--	<folder>data\IMEDS\CgstHfComorbidDS\</folder>  -->
@@ -25,14 +26,17 @@
 			<folder>data\IMEDS\CgstHfComorbidDS\</folder> -->
 		</pearsonOutlier>
 		<pearsonOutlierToDB>
-			<flush>1000</flush>
+		<!--	<flush>1000</flush>
 			<folder>data\IMEDS\MiComorbidDS\</folder>	
-			<folder>data\IMEDS\CgstHfComorbidDS\</folder> 
+			<folder>data\IMEDS\CgstHfComorbidDS\</folder> -->
 		</pearsonOutlierToDB>
-		<!-- Stage 3: prepare patient sequential features. From \\preSeq to seqDS -->>
+		
+		
+		<!-- Here starts to be controlled by SeqptnManager -->
+		<!-- Stage 3: prepare patient sequential features. From \\preSeq to seqDS -->
 		<seqPtnPrepare>		
 			<folder>data\IMEDS\MiComorbidDS\</folder>	
-		<!--	<folder>data\IMEDS\CgstHfComorbidDS\</folder>  	-->	
+			<folder>data\IMEDS\CgstHfComorbidDS\</folder>  		
 		</seqPtnPrepare>
 	</expConfig>
 </root>
