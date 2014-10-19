@@ -22,9 +22,12 @@ public class ImedsDaemonConfig {
 	 private static String omopDbUser;
 	 private static String omopDbPassword;
 	 private static String omopDbSearchPath;
+	 private static String private_search_path;
 	 private static ArrayList<String> patientFeatureExpFolders = new ArrayList<String>();  	
 	 private static ArrayList<String> pearsonOutlierExpFolders = new ArrayList<String>();  
+	 private static ArrayList<String> pearsonOutlierToDB = new ArrayList<String>(); 
 	 private static ArrayList<String> seqPtnPrepareFolders = new ArrayList<String>();
+	 private static Integer flush;
 	 public static String getOmopDbName() {
 		return omopDbName;
 	}
@@ -61,6 +64,12 @@ public class ImedsDaemonConfig {
 	public static void setOmopDbSearchPath(String omopDbSearchPath) {
 		ImedsDaemonConfig.omopDbSearchPath = omopDbSearchPath;
 	}
+	public static String getPrivate_search_path() {
+		return private_search_path;
+	}
+	public static void setPrivate_search_path(String private_search_path) {
+		ImedsDaemonConfig.private_search_path = private_search_path;
+	}
 	public static ArrayList<String> getPatientFeatureExpFolders() {
 		return patientFeatureExpFolders;
 	}
@@ -75,12 +84,24 @@ public class ImedsDaemonConfig {
 		ArrayList<String> pearsonOutlierExpFolders) {
 		ImedsDaemonConfig.pearsonOutlierExpFolders = pearsonOutlierExpFolders;
 	}
+	public static ArrayList<String> getPearsonOutlierToDB() {
+		return pearsonOutlierToDB;
+	}
+	public static void setPearsonOutlierToDB(ArrayList<String> pearsonOutlierToDB) {
+		ImedsDaemonConfig.pearsonOutlierToDB = pearsonOutlierToDB;
+	}
 	public static ArrayList<String> getSeqPtnPrepareFolders() {
 		return seqPtnPrepareFolders;
 	}
 	public static void setSeqPtnPrepareFolders(
 			ArrayList<String> seqPtnPrepareFolders) {
 		ImedsDaemonConfig.seqPtnPrepareFolders = seqPtnPrepareFolders;
+	}
+	public static Integer getFlush() {
+		return flush;
+	}
+	public static void setFlush(Integer flush) {
+		ImedsDaemonConfig.flush = flush;
 	}
 	public ImedsDaemonConfig() {
 		// TODO Auto-generated constructor stub
@@ -96,16 +117,20 @@ public class ImedsDaemonConfig {
 				if(L1_emt.getName().equals("dbConfig")){
 					
 					omopDbDriver		= L1_emt.element(omopDbName).elementText("db_Driver");
-					omopDbUrl		= L1_emt.element(omopDbName).elementText("dbURL");
-					omopDbUser		= L1_emt.element(omopDbName).elementText("dbUser");
-					omopDbPassword	= L1_emt.element(omopDbName).elementText("dbPassword");
+					omopDbUrl			= L1_emt.element(omopDbName).elementText("dbURL");
+					omopDbUser			= L1_emt.element(omopDbName).elementText("dbUser");
+					omopDbPassword		= L1_emt.element(omopDbName).elementText("dbPassword");
 					omopDbSearchPath	= L1_emt.element(omopDbName).elementText("search_path");
-					
+					private_search_path = L1_emt.element(omopDbName).elementText("private_search_path");
 				}else if(L1_emt.getName().equals("expConfig")){
 					List<Element> expList = L1_emt.element("patientFeaturePrepare").elements("folder");
 					getFolderList(expList, patientFeatureExpFolders);
 					expList = L1_emt.element("pearsonOutlier").elements("folder");
 					getFolderList(expList,pearsonOutlierExpFolders);
+					expList = L1_emt.element("pearsonOutlierToDB").elements("folder");
+					getFolderList(expList,pearsonOutlierToDB);
+					
+					flush = Integer.parseInt(L1_emt.element("pearsonOutlierToDB").elementText("flush"));
 					
 					expList = L1_emt.element("seqPtnPrepare").elements("folder");
 					getFolderList(expList,seqPtnPrepareFolders);

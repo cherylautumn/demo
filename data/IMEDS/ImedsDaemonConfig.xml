@@ -7,6 +7,7 @@
 			<dbUser>hchiu</dbUser>
 			<dbPassword>1QAZ2wsx</dbPassword>
 			<search_path>ccae_cdm4</search_path>
+			<private_search_path>ucla</private_search_path>
 		</db_OMOPS>
 	</dbConfig>
 	<expConfig>
@@ -18,13 +19,20 @@
 		</patientFeaturePrepare>
 		
 		<!-- if spark didn't process pearsonOutlier (<threshold>-1</threshold> threshold setting equal to -1), do it here. -->
+		<!-- Stage 2.2. Calculate pearsonOutlier. This step may need to shift to machines with larger memory -->
 		<pearsonOutlier>
+		<!--	<folder>data\IMEDS\MiComorbidDS\</folder>	
+			<folder>data\IMEDS\CgstHfComorbidDS\</folder> -->
+		</pearsonOutlier>
+		<pearsonOutlierToDB>
+			<flush>1000</flush>
 			<folder>data\IMEDS\MiComorbidDS\</folder>	
 			<folder>data\IMEDS\CgstHfComorbidDS\</folder> 
-		</pearsonOutlier>
+		</pearsonOutlierToDB>
 		<!-- Stage 3: prepare patient sequential features. From \\preSeq to seqDS -->>
 		<seqPtnPrepare>		
-			<folder>data\IMEDS\CgstHfComorbidDS\</folder>  		
+			<folder>data\IMEDS\MiComorbidDS\</folder>	
+		<!--	<folder>data\IMEDS\CgstHfComorbidDS\</folder>  	-->	
 		</seqPtnPrepare>
 	</expConfig>
 </root>

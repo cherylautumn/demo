@@ -21,15 +21,17 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.log4j.Logger;
 import org.apache.spark.mllib.linalg.Vectors;
 import org.apache.spark.mllib.regression.LabeledPoint;
 import org.imeds.data.SparkLRDataSetWorker.DataPoint;
 import org.imeds.data.common.CCIcode;
+import org.imeds.db.ImedDB;
 
 import ca.pfv.spmf.algorithms.sequentialpatterns.prefixSpan_AGP.items.Itemset;
 
 public class CCIcsvTool implements DocumentTool{ 
-
+	private static Double infinity=1000000.0;
 	public CCIcsvTool() {
 		// TODO Auto-generated constructor stub
 	}
@@ -95,6 +97,7 @@ public class CCIcsvTool implements DocumentTool{
 			e.printStackTrace();
 		}       
 	}
+	
 	public static void SequenceDataSetCreateDoc(String fileName, HashMap<Long, ArrayList<String>> mapList) {
 		
 		SequenceDataSetCreateDoc(fileName,new ArrayList<ArrayList<String>>(mapList.values()));
@@ -269,6 +272,47 @@ public class CCIcsvTool implements DocumentTool{
 			}
 			return labelItemSet;
    
+	}
+	public static void OutlierParserDoc(String fileName,Integer flush, Integer fileId, Logger logger) throws Exception {
+		Map<Long, ArrayList<Double>> list = new HashMap<Long,ArrayList<Double>>();
+		//CSV Write Example using CSVPrinter
+		CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
+	
+		CSVParser parser;
+		//data\IMEDS\CgstHfComorbidDS\outlier\trainDS_5000_10_prol.csv
+		try {
+			
+			parser = new CSVParser(new FileReader(fileName), format);
+			int counter = 0;
+	        for(CSVRecord record : parser){
+	        	ArrayList<Double> arr = new ArrayList<Double>();
+	        	arr.add(Double.parseDouble(record.get("TrainP")));
+	        	arr.add(Double.parseDouble(record.get("PredictP")));
+	        	if(record.get("Ri").trim().equalsIgnoreCase("Infinity")){
+	        		arr.add(infinity);
+	        	}else{
+	        		arr.add(Double.parseDouble(record.get("Ri")));
+	        	}
+	        	list.put(Long.parseLong(record.get("Id")), arr);
+	        	counter++;
+	        	if((counter%flush)==0){
+	        		logger.info(fileName+" finish "+counter);
+	        		ImedDB.writeOutlier(list, fileId);
+	        		list =  new HashMap<Long,ArrayList<Double>>();
+	        		
+	        	}
+	        	
+	        }
+	        if(list.size()>0){
+	        	ImedDB.writeOutlier(list, fileId);
+	        }
+	        //close the parser
+	        parser.close();	        
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}       
 	}
 	public void parserDoc(String fileName) {
 		// TODO Auto-generated method stub

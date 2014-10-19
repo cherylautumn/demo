@@ -27,15 +27,26 @@ public class ComorbidManager extends ImedsManager {
 		if(ImedsDaemonConfig.getPatientFeatureExpFolders().size()>0){
     		GenPatientFeature();
 		}
-		//Stage 2. Train and predict LR model. Done by Spark.
+		//Stage 2.1. Train and predict LR model. Done by Spark.
 		
-		//Stage 3. Generate outlier.
+		//Stage 2.2. Generate outlier.
 		if(ImedsDaemonConfig.getPearsonOutlierExpFolders().size()>0){
 			for(String folderP:ImedsDaemonConfig.getPearsonOutlierExpFolders()){
 				logger.info("Processing PearsonOutlierGen: "+folderP);
 				PearsonResidualOutlier prlo = new PearsonResidualOutlier();				
 				prlo = new PearsonResidualOutlier(folderP+DSConfig);
 				prlo.oulierGen();
+				prlo = null;
+			}
+		}
+		//Stage 2.3. Write outlier into database
+		if(ImedsDaemonConfig.getPearsonOutlierToDB().size()>0){
+			for(String folderP:ImedsDaemonConfig.getPearsonOutlierToDB()){
+				logger.info("Processing Pearson Outlier To DB: "+folderP);
+				PearsonResidualOutlier prlo = new PearsonResidualOutlier();				
+				prlo = new PearsonResidualOutlier(folderP+DSConfig);
+//				prlo.oulierGen();
+				prlo.writeOulierToDB();
 				prlo = null;
 			}
 		}

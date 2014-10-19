@@ -12,8 +12,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
+import org.imeds.daemon.ImedsDaemonConfig;
 import org.imeds.daemon.imedsDaemon;
 import org.imeds.data.ComorbidDataSetWorker;
 import org.imeds.data.common.CCIDictionary;
@@ -29,6 +33,7 @@ public class ImedDB {
 	protected static Statement stmt = null;
 	
 	private static Logger logger = Logger.getLogger(ImedDB.class);
+	
 	public static void connDB(String dbDriver, String dbURL, String dbUser, String dbPassword, String search_path) throws Exception {
 	     
 		try{
@@ -222,6 +227,73 @@ public class ImedDB {
                 	   cptmap.put(rs.getInt("concept_id"), rs.getString("concept_name"));            	   
                    }
                 rs.close();
+            }
+        }catch (Exception ex) {
+            throw ex;
+        }
+   
+	}
+	public static Integer getOutlierFileId(String filename) throws Exception{
+        ResultSet rs = null;
+        Integer fileId = -1;
+        filename = filename.replace("\\", "\\\\");
+        try {
+            synchronized (ImedDB.class) {
+            	StringBuffer queryStr = new StringBuffer();
+            	
+            	queryStr.append(" SELECT fileId ");
+            	queryStr.append(" FROM  "+ImedsDaemonConfig.getPrivate_search_path()+".LrOutlierFile ");
+            	queryStr.append(" WHERE filename ='"+ filename +"'");
+
+                   rs = stmt.executeQuery(queryStr.toString());
+             //      logger.debug(queryStr.toString());
+                   if(rs.next()){
+                	  fileId = rs.getInt("fileId");
+                	  String deloutlier = "delete from "+ImedsDaemonConfig.getPrivate_search_path()+".LrOutliers where fileId ="+fileId;
+                	  stmt.executeUpdate(deloutlier);
+                   }else{
+                	 
+	                	   String queryMaxId = "select (max(fileId)+1) nextId  from "+ImedsDaemonConfig.getPrivate_search_path()+".LrOutlierFile ";
+	                	   rs = stmt.executeQuery(queryMaxId);
+	                	   if(rs.next())fileId = rs.getInt("nextId");
+	           //     	   logger.debug(queryMaxId);
+	                	   String sql = "INSERT INTO " + ImedsDaemonConfig.getPrivate_search_path()+".LrOutlierFile "+
+	                               "VALUES ("+fileId+", '"+filename+"',getdate())";
+	                	   stmt.executeUpdate(sql);
+	           //     	   logger.debug(sql);
+	                	   rs = stmt.executeQuery(queryStr.toString());
+	                       if(rs.next()){
+	                    	  fileId = rs.getInt("fileId"); 
+	                       }
+                	  }
+                   
+                rs.close();
+            }
+        }catch (Exception ex) {
+            throw ex;
+        }
+        return fileId;
+	}
+	public static void writeOutlier(Map<Long, ArrayList<Double>> list, Integer fileId) throws Exception{
+       
+        try {
+            synchronized (ImedDB.class) {
+            	StringBuffer queryStr = new StringBuffer();
+            	
+            	queryStr.append(" insert into "+ImedsDaemonConfig.getPrivate_search_path()+".LrOutliers values");
+
+                Iterator<Entry<Long, ArrayList<Double>>> iter =list.entrySet().iterator();
+   		        
+       			while (iter.hasNext()) { 
+       				Entry<Long, ArrayList<Double>> entry = iter.next(); 
+       				
+                	queryStr.append("("+fileId+","+entry.getKey()+","+entry.getValue().get(0)+","+entry.getValue().get(1)+","+entry.getValue().get(2)+"),");
+       				
+       			}   
+       			queryStr.deleteCharAt(queryStr.lastIndexOf(","));
+       			//logger.debug(queryStr.toString());
+       			stmt.executeUpdate(queryStr.toString());
+              
             }
         }catch (Exception ex) {
             throw ex;

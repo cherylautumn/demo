@@ -8,7 +8,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+import org.imeds.daemon.ComorbidManager;
+import org.imeds.daemon.ImedsDaemonConfig;
 import org.imeds.data.SparkLRDataSetWorker.DataPoint;
+import org.imeds.db.ImedDB;
 import org.imeds.util.CCIcsvTool;
 import org.imeds.util.ComorbidDSxmlTool;
 import org.imeds.util.OSValidator;
@@ -29,6 +33,7 @@ public class PearsonResidualOutlier extends Outlier{
 	private String configFile="";
 	private ComorbidDataSetConfig cdsc = new ComorbidDataSetConfig();
 	private ComorbidDSxmlTool cfgparser = new ComorbidDSxmlTool();
+	private static Logger logger = Logger.getLogger(PearsonResidualOutlier.class);
 	public PearsonResidualOutlier() {
 		
 	}
@@ -177,6 +182,32 @@ public class PearsonResidualOutlier extends Outlier{
 //		  System.out.println("V\n"+mV.toString());
 		  return mV;
 	  }
+	  
+	  public void writeOulierToDB() {
+			File directory = new File(this.olFolder);
+			File[] fList = directory.listFiles();
+			for (File file : fList){		
+				if (file.isFile()){
+					
+					String filename = file.getName();		
+					String totalPath = this.olFolder+OSValidator.getPathSep()+file.getName();
+					try {
+						Integer fileId = ImedDB.getOutlierFileId(totalPath);
+						this.logger.info("prepare to write <file Id "+fileId+"> "+totalPath+" into DB.");
+						CCIcsvTool.OutlierParserDoc(totalPath, ImedsDaemonConfig.getFlush(), fileId, this.logger);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						this.logger.error("fail to write outlier file "+totalPath+"\n"+e.getMessage());
+						
+					}
+//					init(this.lrFolder+OSValidator.getPathSep()+filename, this.olFolder+OSValidator.getPathSep()+filename.substring(0, filename.indexOf("."))+"_prol.csv", this.threshold);
+					
+//					CCIcsvTool.OutlierCreateDoc(this.outFileName,  (HashMap<Long, ArrayList<Double>>) this.OutlierList);
+				}
+			}
+			
+		}  
 	public static void main(String[] args) {
 //		PearsonResidualOutlier prlo = new PearsonResidualOutlier("data\\IMEDS\\DiabeteComorbidDS\\trainDSf_300_1.0.csv","data\\IMEDS\\DiabeteComorbidDS\\trainDSf_300_1.0_ol.csv", -1.0);
 		PearsonResidualOutlier prlo = new PearsonResidualOutlier();
