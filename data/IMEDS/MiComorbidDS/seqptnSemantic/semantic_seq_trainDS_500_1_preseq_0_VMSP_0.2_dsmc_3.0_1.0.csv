@@ -1,4 +1,4 @@
-notOutlier_Alive,notOutlier_Death,notOutlier_survival_rate,outlier_Alive,outlier_Death,outlier_survival_rate,seq_survival_rate,support,total_patients,fisherScore,seq,,semantic
+notOutlier_Alive,notOutlier_Death,notOutlier_survival_rate,outlier_Alive,outlier_Death,outlier_survival_rate,seq_survival_rate,support,total_patients,fisherScore,seq,semantic
 800.0,1280.0,0.38462,747.0,0.0,1,0.54722,2827,9110,0.009603428503290606,1734104 -1 -2,'Azithromycin' -1 -2 
 689.0,1054.0,0.3953,637.0,0.0,1,0.55714,2380,9110,0.008439687897265409,1506270 -1 -2,'Methylprednisolone' -1 -2 
 532.0,944.0,0.36043,538.0,0.0,1,0.53128,2014,9110,0.0066494306678856075,974166 -1 -2,'Hydrochlorothiazide' -1 -2 

@@ -1,4 +1,4 @@
-notOutlier_Alive,notOutlier_Death,notOutlier_survival_rate,outlier_Alive,outlier_Death,outlier_survival_rate,seq_survival_rate,support,total_patients,fisherScore,seq,,semantic
+notOutlier_Alive,notOutlier_Death,notOutlier_survival_rate,outlier_Alive,outlier_Death,outlier_survival_rate,seq_survival_rate,support,total_patients,fisherScore,seq,semantic
 931.0,1534.0,0.37769,23.0,0.0,1,0.38344,2488,9110,0.0017612608793619988,956874 -1 -2,'Furosemide' -1 -2 
 1027.0,1126.0,0.47701,21.0,0.0,1,0.48206,2174,9110,0.001744395134750283,1124957 -1 -2,'Oxycodone' -1 -2 
 1007.0,1057.0,0.48789,20.0,0.0,1,0.4928,2084,9110,0.001609811449936695,1154029 -1 -2,'Fentanyl' -1 -2 

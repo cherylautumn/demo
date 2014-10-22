@@ -1,4 +1,4 @@
-notOutlier_Alive,notOutlier_Death,notOutlier_survival_rate,outlier_Alive,outlier_Death,outlier_survival_rate,seq_survival_rate,support,total_patients,fisherScore,seq,,semantic
+notOutlier_Alive,notOutlier_Death,notOutlier_survival_rate,outlier_Alive,outlier_Death,outlier_survival_rate,seq_survival_rate,support,total_patients,fisherScore,seq,semantic
 1625.0,2255.0,0.41881,57.0,0.0,1,0.42723,3937,14711,0.0010578368550548953,1742253 -1 -2,'Levofloxacin' -1 -2 
 1481.0,1694.0,0.46646,49.0,0.0,1,0.47457,3224,14711,0.001054958341572172,956874 -11125315 -1 -2,'Furosemide' -11125315 -1 -2 
 1461.0,1773.0,0.45176,49.0,0.0,1,0.45995,3283,14711,9.818434701547522E-4,1125315 -119049105 -1 -2,'Acetaminophen' -119049105 -1 -2 

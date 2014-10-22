@@ -1,4 +1,4 @@
-notOutlier_Alive,notOutlier_Death,notOutlier_survival_rate,outlier_Alive,outlier_Death,outlier_survival_rate,seq_survival_rate,support,total_patients,fisherScore,seq,,semantic
+notOutlier_Alive,notOutlier_Death,notOutlier_survival_rate,outlier_Alive,outlier_Death,outlier_survival_rate,seq_survival_rate,support,total_patients,fisherScore,seq,semantic
 650.0,1280.0,0.33679,897.0,0.0,1,0.54722,2827,9110,0.006948802425900948,1734104 -1 -2,'Azithromycin' -1 -2 
 576.0,1054.0,0.35337,750.0,0.0,1,0.55714,2380,9110,0.005025433649796712,1506270 -1 -2,'Methylprednisolone' -1 -2 
 1115.0,1079.0,0.5082,956.0,0.0,1,0.65746,3150,9110,0.004540525494404891,1322184 -1 -2,'clopidogrel' -1 -2 

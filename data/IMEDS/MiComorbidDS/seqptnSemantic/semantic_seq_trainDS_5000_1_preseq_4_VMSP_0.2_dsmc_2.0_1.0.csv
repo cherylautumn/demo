@@ -1,4 +1,4 @@
-notOutlier_Alive,notOutlier_Death,notOutlier_survival_rate,outlier_Alive,outlier_Death,outlier_survival_rate,seq_survival_rate,support,total_patients,fisherScore,seq,,semantic
+notOutlier_Alive,notOutlier_Death,notOutlier_survival_rate,outlier_Alive,outlier_Death,outlier_survival_rate,seq_survival_rate,support,total_patients,fisherScore,seq,semantic
 879.0,1534.0,0.36428,75.0,0.0,1,0.38344,2488,9110,0.004989634415204861,956874 -1 -2,'Furosemide' -1 -2 
 1502.0,1275.0,0.54087,77.0,0.0,1,0.55326,2854,9110,0.003674135175177098,19121608 -1 -2,'Influenza virus vaccine' -1 -2 
 969.0,1057.0,0.47828,58.0,0.0,1,0.4928,2084,9110,0.0027642843681006126,1154029 -1 -2,'Fentanyl' -1 -2 

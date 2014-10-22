@@ -92,7 +92,9 @@ public class seqRSinterpreter {
 			 for(Integer ri:row){
 				 if(this.cptmap.containsKey(ri))
 				 {
-					 line = line + "'"+this.cptmap.get(ri)+"' ";
+					 String tmp = this.cptmap.get(ri);
+					 tmp = tmp.replace(",", ".");
+					 line = line + "'"+tmp+"' ";
 				 }else{
 					 line = line + ri+" ";
 				 }
@@ -107,7 +109,7 @@ public class seqRSinterpreter {
 			  fstream = new FileWriter(fileName);
 		
 		      BufferedWriter out = new BufferedWriter(fstream);
-		      out.write(srcList.get(0)+",semantic");
+		      out.write(srcList.get(0)+"semantic");
 		      out.newLine();
 		      for(int i=1;i<srcList.size();i++){
 		    	  out.write(srcList.get(i)+outdataList.get(i-1));

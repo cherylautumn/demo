@@ -1,4 +1,4 @@
-notOutlier_Alive,notOutlier_Death,notOutlier_survival_rate,outlier_Alive,outlier_Death,outlier_survival_rate,seq_survival_rate,support,total_patients,fisherScore,seq,,semantic
+notOutlier_Alive,notOutlier_Death,notOutlier_survival_rate,outlier_Alive,outlier_Death,outlier_survival_rate,seq_survival_rate,support,total_patients,fisherScore,seq,semantic
 1398.0,1592.0,0.46756,7.0,0.0,1,0.4688,2939,14711,7.257251716670868E-4,956874 -1956874 -1 -2,'Furosemide' -1956874 -1 -2 
 1420.0,1986.0,0.41691,0.0,0.0,?,0.41691,3360,14711,2.460222386840319E-4,1000560 -1 -2,'Ondansetron' -1 -2 
 1539.0,1651.0,0.48245,0.0,0.0,?,0.48245,3141,14711,2.2609561710043368E-4,1153013 -1 -2,'Promethazine' -1 -2 
