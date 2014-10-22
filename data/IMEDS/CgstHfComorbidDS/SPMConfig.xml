@@ -16,7 +16,7 @@
 		<outputFolder>seqptn</outputFolder>
 	</VMSPConfig>
 	<MMRFSConfig>
-	<enable>1</enable>
+	<enable>0</enable>
 		<basicItemsetsFileName>seqDS</basicItemsetsFileName> <!-- patients drug lists-->
 		<discrimItemsetsFileName>seqptn</discrimItemsetsFileName> <!-- patients freq ptn. one drug list may have multiple freq ptn -->
 		<outlierSource>outlier</outlierSource> <!-- patients LR result.-->

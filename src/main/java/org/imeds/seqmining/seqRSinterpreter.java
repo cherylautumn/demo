@@ -50,50 +50,10 @@ public class seqRSinterpreter {
 	public void readFile(String FileName) throws FileNotFoundException{
 		indataList = new ArrayList<ArrayList<Integer>>();
 		cptmap = new HashMap<Integer, String>();
-/*		CSVFormat format = CSVFormat.RFC4180.withDelimiter(',');
-        
-        //initialize the CSVParser object
-        CSVParser parser;
-		try {
-			parser = new CSVParser(new FileReader(FileName), format);
-			srcList = parser.getRecords();
-	        for(CSVRecord record : parser){
-	        	
-	        	String line = record.get("seq");
-	    		String[] linesplit;
-	        	linesplit = line.split(" ");
-				ArrayList<Integer> itemarr = new ArrayList<Integer>();
-				for(int i=0;i<linesplit.length;i++){
-					
-					String itemtmp = linesplit[i].trim();
-					if(itemtmp!=null && !itemtmp.equals("")){
-						Integer cpttmp = Integer.parseInt(itemtmp);
-						
-						if(cpttmp>=0){
-							cptmap.put(cpttmp,"");
-						}
-						itemarr.add(cpttmp);					
-					}
-					
-				}
-				indataList.add(itemarr);
-	        }
-	        //close the parser
-	        parser.close();
-	    
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
-		
+		srcList = new ArrayList<String>() ;
 		FileInputStream fis = new FileInputStream(FileName);
 		Scanner scanner = new Scanner(fis);
-		 indataList = new ArrayList<ArrayList<Integer>>();
-		 cptmap = new HashMap<Integer, String>();
+		
 		// reading file line by line using Scanner in Java
 //		System.out.println("Reading file line by line in Java using Scanner");
 		int idx = 0;
