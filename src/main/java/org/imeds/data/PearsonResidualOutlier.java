@@ -16,6 +16,7 @@ import org.imeds.db.ImedDB;
 import org.imeds.util.CCIcsvTool;
 import org.imeds.util.ComorbidDSxmlTool;
 import org.imeds.util.OSValidator;
+import org.imeds.util.writeException;
 import org.la4j.inversion.GaussJordanInverter;
 import org.la4j.matrix.Matrix;
 import org.la4j.matrix.dense.Basic2DMatrix;
@@ -139,6 +140,7 @@ public class PearsonResidualOutlier extends Outlier{
 				XtVX =  GJ.inverse();
 //				System.out.println("XVXinverse\n"+GJ.inverse().toString());
 			}catch(Exception e){
+				logger.error("fail to cal Inverse matrix. "+writeException.toString(e));
 				e.printStackTrace();
 			}
 //		  System.out.println("Verify\n"+XtVX.multiply(GJ.inverse()));
@@ -197,8 +199,8 @@ public class PearsonResidualOutlier extends Outlier{
 						CCIcsvTool.OutlierParserDoc(totalPath, ImedsDaemonConfig.getFlush(), fileId, this.logger);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
-						this.logger.error("fail to write outlier file "+totalPath+"\n"+e.getMessage());
+						//e.printStackTrace();
+						this.logger.error("fail to write outlier file "+totalPath+"\n"+writeException.toString(e));
 						
 					}
 //					init(this.lrFolder+OSValidator.getPathSep()+filename, this.olFolder+OSValidator.getPathSep()+filename.substring(0, filename.indexOf("."))+"_prol.csv", this.threshold);

@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
+<!-- DiabeteComorbidDS -->
+	<!-- STAGE 3 Transform patient vertical history into horizontal list-->
+	<SequenceDataSetConfig>		
+		<enable>0</enable>
+		<inputFolder>preSeq</inputFolder>
+		<outputFolder>seqDS</outputFolder>		
+	</SequenceDataSetConfig>
+	<!-- STAGE 4 SPM. setting threshold. threshold must larger than outlier ratio, since pruning. -->
+	<VMSPConfig>
+		<enable>1</enable>
+		<threshold>0.002, 0.1,0.2</threshold> <!-- outlier ratio: 0.34 (file 6), 0.19 (file 0), 0.0042 (file 4) -->
+		<threshold>0.05, 0.1,0.2</threshold>
+		<maxlength></maxlength>
+		<inputFolder>seqDS</inputFolder>
+		<outputFolder>seqptn</outputFolder>
+	</VMSPConfig>
 	<MMRFSConfig>
+		<enable>1</enable>
 		<basicItemsetsFileName>data\IMEDS\DiabeteComorbidDS\seqDS\seq_drug_ingredient_only_withId.csv</basicItemsetsFileName>
-		<discrimItemsetsFileName>data\IMEDS\DiabeteComorbidDS\seqptn\seq_drug_ingredient_only_0.5_out.txt</discrimItemsetsFileName>
+		<discrimItemsetsFileName>data\IMEDS\DiabeteComorbidDS\seqptn\seq_drug_ingredient_only_0.2_out.txt</discrimItemsetsFileName>
 		<labelDefineThreshold>2.0</labelDefineThreshold>
 		<coverageRate>1</coverageRate>
 		<outlierSource>data\IMEDS\DiabeteComorbidDS\outlier\trainDS_5000_1_0_sol.csv</outlierSource>
-		<outlierThreshold>2</outlierThreshold>
-		<featureItemsetFileName>data\IMEDS\DiabeteComorbidDS\seqptn\seq_drug_ingredient_only_0.5_dsmc.txt</featureItemsetFileName>
+	<!--	<outlierThreshold>2</outlierThreshold>-->
+		<featureItemsetFileName>data\IMEDS\DiabeteComorbidDS\seqptn\seq_drug_ingredient_only_0.2_dsmc.txt</featureItemsetFileName>
 	</MMRFSConfig>
 </root>	

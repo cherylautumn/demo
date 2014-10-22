@@ -5,8 +5,8 @@ public class sampleConfig {
 	private String  sample_label= "None";	
 	private Boolean sample_random = false;
 	private String  sample_range_str;
-	private Integer sample_range_start = 0;
-	private Integer sample_range_end = 500;
+	private Integer sample_range_start = 0; //default
+	private Integer sample_range_end = 500; //default
 	private Boolean sample_append = false;
 	
 	public String getSample_id() {

@@ -23,6 +23,8 @@ import org.imeds.data.ComorbidDataSetWorker;
 import org.imeds.data.common.CCIDictionary;
 import org.imeds.util.ImedDateFormat;
 import org.imeds.util.ImedStringFormat;
+import org.imeds.util.LabelType;
+import org.imeds.util.writeException;
 
 public class ImedDB {
 
@@ -47,7 +49,7 @@ public class ImedDB {
 	            s.execute(); 
 	          
 	     } catch (SQLException e) {
-	            logger.error("Connection Failed! Check output console");
+	            logger.error("Connection Failed! "+writeException.toString(e));
 	            throw e;
 	     }
 	        
@@ -60,7 +62,7 @@ public class ImedDB {
 	            if(stmt != null) stmt.close();
 	            logger.info("Connection closed !!");
 	        } catch (SQLException e) {
-	        	logger.error("connection close fail\n"+e.getMessage());
+	        	logger.error("connection close fail\n"+writeException.toString(e));
 	            
 	        }
 	}  
@@ -90,17 +92,17 @@ public class ImedDB {
 	}
 	
 	
-	public static HashMap<Long, ArrayList<Double>>  getPatientsWithIndexDiagnose(ArrayList<Integer> cptIdList, ArrayList<String> colList, int sample_start, int sample_end, boolean random,  int LabelType) throws Exception{
+	public static HashMap<Long, ArrayList<Double>>  getPatientsWithIndexDiagnose(ArrayList<Integer> cptIdList, ArrayList<String> colList, int sample_start, int sample_end, boolean random,  int Label) throws Exception{
 		String orderCdt="";
 		String labelCdt="";		
 		HashMap<Long, ArrayList<Double>> value = new  HashMap<Long, ArrayList<Double>>();
 
 		
-		switch(LabelType){
-		case ComorbidDataSetWorker.death:
+		switch(Label){
+		case LabelType.death:
 			labelCdt = " WHERE label IS NOT NULL "; //death
 			break;
-		case ComorbidDataSetWorker.alive:
+		case LabelType.alive:
 			labelCdt = " WHERE label IS NULL "; //alive
 			break;
 		default:
@@ -146,8 +148,8 @@ public class ImedDB {
                    ArrayList<Double> tmp = new ArrayList<Double>();
  
                    tmp.add(rs.getDouble("ID"));
-        		   if(rs.getLong("Label")>0) tmp.add((double) ComorbidDataSetWorker.death);  //means death
-                   else tmp.add((double) ComorbidDataSetWorker.alive);
+        		   if(rs.getLong("Label")>0) tmp.add((double) LabelType.death);  //means death
+                   else tmp.add((double) LabelType.alive);
         		   if(colList.contains("Gender")){tmp.add((rs.getDouble("Gender")-8500));}
         		   if(colList.contains("Age")){
             		   Date now = new Date();

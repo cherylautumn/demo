@@ -16,7 +16,7 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 import org.imeds.data.ComorbidDataSetConfig;
-import org.imeds.data.SequenceDataSetConfig;
+import org.imeds.seqmining.SequenceDataSetConfig;
 
 public class ComorbidDSxmlTool implements DocumentTool{ 
 	
@@ -81,32 +81,7 @@ public class ComorbidDSxmlTool implements DocumentTool{
 		
 	}
 	
-	public void parserDoc(String fileName,SequenceDataSetConfig cdsc) {
-		File inputXml = new File(fileName);
-		SAXReader saxReader = new SAXReader();
-		try {
-			Document document = saxReader.read(inputXml);
-			Element L0 = document.getRootElement();
-			for (Iterator L1 = L0.elementIterator(); L1.hasNext();) {
-				Element L1_emt = (Element) L1.next();
-				if(L1_emt.getName().equals("SequenceDataSetConfig")){
-					
-					cdsc.setInputFolder(L1_emt.elementText("inputFolder"));
-					cdsc.setOutputFolder(L1_emt.elementText("outputFolder"));
-					
-				}else{
-					
-				}
-			}
-			
-		} catch (DocumentException e) {
-			System.out.println(e.getMessage());
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
+	
 	public void parserDoc(String fileName) {
 		// TODO Auto-generated method stub
 		

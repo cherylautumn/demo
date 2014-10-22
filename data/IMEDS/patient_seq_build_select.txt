@@ -1,4 +1,4 @@
-select,fileid,count,filename
+select,fileid,oulier_count,filename
 0,10,7399,data\IMEDS\CgstHfComorbidDS\outlier\trainDS_500_10_prol.csv
 1,11,6501,data\IMEDS\CgstHfComorbidDS\outlier\trainDS_5000_10_prol.csv
 0,7,6204,data\IMEDS\CgstHfComorbidDS\outlier\trainDS_10000_10_prol.csv

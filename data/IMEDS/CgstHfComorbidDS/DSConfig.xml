@@ -69,14 +69,6 @@
 		<threshold>-1</threshold><!-- 0: return all result. >0, filter out results which Ri lower than it. -->
 	</PearsonResidualOutlier>
 	
-	<!-- STAGE 3 Transform patient vertical history into horizontal list-->
-	<SequenceDataSetConfig>
-		<!--<inputFolder>data\IMEDS\DiabeteComorbidDS\preSeq</inputFolder>
-		<outputFolder>data\IMEDS\DiabeteComorbidDS\seqDS</outputFolder> -->
-		
-		<inputFolder>preSeq</inputFolder>
-		<outputFolder>seqDS</outputFolder>
-		
-	</SequenceDataSetConfig>
+	
 	 
 </root>

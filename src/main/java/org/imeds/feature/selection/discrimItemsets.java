@@ -6,13 +6,17 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.TreeSet;
 
+import org.imeds.util.LabelType;
+
 public class discrimItemsets implements Comparable<discrimItemsets>{ 
 	public static final int TYPE_INFO_GAIN					= 0001;
 	public static final int TYPE_FISHER_GAIN				= 0002;
 	private basicItemsets<Integer> itemsets = new basicItemsets<Integer>(); 
+	private Integer support;
 	private HashMap<Integer, ArrayList<Long>> inlabelCount = new  HashMap<Integer, ArrayList<Long>>();
 	private HashMap<Integer, ArrayList<Long>> outlabelCount = new  HashMap<Integer, ArrayList<Long>>();
 	private ArrayList<label> datapoints = new ArrayList<label>();
+	private dataPointsStat dpstat = new dataPointsStat();
 	private Double gain;
 	public discrimItemsets() {
 		super();
@@ -62,8 +66,8 @@ public class discrimItemsets implements Comparable<discrimItemsets>{
 		HashMap<Integer, statInfo> class_stat = new HashMap<Integer, statInfo>();
 		statInfo sinfo;
 		for(label lb: this.datapoints){
-			if(!class_stat.containsKey(lb.getClass_id())) class_stat.put(lb.getClass_id(), new statInfo());
-			sinfo = class_stat.get(lb.getClass_id());
+			if(!class_stat.containsKey(lb.getLabel_id())) class_stat.put(lb.getLabel_id(), new statInfo());
+			sinfo = class_stat.get(lb.getLabel_id());
 			sinfo.addCnt();
 			sinfo.addSum(lb.getFeature_v());
 			sinfo.addSumSquare(lb.getFeature_v());
@@ -103,6 +107,41 @@ public class discrimItemsets implements Comparable<discrimItemsets>{
 		this.itemsets = itemsets;
 	}
 
+	public Integer getSupport() {
+		return support;
+	}
+
+	public void setSupport(Integer support) {
+		this.support = support;
+	}
+
+	public dataPointsStat getDpstat() {
+		return dpstat;
+	}
+
+	public void setDpstat(dataPointsStat dpstat) {
+		this.dpstat = dpstat;
+	}
+    
+	public void calDpstat(){
+		int featureN=0;
+		for(label lb: this.getDatapoints()){
+			if(lb.getFeature_v()==LabelType.yesFeature){
+				featureN++;
+				if((lb.getLabel_id()==LabelType.notOutlier) && (lb.getClass_id()==LabelType.alive)){
+					this.dpstat.addLabel0_class1();
+				}else if((lb.getLabel_id()==LabelType.notOutlier) && (lb.getClass_id()==LabelType.death)){
+					this.dpstat.addLabel0_class0();
+				}else if((lb.getLabel_id()==LabelType.yesOutlier) && (lb.getClass_id()==LabelType.alive)) {
+					this.dpstat.addLabel1_class1();
+				}else if((lb.getLabel_id()==LabelType.yesOutlier) && (lb.getClass_id()==LabelType.death)){
+					this.dpstat.addLabel1_class0();
+				}else{
+					
+				}	
+			}
+		}
+	}
 	@Override
 	public String toString() {
 //		return "discrimItemsets [itemsets=" + itemsets.toString() + ", datapoints="

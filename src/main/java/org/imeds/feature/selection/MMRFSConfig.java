@@ -6,7 +6,7 @@ public class MMRFSConfig {
 	private Double labelDefineThreshold;
 	private Double coverageRate;
 	private String outlierSource;
-	private Double outlierThreshold;
+//	private Double outlierThreshold;
 	private String featureItemsetFileName;
 	public MMRFSConfig() {
 		// TODO Auto-generated constructor stub
@@ -54,13 +54,13 @@ public class MMRFSConfig {
 		this.outlierSource = outlierSource;
 	}
 
-	public Double getOutlierThreshold() {
-		return outlierThreshold;
-	}
-
-	public void setOutlierThreshold(Double outlierThreshold) {
-		this.outlierThreshold = outlierThreshold;
-	}
+//	public Double getOutlierThreshold() {
+//		return outlierThreshold;
+//	}
+//
+//	public void setOutlierThreshold(Double outlierThreshold) {
+//		this.outlierThreshold = outlierThreshold;
+//	}
 
 	public String getFeatureItemsetFileName() {
 		return featureItemsetFileName;
@@ -68,6 +68,16 @@ public class MMRFSConfig {
 
 	public void setFeatureItemsetFileName(String featureItemsetFileName) {
 		this.featureItemsetFileName = featureItemsetFileName;
+	}
+
+	@Override
+	public String toString() {
+		return "MMRFSConfig [basicItemsetsFileName=" + basicItemsetsFileName
+				+ "\n, discrimItemsetsFileName=" + discrimItemsetsFileName
+				+ "\n, labelDefineThreshold=" + labelDefineThreshold
+				+ "\n, coverageRate=" + coverageRate + ", outlierSource="
+				+ outlierSource + "\n, featureItemsetFileName="
+				+ featureItemsetFileName + "]";
 	}
 
 }

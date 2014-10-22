@@ -15,12 +15,13 @@ import org.imeds.data.common.CCIcode;
 import org.imeds.db.ImedDB;
 import org.imeds.util.CCIcsvTool;
 import org.imeds.util.ComorbidDSxmlTool;
+import org.imeds.util.LabelType;
 
 
 public class ComorbidDataSetWorker extends Worker {
 
-	public static final int death = 0;
-	public static final int alive = 1;
+	//public static final int death = 0;
+	//public static final int alive = 1;
 	public static final int none = -1;
 	private String configFile="";
 	private ComorbidDataSetConfig cdsc = new ComorbidDataSetConfig();
@@ -53,8 +54,8 @@ public class ComorbidDataSetWorker extends Worker {
 		while (iterSampleCfg.hasNext()) {
 			sampleConfig sc = iterSampleCfg.next().getValue();
 			int sample_label=none;
-			if(sc.getSample_label().trim().equalsIgnoreCase("death")) sample_label=death;
-			if(sc.getSample_label().trim().equalsIgnoreCase("alive")) sample_label=alive;
+			if(sc.getSample_label().trim().equalsIgnoreCase("death")) sample_label=LabelType.death;
+			if(sc.getSample_label().trim().equalsIgnoreCase("alive")) sample_label=LabelType.alive;
 			
 			buildPatientFeature(sc.getSample_range_start(), sc.getSample_range_end(), sc.getSample_random(), sample_label, sc.getSample_append(), withHeader);
 			withHeader=false;

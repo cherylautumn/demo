@@ -7,6 +7,7 @@ import org.imeds.data.ComorbidDataSetWorker;
 import org.imeds.data.common.CCIDictionary;
 import org.imeds.db.ImedDB;
 import org.imeds.util.OSValidator;
+import org.imeds.util.writeException;
 
 
 public class imedsDaemon {
@@ -46,7 +47,7 @@ public class imedsDaemon {
 			ImedDB.connDB(ImedsDaemonConfig.getOmopDbDriver(), ImedsDaemonConfig.getOmopDbUrl(),ImedsDaemonConfig.getOmopDbUser(), ImedsDaemonConfig.getOmopDbPassword(), ImedsDaemonConfig.getOmopDbSearchPath());
 		} catch (Exception e) {
 			logger.error("IMED database connection fail!");
-			logger.error(e.toString());
+			logger.error(writeException.toString(e));
 		}
     }
     public static void DbClose(){

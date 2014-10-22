@@ -6,6 +6,7 @@ import org.imeds.feature.selection.basicItemsets;
 import org.imeds.feature.selection.discrimItemsets;
 import org.imeds.feature.selection.label;
 import org.imeds.feature.selection.labelItemsets;
+import org.imeds.feature.selection.statInfo;
 
 public class spmFuncTest {
 
@@ -74,7 +75,8 @@ public class spmFuncTest {
 		//This function has been verified in data\resultTmp\fisherscoreSimpleVerify.xlsx
 		discrimItemsets f1 = new discrimItemsets();
 		discrimItemsets f2 = new discrimItemsets();
-		
+		discrimItemsets f3 = new discrimItemsets();
+		discrimItemsets f4 = new discrimItemsets();
 		
 		f1.addDatapoints(new label(0,2.0,(long) 1));
 		f1.addDatapoints(new label(0,2.0,(long) 2));
@@ -99,15 +101,69 @@ public class spmFuncTest {
 		f2.addDatapoints(new label(1,0.0,(long) 10));
 		
 		
+		f3.addDatapoints(new label(0,1.0,(long) 1));
+		f3.addDatapoints(new label(0,1.0,(long) 2));
+		f3.addDatapoints(new label(0,1.0,(long) 3));
+		f3.addDatapoints(new label(0,0.0,(long) 4));
+		f3.addDatapoints(new label(0,0.0,(long) 5));
+		f3.addDatapoints(new label(1,1.0,(long) 6));
+		f3.addDatapoints(new label(1,1.0,(long) 7));
+		f3.addDatapoints(new label(1,1.0,(long) 8));
+		f3.addDatapoints(new label(1,1.0,(long) 9));
+		f3.addDatapoints(new label(1,1.0,(long) 10));
+		
+		f4.addDatapoints(new label(0,1.0,(long) 1));
+		f4.addDatapoints(new label(0,0.0,(long) 2));
+		f4.addDatapoints(new label(0,0.0,(long) 3));
+		f4.addDatapoints(new label(0,0.0,(long) 4));
+		f4.addDatapoints(new label(0,0.0,(long) 5));
+		f4.addDatapoints(new label(1,1.0,(long) 6));
+		f4.addDatapoints(new label(1,1.0,(long) 7));
+		f4.addDatapoints(new label(1,0.0,(long) 8));
+		f4.addDatapoints(new label(1,0.0,(long) 9));
+		f4.addDatapoints(new label(1,0.0,(long) 10));
+		
 
 		System.out.println("f1 fisher: "+	f1.getGain(discrimItemsets.TYPE_FISHER_GAIN));
 		System.out.println("f2 fisher: "+	f2.getGain(discrimItemsets.TYPE_FISHER_GAIN));
+		System.out.println("f3 fisher: "+	f3.getGain(discrimItemsets.TYPE_FISHER_GAIN));
+		System.out.println("f4 fisher: "+	f4.getGain(discrimItemsets.TYPE_FISHER_GAIN));
 
+	}
+	
+	public static void statTest(){
+		statInfo si = new statInfo();
+		si.addCnt();
+		si.addSum(96.0);
+		si.addSumSquare(96.0);
+		
+		si.addCnt();
+		si.addSum(90.0);
+		si.addSumSquare(90.0);
+		
+		si.addCnt();
+		si.addSum(85.0);
+		si.addSumSquare(85.0);
+		
+		si.addCnt();
+		si.addSum(78.0);
+		si.addSumSquare(78.0);
+		
+		si.addCnt();
+		si.addSum(92.0);
+		si.addSumSquare(92.0);
+		
+		si.addCnt();
+		si.addSum(67.0);
+		si.addSumSquare(67.0);
+		
+		
+		System.out.println("avg: "+si.getMean()+" var: "+si.getVar()+ " std: "+si.getStd());
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		spmFuncTest.fisherscoreTest();
-		
+		//spmFuncTest.fisherscoreTest();
+		spmFuncTest.statTest();
 		
 	}
 

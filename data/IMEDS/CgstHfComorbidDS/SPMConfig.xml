@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
+	<!-- CgstHfComorbidDS -->
+	<!-- STAGE 3 Transform patient vertical history into horizontal list-->
+	<SequenceDataSetConfig>		
+		<enable>0</enable>
+		<inputFolder>preSeq</inputFolder>
+		<outputFolder>seqDS</outputFolder>		
+	</SequenceDataSetConfig>
+	<!-- STAGE 4 SPM. setting threshold. threshold must larger than outlier ratio, since pruning. -->	
+	<VMSPConfig>
+		<enable>0</enable>
+		<threshold>0.1,0.2</threshold> <!-- outlier ratio: 0.4 (file 11), 0.27 (file 1), 0.00075 (file 9) -->
+		<maxlength></maxlength>
+		<inputFolder>seqDS</inputFolder>
+		<outputFolder>seqptn</outputFolder>
+	</VMSPConfig>
 	<MMRFSConfig>
-		<basicItemsetsFileName>data\IMEDS\DiabeteComorbidDS\seqDS\seq_drug_ingredient_only_withId.csv</basicItemsetsFileName>
-		<discrimItemsetsFileName>data\IMEDS\DiabeteComorbidDS\seqptn\seq_drug_ingredient_only_0.5_out.txt</discrimItemsetsFileName>
-		<labelDefineThreshold>2.0</labelDefineThreshold>
-		<coverageRate>1</coverageRate>
-		<outlierSource>data\IMEDS\DiabeteComorbidDS\outlier\trainDS_5000_1_0_sol.csv</outlierSource>
-		<outlierThreshold>2</outlierThreshold>
-		<featureItemsetFileName>data\IMEDS\DiabeteComorbidDS\seqptn\seq_drug_ingredient_only_0.5_dsmc.txt</featureItemsetFileName>
+	<enable>1</enable>
+		<basicItemsetsFileName>seqDS</basicItemsetsFileName> <!-- patients drug lists-->
+		<discrimItemsetsFileName>seqptn</discrimItemsetsFileName> <!-- patients freq ptn. one drug list may have multiple freq ptn -->
+		<outlierSource>outlier</outlierSource> <!-- patients LR result.-->
+		<labelDefineThreshold>3.0,2.0</labelDefineThreshold> <!--default 3 -->
+		<coverageRate>1</coverageRate>		<!--default 1-->
+		<featureItemsetFileName>seqDsmc</featureItemsetFileName> <!-- outputFolder -->	
 	</MMRFSConfig>
 </root>	

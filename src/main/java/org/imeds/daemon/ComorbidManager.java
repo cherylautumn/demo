@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.imeds.data.ComorbidDataSetWorker;
 import org.imeds.data.PearsonResidualOutlier;
 import org.imeds.data.common.CCIDictionary;
+import org.imeds.util.writeException;
 
 public class ComorbidManager extends ImedsManager {
 	private static CCIDictionary cdt;
@@ -17,7 +18,7 @@ public class ComorbidManager extends ImedsManager {
 			cdt.buildCptMap();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			logger.error("CCIDictionary build fail"+e.getMessage());
+			logger.error("CCIDictionary build fail"+writeException.toString(e));
 		}
 	}
 

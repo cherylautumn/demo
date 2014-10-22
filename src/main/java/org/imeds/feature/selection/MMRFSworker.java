@@ -9,17 +9,26 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+import org.imeds.daemon.ComorbidManager;
 import org.imeds.data.ComorbidDataSetConfig;
 import org.imeds.data.Worker;
 import org.imeds.util.CCIcsvTool;
 import org.imeds.util.ComorbidDSxmlTool;
+import org.imeds.util.LabelType;
 import org.imeds.util.SPMdocTool;
 
 public class MMRFSworker extends Worker {
-	
+	private static Logger logger = Logger.getLogger(MMRFSworker.class);
 	private ArrayList<labelItemsets> labelSeqList = new  ArrayList<labelItemsets>();
 	private ArrayList<discrimItemsets> discrimSeqList = new  ArrayList<discrimItemsets>();
+	
+	//labelList <patientId, label> label is outlier or not
 	private HashMap<Long, Integer> labelList = new HashMap<Long, Integer>();
+	
+	//classList <patientId, class> class is patient actual dead=0 or alive=1
+	private HashMap<Long, Double> classList = new HashMap<Long, Double>();
+
 	private String configFile="";
 	private MMRFSConfig cdsc = new MMRFSConfig();
 	private SPMdocTool cfgparser = new SPMdocTool();
@@ -32,32 +41,42 @@ public class MMRFSworker extends Worker {
 	}
 	public MMRFSworker(String configFile) {
 		this.configFile = configFile;
+		//Init MMRFSConfig
+		this.cfgparser.parserConfigDoc(this.configFile,this.cdsc);
+				
+	}
+	public MMRFSworker(MMRFSConfig cdsc) {
+		this.cdsc = cdsc;
 	}
 
 
 	@Override
 	public void prepare() {
-		// TODO Auto-generated method stub
-		this.cfgparser.parserConfigDoc(this.configFile,this.cdsc);
+		
+		//Read in frequent seq ptn
 		this.cfgparser.parserDiscrimDoc(this.cdsc.getDiscrimItemsetsFileName(), this.discrimSeqList);
-		this.labelList = CCIcsvTool.OutlierParserDoc(this.cdsc.getOutlierSource(),this.cdsc.getOutlierThreshold());
+		
+		//label patient as outlier(1) or not(0)	
+		//get patient actual class. died (0) or alive (1)
+		CCIcsvTool.OutlierClassParserDoc(this.cdsc.getOutlierSource(), this.cdsc.getLabelDefineThreshold(), this.labelList, this.classList);
+		
+		//get patient druglist with pateint id
 		this.cfgparser.parserLabelDoc(this.cdsc.getBasicItemsetsFileName(), this.labelSeqList, this.labelList);
 	}
 
 	@Override
 	public void ready() {
-		// TODO Auto-generated method stub
+		// Calculate fisher gain for each frequent seq ptn
 		
 		for(discrimItemsets dscmset:this.discrimSeqList){
 			for(labelItemsets lbset:this.labelSeqList){
+				//if pateint drug list contain frequent seq ptn, mark as 1.0
 				if(lbset.getItemsets().isContained(dscmset.getItemsets())){					
-//					dscmset.addLabelCount(lbset.getLabel(), lbset.getItemsets().getId(), true);	
-					
-					dscmset.addDatapoints(new label(lbset.getLabel(), 2.0,lbset.getItemsets().getId()));
+					//label: outlier(1) or not(0), feature include(1.0 not include (0), patient id
+					dscmset.addDatapoints(new label(lbset.getLabel(), LabelType.yesFeature,lbset.getItemsets().getId(),this.classList.get(lbset.getItemsets().getId())));
 					
 				}else{
-//					dscmset.addLabelCount(lbset.getLabel(), lbset.getItemsets().getId(), false);
-					dscmset.addDatapoints(new label(lbset.getLabel(), 0.0,lbset.getItemsets().getId()));
+					dscmset.addDatapoints(new label(lbset.getLabel(), LabelType.notFeature,lbset.getItemsets().getId(),this.classList.get(lbset.getItemsets().getId())));
 				}
 			}
 			dscmset.getGain(discrimItemsets.TYPE_FISHER_GAIN);
@@ -67,7 +86,7 @@ public class MMRFSworker extends Worker {
 
 	@Override
 	public void go() {
-		// TODO Auto-generated method stub
+		// Feature selection
 		Collections.sort(this.discrimSeqList, new Comparator<discrimItemsets>(){			 
 			public int compare(discrimItemsets e1, discrimItemsets e2) {
 		        if(e1.getGain() < e2.getGain()){
@@ -95,13 +114,14 @@ public class MMRFSworker extends Worker {
 			discrimItemsets dscmset = this.discrimSeqList.get(i);
 			Boolean isDscmset = isDiscriminative(dscmset,cnt);
 			if(isDscmset){
+				dscmset.calDpstat();
 				this.featureSeqList.add(dscmset);
 			}
 			i++;
 			if((i>=this.discrimSeqList.size())|| (cnt[0]>=this.labelSeqList.size()))break;
 		}
 		
-		System.out.println(this.labelSeqList.size()+"/classify total "+cnt[0]);
+		this.logger.info(i+" discriminative ptn done. "+"total patient sequences: "+this.labelSeqList.size()+"/classify patients "+cnt[0]);
 	}
 
 	public Boolean isDiscriminative(discrimItemsets dscmset, Integer[] cnt){
@@ -115,41 +135,46 @@ public class MMRFSworker extends Worker {
 		        }
 		    }
 		});
+		//Todo: add calculate outlier, not outlier, die, alive
 		
-		Integer[] sca = new Integer[3];
-		sca[0]=0;
-		sca[1]=0;
-		sca[2]=0;
 		for(label lb: dscmset.getDatapoints()){
-			if(lb.getFeature_v()>0.0){
-				sca[0]++;//total data has this feature
-				if(lb.getClass_id()==0)sca[1]++;
-				else sca[2]++;
-				
+			if(lb.getFeature_v()==LabelType.yesFeature){			
 				for(labelItemsets e1:this.labelSeqList){
-					if((e1.getItemsets().getId()==lb.getData_id()) && (e1.getItemsets().getReferenceCount()==0)){
-						//data has not been covered
-						rs = true;
-						e1.getItemsets().increaseReferenceCount();
-						cnt[0]++;
-					}
+					if((e1.getItemsets().getId()==lb.getData_id())){
+						if(e1.getItemsets().getReferenceCount()==0){	
+							//data has not been covered
+							rs = true;
+							cnt[0]++;
+						}
+						e1.getItemsets().increaseReferenceCount();						
+					}					
 				}
 			}
 		}
-		System.out.println(dscmset.getItemsets().toString()+" total: "+sca[0]+" pos: "+sca[1]+" neg: "+sca[2]+ " fisher: "+dscmset.getGain());
+		//System.out.println(dscmset.getItemsets().toString()+" total: "+sca[0]+" normal: "+sca[1]+" outlier: "+sca[2]+ " fisher: "+dscmset.getGain());
 		return rs;
 	}
 
 	@Override
 	public void done() {
+		logger.info(this.cdsc.getFeatureItemsetFileName());
 		this.cfgparser.createFeatureFile(this.cdsc.getFeatureItemsetFileName(), this.featureSeqList);
-//		printNotCoveredSeq();
+		printNotCoveredSeq();
 	}
 	
 	public void printNotCoveredSeq(){
+		int notclassify=0;
 		for(labelItemsets e1:this.labelSeqList){
-			if(e1.getItemsets().getReferenceCount()==0)System.out.println(e1.getItemsets().toString());
+			if(e1.getItemsets().getReferenceCount()==0)
+			{	
+			//	System.out.println(e1.getItemsets().toString());
+				notclassify++;
+			}else if(e1.getItemsets().getReferenceCount()>1){
+				//logger.info(e1.getItemsets().toString());
+			}
+			
 		}
+		logger.info("not be classify: "+notclassify);
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

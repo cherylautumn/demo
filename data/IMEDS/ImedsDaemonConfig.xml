@@ -36,7 +36,7 @@
 		<!-- Stage 3: prepare patient sequential features. From \\preSeq to seqDS -->
 		<seqPtnPrepare>		
 			<folder>data\IMEDS\MiComorbidDS\</folder>	
-			<folder>data\IMEDS\CgstHfComorbidDS\</folder>  		
+			<folder>data\IMEDS\CgstHfComorbidDS\</folder>  
 		</seqPtnPrepare>
 	</expConfig>
 </root>
