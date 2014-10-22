@@ -1,4 +1,4 @@
-notOutlier_Alive,notOutlier_Death,notOutlier_survival_rate,outlier_Alive,outlier_Death,outlier_survival_rate,seq_survival_rate,support,total_patients,fisherScore,seq,,semantic
+notOutlier_Alive,notOutlier_Death,notOutlier_survival_rate,outlier_Alive,outlier_Death,outlier_survival_rate,seq_survival_rate,support,total_patients,fisherScore,seq,semantic
 444.0,475.0,0.48313,17.0,0.0,1,0.49252,936,9110,0.004603875798625111,1125315 -11125315 -11797513 -1 -2,'Acetaminophen' -11125315 -11797513 -1 -2 
 408.0,520.0,0.43966,15.0,0.0,1,0.44857,943,9110,0.0032210611452708642,1125315 -119049105 -11125315 -1 -2,'Acetaminophen' -119049105 -11125315 -1 -2 
 462.0,481.0,0.48993,15.0,0.0,1,0.49791,958,9110,0.0031350837000528086,1125315 -11124957 -11125315 -1 -2,'Acetaminophen' -11124957 -11125315 -1 -2 
