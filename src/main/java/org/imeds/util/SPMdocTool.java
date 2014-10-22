@@ -64,9 +64,9 @@ public class SPMdocTool  implements DocumentTool{
 						 String setstr = ri.toString();
 						 setstr = setstr.substring(setstr.indexOf("[")+1,setstr.indexOf("]")).replace(",","");
 						 
-						 out.write(setstr+" -1");
+						 out.write(setstr+" -1 ");
 					 }
-					 out.write(" -2");
+					 out.write(" -2 ");
 					 out.newLine();
 				}
 		      //Close the output stream
