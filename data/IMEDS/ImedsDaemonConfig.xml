@@ -22,7 +22,7 @@
 		<!-- if spark didn't process pearsonOutlier (<threshold>-1</threshold> threshold setting equal to -1), do it here. -->
 		<!-- Stage 2.2. Calculate pearsonOutlier. This step may need to shift to machines with larger memory -->
 		<pearsonOutlier>
-		<!--	<folder>data\IMEDS\MiComorbidDS\</folder>	
+		<!--	<folder>data\IMEDS\MiComorbidDS\</folder> 
 			<folder>data\IMEDS\CgstHfComorbidDS\</folder> -->
 		</pearsonOutlier>
 		<pearsonOutlierToDB>

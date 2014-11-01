@@ -1,0 +1,21 @@
+'Potassium Chloride' -1 
+'Furosemide' -1 
+'Lisinopril' -1 
+'Cephalexin' -1 
+'Metformin' -1 
+'Albuterol' -1 
+'Hydrocodone' -1 'Acetaminophen' 'Hydrocodone' -1 
+'Acetaminophen' 'Hydrocodone' -1 'Acetaminophen' -1 
+'Acetaminophen' 'Hydrocodone' -1 'Hydrocodone' -1 
+'Ondansetron' -1 
+'Levofloxacin' -1 
+'Dexamethasone' -1 
+'Acetaminophen' -1 'Acetaminophen' 'Hydrocodone' -1 
+'Amoxicillin' -1 
+'Simvastatin' -1 
+'Hydrochlorothiazide' -1 
+'Influenza virus vaccine' -1 
+'Oxycodone' -1 
+'Methylprednisolone' -1 
+'Ciprofloxacin' -1 
+'Azithromycin' -1 

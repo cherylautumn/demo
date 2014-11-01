@@ -56,9 +56,16 @@ public class MMRFSworker extends Worker {
 		//Read in frequent seq ptn
 		this.cfgparser.parserDiscrimDoc(this.cdsc.getDiscrimItemsetsFileName(), this.discrimSeqList);
 		
-		//label patient as outlier(1) or not(0)	
-		//get patient actual class. died (0) or alive (1)
-		CCIcsvTool.OutlierClassParserDoc(this.cdsc.getOutlierSource(), this.cdsc.getLabelDefineThreshold(), this.labelList, this.classList);
+		
+		if(this.cdsc.getLabelBase().equalsIgnoreCase("Ri")){
+			//label patient as outlier(1) or not(0)	
+			//get patient actual class. died (0) or alive (1)
+			CCIcsvTool.OutlierClassParserDoc(this.cdsc.getOutlierSource(), this.cdsc.getLabelDefineThreshold(), this.labelList, this.classList);
+		}else if(this.cdsc.getLabelBase().equalsIgnoreCase("PredictP")){
+			//label patient as better than expected(1) or not(0)	
+			//get patient actual class. died (0) or alive (1)
+			CCIcsvTool.PredictClassParserDoc(this.cdsc.getOutlierSource(), this.cdsc.getLabelDefineThreshold(), this.labelList, this.classList);
+		}
 		
 		//get patient druglist with pateint id
 		this.cfgparser.parserLabelDoc(this.cdsc.getBasicItemsetsFileName(), this.labelSeqList, this.labelList);
@@ -110,7 +117,7 @@ public class MMRFSworker extends Worker {
 		Integer[] cnt= new Integer[1];
 		cnt[0]=0; // total cover
 		
-		while(true){
+		while(this.discrimSeqList.size()>0){
 			discrimItemsets dscmset = this.discrimSeqList.get(i);
 			Boolean isDscmset = isDiscriminative(dscmset,cnt);
 			if(isDscmset){
@@ -158,7 +165,11 @@ public class MMRFSworker extends Worker {
 	@Override
 	public void done() {
 		logger.info(this.cdsc.getFeatureItemsetFileName());
-		this.cfgparser.createFeatureFile(this.cdsc.getFeatureItemsetFileName(), this.featureSeqList);
+		if(this.cdsc.getLabelBase().equalsIgnoreCase("Ri")){
+			this.cfgparser.createFeatureFileRi(this.cdsc.getFeatureItemsetFileName(), this.featureSeqList);
+		}else if(this.cdsc.getLabelBase().equalsIgnoreCase("PredictP")){
+			this.cfgparser.createFeatureFilePredictP(this.cdsc.getFeatureItemsetFileName(), this.featureSeqList);
+		}
 		printNotCoveredSeq();
 	}
 	

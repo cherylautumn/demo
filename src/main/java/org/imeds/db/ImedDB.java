@@ -223,7 +223,7 @@ public class ImedDB {
             	queryStr.append(" SELECT concept_id, concept_name ");
             	queryStr.append(" FROM  vocabulary.concept ");
             	queryStr.append(" WHERE concept_id in ("+cptkeys+")");
-
+            	logger.debug(queryStr.toString());
                    rs = stmt.executeQuery(queryStr.toString());
                    while(rs.next()){
                 	   cptmap.put(rs.getInt("concept_id"), rs.getString("concept_name"));            	   

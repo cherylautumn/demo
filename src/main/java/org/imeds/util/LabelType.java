@@ -7,5 +7,7 @@ public class LabelType {
 	public static final int notOutlier = 0;
 	public static final int alive = 1;
 	public static final int death = 0;
+	public static final int PredictAlive = 1;
+	public static final int PredictDeath = 0;
 	
 }

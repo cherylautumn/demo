@@ -20,7 +20,9 @@
 		<basicItemsetsFileName>seqDS</basicItemsetsFileName> <!-- patients drug lists-->
 		<discrimItemsetsFileName>seqptn</discrimItemsetsFileName> <!-- patients freq ptn. one drug list may have multiple freq ptn -->
 		<outlierSource>outlier</outlierSource> <!-- patients LR result.-->
-		<labelDefineThreshold>3.0,2.0</labelDefineThreshold> <!--default 3 -->
+		<labelBase>PredictP</labelBase> <!-- outputFolder -->	
+		<labelDefineThreshold>0.5</labelDefineThreshold> <!--if labelBase ==PredictP, default 0.5 -->
+		<!--<labelDefineThreshold>3.0,2.0</labelDefineThreshold> if labelBase==ri, default 3 -->
 		<coverageRate>1</coverageRate>		<!--default 1-->
 		<featureItemsetFileName>seqDsmc</featureItemsetFileName> <!-- outputFolder -->	
 	</MMRFSConfig>

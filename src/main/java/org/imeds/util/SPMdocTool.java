@@ -38,7 +38,7 @@ public class SPMdocTool  implements DocumentTool{
 		// TODO Auto-generated method stub
 		
 	}
-	public void createFeatureFile(String fileName, ArrayList<discrimItemsets>  arrayList) {
+	public void createFeatureFileRi(String fileName, ArrayList<discrimItemsets>  arrayList) {
 		
 		FileWriter fstream;
 		try {
@@ -76,7 +76,44 @@ public class SPMdocTool  implements DocumentTool{
 			e.printStackTrace();
 		}
 	}
-	
+	public void createFeatureFilePredictP(String fileName, ArrayList<discrimItemsets>  arrayList) {
+		
+		FileWriter fstream;
+		try {
+			  fstream = new FileWriter(fileName);
+		
+		      BufferedWriter out = new BufferedWriter(fstream);
+		      out.write("Outlier_Predict_Alive,outlier_Death,outlier_Predict_Death,Outlier_Alive,support,total_patients,fisherScore,seq");
+			  out.newLine();
+		      for(discrimItemsets row:arrayList){
+		    	
+			    out.write(row.getDpstat().getLabel1_class0()+","); 		
+			    out.write(row.getDpstat().getLabel0_class0()+","); 
+		    	out.write(row.getDpstat().getLabel0_class1()+","); 
+		    	out.write(row.getDpstat().getLabel1_class1()+","); 	  	
+		    	
+		    	    	
+		    	//out.write(ImedCal.double_format(row.getDpstat().seq_survival_rate(), 5)+","); //Seq_survival_rate
+		    	
+		    	out.write(row.getSupport()+",");
+		    	out.write(row.getDatapoints().size()+",");
+		    	out.write(row.getGain()+",");
+					 for(TreeSet<Integer> ri:row.getItemsets().getItemsets()){
+						 String setstr = ri.toString();
+						 setstr = setstr.substring(setstr.indexOf("[")+1,setstr.indexOf("]")).replace(",","");
+						 
+						 out.write(setstr+" -1 ");
+					 }
+					 out.write(" -2 ");
+					 out.newLine();
+				}
+		      //Close the output stream
+		      out.close();    
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	/********************
 	 *  Read			*	
@@ -139,6 +176,7 @@ public class SPMdocTool  implements DocumentTool{
 					cdsc.setMMRFSdiscrimItemsetsFolder(L1_emt.elementText("discrimItemsetsFileName"));
 					cdsc.setMMRFSoutlierSourceFolder(L1_emt.elementText("outlierSource"));
 					cdsc.setMMRFSfeatureItemsetFolder(L1_emt.elementText("featureItemsetFileName"));
+					cdsc.setMMRFSlabelBase(L1_emt.elementText("labelBase"));
 					
 					String thresholdStr = L1_emt.elementText("labelDefineThreshold");
 					if(thresholdStr !=null && !thresholdStr.trim().equals("")){

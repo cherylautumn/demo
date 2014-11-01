@@ -1,0 +1,25 @@
+Outlier_Predict_Alive,outlier_Death,outlier_Predict_Death,Outlier_Alive,support,total_patients,fisherScore,seq,semantic
+0.0,0.0,8.0,0.0,8,40,0.0,956874 -1 1125315 -1 1125315 -1 956874 -1 1125315 -1  -2 ,'Furosemide' -1 'Acetaminophen' -1 'Acetaminophen' -1 'Furosemide' -1 'Acetaminophen' -1 -2 
+0.0,0.0,8.0,0.0,8,40,0.0,956874 -1 1125315 1174888 -1 956874 -1 1125315 -1  -2 ,'Furosemide' -1 'Acetaminophen' 'Hydrocodone' -1 'Furosemide' -1 'Acetaminophen' -1 -2 
+0.0,0.0,8.0,0.0,8,40,0.0,1125315 -1 1125315 -1 1125315 -1 1125315 -1 1125315 -1  -2 ,'Acetaminophen' -1 'Acetaminophen' -1 'Acetaminophen' -1 'Acetaminophen' -1 'Acetaminophen' -1 -2 
+0.0,0.0,8.0,0.0,8,40,0.0,1125315 -1 1125315 1174888 -1 1124957 -1 1125315 -1  -2 ,'Acetaminophen' -1 'Acetaminophen' 'Hydrocodone' -1 'Oxycodone' -1 'Acetaminophen' -1 -2 
+0.0,0.0,9.0,0.0,9,40,0.0,1125315 -1 1125315 1174888 -1 1125315 1174888 -1  -2 ,'Acetaminophen' -1 'Acetaminophen' 'Hydrocodone' -1 'Acetaminophen' 'Hydrocodone' -1 -2 
+0.0,0.0,8.0,0.0,8,40,0.0,1125315 1174888 -1 1125315 -1 1174888 -1 1125315 -1  -2 ,'Acetaminophen' 'Hydrocodone' -1 'Acetaminophen' -1 'Hydrocodone' -1 'Acetaminophen' -1 -2 
+0.0,0.0,8.0,0.0,8,40,0.0,1125315 1174888 -1 1125315 1174888 -1 1713332 -1  -2 ,'Acetaminophen' 'Hydrocodone' -1 'Acetaminophen' 'Hydrocodone' -1 'Amoxicillin' -1 -2 
+0.0,0.0,8.0,0.0,8,40,0.0,1125315 -1 1125315 1174888 -1 1797513 -1 1154029 -1  -2 ,'Acetaminophen' -1 'Acetaminophen' 'Hydrocodone' -1 'Ciprofloxacin' -1 'Fentanyl' -1 -2 
+0.0,0.0,8.0,0.0,8,40,0.0,1125315 -1 1125315 -1 1125315 -1 1502905 -1 1502905 -1  -2 ,'Acetaminophen' -1 'Acetaminophen' -1 'Acetaminophen' -1 'Insulin. Glargine. Human' -1 'Insulin. Glargine. Human' -1 -2 
+0.0,0.0,8.0,0.0,8,40,0.0,1125315 1174888 -1 1125315 1174888 -1 19121608 -1  -2 ,'Acetaminophen' 'Hydrocodone' -1 'Acetaminophen' 'Hydrocodone' -1 'Influenza virus vaccine' -1 -2 
+0.0,0.0,9.0,0.0,9,40,0.0,1125315 -1 1174888 -1 1174888 -1 1124957 -1  -2 ,'Acetaminophen' -1 'Hydrocodone' -1 'Hydrocodone' -1 'Oxycodone' -1 -2 
+0.0,0.0,9.0,0.0,9,40,0.0,1307046 -1 1125315 -1 1125315 1174888 -1  -2 ,'Metoprolol' -1 'Acetaminophen' -1 'Acetaminophen' 'Hydrocodone' -1 -2 
+0.0,0.0,8.0,0.0,8,40,0.0,1125315 -1 1713332 -1 956874 -1 1125315 -1  -2 ,'Acetaminophen' -1 'Amoxicillin' -1 'Furosemide' -1 'Acetaminophen' -1 -2 
+0.0,0.0,8.0,0.0,8,40,0.0,1125315 -1 1125315 -1 956874 -1 19049105 -1  -2 ,'Acetaminophen' -1 'Acetaminophen' -1 'Furosemide' -1 'Potassium Chloride' -1 -2 
+0.0,0.0,8.0,0.0,8,40,0.0,956874 -1 956874 -1 956874 -1  -2 ,'Furosemide' -1 'Furosemide' -1 'Furosemide' -1 -2 
+0.0,0.0,9.0,0.0,9,40,0.0,974166 -1 1125315 -1 1174888 -1  -2 ,'Hydrochlorothiazide' -1 'Acetaminophen' -1 'Hydrocodone' -1 -2 
+0.0,0.0,8.0,0.0,8,40,0.0,1307046 -1 1308216 -1 956874 -1  -2 ,'Metoprolol' -1 'Lisinopril' -1 'Furosemide' -1 -2 
+0.0,0.0,8.0,0.0,8,40,0.0,1125315 -1 1742253 -1 19121608 -1  -2 ,'Acetaminophen' -1 'Levofloxacin' -1 'Influenza virus vaccine' -1 -2 
+0.0,0.0,8.0,0.0,8,40,0.0,708298 -1 708298 -1  -2 ,'Midazolam' -1 'Midazolam' -1 -2 
+0.0,0.0,9.0,0.0,9,40,0.0,956874 -1 1742253 -1  -2 ,'Furosemide' -1 'Levofloxacin' -1 -2 
+0.0,0.0,8.0,0.0,8,40,0.0,1517740 -1 19001311 -1  -2 ,'paricalcitol' -1 'epoetin beta' -1 -2 
+0.0,0.0,8.0,0.0,8,40,0.0,19055720 -1 19055720 -1  -2 ,'HEPARIN. BEEF' -1 'HEPARIN. BEEF' -1 -2 
+0.0,0.0,10.0,0.0,10,40,0.0,586413 -1  -2 ,'pneumococcal polysaccharides (23)' -1 -2 
+0.0,0.0,8.0,0.0,8,40,0.0,791967 -1  -2 ,'Lorazepam' -1 -2 

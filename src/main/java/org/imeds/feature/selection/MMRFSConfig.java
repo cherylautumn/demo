@@ -3,6 +3,7 @@ package org.imeds.feature.selection;
 public class MMRFSConfig {
 	private String basicItemsetsFileName;
 	private String discrimItemsetsFileName;
+	private String labelBase;
 	private Double labelDefineThreshold;
 	private Double coverageRate;
 	private String outlierSource;
@@ -26,6 +27,14 @@ public class MMRFSConfig {
 
 	public void setDiscrimItemsetsFileName(String discrimItemsetsFileName) {
 		this.discrimItemsetsFileName = discrimItemsetsFileName;
+	}
+
+	public String getLabelBase() {
+		return labelBase;
+	}
+
+	public void setLabelBase(String labelBase) {
+		this.labelBase = labelBase;
 	}
 
 	public Double getLabelDefineThreshold() {

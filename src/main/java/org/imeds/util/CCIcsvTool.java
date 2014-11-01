@@ -245,7 +245,7 @@ public class CCIcsvTool implements DocumentTool{
 	public static HashMap<Long,Integer> OutlierParserDoc(String fileName) {
 		return OutlierParserDoc(fileName, 0.0);
 	}
-	
+	//discriminative set is normal and outlier
 	public static void OutlierClassParserDoc(String fileName, Double threshold, HashMap<Long, Integer> labelList, HashMap<Long, Double> classList) {
 		
 		 CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
@@ -258,8 +258,40 @@ public class CCIcsvTool implements DocumentTool{
 		        for(CSVRecord record : parser){
 		        	Long id = Long.parseLong(record.get("Id"));
 		        	//FIXME: OUTLIERS IN THIS SET MAY NOT HAVE DRUG SEQ PTN 
+		        	
 		        	if( Double.parseDouble(record.get("Ri"))>=threshold)labelList.put(id, LabelType.yesOutlier);
 		        	else labelList.put(id, LabelType.notOutlier);
+		        	
+		        	
+		        	classList.put(id, Double.parseDouble(record.get("TrainP")));
+		        }
+		        //close the parser
+		        parser.close();
+		     //   System.out.println(codeList);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+	}
+	//discriminate set is better than expected and worse than expected
+	public static void PredictClassParserDoc(String fileName, Double threshold, HashMap<Long, Integer> labelList, HashMap<Long, Double> classList) {
+		
+		 CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
+        
+	        //initialize the CSVParser object
+	        CSVParser parser;
+			try {
+				parser = new CSVParser(new FileReader(fileName), format);
+				
+		        for(CSVRecord record : parser){
+		        	Long id = Long.parseLong(record.get("Id"));
+		        	//FIXME: OUTLIERS IN THIS SET MAY NOT HAVE DRUG SEQ PTN 
+		        	if( Double.parseDouble(record.get("PredictP"))>=threshold)labelList.put(id, LabelType.PredictAlive);
+		        	else labelList.put(id, LabelType.PredictDeath);
 		        	
 		        	
 		        	classList.put(id, Double.parseDouble(record.get("TrainP")));

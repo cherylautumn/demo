@@ -1,0 +1,95 @@
+'Furosemide' -1 'Furosemide' -1 
+'Hydrocodone' -1 'Acetaminophen' -1 'Amoxicillin' -1 
+'Acetaminophen' -1 'Furosemide' -1 
+'Acetaminophen' -1 'Lisinopril' -1 
+'Acetaminophen' -1 'Acetaminophen' -1 'Amoxicillin' -1 
+'Acetaminophen' -1 'Hydrocodone' -1 'Amoxicillin' -1 
+'Sodium Chloride' 'POLYETHYLENE GLYCOL 3350' -1 
+'Furosemide' -1 'Acetaminophen' -1 
+'Acetaminophen' -1 'Acetaminophen' -1 'Hydrocodone' -1 'Hydrocodone' -1 
+'Acetaminophen' -1 'Hydrocodone' -1 'Hydrocodone' -1 'Acetaminophen' -1 
+'Cephalexin' -1 'Acetaminophen' -1 
+'Acetaminophen' -1 'Hydrocodone' -1 'Acetaminophen' -1 'Acetaminophen' -1 
+'Potassium Chloride' -1 'Hydrocodone' -1 
+'Acetaminophen' -1 'Cephalexin' -1 
+'Hydrocodone' -1 'Hydrocodone' -1 'Acetaminophen' -1 'Hydrocodone' -1 
+'Amlodipine' -1 
+'Hydrocodone' -1 'Amoxicillin' -1 'Hydrocodone' -1 
+'Codeine' -1 'Acetaminophen' -1 
+'Hydrocodone' -1 'Furosemide' -1 
+'Lisinopril' -1 'Lisinopril' -1 
+'Lisinopril' -1 'Hydrocodone' -1 
+'Lisinopril' -1 'Acetaminophen' -1 
+'Hydrocodone' -1 'Amoxicillin' -1 'Acetaminophen' -1 
+'Acetaminophen' 'Hydrocodone' -1 'Amoxicillin' -1 
+'Acetaminophen' -1 'Amoxicillin' -1 'Acetaminophen' -1 
+'cyclobenzaprine' -1 
+'Amoxicillin' -1 'Acetaminophen' 'Hydrocodone' -1 
+'Tramadol' -1 
+'Levofloxacin' -1 'Hydrocodone' -1 
+'Hydrocodone' -1 'Cephalexin' -1 
+'Acetaminophen' 'Hydrocodone' -1 'Potassium Chloride' -1 
+'Acetaminophen' -1 'Azithromycin' -1 'Acetaminophen' -1 
+'Albuterol' -1 'Acetaminophen' -1 
+'Amoxicillin' -1 'Amoxicillin' -1 
+'Metoprolol' -1 'Acetaminophen' -1 
+'Amoxicillin' -1 'Influenza virus vaccine' -1 
+'Acetaminophen' -1 'Codeine' -1 
+'fluticasone' -1 
+'Acetaminophen' -1 'Acetaminophen' -1 'Azithromycin' -1 
+'Dexamethasone' -1 'Acetaminophen' -1 
+'Metformin' -1 'Metformin' -1 'Metformin' -1 
+'atorvastatin' -1 
+'Potassium Chloride' -1 'Acetaminophen' -1 
+'Lidocaine' -1 
+'Acetaminophen' 'Hydrocodone' -1 'Influenza virus vaccine' -1 
+'Acetaminophen' -1 'Promethazine' -1 
+'Guaifenesin' -1 
+'Acetaminophen' -1 'Albuterol' -1 
+'Hydrocodone' -1 'Dexamethasone' -1 
+'Acetaminophen' -1 'Trimethoprim' 'Sulfamethoxazole' -1 
+'Metformin' -1 'Azithromycin' -1 
+'Levofloxacin' -1 'Acetaminophen' -1 
+'Hydrochlorothiazide' -1 'Hydrochlorothiazide' -1 
+'Metformin' -1 'Acetaminophen' 'Hydrocodone' -1 
+'Acetaminophen' 'Hydrocodone' -1 'Acetaminophen' 'Hydrocodone' -1 'Acetaminophen' 'Hydrocodone' -1 
+'Acetaminophen' -1 'Dexamethasone' -1 
+'Ciprofloxacin' -1 'Acetaminophen' -1 
+'Midazolam' 'Fentanyl' -1 
+'Triamcinolone' -1 
+'Hydrochlorothiazide' -1 'Acetaminophen' 'Hydrocodone' -1 
+'Azithromycin' -1 'Amoxicillin' -1 
+'Fluconazole' -1 
+'Hydrocodone' -1 'Ondansetron' -1 
+'Acetaminophen' 'Hydrocodone' -1 'Metformin' -1 
+'zolpidem' -1 
+'Alprazolam' -1 
+'Metformin' -1 'Influenza virus vaccine' -1 
+'Diphenhydramine' -1 
+'Omeprazole' -1 
+'Ibuprofen' -1 
+'Influenza virus vaccine' -1 'Acetaminophen' 'Hydrocodone' -1 
+'Hydrochlorothiazide' -1 'Metformin' -1 
+'Metronidazole' -1 
+'Acetaminophen' -1 'Ondansetron' -1 
+'Metformin' -1 'Amoxicillin' -1 
+'Amoxicillin' -1 'Azithromycin' -1 
+'Doxycycline' -1 
+'Oxycodone' 'Acetaminophen' -1 
+'Hydrocodone' -1 'Hydrochlorothiazide' -1 
+'Ketorolac' -1 
+'Insulin, Glargine, Human' -1 
+'Lorazepam' -1 
+'Acetaminophen' 'Hydrocodone' -1 'Azithromycin' -1 
+'Hydrocortisone' -1 
+'gabapentin' -1 
+'Azithromycin' -1 'Azithromycin' -1 
+'Simvastatin' -1 'Simvastatin' -1 
+'pneumococcal polysaccharides (23)' -1 
+'Morphine' -1 
+'HEPARIN, BEEF' -1 
+'Influenza virus vaccine' -1 'Influenza virus vaccine' -1 
+'Metoclopramide' -1 
+'Acetaminophen' -1 'Methylprednisolone' -1 
+'Thyroxine' -1 
+'Methylprednisolone' -1 'Acetaminophen' -1 

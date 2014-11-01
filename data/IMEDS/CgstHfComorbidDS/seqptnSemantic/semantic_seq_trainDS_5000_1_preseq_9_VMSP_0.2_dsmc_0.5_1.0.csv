@@ -1,0 +1,8 @@
+Outlier_Predict_Alive,outlier_Death,outlier_Predict_Death,Outlier_Alive,support,total_patients,fisherScore,seq,semantic
+0.0,0.0,3.0,0.0,3,12,0.0,956874 970250 -1 904453 -1 956874 -1 956874 -1 939976 967823 986417 19049105 -1  -2 ,'Furosemide' 'Spironolactone' -1 'Esomeprazole' -1 'Furosemide' -1 'Furosemide' -1 'sodium sulfate' 'Sodium Chloride' 'POLYETHYLENE GLYCOL 3350' 'Potassium Chloride' -1 -2 
+0.0,0.0,3.0,0.0,3,12,0.0,956874 -1 956874 -1 1174888 -1 970250 -1 987245 -1 903963 -1  -2 ,'Furosemide' -1 'Furosemide' -1 'Hydrocodone' -1 'Spironolactone' -1 'Lactulose' -1 'Triamcinolone' -1 -2 
+0.0,0.0,3.0,0.0,3,12,0.0,1174888 -1 1125315 1174888 -1 956874 -1 956874 -1 956874 -1  -2 ,'Hydrocodone' -1 'Acetaminophen' 'Hydrocodone' -1 'Furosemide' -1 'Furosemide' -1 'Furosemide' -1 -2 
+0.0,0.0,3.0,0.0,3,12,0.0,1154343 -1 1551099 -1 1551099 -1 956874 -1 956874 -1  -2 ,'Albuterol' -1 'Prednisone' -1 'Prednisone' -1 'Furosemide' -1 'Furosemide' -1 -2 
+0.0,0.0,3.0,0.0,3,12,0.0,939506 939976 967823 986417 19049105 -1  -2 ,'Sodium Bicarbonate' 'sodium sulfate' 'Sodium Chloride' 'POLYETHYLENE GLYCOL 3350' 'Potassium Chloride' -1 -2 
+0.0,0.0,3.0,0.0,3,12,0.0,923645 -1 923645 -1 956874 -1  -2 ,'Omeprazole' -1 'Omeprazole' -1 'Furosemide' -1 -2 
+0.0,0.0,3.0,0.0,3,12,0.0,19136030 -1  -2 ,'Saline Solution. Hypertonic' -1 -2 

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<!-- MiComorbidDS -->
+	<!-- STAGE 3 Transform patient vertical history into horizontal list-->
+	<SequenceDataSetConfig>		
+		<enable>0</enable>
+		<inputFolder>preSeq</inputFolder>
+		<outputFolder>seqDS</outputFolder>		
+	</SequenceDataSetConfig>
+	<!-- STAGE 4 SPM. setting threshold. threshold must larger than outlier ratio, since pruning. -->
+	<VMSPConfig>
+		<enable>0</enable>
+		<threshold>0.1,0.2</threshold> <!-- outlier ratio: 0.34 (file 6), 0.19 (file 0), 0.0042 (file 4) -->		
+		<maxlength></maxlength>
+		<inputFolder>seqDS</inputFolder>
+		<outputFolder>seqptn</outputFolder>
+	</VMSPConfig>
+	<MMRFSConfig>
+		<enable>0</enable>
+		<basicItemsetsFileName>seqDS</basicItemsetsFileName> <!-- patients drug lists-->
+		<discrimItemsetsFileName>seqptn</discrimItemsetsFileName> <!-- patients freq ptn. one drug list may have multiple freq ptn -->
+		<outlierSource>outlier</outlierSource> <!-- patients LR result.-->
+		<labelDefineThreshold>3.0,2.0</labelDefineThreshold> <!--default 3 -->
+		<coverageRate>1</coverageRate>		<!--default 1-->
+		<featureItemsetFileName>seqDsmc</featureItemsetFileName> <!-- outputFolder -->	
+	</MMRFSConfig>
+</root>	

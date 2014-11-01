@@ -19,6 +19,7 @@ public class SequenceDataSetConfig {
 	private String MMRFSbasicItemsetsFolder;
 	private String MMRFSdiscrimItemsetsFolder;
 	private String MMRFSoutlierSourceFolder;
+	private String MMRFSlabelBase;
 	private ArrayList<Double> MMRFSlabelDefineThreshold = new ArrayList<Double>();
 	private ArrayList<Double> MMRFScoverage = new ArrayList<Double>();		
 	private String MMRFSfeatureItemsetFolder;
@@ -165,6 +166,14 @@ public class SequenceDataSetConfig {
 
 	public SequenceDataSetConfig() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public String getMMRFSlabelBase() {
+		return MMRFSlabelBase;
+	}
+
+	public void setMMRFSlabelBase(String mMRFSlabelBase) {
+		MMRFSlabelBase = mMRFSlabelBase;
 	}
 
 }

@@ -256,6 +256,7 @@ public class SequenceDataSetWorker extends Worker {
 										mfcg.setOutlierSource(oulierSourceFileName);
 										mfcg.setDiscrimItemsetsFileName(discrimItemsetsFileName);
 										mfcg.setFeatureItemsetFileName(featureItemsesFilename);
+										mfcg.setLabelBase(this.cdsc.getMMRFSlabelBase());
 										mfcg.setLabelDefineThreshold(thrd);
 										mfcg.setCoverageRate(cvg);
 										cfgList.add(mfcg);

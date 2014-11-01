@@ -1,0 +1,21 @@
+'Influenza virus vaccine' -1 1221 
+'Potassium Chloride' -1 955 
+'Ciprofloxacin' -1 827 
+'Cephalexin' -1 747 
+'Levofloxacin' -1 793 
+'Azithromycin' -1 1062 
+'Amoxicillin' -1 1181 
+'Simvastatin' -1 736 
+'Dexamethasone' -1 828 
+'Methylprednisolone' -1 809 
+'Metformin' -1 1276 
+'Lisinopril' -1 867 
+'Albuterol' -1 744 
+'Oxycodone' -1 744 
+'Ondansetron' -1 768 
+'Hydrochlorothiazide' -1 894 
+'Furosemide' -1 792 
+'Acetaminophen' 'Hydrocodone' -1 'Hydrocodone' -1 753 
+'Hydrocodone' -1 'Acetaminophen' 'Hydrocodone' -1 746 
+'Acetaminophen' 'Hydrocodone' -1 'Acetaminophen' -1 822 
+'Acetaminophen' -1 'Acetaminophen' 'Hydrocodone' -1 807 
