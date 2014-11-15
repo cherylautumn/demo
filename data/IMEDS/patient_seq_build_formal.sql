@@ -14,23 +14,15 @@ set search_path to ccae_cdm4;
 
 select * from ucla.LrOutlierfile
 
-select * from ucla.lroutliers where fileid = 11 limit 10;
+select predict, count(*) from (
+select *, case when predictp >=0.5 then 1
+							 when predictp <0.5  then 0 end as predict, case when ri>=3 then 1 when ri<3 then 0 end as outlier
+from ucla.lroutliers 
+where fileid = 13 )
+where outlier = 0
+group by predict
+limit 10;
 
-select id, count(*) from ucla.lroutliers 
-where fileid = 9
-group by id
-having count(*) > 0
-
-select *  from ucla.lroutliers where fileid = 11;
-select * from ucla.lroutliers where fileid = 9;
-
-select o11.id, o9.id
-from ucla.lroutliers o9 full outer join ucla.lroutliers o11 on o9.id = o11.id
-where o9.fileid = 9 and o11.fileid = 11;
-
-select *
-from ucla.lroutliers o11 left outer join ucla.lroutliers o9 on o9.id = o11.id
-where o9.fileid = 9 and o11.fileid = 11
 
 -----generate outlier patient drug sequence
 set search_path to ccae_cdm4;
