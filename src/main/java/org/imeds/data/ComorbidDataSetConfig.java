@@ -13,9 +13,13 @@ public class ComorbidDataSetConfig extends DataSetConfig {
 	private String pearsonResidualOutlierInputFolder;
 	private String pearsonResidualOutlierOutputFolder;
 	private Double pearsonResidualThreshold;
+	private Double chiSqrtThreshold;
 	private ArrayList<String> sparkLRmodelParas = new ArrayList<String>();
 	private ArrayList<String> sparkLRmodelDataSets = new ArrayList<String>();
 
+	private ArrayList<String> fittedSparkLRmodelParas = new ArrayList<String>();
+	private String preseqOutputFolder;
+	private Double outlierThreshold;
 	
 	public ArrayList<String> getIndex_diagnoses() {
 		return index_diagnoses;
@@ -89,6 +93,14 @@ public class ComorbidDataSetConfig extends DataSetConfig {
 		this.pearsonResidualThreshold = pearsonResidualThreshold;
 	}
 
+	public Double getChiSqrtThreshold() {
+		return chiSqrtThreshold;
+	}
+
+	public void setChiSqrtThreshold(Double chiSqrtThreshold) {
+		this.chiSqrtThreshold = chiSqrtThreshold;
+	}
+
 	public ArrayList<String> getSparkLRmodelParas() {
 		return sparkLRmodelParas;
 	}
@@ -113,6 +125,35 @@ public class ComorbidDataSetConfig extends DataSetConfig {
 			this.sparkLRmodelDataSets.add(ele.getText());			
 		}
 	}
+	
+	public ArrayList<String> getFittedSparkLRmodelParas() {
+		return fittedSparkLRmodelParas;
+	}
+
+	public void setFittedSparkLRmodelParas(ArrayList<String> fittedSparkLRmodelParas) {
+		this.fittedSparkLRmodelParas = fittedSparkLRmodelParas;
+	}
+	public void setFittedSparkLRmodelParas(List<Element> colList) {
+		for(Element ele: colList){
+			this.fittedSparkLRmodelParas.add(ele.getText());			
+		}
+	}
+	public String getPreseqOutputFolder() {
+		return preseqOutputFolder;
+	}
+
+	public void setPreseqOutputFolder(String preseqOutputFolder) {
+		this.preseqOutputFolder = preseqOutputFolder;
+	}
+
+	public Double getOutlierThreshold() {
+		return outlierThreshold;
+	}
+
+	public void setOutlierThreshold(Double outlierThreshold) {
+		this.outlierThreshold = outlierThreshold;
+	}
+
 	public ComorbidDataSetConfig() {
 		// TODO Auto-generated constructor stub
 	}

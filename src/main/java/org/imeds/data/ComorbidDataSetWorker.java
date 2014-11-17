@@ -25,8 +25,8 @@ public class ComorbidDataSetWorker extends Worker {
 	public static final int none = -1;
 	private String configFile="";
 	private ComorbidDataSetConfig cdsc = new ComorbidDataSetConfig();
-	private ComorbidDSxmlTool cfgparser = new ComorbidDSxmlTool();
-	private CCIcsvTool csvparser = new CCIcsvTool();
+	protected ComorbidDSxmlTool cfgparser = new ComorbidDSxmlTool();
+	protected CCIcsvTool csvparser = new CCIcsvTool();
 
 	private HashMap<Integer,Integer> featureIdx = new HashMap<Integer, Integer>();
 	private CCIDictionary ccid;
@@ -37,17 +37,51 @@ public class ComorbidDataSetWorker extends Worker {
 		this.ccid = ccid;
 	}
 
+	public ComorbidDataSetConfig getCdsc() {
+		return cdsc;
+	}
+
+	public void setCdsc(ComorbidDataSetConfig cdsc) {
+		this.cdsc = cdsc;
+	}
+
+	public CCIDictionary getCcid() {
+		return ccid;
+	}
+
+	public void setCcid(CCIDictionary ccid) {
+		this.ccid = ccid;
+	}
+
+	public ComorbidDSxmlTool getCfgparser() {
+		return cfgparser;
+	}
+
+	public void setCfgparser(ComorbidDSxmlTool cfgparser) {
+		this.cfgparser = cfgparser;
+	}
+
+	public CCIcsvTool getCsvparser() {
+		return csvparser;
+	}
+
+	public void setCsvparser(CCIcsvTool csvparser) {
+		this.csvparser = csvparser;
+	}
+
 	@Override
 	public void prepare() {
 		//Initialize config file
 		this.cfgparser.parserDoc(this.configFile,this.cdsc);
 		
-		//Map DeyoCCI ID to my config col id
-		MapFeature();
+		
 	}
 
 	@Override
 	public void ready() {
+		//Map DeyoCCI ID to my config col id
+		MapFeature();
+		
 		Iterator<Entry<String, sampleConfig>> iterSampleCfg = this.cdsc.getSample_sets().entrySet().iterator();
 		//FIXME: not sure whether to generate header or not
 		boolean withHeader=false;
@@ -138,13 +172,14 @@ public class ComorbidDataSetWorker extends Worker {
 				this.featureIdx.put(codeList.get(colList.get(i).trim()).getID(), i);			
 			}
 		}
-		
+		/*
 		Iterator iter = featureIdx.entrySet().iterator(); 
 		while (iter.hasNext()) { 
 		    Map.Entry entry = (Map.Entry) iter.next(); 
 		    Object key = entry.getKey(); 
 		    Object val = entry.getValue(); 	
 		} 
+		*/
 		
 	}
 }

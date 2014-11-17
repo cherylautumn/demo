@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.imeds.data.ComorbidDataSetWorker;
 import org.imeds.data.PearsonResidualOutlier;
 import org.imeds.data.common.CCIDictionary;
+import org.imeds.seqmining.ComorbidDrugDataSetWorker;
 import org.imeds.util.writeException;
 
 public class ComorbidManager extends ImedsManager {
@@ -34,8 +35,7 @@ public class ComorbidManager extends ImedsManager {
 		if(ImedsDaemonConfig.getPearsonOutlierExpFolders().size()>0){
 			for(String folderP:ImedsDaemonConfig.getPearsonOutlierExpFolders()){
 				logger.info("Processing PearsonOutlierGen: "+folderP);
-				PearsonResidualOutlier prlo = new PearsonResidualOutlier();				
-				prlo = new PearsonResidualOutlier(folderP+DSConfig);
+				PearsonResidualOutlier prlo = new PearsonResidualOutlier(folderP+DSConfig);
 				prlo.oulierGen();
 				prlo = null;
 			}
@@ -44,10 +44,20 @@ public class ComorbidManager extends ImedsManager {
 		if(ImedsDaemonConfig.getPearsonOutlierToDB().size()>0){
 			for(String folderP:ImedsDaemonConfig.getPearsonOutlierToDB()){
 				logger.info("Processing Pearson Outlier To DB: "+folderP);
-				PearsonResidualOutlier prlo = new PearsonResidualOutlier();				
-				prlo = new PearsonResidualOutlier(folderP+DSConfig);
+				PearsonResidualOutlier prlo =  new PearsonResidualOutlier(folderP+DSConfig);
 //				prlo.oulierGen();
 				prlo.writeOulierToDB();
+				prlo = null;
+			}
+		}
+		
+		//Stage 2.4. Generate outlier seqPre dataset
+		if(ImedsDaemonConfig.getSeqPtnPrepareFolders().size()>0){
+			for(String folderP:ImedsDaemonConfig.getSeqPtnPrepareFolders()){
+				logger.info("Processing Pearson Outlier To DB: "+folderP);
+				ComorbidDrugDataSetWorker prlo = new ComorbidDrugDataSetWorker(folderP+DSConfig, cdt);	
+				prlo.prepare();
+				prlo.ready();
 				prlo = null;
 			}
 		}
@@ -55,7 +65,11 @@ public class ComorbidManager extends ImedsManager {
 	public void GenPatientFeature(){
 		for(String folderP:ImedsDaemonConfig.getPatientFeatureExpFolders()){
 			logger.info("Processing GenPatientFeature: "+folderP);
-			createtrainDS(folderP);
+			//createtrainDS(folderP);
+			ComorbidDataSetWorker cdsw = new ComorbidDataSetWorker(folderP+DSConfig, cdt);
+    		cdsw.prepare();
+    		cdsw.ready();
+    		cdsw.go();
 			
 		}
 	}

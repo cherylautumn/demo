@@ -26,6 +26,7 @@ public class ImedsDaemonConfig {
 	 private static ArrayList<String> patientFeatureExpFolders = new ArrayList<String>();  	
 	 private static ArrayList<String> pearsonOutlierExpFolders = new ArrayList<String>();  
 	 private static ArrayList<String> pearsonOutlierToDB = new ArrayList<String>(); 
+	 private static ArrayList<String> preSeqDsPrepareFolders = new ArrayList<String>();
 	 private static ArrayList<String> seqPtnPrepareFolders = new ArrayList<String>();
 	 private static Integer flush;
 	 public static String getOmopDbName() {
@@ -135,6 +136,9 @@ public class ImedsDaemonConfig {
 					else flush = 1;
 					expList = L1_emt.element("seqPtnPrepare").elements("folder");
 					getFolderList(expList,seqPtnPrepareFolders);
+					
+					expList = L1_emt.element("preSeqDsPrepare").elements("folder");
+					getFolderList(expList,preSeqDsPrepareFolders);
 					
 //					for(Element ele: expList){
 //						String folderName=ele.getText();

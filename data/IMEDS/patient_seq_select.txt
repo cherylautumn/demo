@@ -1,20 +1,51 @@
 select,fileid,cnt,filename
 
-1,8,8,data\IMEDS\CgstHfComorbidDS\outlier\trainDS_10000_1_prol.csv
+0,8,8,data\IMEDS\CgstHfComorbidDS\outlier\trainDS_10000_1_prol.csv
 1,13,1784,data\IMEDS\CgstHfComorbidDS\outlier\trainDS_2000_1_prol.csv
 1,9,12,data\IMEDS\CgstHfComorbidDS\outlier\trainDS_5000_1_prol.csv
-1,1,4396,data\IMEDS\CgstHfComorbidDS\outlier\trainDS_500_1_prol.csv
+0,1,4396,data\IMEDS\CgstHfComorbidDS\outlier\trainDS_500_1_prol.csv
 0,7,6204,data\IMEDS\CgstHfComorbidDS\outlier\trainDS_10000_10_prol.csv
 0,11,6501,data\IMEDS\CgstHfComorbidDS\outlier\trainDS_5000_10_prol.csv
 0,10,7399,data\IMEDS\CgstHfComorbidDS\outlier\trainDS_500_10_prol.csv
 
+Chi 16277, only fileid in (8, 9) pass the significant test.
+Chi-8 <16277
+Chi-9 >16277 but only larger than a little.
+So, the exp results generated from file id 8, 9 are effective.
+1. maybe need to relax threshold from 3 to 2 in order to pick more outliers under fitted model.
+2. maybe need to try GSPR to find out more outliers.
+3. Fitted model must be trained larger than 5000 times.
+fileid	sum
+8	16086.06
+9	16366.68
+13	49764.53
+1	11006208.03
+7	34208006544203.3
+10	429956416355777540
+11	1519731572805094910
 
 
 1,3,40,data\IMEDS\MiComorbidDS\outlier\trainDS_10000_1_prol.csv
 1,12,74,data\IMEDS\MiComorbidDS\outlier\trainDS_2000_1_prol.csv
 1,4,42,data\IMEDS\MiComorbidDS\outlier\trainDS_5000_1_prol.csv
-1,0,1972,data\IMEDS\MiComorbidDS\outlier\trainDS_500_1_prol.csv
+0,0,1972,data\IMEDS\MiComorbidDS\outlier\trainDS_500_1_prol.csv
 0,2,3183,data\IMEDS\MiComorbidDS\outlier\trainDS_10000_10_prol.csv
 0,6,3474,data\IMEDS\MiComorbidDS\outlier\trainDS_5000_10_prol.csv
 0,5,4060,data\IMEDS\MiComorbidDS\outlier\trainDS_500_10_prol.csv
 
+
+Chi 10215 only fileid in (3, 4) pass the significant test.
+Chi-3 <10215
+Chi-4 >10215 but only larger than a little.
+So, the exp results generated from file id 3, 4 are effective.
+1. maybe need to relax threshold from 3 to 2 in order to pick more outliers under fitted model.
+2. maybe need to try GSPR to find out more outliers.
+
+fileid	sum
+3	10178.51
+4	10227.02
+12	11164.38
+0	1268275.44
+2	27159945.98
+6	2632950548.94
+5	306800028681924290

@@ -26,6 +26,7 @@ import org.apache.spark.mllib.linalg.Vectors;
 import org.apache.spark.mllib.regression.LabeledPoint;
 import org.imeds.data.SparkLRDataSetWorker.DataPoint;
 import org.imeds.data.common.CCIcode;
+import org.imeds.data.common.seqItemPair;
 import org.imeds.db.ImedDB;
 
 import ca.pfv.spmf.algorithms.sequentialpatterns.prefixSpan_AGP.items.Itemset;
@@ -90,6 +91,39 @@ public class CCIcsvTool implements DocumentTool{
 				 printer.print(entry.getValue().get(1));
 				 printer.print(entry.getValue().get(2));
 				 printer.println();
+			}
+			 printer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}       
+	}
+	
+	public static void preSeqCreateDoc(String fileName, HashMap<Long, ArrayList<seqItemPair>> list) {
+		
+		//CSV Write Example using CSVPrinter
+//		CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
+		CSVFormat format = CSVFormat.RFC4180.withDelimiter(',');
+		
+       
+		try {
+			
+			CSVPrinter printer = new CSVPrinter(new FileWriter(fileName), format);
+			printer.print("person_id");
+	        printer.print("date_t");
+	        printer.print("concept_id");
+	        printer.println();
+	        
+	        Iterator<Entry<Long, ArrayList<seqItemPair>>> iter =list.entrySet().iterator();
+		        
+			while (iter.hasNext()) { 
+				 Entry<Long, ArrayList<seqItemPair>> entry = iter.next();
+				 for(seqItemPair pair: entry.getValue()){
+					 printer.print(entry.getKey());
+					 printer.print(pair.getTimestamp());
+					 printer.print(pair.getItemId());
+					 printer.println();
+				 }
 			}
 			 printer.close();
 		} catch (IOException e) {

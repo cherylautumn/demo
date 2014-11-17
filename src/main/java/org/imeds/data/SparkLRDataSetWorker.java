@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +42,8 @@ import org.apache.spark.mllib.linalg.Vectors;
 import org.apache.spark.mllib.regression.LabeledPoint;
 import org.imeds.util.CCIcsvTool;
 import org.imeds.util.ComorbidDSxmlTool;
+import org.imeds.util.ImedDateFormat;
+import org.imeds.util.OSValidator;
 import org.la4j.matrix.Matrix;
 
 import scala.Tuple2;
@@ -61,6 +64,7 @@ public class SparkLRDataSetWorker extends Worker implements Serializable {
 	private Double  stepSize;
 	private Integer iterations;
 	private Double  threshold;
+	private Double  chiSqrtThreshold;
 	private List<DataPoint> result;
 	
 
@@ -99,6 +103,14 @@ public class SparkLRDataSetWorker extends Worker implements Serializable {
 		this.threshold = threshold;
 	}
 	
+	public Double getChiSqrtThreshold() {
+		return chiSqrtThreshold;
+	}
+
+	public void setChiSqrtThreshold(Double chiSqrtThreshold) {
+		this.chiSqrtThreshold = chiSqrtThreshold;
+	}
+
 	public String getConfigFile() {
 		return configFile;
 	}
@@ -232,7 +244,10 @@ public class SparkLRDataSetWorker extends Worker implements Serializable {
 	
 	@Override
   public void go() {
-		PROutlier();
+		//because pearson outlier may induce memory heap problem, i use standardize residual instead.
+		//memory heap is generated from matrix inverse.
+//		PROutlier();
+		stdRi();
 	}
   
 	@Override
@@ -247,6 +262,7 @@ public class SparkLRDataSetWorker extends Worker implements Serializable {
 	  this.stepSize		= Double.parseDouble(paras[1]);
 	  this.iterations 	= Integer.parseInt(paras[2]);
 	  this.threshold	= Double.parseDouble(paras[3]);
+	  this.chiSqrtThreshold=Double.parseDouble(paras[4]);
   }
   
   public void SparkAppInit(){
@@ -290,6 +306,9 @@ public class SparkLRDataSetWorker extends Worker implements Serializable {
      
   }
   public static void ToFile(List<DataPoint> result, String fileName) throws IOException{
+	  
+		if(!OSValidator.isWindows()){fileName = fileName.replace("\\", "/");}
+		
 	
 	  FileWriter fstream = new FileWriter(fileName);
       BufferedWriter out = new BufferedWriter(fstream);
@@ -302,6 +321,85 @@ public class SparkLRDataSetWorker extends Worker implements Serializable {
 
       //Close the output stream
       out.close();    
+  }
+  public void chi_sqrt_test(String fileName, Double chi_sqrt, Double chi_sqrt_threshold) throws IOException{
+	  String chi_sqrt_static=this.getCdsc().getPearsonResidualOutlierOutputFolder()+OSValidator.getPathSep()+"chi_sqrt_test.txt";
+	  if(!OSValidator.isWindows()){
+		  chi_sqrt_static = chi_sqrt_static.replace("\\", "/");
+		  fileName = fileName.replace("\\", "/");
+		 }
+		
+	  FileWriter fstream = new FileWriter(chi_sqrt_static, true);
+      BufferedWriter out = new BufferedWriter(fstream);
+      if(chi_sqrt<= chi_sqrt_threshold) out.write(ImedDateFormat.formatTime(new Date())+" "+fileName+ " "+chi_sqrt+ " <= "+chi_sqrt_threshold);
+      else out.write(ImedDateFormat.formatTime(new Date())+" "+fileName+ " "+chi_sqrt+ " > "+chi_sqrt_threshold+" No outlier output generated");
+      out.newLine();
+      //Close the output stream
+      out.close();   
+  }
+  public void stdRi(){
+	  JavaRDD<DataPoint> predictPoints =  sc.parallelize(result) ;
+		
+	    JavaPairRDD<Long, ArrayList<Double>> pearsonPoints = predictPoints.mapToPair(new PairFunction<DataPoint, Long, ArrayList<Double>>(){
+			public Tuple2<Long, ArrayList<Double>>  call(DataPoint v1) throws Exception {
+				
+				ArrayList<Double> arr= new ArrayList<Double>();
+				arr.add(v1.getTrainP().label()); //original label
+				arr.add(v1.getPredictP());		 //predict score
+				
+				Double Pi = v1.getPredictP();
+				Double Yi = v1.getTrainP().label();
+				if(Pi==0)Pi=0.000001;
+				else if(Pi==1) Pi=0.99999;
+				Double Ri = (Yi-Pi)/Math.pow((Pi*(1-Pi)),0.5);
+				Ri = Math.abs(Ri);
+				arr.add(Ri);					 //residual
+				
+				return new Tuple2<Long, ArrayList<Double>>(v1.getId(),arr);
+			  }    	  
+	    	 }
+		).filter(new Function<Tuple2<Long,ArrayList<Double>>,Boolean>(){
+
+			public Boolean call(Tuple2<Long, ArrayList<Double>> v1) throws Exception {
+				if(v1._2.get(2) > getThreshold())return true;
+				return false;
+			}			
+		});
+	   
+	    
+	    double chi_sqrt= pearsonPoints.map(new Function<Tuple2<Long, ArrayList<Double>>,Double>() {
+
+			public Double call(Tuple2<Long, ArrayList<Double>> v)
+					throws Exception {
+				// TODO Auto-generated method stub
+				//System.out.println(v._1+" : "+v._2.get(2)+ " pow: "+Math.pow(v._2.get(2), 2.0));
+				return Math.pow(v._2.get(2), 2.0);
+			}	  
+	      }).reduce(new Function2<Double, Double, Double>(){
+
+			public Double call(Double arg0, Double arg1) throws Exception {
+				// TODO Auto-generated method stub
+				//System.out.println("pow("+arg0+",2.0)="+Math.pow(arg0, 2.0)+" "+"pow("+arg1+",2.0)="+Math.pow(arg1, 2.0));
+				return (arg0+arg1);
+			}
+	    	  
+	      });
+	   // System.out.println("chi_sqrt "+chi_sqrt);
+	  String fileName =this.getCdsc().getPearsonResidualOutlierOutputFolder()+this.resIn.substring(this.resIn.lastIndexOf("\\"), this.resIn.indexOf("."))+"_"+this.iterations+"_"+this.stepSize.intValue()+"_prol.csv";
+	  if(!OSValidator.isWindows()){fileName = fileName.replace("\\", "/");}  
+	    
+	  try {
+		chi_sqrt_test(fileName, chi_sqrt, this.chiSqrtThreshold);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	  if(chi_sqrt <= this.chiSqrtThreshold){		    
+		  Map<Long,ArrayList<Double>> pearsonOL = pearsonPoints.collectAsMap();
+		 		
+		  CCIcsvTool.OutlierCreateDoc(fileName,  pearsonOL);
+	  }
+	 
   }
   public void PROutlier(){
 	  JavaRDD<DataPoint> predictPoints =  sc.parallelize(result) ;
@@ -347,7 +445,7 @@ public class SparkLRDataSetWorker extends Worker implements Serializable {
     	for(String input_file_path:og.getCdsc().getSparkLRmodelDataSets()){
     		for(String paras:og.getCdsc().getSparkLRmodelParas()){
     			String[] para = paras.split(",");
-    			og.paraInit(input_file_path+","+para[0]+","+para[1]+","+og.getCdsc().getPearsonResidualThreshold());    	    	
+    			og.paraInit(input_file_path+","+para[0]+","+para[1]+","+og.getCdsc().getPearsonResidualThreshold()+","+og.getCdsc().getChiSqrtThreshold());    	    	
     	        og.ready();
     	        if(og.getThreshold()>=0) og.go();
     	       
