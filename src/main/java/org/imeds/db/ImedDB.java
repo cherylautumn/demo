@@ -221,7 +221,7 @@ public class ImedDB {
 	            synchronized (ImedDB.class) {
 	            	StringBuffer queryStr = new StringBuffer();
 	
-	            	queryStr.append(" SELECT distinct person_id " );
+	            	queryStr.append(" SELECT distinct id " );
 	            	queryStr.append(" FROM ucla.lroutliers uts ");
 	            	queryStr.append(" WHERE uts.fileid = "+fileId+" AND uts.ri>="+riThld);
 	            	            	
@@ -229,7 +229,7 @@ public class ImedDB {
 	                rs = stmt.executeQuery(queryStr.toString());
 	                
 	               while (rs.next()) {
-	                   patients.put(rs.getLong("person_id"), new ArrayList<seqItemPair>());
+	                   patients.put(rs.getLong("id"), new ArrayList<seqItemPair>());
 	                }
 	        
 	                rs.close();
@@ -266,7 +266,7 @@ public class ImedDB {
                    logger.info("Query getPatientDrugFeature "+queryStr.toString()+"\n");
                    fs = stmt.executeQuery(queryStr.toString());
                    while(fs.next()){
-                	   value.add(new seqItemPair(fs.getDate("date_t"), fs.getInt("condition_concept_id")));                	   
+                	   value.add(new seqItemPair(fs.getDate("date_t"), fs.getInt("concept_id")));                	   
                    }
                    fs.close();
                 }

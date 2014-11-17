@@ -52,10 +52,10 @@ public class ComorbidManager extends ImedsManager {
 		}
 		
 		//Stage 2.4. Generate outlier seqPre dataset
-		if(ImedsDaemonConfig.getSeqPtnPrepareFolders().size()>0){
-			for(String folderP:ImedsDaemonConfig.getSeqPtnPrepareFolders()){
-				logger.info("Processing Pearson Outlier To DB: "+folderP);
-				ComorbidDrugDataSetWorker prlo = new ComorbidDrugDataSetWorker(folderP+DSConfig, cdt);	
+		if(ImedsDaemonConfig.getPreSeqDsPrepareFolders().size()>0){
+			for(String folderP:ImedsDaemonConfig.getPreSeqDsPrepareFolders()){
+				logger.info("Processing Outlier Seq: "+folderP);
+				ComorbidDrugDataSetWorker prlo = new ComorbidDrugDataSetWorker(folderP,folderP+DSConfig, cdt);	
 				prlo.prepare();
 				prlo.ready();
 				prlo = null;

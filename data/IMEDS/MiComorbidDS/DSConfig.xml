@@ -74,7 +74,7 @@
 
     <preSeqDS>
     	<fittedSparkLRmodels>
-    		<para>500_1_0</para> <!-- 1,500 para is file_id in db--> 
+    		<!--<para>500_1_0</para>  1,500 para is file_id in db--> 
     		<para>5000_1_4</para>
     	</fittedSparkLRmodels>
     	<outlierThreshold>3.0</outlierThreshold>
