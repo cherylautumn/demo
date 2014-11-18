@@ -15,14 +15,17 @@ public class ComorbidDrugDataSetWorker extends ComorbidDataSetWorker {
 
 	private ArrayList<Integer> cptlistTotal;
 	private String olFolder;
-	public ComorbidDrugDataSetWorker(String configFile, CCIDictionary ccid) {
+	private String folderP;
+	public ComorbidDrugDataSetWorker(String folderP, String configFile, CCIDictionary ccid) {
 		super(configFile, ccid);
-		cptlistTotal =  getCspListTotal();
+		if(!OSValidator.isWindows()){folderP = folderP.replace("\\", "/");}
+		this.folderP=folderP;
 		// TODO Auto-generated constructor stub
 	}
 	@Override
 	public void prepare() {
-		super.prepare();		
+		super.prepare();
+		cptlistTotal =  getCspListTotal();
 	}
 	@Override
 	public void ready() {
@@ -32,8 +35,8 @@ public class ComorbidDrugDataSetWorker extends ComorbidDataSetWorker {
 		for(String mid: modelId){
 			String marr[]=mid.split("_");
 			Integer fileId = Integer.parseInt(marr[2].trim()); //"para = 500_1_0"			
-			String fileName = "trainDS_"+marr[0]+"_"+marr[1]+"_preseq_"+fileId+".csv"; //trainDS_500_1_preseq_0
-			buildPatientTreatmentFeature(fileId, getCdsc().getOutlierThreshold(), this.olFolder+fileName);
+			String fileName = this.folderP+OSValidator.getPathSep()+this.olFolder+OSValidator.getPathSep()+"trainDS_"+marr[0]+"_"+marr[1]+"_preseq_"+fileId+".csv"; //trainDS_500_1_preseq_0
+			buildPatientTreatmentFeature(fileId, getCdsc().getOutlierThreshold(), fileName);
 		}
 		
 		

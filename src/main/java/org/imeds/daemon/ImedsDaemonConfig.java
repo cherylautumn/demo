@@ -98,6 +98,13 @@ public class ImedsDaemonConfig {
 			ArrayList<String> seqPtnPrepareFolders) {
 		ImedsDaemonConfig.seqPtnPrepareFolders = seqPtnPrepareFolders;
 	}
+	public static ArrayList<String> getPreSeqDsPrepareFolders() {
+		return preSeqDsPrepareFolders;
+	}
+	public static void setPreSeqDsPrepareFolders(
+			ArrayList<String> preSeqDsPrepareFolders) {
+		ImedsDaemonConfig.preSeqDsPrepareFolders = preSeqDsPrepareFolders;
+	}
 	public static Integer getFlush() {
 		return flush;
 	}

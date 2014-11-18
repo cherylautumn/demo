@@ -62,14 +62,25 @@
 			<para>1,10000</para>				
 			<para>10,500</para>
 			<para>10,5000</para>
-			<para>10,10000</para>-->			
+			<para>10,10000</para>-->	
+					
 		</SparkLRmodelParas>
 		
 		<inputFolder>data\IMEDS\CgstHfComorbidDS\logisticRegressionPredict</inputFolder> <!-- for PearsonResidualOutlier only, does not need to run with spark. if null, then spark don't generate tmp file-->
 		<outputFolder>data\IMEDS\CgstHfComorbidDS\outlier</outputFolder>
 		<threshold>-1</threshold><!-- 0: return all result. >0, filter out results which Ri lower than it. -->
+		<chiSqrtThreshold>10215</chiSqrtThreshold><!-- chi-sqrt threshold, DF=n-(p+1), alpha =0.05 -->
 	</PearsonResidualOutlier>
-	
+	<preSeqDS>
+    	<fittedSparkLRmodels>
+    		<!--<para>500_1_0</para>  1,500 para is file_id in db--> 
+    		<para>5000_1_9</para>
+			<para>10000_1_8</para>
+    	</fittedSparkLRmodels>
+    	<outlierThreshold>3.0</outlierThreshold>
+    	<outputFolder>preSeq</outputFolder>	
+    </preSeqDS>	
+	 
 	
 	 
 </root>
