@@ -1,0 +1,10 @@
+data/IMEDS/MiComorbidDS/outlier/trainDS_500_1_prol.csv Infinity > 10215.0 No outlier output generated
+data/IMEDS/MiComorbidDS/outlier/trainDS_500_1_prol.csv Infinity > 10215.0 No outlier output generated
+data/IMEDS/MiComorbidDS/outlier/trainDS_500_1_prol.csv Infinity > 10215.0 No outlier output generated
+data/IMEDS/MiComorbidDS/outlier/trainDS_500_1_prol.csv Infinity > 10215.0 No outlier output generated
+data/IMEDS/MiComorbidDS/outlier/trainDS_500_1_prol.csv 40058.27651225315 > 10215.0 No outlier output generated
+data/IMEDS/MiComorbidDS/outlier/trainDS_500_1_prol.csv Infinity > 10215.0 No outlier output generated
+data/IMEDS/MiComorbidDS/outlier/trainDS_500_1_prol.csv 1268125.18417237 > 10215.0 No outlier output generated
+2014-11-16 03:34:18 data/IMEDS/MiComorbidDS/outlier/trainDS_500_1_prol.csv 1268125.18417237 > 10215.0 No outlier output generated
+2014-11-16 03:35:42 data/IMEDS/MiComorbidDS/outlier/trainDS_500_1_prol.csv 1268125.18417237 > 10215.0 No outlier output generated
+2014-11-16 03:49:55 data/IMEDS/MiComorbidDS/outlier/trainDS_5000_1_prol.csv 10207.852682772615 <= 10215.0

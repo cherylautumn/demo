@@ -10,7 +10,7 @@
 	<!-- STAGE 4 SPM. setting threshold. threshold must larger than outlier ratio, since pruning. -->	
 	<VMSPConfig>
 		<enable>0</enable>
-		<threshold>0.1,0.2</threshold> <!-- outlier ratio: 0.4 (file 11), 0.27 (file 1), 0.00075 (file 9) -->
+		<threshold>0.2</threshold> <!-- outlier ratio: 0.4 (file 11), 0.27 (file 1), 0.00075 (file 9) -->
 		<maxlength></maxlength>
 		<inputFolder>seqDS</inputFolder>
 		<outputFolder>seqptn</outputFolder>

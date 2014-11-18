@@ -34,15 +34,15 @@
 		</pearsonOutlierToDB>
 
 		<preSeqDsPrepare>
-			<folder>data\IMEDS\MiComorbidDS\</folder>	
-			<!--<folder>data\IMEDS\CgstHfComorbidDS\</folder>  -->
+		<!--	<folder>data\IMEDS\MiComorbidDS\</folder>	
+			<folder>data\IMEDS\CgstHfComorbidDS\</folder>  -->
 		</preSeqDsPrepare>
 		
 		<!-- Here starts to be controlled by SeqptnManager -->
 		<!-- Stage 3: prepare patient sequential features. From \\preSeq to seqDS -->
 		<seqPtnPrepare>		
-		<!--	<folder>data\IMEDS\MiComorbidDS\</folder>	
-			<folder>data\IMEDS\CgstHfComorbidDS\</folder>  -->
+			<folder>data\IMEDS\MiComorbidDS\</folder>	
+			<folder>data\IMEDS\CgstHfComorbidDS\</folder>  
 		</seqPtnPrepare>
 	</expConfig>
 </root>
