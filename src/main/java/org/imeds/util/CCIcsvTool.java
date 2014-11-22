@@ -324,11 +324,12 @@ public class CCIcsvTool implements DocumentTool{
 		        for(CSVRecord record : parser){
 		        	Long id = Long.parseLong(record.get("Id"));
 		        	//FIXME: OUTLIERS IN THIS SET MAY NOT HAVE DRUG SEQ PTN 
-		        	if( Double.parseDouble(record.get("PredictP"))>=threshold)labelList.put(id, LabelType.PredictAlive);
-		        	else labelList.put(id, LabelType.PredictDeath);
+		        	//if( Double.parseDouble(record.get("Ri"))>=threshold){
+		        		if( Double.parseDouble(record.get("PredictP"))>=threshold)labelList.put(id, LabelType.PredictAlive);
+		        		else labelList.put(id, LabelType.PredictDeath);
 		        	
-		        	
-		        	classList.put(id, Double.parseDouble(record.get("TrainP")));
+		        		classList.put(id, Double.parseDouble(record.get("TrainP")));
+		        	//}
 		        }
 		        //close the parser
 		        parser.close();

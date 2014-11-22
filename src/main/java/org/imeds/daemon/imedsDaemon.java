@@ -3,6 +3,7 @@ package org.imeds.daemon;
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.imeds.data.ComorbidDataSetWorker;
 import org.imeds.data.common.CCIDictionary;
 import org.imeds.db.ImedDB;
@@ -22,8 +23,14 @@ public class imedsDaemon {
     private String DeyoCCIPath = "data\\IMEDS\\DeyoCCI.csv";
     private ImedsManager manager ;
 	public imedsDaemon() {
-		
+		 
+	   
 		OsPathChk();
+		String log4jpath = "target\\log4j.properties" ;
+		if(!OSValidator.isWindows()){
+			log4jpath =log4jpath.replace("\\", "/");			
+		}
+		 PropertyConfigurator.configure(log4jpath ); 
 		logger.info("Load data\\IMEDS\\ImedsDaemonConfig.xml.");
 		ImedsDaemonConfig.loadImedsDaemonConfig(ImedsDaemonConfigPath);
 		

@@ -1,0 +1,11 @@
+Outlier_Predict_Alive,outlier_Death,outlier_Predict_Death,Outlier_Alive,support,total_patients,fisherScore,seq,semantic
+0.0,0.0,54.0,0.0,54,198,0.0,1125315 1174888 -1  -2 ,'Acetaminophen' 'Hydrocodone' -1 -2 
+0.0,0.0,41.0,0.0,41,198,0.0,1705674 1836430 -1  -2 ,'Trimethoprim' 'Sulfamethoxazole' -1 -2 
+0.0,0.0,68.0,0.0,68,198,0.0,956874 -1  -2 ,'Furosemide' -1 -2 
+0.0,0.0,46.0,0.0,46,198,0.0,1000560 -1  -2 ,'Ondansetron' -1 -2 
+0.0,0.0,40.0,0.0,40,198,0.0,1154029 -1  -2 ,'Fentanyl' -1 -2 
+0.0,0.0,45.0,0.0,45,198,0.0,1154343 -1  -2 ,'Albuterol' -1 -2 
+0.0,0.0,49.0,0.0,49,198,0.0,1551099 -1  -2 ,'Prednisone' -1 -2 
+0.0,0.0,44.0,0.0,44,198,0.0,1742253 -1  -2 ,'Levofloxacin' -1 -2 
+0.0,0.0,49.0,0.0,49,198,0.0,19049105 -1  -2 ,'Potassium Chloride' -1 -2 
+0.0,0.0,54.0,0.0,54,198,0.0,19121608 -1  -2 ,'Influenza virus vaccine' -1 -2 

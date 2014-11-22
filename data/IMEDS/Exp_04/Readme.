@@ -1,0 +1,59 @@
+Exp_04 Note.
+
+Description
+	This experiment runs on larger set for Cghf and Mi patients. Basically, the number of dead patients selected for each dataset almost covers the total number of dead pateints in Cghf and Mi. In this experiment, I mainly fixed the previous patient drug history bug. In this dataset, patient's drug history is built after the index diagnose day. In order to get larger patients dataset for SPM, I relaxed the residual threshold with 2, 2.5 and 3 based on the LR which goodness-of-fit, chi-square-test, cannot reject H0. 
+
+Dataset for LR
+	Cghf: 50000 alive, 50000 die.
+		- Model trained with 11000, 12500, 15000 times. 
+		- Goodness-of-fit is measured by chi-square.
+		- Chi-square-threshold=  100718.67 under alpha=0.05 df=(100000-(17+1))
+		- trainDS_15000_1_prol.csv 100489.28859039422 <= 100718.67
+		- trainDS_12500_1_prol.csv 100575.2535024524 <= 100718.67
+		- trainDS_11000_1_prol.csv 100667.10236769353 <= 100718.67
+
+	Mi: 25000 alive, 25000 die.
+		- Model trained with 10000 times. 
+		- Goodness-of-fit is measured by chi-square.
+		- Chi-square-threshold=  50503.1893 under alpha=0.05 df=(50000-(17+1))
+		- trainDS_9000_1_prol.csv 50867.525077952014 > 50503.1893 No outlier output generated
+		- trainDS_10000_1_prol.csv 50861.13260130268 > 50503.1893 No outlier output generated
+		- trainDS_12500_1_prol.csv 50863.91584525482 > 50503.1893 No outlier output generated
+		- trainDS_15000_1_prol.csv 50876.49814491112 > 50503.1893 No outlier output generated
+		- trainDS_20000_1_prol.csv 50906.44208662091 > 50503.1893 No outlier output generated
+		- trainDS_10000_1_prol.csv 50861.13260130268 <= 50870.0
+		- Since under the chi-square-threshold models alway reject H0, I relax the threshold at last and only use model which trained 10000 times.
+
+Outlier selection. 
+	I pick outlier patients according to their ri> ri_threshold. I use 2, 2.5 and 3 in order to generate larger SPM patient dataset. Three folder "LR_2", "LR_2.5" and "LR_3" represent result for each. 
+	Under each folder, 2 files "outlierfileX.0.csv" and "outliersX.0.csv" are attatched. 
+
+	Ex. In folder LR_3, 
+	-"outlierfile3.0.csv". count is the number of outliers whose residual ri>3.0
+	 fileid | count |                           filename                            
+	--------+-------+---------------------------------------------------------------
+	     14 |   165 | data/IMEDS/MiComorbidDS/outlier//trainDS_10000_1_prol.csv
+	     17 |    96 | data/IMEDS/CgstHfComorbidDS/outlier//trainDS_15000_1_prol.csv
+	     16 |    96 | data/IMEDS/CgstHfComorbidDS/outlier//trainDS_12500_1_prol.csv
+	     15 |    99 | data/IMEDS/CgstHfComorbidDS/outlier//trainDS_11000_1_prol.csv
+
+	-"outliers3.0.csv"
+	- fileid mapped to fileid in "outlierfile3.0.csv".
+	- id: patient id
+	- trainp: the actual status of patient. 1 means alive, 0 means dead
+	- PredictP: is the predict probability of patient alive
+	- Ri: is the absolute value of standardize residual
+
+	 fileid |     id      | trainp |      predictp      |        ri        
+	--------+-------------+--------+--------------------+------------------
+	     14 | 26471606303 |      1 | 0.0604404624904402 | 3.94274112906845
+	     14 |   619419501 |      1 | 0.0844817929862915 | 3.29194015571464
+	     14 | 26478904702 |      1 | 0.0985418363942555 | 3.02456179710869
+	     14 | 28283489201 |      1 | 0.0765085973745548 | 3.47425193649938
+	     14 | 26836148901 |      1 | 0.0212493980903187 | 6.78676333136378
+	     14 | 26485288501 |      1 | 0.0538967980974977 | 4.18974675672596
+
+SPM. 
+   In each folder,"LR_2", "LR_2.5" and "LR_3", discriminative sequential pattern results of Cghf and Mi patients are placed two folders, "CgstHf" and "Mi". Only folder "seqptnSemantic" need to be reviewed. 
+
+   Since outlier patients selected from last step only belong to "better than expected", the discriminative ability does not play a vital role here. Maybe support, which means the frequency of that pattern among patients, has some value.  

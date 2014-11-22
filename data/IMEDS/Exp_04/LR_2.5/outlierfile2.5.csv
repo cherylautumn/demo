@@ -1,0 +1,9 @@
+ fileid | count |                           filename                            
+--------+-------+---------------------------------------------------------------
+     14 |   335 | data/IMEDS/MiComorbidDS/outlier//trainDS_10000_1_prol.csv
+     17 |   235 | data/IMEDS/CgstHfComorbidDS/outlier//trainDS_15000_1_prol.csv
+     16 |   239 | data/IMEDS/CgstHfComorbidDS/outlier//trainDS_12500_1_prol.csv
+     15 |   243 | data/IMEDS/CgstHfComorbidDS/outlier//trainDS_11000_1_prol.csv
+(4 筆資料列)
+
+SET

@@ -74,14 +74,17 @@ public class MMRFSworker extends Worker {
 	@Override
 	public void ready() {
 		// Calculate fisher gain for each frequent seq ptn
-		
+		int i=0;
 		for(discrimItemsets dscmset:this.discrimSeqList){
+			i++;
 			for(labelItemsets lbset:this.labelSeqList){
 				//if pateint drug list contain frequent seq ptn, mark as 1.0
 				if(lbset.getItemsets().isContained(dscmset.getItemsets())){					
 					//label: outlier(1) or not(0), feature include(1.0 not include (0), patient id
+					
 					dscmset.addDatapoints(new label(lbset.getLabel(), LabelType.yesFeature,lbset.getItemsets().getId(),this.classList.get(lbset.getItemsets().getId())));
 					
+					//System.out.println(i+" lb: "+lbset.getLabel()+" yesF:"+LabelType.yesFeature+" : "+dscmset.getDatapoints());
 				}else{
 					dscmset.addDatapoints(new label(lbset.getLabel(), LabelType.notFeature,lbset.getItemsets().getId(),this.classList.get(lbset.getItemsets().getId())));
 				}

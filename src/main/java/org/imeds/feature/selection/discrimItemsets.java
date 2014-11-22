@@ -65,13 +65,16 @@ public class discrimItemsets implements Comparable<discrimItemsets>{
 	public Double genFisherScore(){
 		HashMap<Integer, statInfo> class_stat = new HashMap<Integer, statInfo>();
 		statInfo sinfo;
+	//	System.out.print(this.itemsets);
 		for(label lb: this.datapoints){
 			if(!class_stat.containsKey(lb.getLabel_id())) class_stat.put(lb.getLabel_id(), new statInfo());
 			sinfo = class_stat.get(lb.getLabel_id());
 			sinfo.addCnt();
 			sinfo.addSum(lb.getFeature_v());
 			sinfo.addSumSquare(lb.getFeature_v());
+			//System.out.print(lb.getLabel_id()+" f:"+lb.getFeature_v()+" ");
 		}
+		//System.out.println();
 		
 		Iterator<Entry<Integer,statInfo>> itr = class_stat.entrySet().iterator();
 		Double sum=0.0, cnt=0.0, mu=0.0, nom=0.0, denom=0.0;
@@ -83,10 +86,12 @@ public class discrimItemsets implements Comparable<discrimItemsets>{
 		}
 		mu = sum/cnt;
 		itr = class_stat.entrySet().iterator();
+		//System.out.print(class_stat.size()+"/"+sum+"/"+cnt+"="+mu);
 		while (itr.hasNext()) {
 			Entry<Integer, statInfo> entry = itr.next();
 			nom	  = nom+(entry.getValue().getCnt()*Math.pow((entry.getValue().getMean()-mu), 2));
 			denom = denom+(entry.getValue().getCnt()*entry.getValue().getVar());
+		//	System.out.println(" nom:"+entry.getValue().getMean());
 		}
 		return (nom/denom);
 	}

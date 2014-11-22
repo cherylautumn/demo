@@ -1,0 +1,39 @@
+Outlier_Predict_Alive,outlier_Death,outlier_Predict_Death,Outlier_Alive,support,total_patients,fisherScore,seq,semantic
+0.0,0.0,11.0,0.0,11,80,0.0,1125315 1174888 -1 1125315 1174888 -1  -2 ,'Acetaminophen' 'Hydrocodone' -1 'Acetaminophen' 'Hydrocodone' -1 -2 
+0.0,0.0,9.0,0.0,9,80,0.0,939506 967823 986417 19049105 -1  -2 ,'Sodium Bicarbonate' 'Sodium Chloride' 'POLYETHYLENE GLYCOL 3350' 'Potassium Chloride' -1 -2 
+0.0,0.0,8.0,0.0,8,80,0.0,1125315 -1 1125315 -1 950637 -1  -2 ,'Acetaminophen' -1 'Acetaminophen' -1 'Tacrolimus' -1 -2 
+0.0,0.0,9.0,0.0,9,80,0.0,956874 -1 1125315 1174888 -1  -2 ,'Furosemide' -1 'Acetaminophen' 'Hydrocodone' -1 -2 
+0.0,0.0,8.0,0.0,8,80,0.0,1125315 1174888 -1 1000560 -1  -2 ,'Acetaminophen' 'Hydrocodone' -1 'Ondansetron' -1 -2 
+0.0,0.0,8.0,0.0,8,80,0.0,1705674 1836430 -1 950637 -1  -2 ,'Trimethoprim' 'Sulfamethoxazole' -1 'Tacrolimus' -1 -2 
+0.0,0.0,8.0,0.0,8,80,0.0,1705674 1836430 -1 1125315 -1  -2 ,'Trimethoprim' 'Sulfamethoxazole' -1 'Acetaminophen' -1 -2 
+0.0,0.0,8.0,0.0,8,80,0.0,19049105 -1 1705674 1836430 -1  -2 ,'Potassium Chloride' -1 'Trimethoprim' 'Sulfamethoxazole' -1 -2 
+0.0,0.0,8.0,0.0,8,80,0.0,797399 -1 797399 -1  -2 ,'gabapentin' -1 'gabapentin' -1 -2 
+0.0,0.0,9.0,0.0,9,80,0.0,956874 -1 797399 -1  -2 ,'Furosemide' -1 'gabapentin' -1 -2 
+0.0,0.0,9.0,0.0,9,80,0.0,903963 -1 903963 -1  -2 ,'Triamcinolone' -1 'Triamcinolone' -1 -2 
+0.0,0.0,9.0,0.0,9,80,0.0,708298 1154029 -1  -2 ,'Midazolam' 'Fentanyl' -1 -2 
+0.0,0.0,14.0,0.0,14,80,0.0,956874 -1 956874 -1  -2 ,'Furosemide' -1 'Furosemide' -1 -2 
+0.0,0.0,8.0,0.0,8,80,0.0,797399 -1 1124957 -1  -2 ,'gabapentin' -1 'Oxycodone' -1 -2 
+0.0,0.0,8.0,0.0,8,80,0.0,1124957 -1 1124957 -1  -2 ,'Oxycodone' -1 'Oxycodone' -1 -2 
+0.0,0.0,9.0,0.0,9,80,0.0,1124957 1125315 -1  -2 ,'Oxycodone' 'Acetaminophen' -1 -2 
+0.0,0.0,8.0,0.0,8,80,0.0,1125315 -1 1154343 -1  -2 ,'Acetaminophen' -1 'Albuterol' -1 -2 
+0.0,0.0,9.0,0.0,9,80,0.0,1125315 -1 1797513 -1  -2 ,'Acetaminophen' -1 'Ciprofloxacin' -1 -2 
+0.0,0.0,8.0,0.0,8,80,0.0,956874 -1 19049105 -1  -2 ,'Furosemide' -1 'Potassium Chloride' -1 -2 
+0.0,0.0,8.0,0.0,8,80,0.0,19049105 -1 987245 -1  -2 ,'Potassium Chloride' -1 'Lactulose' -1 -2 
+0.0,0.0,8.0,0.0,8,80,0.0,501488 -1  -2 ,'Hepatitis B Vaccines' -1 -2 
+0.0,0.0,9.0,0.0,9,80,0.0,781039 -1  -2 ,'Alprazolam' -1 -2 
+0.0,0.0,9.0,0.0,9,80,0.0,948078 -1  -2 ,'pantoprazole' -1 -2 
+0.0,0.0,15.0,0.0,15,80,0.0,970250 -1  -2 ,'Spironolactone' -1 -2 
+0.0,0.0,16.0,0.0,16,80,0.0,989878 -1  -2 ,'Lidocaine' -1 -2 
+0.0,0.0,8.0,0.0,8,80,0.0,1000632 -1  -2 ,'Clotrimazole' -1 -2 
+0.0,0.0,9.0,0.0,9,80,0.0,1110410 -1  -2 ,'Morphine' -1 -2 
+0.0,0.0,15.0,0.0,15,80,0.0,1126658 -1  -2 ,'Hydromorphone' -1 -2 
+0.0,0.0,8.0,0.0,8,80,0.0,1129625 -1  -2 ,'Diphenhydramine' -1 -2 
+0.0,0.0,12.0,0.0,12,80,0.0,1153013 -1  -2 ,'Promethazine' -1 -2 
+0.0,0.0,15.0,0.0,15,80,0.0,1307046 -1  -2 ,'Metoprolol' -1 -2 
+0.0,0.0,9.0,0.0,9,80,0.0,1310149 -1  -2 ,'Warfarin' -1 -2 
+0.0,0.0,8.0,0.0,8,80,0.0,1501700 -1  -2 ,'Thyroxine' -1 -2 
+0.0,0.0,13.0,0.0,13,80,0.0,1506270 -1  -2 ,'Methylprednisolone' -1 -2 
+0.0,0.0,10.0,0.0,10,80,0.0,1707164 -1  -2 ,'Metronidazole' -1 -2 
+0.0,0.0,8.0,0.0,8,80,0.0,1707687 -1  -2 ,'Vancomycin' -1 -2 
+0.0,0.0,12.0,0.0,12,80,0.0,1777806 -1  -2 ,'Ceftriaxone' -1 -2 
+0.0,0.0,22.0,0.0,22,80,0.0,19121608 -1  -2 ,'Influenza virus vaccine' -1 -2 

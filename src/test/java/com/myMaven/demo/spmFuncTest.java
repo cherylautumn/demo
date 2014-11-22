@@ -112,13 +112,13 @@ public class spmFuncTest {
 		f3.addDatapoints(new label(1,1.0,(long) 9));
 		f3.addDatapoints(new label(1,1.0,(long) 10));
 		
-		f4.addDatapoints(new label(0,1.0,(long) 1));
-		f4.addDatapoints(new label(0,0.0,(long) 2));
-		f4.addDatapoints(new label(0,0.0,(long) 3));
-		f4.addDatapoints(new label(0,0.0,(long) 4));
-		f4.addDatapoints(new label(0,0.0,(long) 5));
-		f4.addDatapoints(new label(1,1.0,(long) 6));
-		f4.addDatapoints(new label(1,1.0,(long) 7));
+		f4.addDatapoints(new label(0,0.0,(long) 1));
+		f4.addDatapoints(new label(0,1.0,(long) 2));
+		f4.addDatapoints(new label(0,1.0,(long) 3));
+		f4.addDatapoints(new label(0,1.0,(long) 4));
+		f4.addDatapoints(new label(0,1.0,(long) 5));
+		f4.addDatapoints(new label(1,0.0,(long) 6));
+		f4.addDatapoints(new label(1,0.0,(long) 7));
 		f4.addDatapoints(new label(1,0.0,(long) 8));
 		f4.addDatapoints(new label(1,0.0,(long) 9));
 		f4.addDatapoints(new label(1,0.0,(long) 10));
@@ -162,8 +162,8 @@ public class spmFuncTest {
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//spmFuncTest.fisherscoreTest();
-		spmFuncTest.statTest();
+		spmFuncTest.fisherscoreTest();
+//		spmFuncTest.statTest();
 		
 	}
 
