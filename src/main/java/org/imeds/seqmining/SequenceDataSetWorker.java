@@ -119,10 +119,12 @@ public class SequenceDataSetWorker extends Worker {
 				its.addItem(item);
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.error(writeException.toString(e));
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
+				logger.error(writeException.toString(e));
 			}
 		}
 		return sequences;

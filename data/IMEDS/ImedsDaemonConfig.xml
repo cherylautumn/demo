@@ -14,9 +14,8 @@
 	   <!-- Here starts to be controlled by ComorbidManager -->
 		<!-- Stage 1: prepare patient features, train.csv -->
 		<patientFeaturePrepare>	
-		   <!--	<folder>data\IMEDS\MiComorbidDS\</folder>	-->
-		   <!--	<folder>data\IMEDS\CgstHfComorbidDS\</folder>  -->
-	 	   <!-- <folder>data\IMEDS\DiabeteComorbidDS\</folder> -->  		
+		   	<folder>data\IMEDS\TestComorbidDS\</folder>	
+		 <!--  	<folder>data\IMEDS\CgstHfComorbidDS\</folder>  	-->	
 		</patientFeaturePrepare>
 		
 		<!-- if spark didn't process pearsonOutlier (<threshold>-1</threshold> threshold setting equal to -1), do it here. -->
@@ -41,8 +40,8 @@
 		<!-- Here starts to be controlled by SeqptnManager -->
 		<!-- Stage 3: prepare patient sequential features. From \\preSeq to seqDS -->
 		<seqPtnPrepare>		
-			<folder>data\IMEDS\MiComorbidDS\</folder>	
-			<folder>data\IMEDS\CgstHfComorbidDS\</folder>  
+		<!--	<folder>data\IMEDS\MiComorbidDS\</folder>	
+			<folder>data\IMEDS\CgstHfComorbidDS\</folder>  -->
 		</seqPtnPrepare>
 	</expConfig>
 </root>

@@ -17,7 +17,7 @@ public class ImedDateFormat {
     /**
      * A convenient API to format date into string.
      */
-    public String format(Date d) {
+    public static String format(Date d) {
     	if (d==null) return null;
     	SimpleDateFormat sdf = new SimpleDateFormat(IMES_DATE_FORMAT);
         return sdf.format(d);
@@ -31,9 +31,15 @@ public class ImedDateFormat {
     /**
      * A convenient API to parse date string.
      */
-    public Date parse(String source) throws Exception {
+    public static Date parse(String source) throws Exception {
     	SimpleDateFormat sdf = new SimpleDateFormat(IMES_DATE_FORMAT);
         return sdf.parse(source);
     }
+    public static Date parseTime(String source) throws Exception {
+    	SimpleDateFormat sdf = new SimpleDateFormat(IMES_TIME_FORMAT);
+        return sdf.parse(source);
+    }
+    
+    
 }
 

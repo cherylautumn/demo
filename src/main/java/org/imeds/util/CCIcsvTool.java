@@ -25,6 +25,7 @@ import org.apache.log4j.Logger;
 import org.apache.spark.mllib.linalg.Vectors;
 import org.apache.spark.mllib.regression.LabeledPoint;
 import org.imeds.data.SparkLRDataSetWorker.DataPoint;
+import org.imeds.data.SurvivalTime;
 import org.imeds.data.common.CCIcode;
 import org.imeds.data.common.seqItemPair;
 import org.imeds.db.ImedDB;
@@ -42,7 +43,6 @@ public class CCIcsvTool implements DocumentTool{
 //		CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
 		CSVFormat format = CSVFormat.RFC4180.withDelimiter(',');
 		
-       
 		try {
 			
 			CSVPrinter printer = new CSVPrinter(new FileWriter(fileName, append), format);
@@ -56,6 +56,33 @@ public class CCIcsvTool implements DocumentTool{
 				 ArrayList<Double> feature = entry.getValue();
 				 printer.print(entry.getKey());
 				 feature.remove(0);
+				 
+				 printer.printRecord(feature);
+			}
+			 printer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}       
+	}
+	public void SurvivalDataSetCreateDoc(String fileName, ArrayList<String> arrayList, HashMap<Long, SurvivalTime> features) {
+		
+		//CSV Write Example using CSVPrinter
+//		CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
+		CSVFormat format = CSVFormat.RFC4180.withDelimiter(',');
+		
+		try {
+			
+			CSVPrinter printer = new CSVPrinter(new FileWriter(fileName), format);
+
+	        Iterator<Entry<Long, SurvivalTime>> iter =features.entrySet().iterator();
+	        
+	        printer.printRecord(arrayList);
+	        
+			while (iter.hasNext()) { 
+				Entry<Long, SurvivalTime> entry = iter.next(); 
+				 SurvivalTime feature = entry.getValue();
+				 printer.print(entry.getKey());
 				 
 				 printer.printRecord(feature);
 			}

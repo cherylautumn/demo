@@ -2,6 +2,8 @@ package org.imeds.data;
 
 import java.util.ArrayList;
 
+import org.imeds.util.OSValidator;
+
 public class DataSetConfig {
 	
 	private String targetFileName="";
@@ -13,7 +15,11 @@ public class DataSetConfig {
 	}
 
 	public void setTargetFileName(String targetFileName) {
+	
 		this.targetFileName = targetFileName;
+		if(!OSValidator.isWindows()){
+			this.targetFileName =this.targetFileName.replace("\\", "/");			
+		}
 	}
 
 	public ArrayList<String> getColList() {

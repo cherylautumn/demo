@@ -16,6 +16,8 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 import org.imeds.data.ComorbidDataSetConfig;
+import org.imeds.data.SurvivalDataSetConfig;
+import org.imeds.data.sampleConfig;
 import org.imeds.seqmining.SequenceDataSetConfig;
 
 public class ComorbidDSxmlTool implements DocumentTool{ 
@@ -58,6 +60,9 @@ public class ComorbidDSxmlTool implements DocumentTool{
 					cdsc.setColList(L1_emt.element("columns").elements("col"));
 					//getTarget(L1_emt);
 				}else if(L1_emt.getName().equals("DataSetParas")){
+					String enable = L1_emt.elementText("enable");
+					if(enable!=null && enable.trim().equalsIgnoreCase("1"))
+						cdsc.setLRsampleEnable(true);
 					cdsc.setSample_sets(L1_emt.elements("sampleConfig"));
 					
 				}else if(L1_emt.getName().equals("PearsonResidualOutlier")){
@@ -86,7 +91,41 @@ public class ComorbidDSxmlTool implements DocumentTool{
 		}
 		
 	}
-	
+	public void parserDoc(String fileName,SurvivalDataSetConfig cdsc) throws Exception {
+		parserDoc(fileName,(ComorbidDataSetConfig)cdsc);
+		File inputXml = new File(fileName);
+		SAXReader saxReader = new SAXReader();
+		try {
+			Document document = saxReader.read(inputXml);
+			Element L0 = document.getRootElement();
+			for (Iterator L1 = L0.elementIterator(); L1.hasNext();) {
+				Element L1_emt = (Element) L1.next();
+				if(L1_emt.getName().equals("Survivaltargets")){
+					cdsc.setTargetFileName(L1_emt.element("fileName").getText());
+					cdsc.setCensorDate(L1_emt.element("collectDates").elements("cDate"));
+					cdsc.setSvlcolList(L1_emt.element("columns").elements("col"));
+					//getTarget(L1_emt);
+				}else if(L1_emt.getName().equals("SurvivalDataSetParas")){
+					String enable = L1_emt.elementText("enable");
+					if(enable!=null && enable.trim().equalsIgnoreCase("1"))
+						cdsc.setSurvivalsampleEnable(true);
+					cdsc.setSurvivalDataSet(L1_emt.element("sampleConfig"));
+					
+					
+				}else{
+					
+					
+				}
+			}
+			
+		} catch (DocumentException e) {
+			System.out.println(e.getMessage());
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	
 	public void parserDoc(String fileName) {
 		// TODO Auto-generated method stub

@@ -8,7 +8,9 @@ import org.dom4j.Element;
 
 public class ComorbidDataSetConfig extends DataSetConfig {
 	private ArrayList<String> index_diagnoses = new ArrayList<String>();
+	private boolean LRsampleEnable=false;
 	private HashMap<String, sampleConfig> sample_sets = new HashMap<String, sampleConfig>(); 
+	
 	
 	private String pearsonResidualOutlierInputFolder;
 	private String pearsonResidualOutlierOutputFolder;
@@ -44,7 +46,6 @@ public class ComorbidDataSetConfig extends DataSetConfig {
 				}
 			}			
 		}
-
 	}
 
 	public HashMap<String, sampleConfig> getSample_sets() {
@@ -67,6 +68,15 @@ public class ComorbidDataSetConfig extends DataSetConfig {
 	public void setSample_sets(String sample_id, sampleConfig sample_config) {
 		this.sample_sets.put(sample_id, sample_config);
 	}
+	public boolean isLRsampleEnable() {
+		return LRsampleEnable;
+	}
+
+	public void setLRsampleEnable(boolean lRsampleEnable) {
+		LRsampleEnable = lRsampleEnable;
+	}
+
+	
 	public String getPearsonResidualOutlierInputFolder() {
 		return pearsonResidualOutlierInputFolder;
 	}

@@ -13,7 +13,7 @@ import org.imeds.util.OSValidator;
 
 public class ComorbidDrugDataSetWorker extends ComorbidDataSetWorker {
 
-	private ArrayList<Integer> cptlistTotal;
+	
 	private String olFolder;
 	private String folderP;
 	public ComorbidDrugDataSetWorker(String folderP, String configFile, CCIDictionary ccid) {
@@ -25,7 +25,7 @@ public class ComorbidDrugDataSetWorker extends ComorbidDataSetWorker {
 	@Override
 	public void prepare() {
 		super.prepare();
-		cptlistTotal =  getCspListTotal();
+		
 	}
 	@Override
 	public void ready() {
@@ -68,16 +68,16 @@ public class ComorbidDrugDataSetWorker extends ComorbidDataSetWorker {
 	
 	}
 	
-	public ArrayList<Integer> getCspListTotal(){
-		ArrayList<Integer> cptlistTotal = new ArrayList<Integer>();
-		for(String dga:getCdsc().getIndex_diagnoses()){
-			if(getCcid().getCodeList().containsKey(dga)){
-				ArrayList<Integer> cptlist = getCcid().getCodeList().get(dga).getIcdCptId();
-				if(cptlist.size()>0){
-					cptlistTotal.addAll(cptlist);
-				}					
-			}				
-		}
-		return cptlistTotal;
-	}
+//	public ArrayList<Integer> getCspListTotal(){
+//		ArrayList<Integer> cptlistTotal = new ArrayList<Integer>();
+//		for(String dga:getCdsc().getIndex_diagnoses()){
+//			if(getCcid().getCodeList().containsKey(dga)){
+//				ArrayList<Integer> cptlist = getCcid().getCodeList().get(dga).getIcdCptId();
+//				if(cptlist.size()>0){
+//					cptlistTotal.addAll(cptlist);
+//				}					
+//			}				
+//		}
+//		return cptlistTotal;
+//	}
 }

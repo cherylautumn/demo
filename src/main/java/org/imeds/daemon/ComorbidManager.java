@@ -3,6 +3,7 @@ package org.imeds.daemon;
 import org.apache.log4j.Logger;
 import org.imeds.data.ComorbidDataSetWorker;
 import org.imeds.data.PearsonResidualOutlier;
+import org.imeds.data.SurvivalDataSetWorker;
 import org.imeds.data.common.CCIDictionary;
 import org.imeds.seqmining.ComorbidDrugDataSetWorker;
 import org.imeds.util.writeException;
@@ -65,19 +66,27 @@ public class ComorbidManager extends ImedsManager {
 	public void GenPatientFeature(){
 		for(String folderP:ImedsDaemonConfig.getPatientFeatureExpFolders()){
 			logger.info("Processing GenPatientFeature: "+folderP);
-			//createtrainDS(folderP);
+
+			
 			ComorbidDataSetWorker cdsw = new ComorbidDataSetWorker(folderP+DSConfig, cdt);
     		cdsw.prepare();
-    		cdsw.ready();
-    		cdsw.go();
-			
+    		if(cdsw.getCdsc().isLRsampleEnable())
+    		{	
+    			logger.info("GenLRsampleFeature: "+folderP);
+    			cdsw.ready();
+    			cdsw.go();
+    		}
+    		
+    		
+    		SurvivalDataSetWorker svlcdsw = new SurvivalDataSetWorker(folderP+DSConfig, cdt, logger);    		
+    		svlcdsw.prepare();
+    		if(svlcdsw.getCdsc().isSurvivalsampleEnable())
+    		{
+    			logger.info("GenSurvivalsampleFeature: "+folderP);
+    			cdsw.ready();
+    			cdsw.go();
+    		}
 		}
-	}
-	public void createtrainDS(String expFolderPath){
-		ComorbidDataSetWorker cdsw = new ComorbidDataSetWorker(expFolderPath+DSConfig, cdt);
-    		cdsw.prepare();
-    		cdsw.ready();
-    		cdsw.go();
 	}
 	
 }

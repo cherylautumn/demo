@@ -20,6 +20,7 @@ import org.apache.log4j.Logger;
 import org.imeds.daemon.ImedsDaemonConfig;
 import org.imeds.daemon.imedsDaemon;
 import org.imeds.data.ComorbidDataSetWorker;
+import org.imeds.data.SurvivalTime;
 import org.imeds.data.common.CCIDictionary;
 import org.imeds.data.common.seqItemPair;
 import org.imeds.util.ImedDateFormat;
@@ -90,6 +91,63 @@ public class ImedDB {
             throw ex;
         }
         return value;
+	}
+	
+	public static void  getPatientsWithIndexDiagnoseSurvivalData( HashMap<Long, ArrayList<Double>> value,HashMap<Long, SurvivalTime> patientsSurvival, ArrayList<Integer> cptIdList, ArrayList<String> colList, int sample_start, int sample_end, boolean random) throws Exception{
+		  ResultSet rs;
+	       
+	        try {
+	            synchronized (ImedDB.class) {
+	            	StringBuffer queryStr = new StringBuffer();  
+	            	
+	            	queryStr.append(" SELECT * ");
+	            	queryStr.append(" FROM ( ");
+	            	queryStr.append(" SELECT min(op.observation_period_start_date) as obs_startDate,  max(op.observation_period_end_date)as obs_endDate,t.* ");
+	            	queryStr.append(" FROM  observation_period op, ");
+	            	queryStr.append("	( SELECT DISTINCT p.person_id as ID, death.death_date as death_date, p.gender_concept_id as Gender, year_of_birth as Age, race_concept_id as Race, ethnicity_concept_id as Ethnicity, ");
+	            	queryStr.append(" location_id as Location ");
+	            	queryStr.append(" FROM condition_occurrence co, person p ");
+	            	queryStr.append(" LEFT OUTER JOIN death  ON (p.person_id = death.person_id)  ");
+	            	queryStr.append(" WHERE p.person_id = co.person_id AND condition_concept_id IN ("+ImedStringFormat.tranListIn(cptIdList)+") ");
+	            	queryStr.append(" )  AS t");
+	            	queryStr.append(" WHERE  t.ID=op.person_id ");
+	            	queryStr.append(" GROUP BY op.person_id, t.id, t.gender, t.age, t.race, t.ethnicity, t.location, t.death_date");
+	            	queryStr.append(" ORDER BY random() LIMIT "+(sample_end - sample_start)+" OFFSET "+sample_start);
+	            	queryStr.append(" ) ORDER BY obs_endDate");
+	            	
+	            	logger.info("Query getPatientsWithIndexDiagnose :"+ queryStr.toString()+"\n" );
+	                rs = stmt.executeQuery(queryStr.toString());
+	               
+	                while (rs.next()) {
+	                   ArrayList<Double> tmp = new ArrayList<Double>();
+	 
+	                   tmp.add(rs.getDouble("ID"));
+	        		   if(colList.contains("Gender")){tmp.add((rs.getDouble("Gender")-8500));}
+	        		   if(colList.contains("Age")){ tmp.add(rs.getDouble("Age"));}
+	        		   if(colList.contains("Race")) tmp.add(rs.getDouble("Race"));
+	        		   if(colList.contains("Ethnicity")) tmp.add(rs.getDouble("Ethnicity"));
+	        		   if(colList.contains("Location")){
+	        			   if(rs.getDouble("Location")>0)
+	        			   tmp.add(rs.getDouble("Location")/10000000);
+	        		   }
+	        		   value.put(rs.getLong("ID"), tmp);
+	        		   
+	        		   SurvivalTime st= new SurvivalTime();
+	        		   st.setId(rs.getLong("ID"));
+	        		   st.setObs_start_date(rs.getDate("obs_startDate"));
+	        		   st.setObs_end_date(rs.getDate("obs_endDate"));
+	        		   if(rs.getDate("death_date")!=null)st.setDeath_date(rs.getDate("death_date"));
+	        		   patientsSurvival.put(rs.getLong("ID"), st);
+	                 
+	                  
+	                }
+	        
+	                rs.close();
+	            }
+	        }catch (Exception ex) {
+	            throw ex;
+	        }
+	        
 	}
 	
 	

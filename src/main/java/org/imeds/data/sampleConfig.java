@@ -69,10 +69,30 @@ public class sampleConfig {
 	public sampleConfig() {
 		// TODO Auto-generated constructor stub
 	}
+
+	public sampleConfig(String sample_random, String sample_range_str, String sample_append) {
+		sampleConfig( sample_random, sample_range_str, sample_append);
+	}
 	public sampleConfig(String sample_id, String sample_label, String sample_random, String sample_range_str, String sample_append) {
 		this.sample_id = sample_id;
 		this.sample_label=sample_label;
-		
+		sampleConfig( sample_random, sample_range_str, sample_append);
+		/*
+		if(sample_random.trim()!=null && sample_random.trim().equalsIgnoreCase("true"))this.sample_random = true;
+		else this.sample_random = false;
+
+		if(sample_range_str.trim()!=null){
+			this.sample_range_str = sample_range_str;
+			String[] rge=this.sample_range_str.split(",");
+			this.sample_range_start=Integer.parseInt(rge[0]);
+			this.sample_range_end = Integer.parseInt(rge[1]);
+		}
+
+		if(sample_append.trim()!=null && sample_append.trim().equalsIgnoreCase("true"))this.sample_append = true;
+		else this.sample_append = false;*/
+	}
+	
+	private void sampleConfig(String sample_random, String sample_range_str, String sample_append) {
 		if(sample_random.trim()!=null && sample_random.trim().equalsIgnoreCase("true"))this.sample_random = true;
 		else this.sample_random = false;
 
@@ -85,8 +105,8 @@ public class sampleConfig {
 
 		if(sample_append.trim()!=null && sample_append.trim().equalsIgnoreCase("true"))this.sample_append = true;
 		else this.sample_append = false;
+		
 	}
-
 	@Override
 	public String toString() {
 		return "sampleConfig [sample_id=" + sample_id + ", sample_label="
