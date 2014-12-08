@@ -101,7 +101,7 @@ public class ComorbidDSxmlTool implements DocumentTool{
 			for (Iterator L1 = L0.elementIterator(); L1.hasNext();) {
 				Element L1_emt = (Element) L1.next();
 				if(L1_emt.getName().equals("Survivaltargets")){
-					cdsc.setTargetFileName(L1_emt.element("fileName").getText());
+					cdsc.setSvltargetFileName(L1_emt.element("fileName").getText());
 					cdsc.setCensorDate(L1_emt.element("collectDates").elements("cDate"));
 					cdsc.setSvlcolList(L1_emt.element("columns").elements("col"));
 					//getTarget(L1_emt);

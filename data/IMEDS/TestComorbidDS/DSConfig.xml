@@ -6,7 +6,7 @@
 	</Index_Diagnoses>
 
 	<target>
-		<fileName>data\IMEDS\CgstHfComorbidDS\trainDS.csv</fileName>
+		<fileName>data\IMEDS\TestComorbidDS\trainDS.csv</fileName>
 		<columns>
 			<col>ID</col>
 			<col>Label</col>
@@ -51,7 +51,7 @@
 		</sampleConfig>
 	</DataSetParas>
 	<Survivaltargets>
-		<fileName>data\IMEDS\CgstHfComorbidDS\</fileName>
+		<fileName>data\IMEDS\TestComorbidDS\</fileName>
 		<collectDates>
 			<cDate>2010-10-10</cDate>
 			<cDate>2005-10-10</cDate>			
@@ -71,16 +71,16 @@
 	<SurvivalDataSetParas>
 		<enable>1</enable>
 		<sampleConfig>
-			<sample_range>0,5000</sample_range><!-- 0,100 -->	
+			<sample_range>0,100</sample_range><!-- 0,100 -->	
 			<sample_random>true</sample_random>			
-			<sample_append>true</sample_append>
+			<sample_append>false</sample_append>
 		</sampleConfig>
 	</SurvivalDataSetParas>
 	
 	<!-- STAGE 2 Applying Logistic Regression to calculate outlier-->
 	<PearsonResidualOutlier>
 		<SparkLRmodelDataSets>
-			<dataset>data\IMEDS\CgstHfComorbidDS\trainDS.csv</dataset> <!-- input the same from target filename -->		
+			<dataset>data\IMEDS\TestComorbidDS\trainDS.csv</dataset> <!-- input the same from target filename -->		
 		</SparkLRmodelDataSets>
 		<SparkLRmodelParas>
 			<!--<para>1,500</para>-->
@@ -93,8 +93,8 @@
 					
 		</SparkLRmodelParas>
 		
-		<inputFolder>data\IMEDS\CgstHfComorbidDS\logisticRegressionPredict</inputFolder> <!-- for PearsonResidualOutlier only, does not need to run with spark. if null, then spark don't generate tmp file-->
-		<outputFolder>data\IMEDS\CgstHfComorbidDS\outlier</outputFolder>
+		<inputFolder>data\IMEDS\TestComorbidDS\logisticRegressionPredict</inputFolder> <!-- for PearsonResidualOutlier only, does not need to run with spark. if null, then spark don't generate tmp file-->
+		<outputFolder>data\IMEDS\TestComorbidDS\outlier</outputFolder>
 		<threshold>-1</threshold><!-- 0: return all result. >0, filter out results which Ri lower than it. -->
 		<chiSqrtThreshold>10215</chiSqrtThreshold><!-- chi-sqrt threshold, DF=n-(p+1), alpha =0.05 -->
 	</PearsonResidualOutlier>

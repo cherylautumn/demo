@@ -75,8 +75,8 @@ public class ComorbidDataSetWorker extends Worker {
 		//Initialize config file
 		this.cfgparser.parserDoc(this.configFile,this.cdsc);		
 		//Map DeyoCCI ID to my config col id
-		MapFeature();
-		this.cptlistTotal =  getCspListTotal();
+		MapFeature(this.cdsc);
+		this.cptlistTotal =  getCspListTotal(this.cdsc);
 	}
 
 	@Override
@@ -116,7 +116,7 @@ public class ComorbidDataSetWorker extends Worker {
 			
 			HashMap<Long, ArrayList<Double>> patients =  new HashMap<Long, ArrayList<Double>>();
 			patients.putAll(ImedDB.getPatientsWithIndexDiagnose(this.cptlistTotal, this.cdsc.getColList(), sample_range_start, sample_range_end,  sample_random, sample_label));
-			formCharlsonFeature(patients, this.cptlistTotal);
+			formCharlsonFeature(patients, this.cptlistTotal, this.cdsc);
 			csvparser.ComorbidDataSetCreateDoc(this.cdsc.getTargetFileName(),this.cdsc.getColList(), patients, append, withHeader);
 			/**
 			//2. Select the first date when the patient was diagnosed with Diabetes. Iterate patients one by one
@@ -168,7 +168,7 @@ public class ComorbidDataSetWorker extends Worker {
 		// TODO Auto-generated method stub
 		
 	}
-	public void formCharlsonFeature(HashMap<Long, ArrayList<Double>> patients,ArrayList<Integer> cptlistTotal) throws Exception{
+	public void formCharlsonFeature(HashMap<Long, ArrayList<Double>> patients,ArrayList<Integer> cptlistTotal,ComorbidDataSetConfig cdsc) throws Exception{
 
 		//2. Select the first date when the patient was diagnosed with Diabetes. Iterate patients one by one
 		Iterator<Entry<Long, ArrayList<Double>>> iter = patients.entrySet().iterator();
@@ -180,7 +180,7 @@ public class ComorbidDataSetWorker extends Worker {
 			Entry<Long, ArrayList<Double>> entry = iter.next();
 			
 			ArrayList<Double> csvFeature =  entry.getValue();
-			for(int i=csvFeature.size();i<this.cdsc.getColList().size();i++){
+			for(int i=csvFeature.size();i<cdsc.getColList().size();i++){
 				csvFeature.add(0.0);	
 			}
 			
@@ -199,9 +199,9 @@ public class ComorbidDataSetWorker extends Worker {
 		}
 		
 	}
-	public ArrayList<Integer> getCspListTotal(){
+	public ArrayList<Integer> getCspListTotal(ComorbidDataSetConfig cdsc){
 		ArrayList<Integer> cptlistTotal = new ArrayList<Integer>();
-		for(String dga:getCdsc().getIndex_diagnoses()){
+		for(String dga:cdsc.getIndex_diagnoses()){
 			if(getCcid().getCodeList().containsKey(dga)){
 				ArrayList<Integer> cptlist = getCcid().getCodeList().get(dga).getIcdCptId();
 				if(cptlist.size()>0){
@@ -212,8 +212,8 @@ public class ComorbidDataSetWorker extends Worker {
 		return cptlistTotal;
 	}
 	
-	public void MapFeature(){
-		List<String> colList = this.cdsc.getColList();
+	public void MapFeature(ComorbidDataSetConfig cdsc){
+		List<String> colList = cdsc.getColList();
 	    HashMap<String, CCIcode> codeList  = this.ccid.getCodeList();    
 	    
 		for(int i=0;i<colList.size();i++){

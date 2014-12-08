@@ -83,8 +83,8 @@ public class ComorbidManager extends ImedsManager {
     		if(svlcdsw.getCdsc().isSurvivalsampleEnable())
     		{
     			logger.info("GenSurvivalsampleFeature: "+folderP);
-    			cdsw.ready();
-    			cdsw.go();
+    			svlcdsw.ready();
+    			svlcdsw.go();
     		}
 		}
 	}

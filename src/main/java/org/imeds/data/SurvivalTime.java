@@ -90,12 +90,14 @@ public class SurvivalTime {
 	}
 	@Override
 	public String toString() {
-		return "SurvivalTime [id=" + id + ", obs_start_date=" + obs_start_date
-				+ ", obs_end_date=" + obs_end_date + ", death_date="
-				+ death_date + ", censored_date=" + censored_date
-				+ ", survival_length=" + survival_length + ", survival_start="
-				+ survival_start + ", survival_end=" + survival_end
-				+ ", censored=" + censored + "]";
+		return id + "," + obs_start_date
+				  + "," + obs_end_date 
+				  + "," + death_date 
+				  + "," + censored_date
+			  	  + "," + survival_length 
+			  	  + "," + survival_start
+				  + "," + survival_end
+				  + "," + censored;
 	}
 	
 

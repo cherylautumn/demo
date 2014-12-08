@@ -40,8 +40,8 @@ public class SurvivalDataSetWorker extends ComorbidDataSetWorker {
 			
 		}		
 		//Map DeyoCCI ID to my config col id
-		MapFeature();
-		this.cptlistTotal =  getCspListTotal();
+		MapFeature(this.cdsc);
+		this.cptlistTotal =  getCspListTotal(this.cdsc);
 	}
 	@Override
 	public void ready() {
@@ -52,7 +52,7 @@ public class SurvivalDataSetWorker extends ComorbidDataSetWorker {
 		HashMap<Long, SurvivalTime> patientsSurvival =  new HashMap<Long, SurvivalTime>();
 		try {
 			ImedDB.getPatientsWithIndexDiagnoseSurvivalData(patients,patientsSurvival,this.cptlistTotal, getCdsc().getColList(), sc.getSample_range_start(),sc.getSample_range_end(),sc.getSample_random());
-			formCharlsonFeature(patients, this.cptlistTotal);
+			formCharlsonFeature(patients, this.cptlistTotal, this.cdsc);
 			csvparser.ComorbidDataSetCreateDoc(getCdsc().getTargetFileName(),getCdsc().getColList(), patients,sc.getSample_append(),  withHeader);
 			
 			for(Date cend: this.cdsc.getCensorDate()){
@@ -62,7 +62,7 @@ public class SurvivalDataSetWorker extends ComorbidDataSetWorker {
 					SurvivalTime csvFeature = iter.next().getValue();
 					csvFeature.setCensored_date(cend);
 				}
-				String filename = getCdsc().getTargetFileName()+OSValidator.getPathSep()+ImedDateFormat.format(cend)+"svltrainDS.csv";
+				String filename = getCdsc().getSvltargetFileName()+OSValidator.getPathSep()+ImedDateFormat.format(cend)+"svltrainDS.csv";
 				csvparser.SurvivalDataSetCreateDoc(filename,this.cdsc.getSvlcolList(), patientsSurvival);				
 			}
 			

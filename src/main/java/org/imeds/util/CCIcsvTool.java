@@ -82,9 +82,17 @@ public class CCIcsvTool implements DocumentTool{
 			while (iter.hasNext()) { 
 				Entry<Long, SurvivalTime> entry = iter.next(); 
 				 SurvivalTime feature = entry.getValue();
-				 printer.print(entry.getKey());
-				 
-				 printer.printRecord(feature);
+				 if(feature.getCensored_date().after(feature.getObs_start_date())){ 
+					 printer.print(entry.getKey());
+					 printer.print(feature.getObs_start_date());
+					 printer.print(feature.getObs_end_date());
+					 printer.print(feature.getDeath_date());
+					 printer.print(feature.getSurvival_length());
+					 printer.print(feature.getSurvival_start());
+					 printer.print(feature.getSurvival_end());
+					 printer.print(feature.isCensored());
+					 printer.println();					 
+				 }
 			}
 			 printer.close();
 		} catch (IOException e) {
