@@ -46,7 +46,7 @@ public class SurvivalDataSetWorker extends ComorbidDataSetWorker {
 	@Override
 	public void ready() {
 		
-		boolean withHeader=false;
+		boolean withHeader=true;
 		sampleConfig sc =this.cdsc.getSurvivalDataSet();
 		HashMap<Long, ArrayList<Double>> patients =  new HashMap<Long, ArrayList<Double>>();
 		HashMap<Long, SurvivalTime> patientsSurvival =  new HashMap<Long, SurvivalTime>();

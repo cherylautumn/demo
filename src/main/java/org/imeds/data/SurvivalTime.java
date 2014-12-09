@@ -44,22 +44,27 @@ public class SurvivalTime {
 	}
 	public void setCensored_date(Date censored_date) {
 		this.censored_date = censored_date;
+		int svvlen=0;
 		if(this.death_date!=null){
 			if(!this.death_date.after(this.censored_date)){
 				setCensored(false);
-				setSurvival_length(Days.daysBetween(new DateTime(this.death_date),new DateTime(this.obs_start_date)).getDays());
+				svvlen=Days.daysBetween(new DateTime(this.death_date),new DateTime(this.obs_start_date)).getDays();
+				
 			}else{
 				setCensored(true);
-				setSurvival_length(Days.daysBetween(new DateTime(this.censored_date),new DateTime(this.obs_start_date)).getDays());
+				svvlen=Days.daysBetween(new DateTime(this.censored_date),new DateTime(this.obs_start_date)).getDays();
 			}
 		}else {
 			setCensored(true);
 			if(!this.obs_end_date.after(this.censored_date)){
-				setSurvival_length(Days.daysBetween(new DateTime(this.obs_end_date),new DateTime(this.obs_start_date)).getDays());
+				svvlen=Days.daysBetween(new DateTime(this.obs_end_date),new DateTime(this.obs_start_date)).getDays();
 			}else{
-				setSurvival_length(Days.daysBetween(new DateTime(this.censored_date),new DateTime(this.obs_start_date)).getDays());
+				svvlen=Days.daysBetween(new DateTime(this.censored_date),new DateTime(this.obs_start_date)).getDays();
 			}
 		}
+		svvlen = Math.abs(svvlen);
+		setSurvival_length(svvlen);
+		
 		setSurvival_start(0);
 		setSurvival_end(this.survival_length);
 		

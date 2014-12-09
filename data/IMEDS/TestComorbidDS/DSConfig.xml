@@ -9,7 +9,7 @@
 		<fileName>data\IMEDS\TestComorbidDS\trainDS.csv</fileName>
 		<columns>
 			<col>ID</col>
-			<col>Label</col>
+		<!--	<col>Label</col>-->
 			<col>Gender</col>						
 			<col>Age</col>
 	<!--    <col>Race</col>
@@ -71,7 +71,7 @@
 	<SurvivalDataSetParas>
 		<enable>1</enable>
 		<sampleConfig>
-			<sample_range>0,100</sample_range><!-- 0,100 -->	
+			<sample_range>0,50000</sample_range><!-- 0,100 -->	
 			<sample_random>true</sample_random>			
 			<sample_append>false</sample_append>
 		</sampleConfig>
