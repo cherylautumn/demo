@@ -7,6 +7,7 @@ import org.apache.log4j.PropertyConfigurator;
 import org.imeds.data.ComorbidDataSetWorker;
 import org.imeds.data.common.CCIDictionary;
 import org.imeds.db.ImedDB;
+import org.imeds.db.ImedR;
 import org.imeds.util.OSValidator;
 import org.imeds.util.writeException;
 
@@ -36,6 +37,7 @@ public class imedsDaemon {
 		
 		logger.info("IMED database connection.");
 		DbInit();
+		RInit();
 		
 	}
 	/*####################################################################################*
@@ -51,7 +53,7 @@ public class imedsDaemon {
     public void DbInit(){
     
 		try {
-			ImedDB.connDB(ImedsDaemonConfig.getOmopDbDriver(), ImedsDaemonConfig.getOmopDbUrl(),ImedsDaemonConfig.getOmopDbUser(), ImedsDaemonConfig.getOmopDbPassword(), ImedsDaemonConfig.getOmopDbSearchPath());
+		//	ImedDB.connDB(ImedsDaemonConfig.getOmopDbDriver(), ImedsDaemonConfig.getOmopDbUrl(),ImedsDaemonConfig.getOmopDbUser(), ImedsDaemonConfig.getOmopDbPassword(), ImedsDaemonConfig.getOmopDbSearchPath());
 		} catch (Exception e) {
 			logger.error("IMED database connection fail!");
 			logger.error(writeException.toString(e));
@@ -60,7 +62,18 @@ public class imedsDaemon {
     public static void DbClose(){
     		ImedDB.closeDB();
     }
-    
+    public void RInit(){
+        
+		try {
+			ImedR.connR();
+		} catch (Exception e) {
+			logger.error("R connection fail!");
+			logger.error(writeException.toString(e));
+		}
+    }
+    public static void RClose(){
+    		ImedR.closeR();
+    }
    
     public void service() {
         logger.info("Start scheduling.....");
@@ -76,6 +89,7 @@ public class imedsDaemon {
 		singleton = new imedsDaemon();
 		singleton.service();
 		DbClose();
+		RClose();
 	}
 
 }

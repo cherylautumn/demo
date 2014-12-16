@@ -16,7 +16,9 @@ public class SurvivalDataSetConfig extends ComorbidDataSetConfig {
 	private String svltargetFileName="";
 	private ArrayList<Date> censorDate=new ArrayList<Date>();
 	private ArrayList<String> svlcolList=new ArrayList<String>();
-
+	
+	private String coxResidualOutlierInputFolder;
+	private String coxResidualOutlierOutputFolder;
 
 	public String getSvltargetFileName() {
 		return svltargetFileName;
@@ -76,5 +78,24 @@ public class SurvivalDataSetConfig extends ComorbidDataSetConfig {
 	public void setSurvivalDataSet(sampleConfig survivalDataSet) {
 		SurvivalDataSet = survivalDataSet;
 	}
+	
+	public String getCoxResidualOutlierInputFolder() {
+		return coxResidualOutlierInputFolder;
+	}
+
+	public void setCoxResidualOutlierInputFolder(
+			String coxResidualOutlierInputFolder) {
+		this.coxResidualOutlierInputFolder = coxResidualOutlierInputFolder;
+	}
+
+	public String getCoxResidualOutlierOutputFolder() {
+		return coxResidualOutlierOutputFolder;
+	}
+
+	public void setCoxResidualOutlierOutputFolder(
+			String coxResidualOutlierOutputFolder) {
+		this.coxResidualOutlierOutputFolder = coxResidualOutlierOutputFolder;
+	}
+
 
 }

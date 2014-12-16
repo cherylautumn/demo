@@ -55,16 +55,17 @@ public class SurvivalDataSetWorker extends ComorbidDataSetWorker {
 			formCharlsonFeature(patients, this.cptlistTotal, this.cdsc);
 			csvparser.ComorbidDataSetCreateDoc(getCdsc().getTargetFileName(),getCdsc().getColList(), patients,sc.getSample_append(),  withHeader);
 			
-			for(Date cend: this.cdsc.getCensorDate()){
-				Iterator<Entry<Long,SurvivalTime>> iter = patientsSurvival.entrySet().iterator();
-				
-				while (iter.hasNext()) {					
-					SurvivalTime csvFeature = iter.next().getValue();
-					csvFeature.setCensored_date(cend);
-				}
-				String filename = getCdsc().getSvltargetFileName()+OSValidator.getPathSep()+ImedDateFormat.format(cend)+"svltrainDS.csv";
-				csvparser.SurvivalDataSetCreateDoc(filename,this.cdsc.getSvlcolList(), patientsSurvival);				
-			}
+//			for(Date cend: this.cdsc.getCensorDate()){
+//				Iterator<Entry<Long,SurvivalTime>> iter = patientsSurvival.entrySet().iterator();
+//				
+//				while (iter.hasNext()) {					
+//					SurvivalTime csvFeature = iter.next().getValue();
+//					csvFeature.setCensored_date(cend);
+//				}
+//				//String filename = getCdsc().getSvltargetFileName()+OSValidator.getPathSep()+ImedDateFormat.format(cend)+"svltrainDS.csv";
+//				csvparser.SurvivalDataSetCreateDoc(getCdsc().getSvltargetFileName(),this.cdsc.getSvlcolList(), patientsSurvival);				
+//			}
+			csvparser.SurvivalDataSetCreateDoc(getCdsc().getSvltargetFileName(),this.cdsc.getSvlcolList(), patientsSurvival);
 			
 		} catch (Exception e) {
 			
@@ -72,4 +73,6 @@ public class SurvivalDataSetWorker extends ComorbidDataSetWorker {
 		}
 		
 	}
+	
+	
 }

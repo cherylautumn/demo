@@ -235,7 +235,90 @@ public class ImedDB {
         return value;
 	}
 
-	public static ArrayList<Integer> getPatientDisFeature(Long pid, ArrayList<Integer> cptIdList) throws Exception{
+	public static Date getPatientDisIndexDay(Long pid, ArrayList<Integer> cptIdList) throws Exception{
+		ResultSet rs;
+        ArrayList<Integer> value = new ArrayList<Integer>();
+        try {
+            synchronized (ImedDB.class) {
+            	StringBuffer queryStr = new StringBuffer();
+
+            	queryStr.append(" SELECT person_id, condition_start_date as START_TIME " );
+            	queryStr.append(" FROM condition_occurrence co_d ");
+            	queryStr.append(" WHERE condition_concept_id IN ("+ImedStringFormat.tranListIn(cptIdList)+") AND person_id ="+pid);
+            	queryStr.append(" ORDER BY condition_start_date LIMIT 1");            	            	
+            	logger.info("Query getPatientDisFeature "+queryStr.toString()+"\n");
+                rs = stmt.executeQuery(queryStr.toString());
+                
+                if (rs.next()) {
+                   ResultSet fs;
+                   queryStr = new StringBuffer();
+                   Date IdxDisStart = rs.getTimestamp("START_TIME");  
+                   return IdxDisStart;
+                  
+                }
+        
+                rs.close();
+            }
+        }catch (Exception ex) {
+            throw ex;
+        }
+       return null;
+	}
+	public static ArrayList<Integer> getPatientDisFeature(Long pid, ArrayList<Integer> cptIdList,SurvivalTime svtime) throws Exception{
+        ResultSet rs;
+        ArrayList<Integer> value = new ArrayList<Integer>();
+        try {
+            synchronized (ImedDB.class) {
+               StringBuffer queryStr = new StringBuffer();
+               queryStr = new StringBuffer();
+               Date IdxDisStart = getPatientDisIndexDay(pid, cptIdList);
+               
+               if(svtime!=null)svtime.setDis_index_date(IdxDisStart);
+               queryStr.append(" SELECT DISTINCT  condition_concept_id FROM condition_occurrence "); 
+               queryStr.append(" WHERE person_id = "+pid+" AND condition_start_date <= '"+ new ImedDateFormat().format(IdxDisStart)+"'");
+              
+               logger.info("Query getPatientDisFeature "+queryStr.toString()+"\n");
+               rs = stmt.executeQuery(queryStr.toString());
+               while(rs.next()){
+            	   value.add(rs.getInt("condition_concept_id"));                	   
+               }
+               rs.close();
+               
+            }
+        }catch (Exception ex) {
+            throw ex;
+        }
+        return value;
+	}
+	
+	public static ArrayList<seqItemPair> getPatientDrugFeature(Long pid, ArrayList<Integer> cptIdList) throws Exception{
+        ResultSet rs;
+        ArrayList<seqItemPair> value = new ArrayList<seqItemPair>();
+        try {
+            synchronized (ImedDB.class) {
+               StringBuffer queryStr = new StringBuffer();
+             
+               queryStr = new StringBuffer();
+               Date IdxDisStart = getPatientDisIndexDay(pid, cptIdList);                              
+               queryStr.append(" SELECT de.drug_era_start_date as date_t, de.drug_concept_id as concept_id ");
+               queryStr.append(" FROM drug_era de"); 
+               queryStr.append(" WHERE de.person_id = "+pid+" AND de.drug_era_start_date >= '"+ new ImedDateFormat().format(IdxDisStart)+"'");
+               queryStr.append(" ORDER BY de.drug_era_start_date,de.drug_concept_id ");
+              
+               logger.info("Query getPatientDrugFeature "+queryStr.toString()+"\n");
+               rs = stmt.executeQuery(queryStr.toString());
+               while(rs.next()){
+            	   value.add(new seqItemPair(rs.getDate("date_t"), rs.getInt("concept_id")));                	   
+               }
+               rs.close();
+                
+            }
+        }catch (Exception ex) {
+            throw ex;
+        }
+        return value;
+	}
+/**	public static ArrayList<Integer> getPatientDisFeature(Long pid, ArrayList<Integer> cptIdList) throws Exception{
         ResultSet rs;
         ArrayList<Integer> value = new ArrayList<Integer>();
         try {
@@ -252,7 +335,9 @@ public class ImedDB {
                 if (rs.next()) {
                    ResultSet fs;
                    queryStr = new StringBuffer();
-                   Date IdxDisStart = rs.getTimestamp("START_TIME");                  
+                   Date IdxDisStart = rs.getTimestamp("START_TIME");  
+                   
+                   
                    queryStr.append(" SELECT DISTINCT  condition_concept_id FROM condition_occurrence "); 
                    queryStr.append(" WHERE person_id = "+pid+" AND condition_start_date <= '"+ new ImedDateFormat().format(IdxDisStart)+"'");
                   
@@ -270,7 +355,7 @@ public class ImedDB {
             throw ex;
         }
         return value;
-	}
+	}**/
 	
 	public static HashMap<Long, ArrayList<seqItemPair>> getOutlierPatient(Integer fileId, Double riThld) throws Exception{
 		HashMap<Long, ArrayList<seqItemPair>> patients = new HashMap<Long, ArrayList<seqItemPair>>();
@@ -298,6 +383,7 @@ public class ImedDB {
 	        
 		return patients;
 	}
+/**
 	public static ArrayList<seqItemPair> getPatientDrugFeature(Long pid, ArrayList<Integer> cptIdList) throws Exception{
         ResultSet rs;
         ArrayList<seqItemPair> value = new ArrayList<seqItemPair>();
@@ -335,7 +421,7 @@ public class ImedDB {
             throw ex;
         }
         return value;
-	}
+	}**/
 	public static void getDisSemanticConcept(HashMap<Integer, String> cptmap) throws Exception{
         ResultSet rs = null;
         try {

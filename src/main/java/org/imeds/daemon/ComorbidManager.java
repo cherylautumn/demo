@@ -2,9 +2,10 @@ package org.imeds.daemon;
 
 import org.apache.log4j.Logger;
 import org.imeds.data.ComorbidDataSetWorker;
-import org.imeds.data.PearsonResidualOutlier;
 import org.imeds.data.SurvivalDataSetWorker;
 import org.imeds.data.common.CCIDictionary;
+import org.imeds.data.outlier.CoxDevianceResidualOutlier;
+import org.imeds.data.outlier.PearsonResidualOutlier;
 import org.imeds.seqmining.ComorbidDrugDataSetWorker;
 import org.imeds.util.writeException;
 
@@ -17,7 +18,7 @@ public class ComorbidManager extends ImedsManager {
 		cdt = new CCIDictionary(DeyoCCIPath);
 		cdt.buildDictionary();
 		try {
-			cdt.buildCptMap();
+		//	cdt.buildCptMap();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			logger.error("CCIDictionary build fail"+writeException.toString(e));
@@ -51,6 +52,17 @@ public class ComorbidManager extends ImedsManager {
 				prlo = null;
 			}
 		}
+		if(ImedsDaemonConfig.getCoxDevianceResidualOutlierFolders().size()>0){
+			for(String folderP:ImedsDaemonConfig.getCoxDevianceResidualOutlierFolders()){
+				logger.info("Processing CoxOutlierGen: "+folderP);
+				CoxDevianceResidualOutlier prlo = new CoxDevianceResidualOutlier(folderP,DSConfig);
+				prlo.genSvlData();
+				prlo.oulierGen();
+				prlo.writeOulierToDB();
+				prlo = null;
+			}
+		}
+	
 		
 		//Stage 2.4. Generate outlier seqPre dataset
 		if(ImedsDaemonConfig.getPreSeqDsPrepareFolders().size()>0){

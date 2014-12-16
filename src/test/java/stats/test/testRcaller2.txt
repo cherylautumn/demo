@@ -1,0 +1,35 @@
+package stats.test;
+
+import java.io.File;
+
+import rcaller.RCaller;
+import rcaller.RCode;
+
+public class testRcaller2 {
+	 public static void main(String[] args) {
+	        new testRcaller2();
+	    }
+	 public testRcaller2() {
+	try {
+	      RCaller caller = new RCaller();
+	      caller.setRscriptExecutable("/Library/Frameworks/R.framework/Resources/bin/Rscript");
+
+	      RCode code = new RCode();
+	      code.clear();
+
+	      double[] numbers = new double[]{1, 4, 3, 5, 6, 10};
+
+	      code.addDoubleArray("x", numbers);
+	      File file = code.startPlot();
+	      System.out.println("Plot will be saved to : " + file);
+	      code.addRCode("plot.ts(x)");
+	      code.endPlot();
+
+	      caller.setRCode(code);
+	      caller.runOnly();
+	      code.showPlot(file);
+	    } catch (Exception e) {
+	      System.out.println(e.toString());
+	    }
+	 }
+}

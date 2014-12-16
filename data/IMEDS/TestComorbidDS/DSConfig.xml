@@ -51,21 +51,24 @@
 		</sampleConfig>
 	</DataSetParas>
 	<Survivaltargets>
-		<fileName>data\IMEDS\TestComorbidDS\</fileName>
+		
+		<fileName>data\IMEDS\TestComorbidDS\svltrainDS.csv</fileName>
 		<collectDates>
 			<cDate>2010-10-10</cDate>
 			<cDate>2005-10-10</cDate>			
 		</collectDates>
-		<columns>
+		<columns> <!--must be the same with the seq defined in survival_time obj to string. fixed me later-->
 			<col>ID</col>
 			<col>obs_startDate</col>
 			<col>obs_endDate</col>
 			<col>death_date</col>
+			<col>dis_idx_date</col>
 			<col>Period</col>
 			<col>PeriodStart</col>						
 			<col>PeriodEnd</col>
 			<col>Censored</col>			
 		</columns>
+		<!--<outputFolder>data\IMEDS\TestComorbidDS\coxRegressionPredict</outputFolder>-->
 	</Survivaltargets>	
 	
 	<SurvivalDataSetParas>
@@ -98,11 +101,15 @@
 		<threshold>-1</threshold><!-- 0: return all result. >0, filter out results which Ri lower than it. -->
 		<chiSqrtThreshold>10215</chiSqrtThreshold><!-- chi-sqrt threshold, DF=n-(p+1), alpha =0.05 -->
 	</PearsonResidualOutlier>
+
+	<CoxDevianceResidualOutlier>
+		<inputFolder>coxRegressionPredict</inputFolder> 
+		<outputFolder>outlier</outputFolder>	
+	</CoxDevianceResidualOutlier>
+
 	<preSeqDS>
     	<fittedSparkLRmodels>
     		<!--<para>500_1_0</para>  1,500 para is file_id in db--> 
-    		<para>5000_1_9</para>
-			<para>10000_1_8</para>
     	</fittedSparkLRmodels>
     	<outlierThreshold>3.0</outlierThreshold>
     	<outputFolder>preSeq</outputFolder>	

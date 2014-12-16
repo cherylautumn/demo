@@ -1,0 +1,90 @@
+package stats.test;
+import static java.lang.System.out;
+
+import java.util.*;
+import java.util.Map.Entry;
+
+import org.imeds.data.SurvivalTime;
+import org.imeds.util.CCIcsvTool;
+
+import javastat.*;
+import static javastat.util.Argument.*;
+import static javastat.util.Output.*;
+import javastat.util.*;
+ 
+/**
+ *
+ * <p>Example: class CoxRegression.</p>
+ * <p>Data Source: Collett, D. (1994). Modelling Survival Data in Medical
+ *    Research. New York: Chapman and Hall, pp. 290-291. </p>
+ */
+ 
+public class CoxRegressionExample
+{
+ 
+    public static void main(String arg[])
+    {
+    	HashMap<Long,SurvivalTime> DataPoints = new HashMap<Long,SurvivalTime>();
+    	String svfilename="/Users/cheryl/DevWorkSpace/demo/data/IMEDS/TestComorbidDS/2010-10-10svltrainDS.csv";
+    	String trainDSname="/Users/cheryl/DevWorkSpace/demo/data/IMEDS/TestComorbidDS/trainDS.csv";
+    	CCIcsvTool.SurvivalDataSetParserDoc(svfilename, DataPoints);    	
+    	CCIcsvTool.SurvivalDataSetFeatureParserDoc(trainDSname, DataPoints) ;
+    	
+    	double time[]=new double[DataPoints.size()];
+    	double censor[]=new double[DataPoints.size()];
+    	double covariate[][]=new double[17][DataPoints.size()];
+    	
+    	Iterator<Entry<Long,SurvivalTime>> iter = DataPoints .entrySet().iterator();
+		
+		int idx=0;
+		while (iter.hasNext()) {					
+			SurvivalTime st = iter.next().getValue();
+			
+			time[idx]=st.getSurvival_length()*1.0;
+			
+			if(st.isCensored())censor[idx]=1.0;
+			else censor[idx]=0.0;
+		
+			for(int i=0;i<st.getFeatures().size();i++){
+				covariate[i][idx]=st.getFeatures().get(i);
+			   }
+			idx++;
+		}
+		String rfileName = "/Users/cheryl/DevWorkSpace/demo/data/IMEDS/TestComorbidDS/2010-10-10svltrainDSforR.csv";
+	   CCIcsvTool.SurvivalDataSetCreateDoc(rfileName, DataPoints);	
+       DataManager dm = new DataManager();
+       /*
+        CoxRegression testclass1 = new CoxRegression(0.05, time, censor,covariate);
+        testclass1.maxIterationNumber=1000;
+        double[] coefficients = testclass1.coefficients;
+        double[][] variance ={testclass1.variance[0], testclass1.variance[1]};
+        double[] testStatistic = testclass1.testStatistic;
+        double[] pValue = testclass1.pValue;
+        double[][] confidenceInterval = {testclass1.confidenceInterval[0],testclass1.confidenceInterval[1]};
+        for(int k=0;k<coefficients.length;k++)System.out.print(coefficients.length+"$$"+coefficients[k]+" ");
+ 
+        CoxRegression testclass2 = new CoxRegression();
+        coefficients = testclass2.coefficients(time, censor, covariate);
+        testStatistic = testclass2.testStatistic(time, censor, covariate);
+        pValue = testclass2.pValue(time, censor, covariate);
+        confidenceInterval = testclass2.confidenceInterval(0.1, time, censor, covariate);
+ 
+        Hashtable argument1 = new Hashtable();
+        argument1.put(ALPHA, 0.05);
+        StatisticalAnalysis testclass3 = new CoxRegression(argument1, time, censor, covariate[0],covariate[1]).statisticalAnalysis;
+        coefficients = (double[]) testclass3.output.get(COEFFICIENTS);
+        variance =(double[][]) testclass3.output.get(COEFFICIENT_VARIANCE);
+        testStatistic = (double[]) testclass3.output.get(TEST_STATISTIC);
+        pValue = (double[]) testclass3.output.get(PVALUE);
+        confidenceInterval = (double[][]) testclass3.output.get(CONFIDENCE_INTERVAL);
+ 
+        Hashtable argument2 = new Hashtable();
+        CoxRegression testclass4 = new CoxRegression(argument2, null);
+        coefficients = testclass4.coefficients(argument2, time, censor, covariate);
+        testStatistic = testclass4.testStatistic(argument2, time, censor,covariate);
+        pValue = testclass4.pValue(argument2, time, censor, covariate);
+        argument2.put(ALPHA, 0.1);
+        confidenceInterval = testclass4.confidenceInterval(argument2, time, censor, covariate);*/
+    }
+ 
+}

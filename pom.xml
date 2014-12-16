@@ -53,6 +53,18 @@
     	<version>2.0.2</version>
     	<type>pom</type>
     </dependency>
+    <dependency>
+		 <groupId>joda-time</groupId>
+		 <artifactId>joda-time</artifactId>
+		 <scope>system</scope>
+		 <systemPath>${project.basedir}/lib/joda-time-2.4.jar</systemPath>
+	</dependency>
+	<dependency>
+		 <groupId>org.nuiton.thirdparty</groupId>
+		 <artifactId>JRI</artifactId>
+		 <version>0.8-4</version>
+	</dependency>
+		
   </dependencies>
   <dependencyManagement>
   	<dependencies>
@@ -107,8 +119,16 @@
   		<dependency>
 		  <groupId>joda-time</groupId>
 		  <artifactId>joda-time</artifactId>
-		  <version>2.5</version>
+		  <version>2.4</version>
+		   <scope>system</scope>
+		    <systemPath>${project.basedir}/lib/joda-time-2.4.jar</systemPath>
 		</dependency>
+		<dependency>
+			<groupId>org.nuiton.thirdparty</groupId>
+			<artifactId>JRI</artifactId>
+			<version>0.8-4</version>
+		</dependency>
+		
   		
   	</dependencies>
   </dependencyManagement>

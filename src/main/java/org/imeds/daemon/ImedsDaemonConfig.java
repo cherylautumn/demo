@@ -28,6 +28,7 @@ public class ImedsDaemonConfig {
 	 private static ArrayList<String> pearsonOutlierToDB = new ArrayList<String>(); 
 	 private static ArrayList<String> preSeqDsPrepareFolders = new ArrayList<String>();
 	 private static ArrayList<String> seqPtnPrepareFolders = new ArrayList<String>();
+	 private static ArrayList<String> CoxDevianceResidualOutlierFolders = new ArrayList<String>();
 	 private static Integer flush;
 	 public static String getOmopDbName() {
 		return omopDbName;
@@ -105,6 +106,13 @@ public class ImedsDaemonConfig {
 			ArrayList<String> preSeqDsPrepareFolders) {
 		ImedsDaemonConfig.preSeqDsPrepareFolders = preSeqDsPrepareFolders;
 	}
+	public static ArrayList<String> getCoxDevianceResidualOutlierFolders() {
+		return CoxDevianceResidualOutlierFolders;
+	}
+	public static void setCoxDevianceResidualOutlierFolders(
+			ArrayList<String> coxDevianceResidualOutlier) {
+		CoxDevianceResidualOutlierFolders = coxDevianceResidualOutlier;
+	}
 	public static Integer getFlush() {
 		return flush;
 	}
@@ -133,10 +141,15 @@ public class ImedsDaemonConfig {
 				}else if(L1_emt.getName().equals("expConfig")){
 					List<Element> expList = L1_emt.element("patientFeaturePrepare").elements("folder");
 					getFolderList(expList, patientFeatureExpFolders);
+					
 					expList = L1_emt.element("pearsonOutlier").elements("folder");
 					getFolderList(expList,pearsonOutlierExpFolders);
+					
 					expList = L1_emt.element("pearsonOutlierToDB").elements("folder");
 					getFolderList(expList,pearsonOutlierToDB);
+					
+					expList = L1_emt.element("CoxDevianceResidualOutlier").elements("folder");
+					getFolderList(expList,CoxDevianceResidualOutlierFolders);
 					
 					String flushstr = L1_emt.element("pearsonOutlierToDB").elementText("flush");
 					if(flushstr!=null && flushstr.trim()!="")flush = Integer.parseInt(flushstr);

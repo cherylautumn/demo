@@ -169,6 +169,9 @@ public class ComorbidDataSetWorker extends Worker {
 		
 	}
 	public void formCharlsonFeature(HashMap<Long, ArrayList<Double>> patients,ArrayList<Integer> cptlistTotal,ComorbidDataSetConfig cdsc) throws Exception{
+		formCharlsonFeature( patients,cptlistTotal,cdsc,null);
+	}
+	public void formCharlsonFeature(HashMap<Long, ArrayList<Double>> patients,ArrayList<Integer> cptlistTotal,ComorbidDataSetConfig cdsc, SurvivalTime svtime) throws Exception{
 
 		//2. Select the first date when the patient was diagnosed with Diabetes. Iterate patients one by one
 		Iterator<Entry<Long, ArrayList<Double>>> iter = patients.entrySet().iterator();
@@ -186,7 +189,7 @@ public class ComorbidDataSetWorker extends Worker {
 			
 			//3. create a binary var=1 for each of the comorbidities if the date it was recorded was before the index date
 			Long key = entry.getKey(); 			    												
-			ArrayList<Integer> feature =  ImedDB.getPatientDisFeature(key,cptlistTotal);
+			ArrayList<Integer> feature =  ImedDB.getPatientDisFeature(key,cptlistTotal, svtime);
 			for(Integer ft:feature){
 				if(this.ccid.getCptCat().containsKey(ft)){
 					int cptCat = this.ccid.getCptCat().get(ft);

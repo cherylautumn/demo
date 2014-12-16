@@ -19,6 +19,9 @@ public class ComorbidDataSetConfig extends DataSetConfig {
 	private ArrayList<String> sparkLRmodelParas = new ArrayList<String>();
 	private ArrayList<String> sparkLRmodelDataSets = new ArrayList<String>();
 
+	
+
+	
 	private ArrayList<String> fittedSparkLRmodelParas = new ArrayList<String>();
 	private String preseqOutputFolder;
 	private Double outlierThreshold;
@@ -148,6 +151,7 @@ public class ComorbidDataSetConfig extends DataSetConfig {
 			this.fittedSparkLRmodelParas.add(ele.getText());			
 		}
 	}
+
 	public String getPreseqOutputFolder() {
 		return preseqOutputFolder;
 	}

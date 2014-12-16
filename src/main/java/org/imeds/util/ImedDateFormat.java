@@ -32,8 +32,11 @@ public class ImedDateFormat {
      * A convenient API to parse date string.
      */
     public static Date parse(String source) throws Exception {
+    	
     	SimpleDateFormat sdf = new SimpleDateFormat(IMES_DATE_FORMAT);
-        return sdf.parse(source);
+    	if(source!=null&& !source.trim().equals(""))
+    		return sdf.parse(source);
+    	return null;
     }
     public static Date parseTime(String source) throws Exception {
     	SimpleDateFormat sdf = new SimpleDateFormat(IMES_TIME_FORMAT);

@@ -112,8 +112,11 @@ public class ComorbidDSxmlTool implements DocumentTool{
 					cdsc.setSurvivalDataSet(L1_emt.element("sampleConfig"));
 					
 					
-				}else{
+				}else if(L1_emt.getName().equals("CoxDevianceResidualOutlier")){
+					cdsc.setCoxResidualOutlierInputFolder(L1_emt.element("inputFolder").getText());
+					cdsc.setCoxResidualOutlierOutputFolder(L1_emt.element("outputFolder").getText());
 					
+				}else{
 					
 				}
 			}
