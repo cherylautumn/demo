@@ -14,8 +14,8 @@
 	   <!-- Here starts to be controlled by ComorbidManager -->
 		<!-- Stage 1: prepare patient features, train.csv -->
 		<patientFeaturePrepare>	
-		   	<folder>data\IMEDS\TestComorbidDS\</folder>	
-		 <!--  	<folder>data\IMEDS\CgstHfComorbidDS\</folder>  	-->	
+		   <!-- 	<folder>data\IMEDS\TestComorbidDS\</folder>	
+		  	<folder>data\IMEDS\CgstHfComorbidDS\</folder>  	-->	
 		</patientFeaturePrepare>
 		
 		<!-- if spark didn't process pearsonOutlier (<threshold>-1</threshold> threshold setting equal to -1), do it here. -->
@@ -25,15 +25,19 @@
 		<!--	<folder>data\IMEDS\MiComorbidDS\</folder> 
 			<folder>data\IMEDS\CgstHfComorbidDS\</folder> -->
 		</pearsonOutlier>		
-
+		<CoxDevianceResidualOutlier>
+		<!--	<folder>data\IMEDS\TestComorbidDS\</folder> -->
+		</CoxDevianceResidualOutlier>	
 		<pearsonOutlierToDB>
-		<!--	<flush>1000</flush>
-			<folder>data\IMEDS\MiComorbidDS\</folder>	
+			<flush>1000</flush>
+			<folder>data\IMEDS\TestComorbidDS\</folder>	
+		<!--	<folder>data\IMEDS\MiComorbidDS\</folder>	
 			<folder>data\IMEDS\CgstHfComorbidDS\</folder> -->
 		</pearsonOutlierToDB>
-
+		
 		<preSeqDsPrepare>
-		<!--	<folder>data\IMEDS\MiComorbidDS\</folder>	
+		<!--	<folder>data\IMEDS\TestComorbidDS\</folder>	
+			<folder>data\IMEDS\MiComorbidDS\</folder>	
 			<folder>data\IMEDS\CgstHfComorbidDS\</folder>  -->
 		</preSeqDsPrepare>
 		

@@ -74,7 +74,7 @@
 	<SurvivalDataSetParas>
 		<enable>1</enable>
 		<sampleConfig>
-			<sample_range>0,50000</sample_range><!-- 0,100 -->	
+			<sample_range>0,100</sample_range><!-- 0,100 -->	
 			<sample_random>true</sample_random>			
 			<sample_append>false</sample_append>
 		</sampleConfig>
@@ -108,7 +108,7 @@
 	</CoxDevianceResidualOutlier>
 
 	<preSeqDS>
-    	<fittedSparkLRmodels>
+    	<fittedSparkLRmodels> <!--NOTE: if here didn't set any parameter, generate all patients drug history from tranDS -->
     		<!--<para>500_1_0</para>  1,500 para is file_id in db--> 
     	</fittedSparkLRmodels>
     	<outlierThreshold>3.0</outlierThreshold>

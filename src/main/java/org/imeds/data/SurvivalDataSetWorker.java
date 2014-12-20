@@ -52,7 +52,7 @@ public class SurvivalDataSetWorker extends ComorbidDataSetWorker {
 		HashMap<Long, SurvivalTime> patientsSurvival =  new HashMap<Long, SurvivalTime>();
 		try {
 			ImedDB.getPatientsWithIndexDiagnoseSurvivalData(patients,patientsSurvival,this.cptlistTotal, getCdsc().getColList(), sc.getSample_range_start(),sc.getSample_range_end(),sc.getSample_random());
-			formCharlsonFeature(patients, this.cptlistTotal, this.cdsc);
+			formCharlsonFeature(patients, this.cptlistTotal, this.cdsc, patientsSurvival );
 			csvparser.ComorbidDataSetCreateDoc(getCdsc().getTargetFileName(),getCdsc().getColList(), patients,sc.getSample_append(),  withHeader);
 			
 //			for(Date cend: this.cdsc.getCensorDate()){

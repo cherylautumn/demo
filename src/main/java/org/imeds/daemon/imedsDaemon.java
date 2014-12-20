@@ -37,7 +37,7 @@ public class imedsDaemon {
 		
 		logger.info("IMED database connection.");
 		DbInit();
-		RInit();
+	//	RInit();
 		
 	}
 	/*####################################################################################*
@@ -53,7 +53,7 @@ public class imedsDaemon {
     public void DbInit(){
     
 		try {
-		//	ImedDB.connDB(ImedsDaemonConfig.getOmopDbDriver(), ImedsDaemonConfig.getOmopDbUrl(),ImedsDaemonConfig.getOmopDbUser(), ImedsDaemonConfig.getOmopDbPassword(), ImedsDaemonConfig.getOmopDbSearchPath());
+			ImedDB.connDB(ImedsDaemonConfig.getOmopDbDriver(), ImedsDaemonConfig.getOmopDbUrl(),ImedsDaemonConfig.getOmopDbUser(), ImedsDaemonConfig.getOmopDbPassword(), ImedsDaemonConfig.getOmopDbSearchPath());
 		} catch (Exception e) {
 			logger.error("IMED database connection fail!");
 			logger.error(writeException.toString(e));
@@ -89,7 +89,7 @@ public class imedsDaemon {
 		singleton = new imedsDaemon();
 		singleton.service();
 		DbClose();
-		RClose();
+		//RClose();
 	}
 
 }

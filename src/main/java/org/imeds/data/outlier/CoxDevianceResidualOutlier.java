@@ -71,7 +71,7 @@ public class CoxDevianceResidualOutlier extends Outlier {
 				csvFeature.setCensored_date(cend);
 			}
 			String filename = this.lrFolder+OSValidator.getPathSep()+ImedDateFormat.format(cend)+"svltrainDS.csv";
-			getCsvparser().SurvivalDataSetCreateDoc(filename,this.cdsc.getSvlcolList(), patientsSurvival);				
+			getCsvparser().SurvivalCensoredDataSetCreateDoc(filename,this.cdsc.getSvlcolList(), patientsSurvival);				
 		}
 	}
 	public void init( String svFileName, String rFileName ){

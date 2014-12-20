@@ -18,7 +18,7 @@ public class ComorbidManager extends ImedsManager {
 		cdt = new CCIDictionary(DeyoCCIPath);
 		cdt.buildDictionary();
 		try {
-		//	cdt.buildCptMap();
+			cdt.buildCptMap();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			logger.error("CCIDictionary build fail"+writeException.toString(e));
@@ -33,7 +33,7 @@ public class ComorbidManager extends ImedsManager {
 		}
 		//Stage 2.1. Train and predict LR model. Done by Spark.
 		
-		//Stage 2.2. Generate outlier.
+		//Stage 2.2. Generate Pearson outlier.
 		if(ImedsDaemonConfig.getPearsonOutlierExpFolders().size()>0){
 			for(String folderP:ImedsDaemonConfig.getPearsonOutlierExpFolders()){
 				logger.info("Processing PearsonOutlierGen: "+folderP);
@@ -42,27 +42,25 @@ public class ComorbidManager extends ImedsManager {
 				prlo = null;
 			}
 		}
-		//Stage 2.3. Write outlier into database
-		if(ImedsDaemonConfig.getPearsonOutlierToDB().size()>0){
-			for(String folderP:ImedsDaemonConfig.getPearsonOutlierToDB()){
-				logger.info("Processing Pearson Outlier To DB: "+folderP);
-				PearsonResidualOutlier prlo =  new PearsonResidualOutlier(folderP+DSConfig);
-//				prlo.oulierGen();
-				prlo.writeOulierToDB();
-				prlo = null;
-			}
-		}
+		//Stage 2.2. Generate cox deviance outlier.
 		if(ImedsDaemonConfig.getCoxDevianceResidualOutlierFolders().size()>0){
 			for(String folderP:ImedsDaemonConfig.getCoxDevianceResidualOutlierFolders()){
 				logger.info("Processing CoxOutlierGen: "+folderP);
 				CoxDevianceResidualOutlier prlo = new CoxDevianceResidualOutlier(folderP,DSConfig);
 				prlo.genSvlData();
 				prlo.oulierGen();
+				prlo = null;
+			}
+		}
+		//Stage 2.3. Write outlier into database
+		if(ImedsDaemonConfig.getPearsonOutlierToDB().size()>0){
+			for(String folderP:ImedsDaemonConfig.getPearsonOutlierToDB()){
+				logger.info("Processing Outlier To DB: "+folderP);
+				PearsonResidualOutlier prlo =  new PearsonResidualOutlier(folderP+DSConfig);
 				prlo.writeOulierToDB();
 				prlo = null;
 			}
 		}
-	
 		
 		//Stage 2.4. Generate outlier seqPre dataset
 		if(ImedsDaemonConfig.getPreSeqDsPrepareFolders().size()>0){

@@ -65,7 +65,43 @@ public class CCIcsvTool implements DocumentTool{
 			e.printStackTrace();
 		}       
 	}
-	public void SurvivalDataSetCreateDoc(String fileName, ArrayList<String> arrayList, HashMap<Long, SurvivalTime> features) {
+public void SurvivalDataSetCreateDoc(String fileName, ArrayList<String> arrayList, HashMap<Long, SurvivalTime> features) {
+		
+		//CSV Write Example using CSVPrinter
+//		CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
+		CSVFormat format = CSVFormat.RFC4180.withDelimiter(',');
+		
+		try {
+			
+			CSVPrinter printer = new CSVPrinter(new FileWriter(fileName), format);
+
+	        Iterator<Entry<Long, SurvivalTime>> iter =features.entrySet().iterator();
+	        
+	        printer.printRecord(arrayList);
+	        
+			while (iter.hasNext()) { 
+				Entry<Long, SurvivalTime> entry = iter.next(); 
+				 SurvivalTime feature = entry.getValue();
+				// if(feature.getCensored_date().after(feature.getObs_start_date())){ 
+					 printer.print(entry.getKey());
+					 printer.print(ImedDateFormat.format(feature.getObs_start_date()));
+					 printer.print(ImedDateFormat.format(feature.getObs_end_date()));
+					 printer.print(ImedDateFormat.format(feature.getDeath_date()));
+					 printer.print(ImedDateFormat.format(feature.getDis_index_date()));
+//					 printer.print(feature.getSurvival_length());
+//					 printer.print(feature.getSurvival_start());
+//					 printer.print(feature.getSurvival_end());
+//					 printer.print(feature.isCensored());
+					 printer.println();					 
+				 //}
+			}
+			 printer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}       
+	}
+	public void SurvivalCensoredDataSetCreateDoc(String fileName, ArrayList<String> arrayList, HashMap<Long, SurvivalTime> features) {
 		
 		//CSV Write Example using CSVPrinter
 //		CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
