@@ -3,6 +3,7 @@ package org.imeds.seqmining;
 import java.util.ArrayList;
 
 import org.imeds.data.common.CCIDictionary;
+import org.imeds.feature.screening.ModelFreeScreen.MFStype;
 
 public class SequenceDataSetConfig {
 	
@@ -24,6 +25,35 @@ public class SequenceDataSetConfig {
 	private ArrayList<Double> MMRFScoverage = new ArrayList<Double>();		
 	private String MMRFSfeatureItemsetFolder;
 	
+	private boolean SVIenable=false;
+	private String SVIverticalSeqFile;
+	private String SVIsurvivalFile;
+	private String SVIfilterFile;
+	private String SVIfilterCriteria;
+	private String SVIoutputFileName;
+	private Double SVIoutlierThreshold;
+	
+	private boolean SVIFSenable=false;
+	private String SVIFSsurvivalFile;
+	private String SVIFSseqFile;
+	private String SVIFSseqptnFolder;
+	private String SVIFSseqCoxFolder;
+	private String SVIFSseqFeatureFolder;
+	private String SVIFSseqPreSemanticFolder;
+	
+	private boolean MFreeenable=false;
+	private Integer MFreexStart;
+	private ArrayList<String> MFreeyTitle =new ArrayList<String>();
+	private boolean MFreesoftThreshold=false;
+	private Integer MFreetopK;
+	private Integer MFreefeatureStart;
+	private Integer MFreecoxIter;
+	private Integer MFreeStep;
+	private MFStype MFreescreenType;
+	private String MFreeaucFolder;
+	private ArrayList<String> MFreefeatureScore=new ArrayList<String>();	
+	private String MFreefeatureDescription;
+
 	public String getInputFolder() {
 		return inputFolder;
 	}
@@ -176,4 +206,222 @@ public class SequenceDataSetConfig {
 		MMRFSlabelBase = mMRFSlabelBase;
 	}
 
+	public boolean isSVIenable() {
+		return SVIenable;
+	}
+
+	public void setSVIenable(boolean sVIenable) {
+		SVIenable = sVIenable;
+	}
+
+	public String getSVIverticalSeqFile() {
+		return SVIverticalSeqFile;
+	}
+
+	public void setSVIverticalSeqFile(String sVIverticalSeqFile) {
+		SVIverticalSeqFile = sVIverticalSeqFile;
+	}
+
+	public String getSVIsurvivalFile() {
+		return SVIsurvivalFile;
+	}
+
+	public void setSVIsurvivalFile(String sVIsurvivalFile) {
+		SVIsurvivalFile = sVIsurvivalFile;
+	}
+
+	public String getSVIfilterFile() {
+		return SVIfilterFile;
+	}
+
+	public void setSVIfilterFile(String sVIfilterFile) {
+		SVIfilterFile = sVIfilterFile;
+	}
+
+	public String getSVIfilterCriteria() {
+		return SVIfilterCriteria;
+	}
+
+	public void setSVIfilterCriteria(String sVIfilterCriteria) {
+		SVIfilterCriteria = sVIfilterCriteria;
+	}
+
+	public String getSVIoutputFileName() {
+		return SVIoutputFileName;
+	}
+
+	public void setSVIoutputFileName(String sVIoutputFileName) {
+		SVIoutputFileName = sVIoutputFileName;
+	}
+
+	public boolean isSVIFSenable() {
+		return SVIFSenable;
+	}
+
+	public void setSVIFSenable(boolean sVIFSenable) {
+		SVIFSenable = sVIFSenable;
+	}
+
+	public String getSVIFSsurvivalFile() {
+		return SVIFSsurvivalFile;
+	}
+
+	public void setSVIFSsurvivalFile(String sVIFSsurvivalFile) {
+		SVIFSsurvivalFile = sVIFSsurvivalFile;
+	}
+
+	public String getSVIFSseqFile() {
+		return SVIFSseqFile;
+	}
+
+	public void setSVIFSseqFile(String sVIFSseqFile) {
+		SVIFSseqFile = sVIFSseqFile;
+	}
+
+	public String getSVIFSseqptnFolder() {
+		return SVIFSseqptnFolder;
+	}
+
+	public void setSVIFSseqptnFolder(String sVIFSseqptnFolder) {
+		SVIFSseqptnFolder = sVIFSseqptnFolder;
+	}
+
+	public String getSVIFSseqCoxFolder() {
+		return SVIFSseqCoxFolder;
+	}
+
+	public void setSVIFSseqCoxFolder(String sVIFSseqCoxFolder) {
+		SVIFSseqCoxFolder = sVIFSseqCoxFolder;
+	}
+
+	public String getSVIFSseqFeatureFolder() {
+		return SVIFSseqFeatureFolder;
+	}
+
+	public void setSVIFSseqFeatureFolder(String sVIFSseqFeatureFolder) {
+		SVIFSseqFeatureFolder = sVIFSseqFeatureFolder;
+	}
+
+
+
+
+	public String getSVIFSseqPreSemanticFolder() {
+		return SVIFSseqPreSemanticFolder;
+	}
+
+	public void setSVIFSseqPreSemanticFolder(String sVIFSseqPreSemanticFolder) {
+		SVIFSseqPreSemanticFolder = sVIFSseqPreSemanticFolder;
+	}
+
+	public Double getSVIoutlierThreshold() {
+		return SVIoutlierThreshold;
+	}
+
+	public void setSVIoutlierThreshold(Double sVIoutlierThreshold) {
+		SVIoutlierThreshold = sVIoutlierThreshold;
+	}
+
+
+	public boolean isMFreeenable() {
+		return MFreeenable;
+	}
+
+	public void setMFreeenable(boolean mFreeenable) {
+		MFreeenable = mFreeenable;
+	}
+
+	public Integer getMFreexStart() {
+		return MFreexStart;
+	}
+
+	public void setMFreexStart(Integer mFreexStart) {
+		MFreexStart = mFreexStart;
+	}
+
+	public ArrayList<String> getMFreeyTitle() {
+		return MFreeyTitle;
+	}
+
+	public void setMFreeyTitle(ArrayList<String> mFreeyTitle) {
+		MFreeyTitle = mFreeyTitle;
+	}
+
+	public boolean isMFreesoftThreshold() {
+		return MFreesoftThreshold;
+	}
+
+	public void setMFreesoftThreshold(boolean mFreesoftThreshold) {
+		MFreesoftThreshold = mFreesoftThreshold;
+	}
+
+	public Integer getMFreetopK() {
+		return MFreetopK;
+	}
+
+	public void setMFreetopK(Integer mFreetopK) {
+		MFreetopK = mFreetopK;
+	}
+
+	public Integer getMFreefeatureStart() {
+		return MFreefeatureStart;
+	}
+
+	public void setMFreefeatureStart(Integer mFreefeatureStart) {
+		MFreefeatureStart = mFreefeatureStart;
+	}
+
+	public Integer getMFreecoxIter() {
+		return MFreecoxIter;
+	}
+
+	public void setMFreecoxIter(Integer mFreecoxIter) {
+		MFreecoxIter = mFreecoxIter;
+	}
+
+	public Integer getMFreeStep() {
+		return MFreeStep;
+	}
+
+	public void setMFreeStep(Integer mFreeStep) {
+		MFreeStep = mFreeStep;
+	}
+
+	public MFStype getMFreescreenType() {
+		return MFreescreenType;
+	}
+
+	public void setMFreescreenType(MFStype mFreescreenType) {
+		MFreescreenType = mFreescreenType;
+	}
+
+
+	public String getMFreeaucFolder() {
+		return MFreeaucFolder;
+	}
+
+	public void setMFreeaucFolder(String mFreeaucFolder) {
+		MFreeaucFolder = mFreeaucFolder;
+	}
+
+	public ArrayList<String> getMFreefeatureScore() {
+		return MFreefeatureScore;
+	}
+
+	public void setMFreefeatureScore(ArrayList<String> mFreefeatureScore) {
+		MFreefeatureScore = mFreefeatureScore;
+	}
+
+	public void addMFreefeatureScore(String mFreefeatureScore) {
+		this.MFreefeatureScore.add(mFreefeatureScore);
+	}
+
+	public String getMFreefeatureDescription() {
+		return MFreefeatureDescription;
+	}
+
+	public void setMFreefeatureDescription(String mFreefeatureDescription) {
+		MFreefeatureDescription = mFreefeatureDescription;
+	}
+
+	
 }

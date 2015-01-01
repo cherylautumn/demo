@@ -8,6 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -18,6 +20,8 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.imeds.data.ComorbidDataSetConfig;
+import org.imeds.feature.screening.feature;
+import org.imeds.feature.screening.ModelFreeScreen.MFStype;
 import org.imeds.feature.selection.MMRFSConfig;
 import org.imeds.feature.selection.basicItemsets;
 import org.imeds.feature.selection.discrimItemsets;
@@ -37,6 +41,73 @@ public class SPMdocTool  implements DocumentTool{
 	public void createDoc(String fileName) {
 		// TODO Auto-generated method stub
 		
+	}
+	public void createFeatureFileModelFree(String fileName, ArrayList<discrimItemsets>  arrayList) {
+		
+		FileWriter fstream;
+		try {
+			  fstream = new FileWriter(fileName);
+		
+		      BufferedWriter out = new BufferedWriter(fstream);
+		      out.write("support,modelFreeScore,seqId,seq");
+			  out.newLine();
+		      for(discrimItemsets row:arrayList){
+		    	
+		    	out.write(row.getSupport()+",");
+		    	
+		    	out.write(row.getGain()+",");
+		    	out.write(row.getItemsets().getId()+",");
+		    	for(TreeSet<Integer> ri:row.getItemsets().getItemsets()){
+					String setstr = ri.toString();
+					setstr = setstr.substring(setstr.indexOf("[")+1,setstr.indexOf("]")).replace(",","");						 
+					out.write(setstr+" -1 ");
+				}
+					 out.write(" -2 ");
+					 out.newLine();
+		      }
+		      //Close the output stream
+		      out.close();    
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void createFeatureFilePreSemantic(String fileName,String featureType, ArrayList<discrimItemsets>  arrayList) {
+		
+		FileWriter fstream;
+		try {
+			  fstream = new FileWriter(fileName);
+		
+		      BufferedWriter out = new BufferedWriter(fstream);
+		      out.write(featureType+",seqId,seq");
+			  out.newLine();
+			  int length=arrayList.size();
+			  	
+			  
+			      for(discrimItemsets row:arrayList){
+			    	if(featureType.contains("support")){
+			    		out.write(row.getSupport()+",");
+			    	}else if(featureType.contains("modelFreeScore")){
+			    		out.write(row.getGain()+",");
+			    	}else{
+			    		out.write((length--)+",");
+			    	}
+			    	out.write(row.getItemsets().getId()+",");
+			    	for(TreeSet<Integer> ri:row.getItemsets().getItemsets()){
+						String setstr = ri.toString();
+						setstr = setstr.substring(setstr.indexOf("[")+1,setstr.indexOf("]")).replace(",","");						 
+						out.write(setstr+" -1 ");
+					}
+						 out.write(" -2 ");
+						 out.newLine();
+			      }	
+			  
+		      //Close the output stream
+		      out.close();    
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public void createFeatureFileRi(String fileName, ArrayList<discrimItemsets>  arrayList) {
 		
@@ -202,8 +273,83 @@ public class SPMdocTool  implements DocumentTool{
 					}
 					
 				}
+
+				if(L1_emt.getName().equals("SurvivalSequenceDataSetConfig")){
+					String enable = L1_emt.elementText("enable");
+					if(enable!=null && enable.trim().equalsIgnoreCase("1"))
+						cdsc.setSVIenable(true);
+					
+					cdsc.setSVIverticalSeqFile(L1_emt.elementText("verticalSeqFile"));
+					cdsc.setSVIsurvivalFile(L1_emt.elementText("survivalFile"));
+					cdsc.setSVIfilterFile(L1_emt.elementText("filterFile"));
+					cdsc.setSVIfilterCriteria(L1_emt.elementText("filterCriteria").trim().toLowerCase());
+					cdsc.setSVIoutputFileName(L1_emt.elementText("outputFileName"));
+					cdsc.setSVIoutlierThreshold(Double.parseDouble(L1_emt.elementText("outlierThreshold").trim()));
+					
+				}
+				if(L1_emt.getName().equals("SurvivalFSConfig")){
+					String enable = L1_emt.elementText("enable");
+					if(enable!=null && enable.trim().equalsIgnoreCase("1"))
+						cdsc.setSVIFSenable(true);
+					
+					cdsc.setSVIFSsurvivalFile(L1_emt.elementText("survivalFile"));
+					cdsc.setSVIFSseqFile(L1_emt.elementText("seqFile"));
+					cdsc.setSVIFSseqptnFolder(L1_emt.elementText("seqptnFolder"));
+					cdsc.setSVIFSseqCoxFolder(L1_emt.elementText("seqCoxFolder"));
+					cdsc.setSVIFSseqFeatureFolder(L1_emt.elementText("seqFeatureFolder"));
+					cdsc.setSVIFSseqPreSemanticFolder(L1_emt.elementText("seqPreSemanticFolder"));
+				}
 				
-				
+				if(L1_emt.getName().equals("ModelFreeScreenConfig")){
+					String enable = L1_emt.elementText("enable");
+					if(enable!=null && enable.trim().equalsIgnoreCase("1"))
+						cdsc.setMFreeenable(true);
+					
+					cdsc.setMFreexStart(Integer.parseInt(L1_emt.elementText("xStart").trim()));
+					
+					String yTitleStr = L1_emt.elementText("yTitle");
+					if(yTitleStr !=null && !yTitleStr.trim().equals("")){
+						String yTitle[]=yTitleStr.split(",");
+						for(int i=0;i<yTitle.length;i++){
+							cdsc.getMFreeyTitle().add(yTitle[i].trim());
+						}
+					}
+					String softThreshold = L1_emt.elementText("softThreshold");
+					if(softThreshold!=null && softThreshold.trim().equalsIgnoreCase("1"))
+						cdsc.setMFreesoftThreshold(true);
+					
+					cdsc.setMFreetopK(Integer.parseInt(L1_emt.elementText("topK").trim()));
+					cdsc.setMFreecoxIter(Integer.parseInt(L1_emt.elementText("coxIter").trim()));
+					cdsc.setMFreeStep(Integer.parseInt(L1_emt.elementText("step").trim()));
+					String featurestart = L1_emt.elementText("featureStart").trim();
+					if(featurestart !=null && !featurestart.equals("")){
+						cdsc.setMFreefeatureStart(Integer.parseInt(featurestart));
+					}else{
+						cdsc.setMFreefeatureStart(-1);
+					}
+					String sctypeStr = L1_emt.elementText("screenType").trim().toLowerCase();
+					if(sctypeStr!=null && sctypeStr.equals(MFStype.General.name().toLowerCase())){
+						cdsc.setMFreescreenType(MFStype.General);
+					}else if (sctypeStr!=null && sctypeStr.equals(MFStype.Survival.name().toLowerCase())){
+						cdsc.setMFreescreenType(MFStype.Survival);
+					}else {
+						cdsc.setMFreescreenType(MFStype.General);
+					}
+					
+					cdsc.setMFreeaucFolder(L1_emt.elementText("aucFolder").trim());
+					
+					String featureScoreStr = L1_emt.elementText("featureScore");
+					if(featureScoreStr !=null && !featureScoreStr.trim().equals("")){
+						String featureScore[]=featureScoreStr.split(",");
+						for(int i=0;i<featureScore.length;i++){
+							cdsc.addMFreefeatureScore(featureScore[i].trim());
+						}
+					}
+					
+					
+				}
+
+
 			}
 			
 		} catch (DocumentException e) {
@@ -253,7 +399,8 @@ public class SPMdocTool  implements DocumentTool{
 				
 				String line =scanner.nextLine();
 				Integer support = Integer.parseInt(line.substring((line.indexOf(":")+1), line.length()).trim());
-				line = line.substring(0, line.indexOf("SUP"));
+				if(line.contains("#"))line = line.substring(0, line.indexOf("#"));
+				else line = line.substring(0, line.indexOf("SUP"));
 				basicItemsets<Integer> itemsets = new  basicItemsets<Integer>();
 				genItemsets(line,itemsets);
 				
@@ -302,6 +449,7 @@ public class SPMdocTool  implements DocumentTool{
 				String line =scanner.nextLine();
 				String[] id_itemsets = line.split(",");
 				Long id = Long.parseLong(id_itemsets[0].trim());
+				
 				basicItemsets<Integer> itemsets = new  basicItemsets<Integer>(id);
 				genItemsets(id_itemsets[1],itemsets);
 				if(labelList.containsKey(id)){
@@ -316,5 +464,27 @@ public class SPMdocTool  implements DocumentTool{
 			e.printStackTrace();
 		}		
 	}
-	
+	public void parserPreseqDoc(String FileName, ArrayList<basicItemsets> SeqList ) {
+		FileInputStream fis;
+		try {
+			fis = new FileInputStream(FileName);
+			Scanner scanner = new Scanner(fis);
+			
+			while (scanner.hasNextLine()) {
+				
+				String line =scanner.nextLine();
+				String[] id_itemsets = line.split(",");
+				Long id = Long.parseLong(id_itemsets[0].trim());
+				
+				basicItemsets<Integer> itemsets = new  basicItemsets<Integer>(id);
+				genItemsets(id_itemsets[1],itemsets);
+
+				SeqList.add(itemsets);
+			}
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+	}
 }

@@ -9,5 +9,6 @@ public class LabelType {
 	public static final int death = 0;
 	public static final int PredictAlive = 1;
 	public static final int PredictDeath = 0;
-	
+	public static final double featureContained = 1.0;
+	public static final double featureNotContained = 0.0;
 }

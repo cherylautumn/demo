@@ -1,12 +1,14 @@
 package org.imeds.data;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 
-public class SurvivalTime {
+public class SurvivalTime  implements Comparable<SurvivalTime> {
 	private Long id;
 	private Date obs_start_date;
 	private Date obs_end_date;
@@ -16,7 +18,7 @@ public class SurvivalTime {
 	private Integer survival_length;
 	private Integer survival_start;
 	private Integer survival_end;
-	private boolean censored;
+	private boolean failed;
 	
 	private ArrayList<Double> features=new ArrayList<Double>();
 	public ArrayList<Double> getFeatures() {
@@ -32,23 +34,37 @@ public class SurvivalTime {
 		  
 		  this.features.add(Double.parseDouble(s.trim()));
 		}
+		
+	    Calendar cal = Calendar.getInstance();
+	    cal.setTime(this.dis_index_date);
+	    int year = cal.get(Calendar.YEAR);
+		Double age = year - this.features.get(1);
+		this.features.add(age);
 	}
 	public SurvivalTime(){
 		
 	}
-	public SurvivalTime(Long id, Integer survival_length, boolean censored) {
+	public SurvivalTime(Long id, Integer survival_length, boolean failed) {
 		super();
 		this.id = id;
 		this.survival_length = survival_length;
-		this.censored = censored;
+		this.failed = failed;
 	}
-
-	public SurvivalTime(Long id2, Date obs_startDate, Date obs_endDate,
-			Date death_Date) {
+	public SurvivalTime(Long id, Integer survival_length, boolean failed,Date dis_idx_date) {
+		super();
+		this.id = id;
+		this.survival_length = survival_length;
+		this.failed = failed;
+		this.dis_index_date = dis_idx_date;
+	}
+	public SurvivalTime(Long id, Date obs_startDate, Date obs_endDate,
+			Date death_Date,Date dis_idx_date) {
 		// TODO Auto-generated constructor stub
+		this.id = id;
 		this.obs_start_date=obs_startDate;
 		this.obs_end_date=obs_endDate;
 		this.death_date=death_Date;
+		this.dis_index_date=dis_idx_date;
 
 	}
 	public Long getId() {
@@ -81,21 +97,22 @@ public class SurvivalTime {
 	public void setCensored_date(Date censored_date) {
 		this.censored_date = censored_date;
 		int svvlen=0;
-		if(this.death_date!=null){
-			if(!this.death_date.after(this.censored_date)){
-				setCensored(true);
-				svvlen=Days.daysBetween(new DateTime(this.death_date),new DateTime(this.obs_start_date)).getDays();
+		if(this.death_date!=null){ //Death happened			
+			
+			if(!this.death_date.after(this.censored_date)){ //Death happened before censored date
+				setFailed(true);
+				svvlen=Days.daysBetween(new DateTime(this.death_date),new DateTime(this.dis_index_date)).getDays();
 				
-			}else{
-				setCensored(false);
-				svvlen=Days.daysBetween(new DateTime(this.censored_date),new DateTime(this.obs_start_date)).getDays();
+			}else{//Death happend after censored date, right censored.
+				setFailed(false);
+				svvlen=Days.daysBetween(new DateTime(this.censored_date),new DateTime(this.dis_index_date)).getDays();
 			}
-		}else {
-			setCensored(false);
+		}else { //Death not happen
+			setFailed(false);
 			if(!this.obs_end_date.after(this.censored_date)){
-				svvlen=Days.daysBetween(new DateTime(this.obs_end_date),new DateTime(this.obs_start_date)).getDays();
+				svvlen=Days.daysBetween(new DateTime(this.obs_end_date),new DateTime(this.dis_index_date)).getDays();
 			}else{
-				svvlen=Days.daysBetween(new DateTime(this.censored_date),new DateTime(this.obs_start_date)).getDays();
+				svvlen=Days.daysBetween(new DateTime(this.censored_date),new DateTime(this.dis_index_date)).getDays();
 			}
 		}
 		svvlen = Math.abs(svvlen);
@@ -129,16 +146,16 @@ public class SurvivalTime {
 	public void setSurvival_end(Integer survival_end) {
 		this.survival_end = survival_end;
 	}
-	public boolean isCensored() {
-		return censored;
+	public boolean isFailed() {
+		return failed;
 	}
-	public double getCensored() {
-		if(censored)return 1;
+	public double getfailed() {
+		if(failed)return 1;
 		else return 0;		
 		
 	}
-	public void setCensored(boolean censored) {
-		this.censored = censored;
+	public void setFailed(boolean failed) {
+		this.failed =failed;
 	}
 
 	@Override
@@ -150,7 +167,26 @@ public class SurvivalTime {
 			  	  + "," + survival_length 
 			  	  + "," + survival_start
 				  + "," + survival_end
-				  + "," + censored;
+				  + "," + failed;
+	}
+
+//	public int compare(SurvivalTime o1, SurvivalTime o2) {
+//		// TODO Auto-generated method stub
+//		int result = Integer.compare(o1.getSurvival_length(), o2.getSurvival_length());
+//	    if (result != 0) {
+//	      return result;
+//	    }
+//	    
+//		return 0;
+//	}
+	public int compareTo(SurvivalTime o) {
+		// TODO Auto-generated method stub
+		int result = Integer.compare(this.getSurvival_length(), o.getSurvival_length());
+	    if (result != 0) {
+	      return result;
+	    }
+	    
+		return 0;	
 	}
 	
 

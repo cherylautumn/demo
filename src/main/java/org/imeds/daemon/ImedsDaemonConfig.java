@@ -23,6 +23,7 @@ public class ImedsDaemonConfig {
 	 private static String omopDbPassword;
 	 private static String omopDbSearchPath;
 	 private static String private_search_path;
+	 private static boolean omopDbEnable=false;
 	 private static ArrayList<String> patientFeatureExpFolders = new ArrayList<String>();  	
 	 private static ArrayList<String> pearsonOutlierExpFolders = new ArrayList<String>();  
 	 private static ArrayList<String> pearsonOutlierToDB = new ArrayList<String>(); 
@@ -66,12 +67,19 @@ public class ImedsDaemonConfig {
 	public static void setOmopDbSearchPath(String omopDbSearchPath) {
 		ImedsDaemonConfig.omopDbSearchPath = omopDbSearchPath;
 	}
+	public static boolean isOmopDbEnable() {
+		return omopDbEnable;
+	}
+	public static void setOmopDbEnable(boolean omopDbEnable) {
+		ImedsDaemonConfig.omopDbEnable = omopDbEnable;
+	}
 	public static String getPrivate_search_path() {
 		return private_search_path;
 	}
 	public static void setPrivate_search_path(String private_search_path) {
 		ImedsDaemonConfig.private_search_path = private_search_path;
 	}
+
 	public static ArrayList<String> getPatientFeatureExpFolders() {
 		return patientFeatureExpFolders;
 	}
@@ -138,6 +146,10 @@ public class ImedsDaemonConfig {
 					omopDbPassword		= L1_emt.element(omopDbName).elementText("dbPassword");
 					omopDbSearchPath	= L1_emt.element(omopDbName).elementText("search_path");
 					private_search_path = L1_emt.element(omopDbName).elementText("private_search_path");
+					String enable = L1_emt.elementText("enable");
+					if(enable!=null && enable.trim().equalsIgnoreCase("1"))
+						omopDbEnable = true;
+					String private_search_path = L1_emt.element(omopDbName).elementText("private_search_path");
 				}else if(L1_emt.getName().equals("expConfig")){
 					List<Element> expList = L1_emt.element("patientFeaturePrepare").elements("folder");
 					getFolderList(expList, patientFeatureExpFolders);

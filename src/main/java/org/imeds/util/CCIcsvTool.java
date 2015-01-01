@@ -29,6 +29,9 @@ import org.imeds.data.SurvivalTime;
 import org.imeds.data.common.CCIcode;
 import org.imeds.data.common.seqItemPair;
 import org.imeds.db.ImedDB;
+import org.imeds.feature.screening.Tuple;
+import org.imeds.feature.screening.feature;
+import org.imeds.feature.screening.measureScore;
 
 import ca.pfv.spmf.algorithms.sequentialpatterns.prefixSpan_AGP.items.Itemset;
 
@@ -65,7 +68,7 @@ public class CCIcsvTool implements DocumentTool{
 			e.printStackTrace();
 		}       
 	}
-public void SurvivalDataSetCreateDoc(String fileName, ArrayList<String> arrayList, HashMap<Long, SurvivalTime> features) {
+public static void SurvivalDataSetCreateDoc(String fileName, ArrayList<String> arrayList, HashMap<Long, SurvivalTime> features) {
 		
 		//CSV Write Example using CSVPrinter
 //		CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
@@ -91,7 +94,7 @@ public void SurvivalDataSetCreateDoc(String fileName, ArrayList<String> arrayLis
 //					 printer.print(feature.getSurvival_length());
 //					 printer.print(feature.getSurvival_start());
 //					 printer.print(feature.getSurvival_end());
-//					 printer.print(feature.isCensored());
+//					 printer.print(feature.isFailed());
 					 printer.println();					 
 				 //}
 			}
@@ -101,8 +104,8 @@ public void SurvivalDataSetCreateDoc(String fileName, ArrayList<String> arrayLis
 			e.printStackTrace();
 		}       
 	}
-	public void SurvivalCensoredDataSetCreateDoc(String fileName, ArrayList<String> arrayList, HashMap<Long, SurvivalTime> features) {
-		
+	public static void SurvivalCensoredDataSetCreateDoc(String fileName, ArrayList<String> arrayList, ArrayList<SurvivalTime> features) {
+				
 		//CSV Write Example using CSVPrinter
 //		CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
 		CSVFormat format = CSVFormat.RFC4180.withDelimiter(',');
@@ -111,15 +114,16 @@ public void SurvivalDataSetCreateDoc(String fileName, ArrayList<String> arrayLis
 			
 			CSVPrinter printer = new CSVPrinter(new FileWriter(fileName), format);
 
-	        Iterator<Entry<Long, SurvivalTime>> iter =features.entrySet().iterator();
+//	        Iterator<Entry<Long, SurvivalTime>> iter =features.entrySet().iterator();
 	        
 	        printer.printRecord(arrayList);
-	        
-			while (iter.hasNext()) { 
-				Entry<Long, SurvivalTime> entry = iter.next(); 
-				 SurvivalTime feature = entry.getValue();
-				 if(feature.getCensored_date().after(feature.getObs_start_date())){ 
-					 printer.print(entry.getKey());
+	        for(SurvivalTime feature:features){
+//			while (iter.hasNext()) { 
+//				Entry<Long, SurvivalTime> entry = iter.next(); 
+//				 SurvivalTime feature = entry.getValue();
+				 if(feature.getCensored_date().after(feature.getDis_index_date()) && feature.getSurvival_length()>0){ 
+//					 printer.print(entry.getKey());
+					 printer.print(feature.getId());
 					 printer.print(ImedDateFormat.format(feature.getObs_start_date()));
 					 printer.print(ImedDateFormat.format(feature.getObs_end_date()));
 					 printer.print(ImedDateFormat.format(feature.getDeath_date()));
@@ -127,9 +131,33 @@ public void SurvivalDataSetCreateDoc(String fileName, ArrayList<String> arrayLis
 					 printer.print(feature.getSurvival_length());
 					 printer.print(feature.getSurvival_start());
 					 printer.print(feature.getSurvival_end());
-					 printer.print(feature.isCensored());
+					 printer.print(feature.isFailed());
 					 printer.println();					 
 				 }
+			}
+			 printer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}       
+	}
+	public static void SurvivalDataSetCreateDoc(String fileName, ArrayList<String> arrayList, ArrayList<SurvivalTime> features) {
+		
+		//CSV Write Example using CSVPrinter
+//		CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
+		CSVFormat format = CSVFormat.RFC4180.withDelimiter(',');
+		
+		try {
+			
+			CSVPrinter printer = new CSVPrinter(new FileWriter(fileName), format);
+	        printer.printRecord(arrayList);
+	        for(SurvivalTime feature:features){
+					 printer.print(feature.getId());
+					 printer.print(feature.getSurvival_length());
+					 printer.print(feature.isFailed());
+					 printer.print(ImedDateFormat.format(feature.getDis_index_date()));
+					 printer.println();					 
+				// }
 			}
 			 printer.close();
 		} catch (IOException e) {
@@ -150,7 +178,7 @@ public void SurvivalDataSetCreateDoc(String fileName, ArrayList<String> arrayLis
 	        //printer.printRecord(arrayList);
 	        printer.print("ID");
 	        printer.print("Period");
-	        printer.print("Censored");
+	        printer.print("Failed");
 	       
 	        boolean lock=false;
 	        int rid=0;
@@ -167,10 +195,60 @@ public void SurvivalDataSetCreateDoc(String fileName, ArrayList<String> arrayLis
 					 printer.print(entry.getKey());
 					
 					 printer.print(feature.getSurvival_length());
-					// printer.print(feature.isCensored());
-					 if(feature.isCensored())printer.print(1);
+					
+					 if(feature.isFailed())printer.print(1);
 					 else printer.print(0);
-					 ridx_map.put(rid, entry.getKey());
+					 
+					 if(ridx_map!=null)ridx_map.put(rid, entry.getKey());
+					 
+					 for(Double dt:feature.getFeatures()){
+						 printer.print(dt);
+					 }
+					 printer.println();					 
+					 rid++;
+			}
+			 printer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}       
+	}
+	
+	public static void SurvivalDataSetCreateDoc(String fileName,ArrayList<SurvivalTime> DataPoints) {
+		
+		CSVFormat format = CSVFormat.RFC4180.withDelimiter(',');
+		
+		try {
+			
+			CSVPrinter printer = new CSVPrinter(new FileWriter(fileName), format);
+
+//	        Iterator<Entry<Long, SurvivalTime>> iter =DataPoints.entrySet().iterator();
+	        
+	        //printer.printRecord(arrayList);
+	        printer.print("ID");
+	        printer.print("Period");
+	        printer.print("Failed");
+	       
+	        boolean lock=false;
+	        int rid=0;
+//			while (iter.hasNext()) { 
+			for(SurvivalTime feature: DataPoints){	
+//				Entry<Long, SurvivalTime> entry = iter.next(); 
+//				 SurvivalTime feature = entry.getValue();
+				 if(!lock){
+					 for(int k=0;k<feature.getFeatures().size();k++){
+				        	printer.print("D"+k);
+				        }
+					 printer.println();
+					 lock = true;
+				 }
+					 printer.print(feature.getId());
+					
+					 printer.print(feature.getSurvival_length());
+					
+					 if(feature.isFailed())printer.print(1);
+					 else printer.print(0);
+					
 					 for(Double dt:feature.getFeatures()){
 						 printer.print(dt);
 					 }
@@ -290,6 +368,33 @@ public void SurvivalDataSetCreateDoc(String fileName, ArrayList<String> arrayLis
 			e.printStackTrace();
 		}
 	}
+public static void AucCreateDoc(String fileName, ArrayList<measureScore> mscore) {
+		
+		//CSV Write Example using CSVPrinter
+//		CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
+		CSVFormat format = CSVFormat.RFC4180.withDelimiter(',');
+		
+       
+		try {
+			
+			CSVPrinter printer = new CSVPrinter(new FileWriter(fileName), format);
+			printer.print("Count");
+	        printer.print("AUC");
+	        printer.print("Comment");
+	        printer.println();
+	        for(measureScore ms:mscore){
+	        	printer.print(ms.getId());
+	        	printer.print(ms.getScore());
+	        	printer.print(ms.getComment());
+	        	printer.println();
+	        }
+	    
+			 printer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}       
+	}
 	/***********************
 	 * Csv Read
 	 * 
@@ -397,6 +502,8 @@ public void SurvivalDataSetCreateDoc(String fileName, ArrayList<String> arrayLis
 	public static HashMap<Long,Integer> OutlierParserDoc(String fileName) {
 		return OutlierParserDoc(fileName, 0.0);
 	}
+	
+	
 	//discriminative set is normal and outlier
 	public static void OutlierClassParserDoc(String fileName, Double threshold, HashMap<Long, Integer> labelList, HashMap<Long, Double> classList) {
 		
@@ -411,7 +518,7 @@ public void SurvivalDataSetCreateDoc(String fileName, ArrayList<String> arrayLis
 		        	Long id = Long.parseLong(record.get("Id"));
 		        	//FIXME: OUTLIERS IN THIS SET MAY NOT HAVE DRUG SEQ PTN 
 		        	
-		        	if( Double.parseDouble(record.get("Ri"))>=threshold)labelList.put(id, LabelType.yesOutlier);
+		        	if(Math.abs(Double.parseDouble(record.get("Ri")))>=threshold)labelList.put(id, LabelType.yesOutlier);
 		        	else labelList.put(id, LabelType.notOutlier);
 		        	
 		        	
@@ -531,8 +638,13 @@ public void SurvivalDataSetCreateDoc(String fileName, ArrayList<String> arrayLis
 			e.printStackTrace();
 		}       
 	}
-	
-	public static void SurvivalDataSetParserDoc(String fileName,HashMap<Long,SurvivalTime> DataPoints) {
+	public static void SurvivalDataSetParserDoc(String fileName,HashMap<Long,SurvivalTime> DataPoints) throws Exception{
+		SurvivalDataSetParserDoc(fileName,DataPoints,null);
+	}
+	public static void SurvivalDataSetParserDoc(String fileName,ArrayList<SurvivalTime> DataPoints) throws Exception{
+		SurvivalDataSetParserDoc(fileName,null,DataPoints);
+	}
+	public static void SurvivalDataSetParserDoc(String fileName,HashMap<Long,SurvivalTime> DataPoints,ArrayList<SurvivalTime> ArrDataPoints) throws Exception {
 		
 		 //Create the CSVFormat object
 		
@@ -547,9 +659,11 @@ public void SurvivalDataSetCreateDoc(String fileName, ArrayList<String> arrayLis
 	        		        	
 	        	Long Id = Long.parseLong(record.get("ID").trim());
 	        	Integer survival_length = Integer.parseInt(record.get("Period"));
-	        	Boolean censored = Boolean.parseBoolean(record.get("Censored"));
-	        	SurvivalTime st= new SurvivalTime(Id, survival_length, censored);
-	        	DataPoints.put(Id, st);
+	        	Boolean failed = Boolean.parseBoolean(record.get("Failed"));
+	        	Date dis_idx_date = ImedDateFormat.parse(record.get("dis_idx_date"));
+	        	SurvivalTime st= new SurvivalTime(Id, survival_length, failed, dis_idx_date);
+	        	if(DataPoints!=null)DataPoints.put(Id, st);
+	        	if(ArrDataPoints!=null)ArrDataPoints.add(st);
 	        }
 	        //close the parser
 	        parser.close();
@@ -599,8 +713,9 @@ public void SurvivalDataSetCreateDoc(String fileName, ArrayList<String> arrayLis
 		}
 		
 	}
-	public static void SurvivalTrainDataSetParserDoc(String fileName,HashMap<Long,SurvivalTime> DataPoints) {
-		
+	//public static void SurvivalTrainDataSetParserDoc(String fileName,HashMap<Long,SurvivalTime> DataPoints) {
+	public static void SurvivalTrainDataSetParserDoc(String fileName,ArrayList<SurvivalTime> DataPoints) {
+				
 		 //Create the CSVFormat object
 		
       CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
@@ -611,16 +726,18 @@ public void SurvivalDataSetCreateDoc(String fileName, ArrayList<String> arrayLis
 			parser = new CSVParser(new FileReader(fileName), format);
 			
 	        for(CSVRecord record : parser){
-	        	//ID	obs_startDate	obs_endDate	death_date	Period	PeriodStart	PeriodEnd	Censored
+	        	//ID	obs_startDate	obs_endDate	death_date	Period	PeriodStart	PeriodEnd	Failed
 	        	Long Id = Long.parseLong(record.get("ID").trim());
 	        	Date obs_startDate = ImedDateFormat.parse(record.get("obs_startDate"));
 	        	Date obs_endDate = ImedDateFormat.parse(record.get("obs_endDate"));
 	        	
 	        	Date death_Date = ImedDateFormat.parse(record.get("death_date"));
+	        	Date dis_idx_date = ImedDateFormat.parse(record.get("dis_idx_date"));
 	        	
 	        	
-	        	SurvivalTime st= new SurvivalTime(Id, obs_startDate, obs_endDate,death_Date);
-	        	DataPoints.put(Id, st);
+	        	SurvivalTime st= new SurvivalTime(Id, obs_startDate, obs_endDate,death_Date,dis_idx_date);
+	        	DataPoints.add(st);
+//	        	DataPoints.put(Id, st);
 	        }
 	        //close the parser
 	        parser.close();
@@ -666,6 +783,79 @@ public void SurvivalDataSetCreateDoc(String fileName, ArrayList<String> arrayLis
 		}
 		
 	}
+	public static void RegressionDatasetParserDoc(String fileName,ArrayList<Tuple> DataPointList,String ID, ArrayList<String> yTitle,Integer xStart) {
+		
+		 //Create the CSVFormat object
+		
+       CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
+        
+       //initialize the CSVParser object
+       CSVParser parser;
+		try {
+			parser = new CSVParser(new FileReader(fileName), format);
+			Long Id;
+	        for(CSVRecord record : parser){
+	        	Tuple tuple =new Tuple();
+	        	if(ID!=null) tuple.setId(Long.parseLong(record.get(ID).trim()));
+	        	
+	        	for(String yItem:yTitle)tuple.addyList(Double.parseDouble(record.get(yItem)));
+	        	
+	        	for(int i=xStart;i<record.size();i++)tuple.addxList(Double.parseDouble(record.get(i)));
+	        	
+	        	DataPointList.add(tuple);
+	        }
+	        //close the parser
+	        parser.close();
+	     //   System.out.println(codeList);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	public static void dsmcParserDoc(String fileName, String featureId, String featureScoreType, String featureDscp, ArrayList<feature> list){
+		
+		 //Create the CSVFormat object
+		
+     CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
+      
+     //initialize the CSVParser object
+     CSVParser parser;
+		try {
+			parser = new CSVParser(new FileReader(fileName), format);
+			
+	        for(CSVRecord record : parser){
+	        	//support	modelFreeScore	seqId
+	        	
+	        	Long Id = Long.parseLong(record.get(featureId).trim());
+	        	
+	        	Double score = Double.parseDouble(record.get(featureScoreType.trim()).trim());
+	        	
+	        	feature ft=new feature(Id,score);
+	        	if(featureDscp!=null && !featureDscp.trim().equals("")){
+	        		ft.setDescription(featureDscp);
+	        	}
+	        	list.add(ft);
+	        }
+	        //close the parser
+	        parser.close();
+	     //   System.out.println(codeList);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public void parserDoc(String fileName) {
 		// TODO Auto-generated method stub
 		

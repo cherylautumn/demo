@@ -82,11 +82,11 @@ public class MMRFSworker extends Worker {
 				if(lbset.getItemsets().isContained(dscmset.getItemsets())){					
 					//label: outlier(1) or not(0), feature include(1.0 not include (0), patient id
 					
-					dscmset.addDatapoints(new label(lbset.getLabel(), LabelType.yesFeature,lbset.getItemsets().getId(),this.classList.get(lbset.getItemsets().getId())));
+					dscmset.addDatapoints(new label(lbset.getLabel(), LabelType.yesFeature,(long)lbset.getItemsets().getId(),this.classList.get(lbset.getItemsets().getId())));
 					
 					//System.out.println(i+" lb: "+lbset.getLabel()+" yesF:"+LabelType.yesFeature+" : "+dscmset.getDatapoints());
 				}else{
-					dscmset.addDatapoints(new label(lbset.getLabel(), LabelType.notFeature,lbset.getItemsets().getId(),this.classList.get(lbset.getItemsets().getId())));
+					dscmset.addDatapoints(new label(lbset.getLabel(), LabelType.notFeature,(long)lbset.getItemsets().getId(),this.classList.get(lbset.getItemsets().getId())));
 				}
 			}
 			dscmset.getGain(discrimItemsets.TYPE_FISHER_GAIN);
@@ -150,7 +150,7 @@ public class MMRFSworker extends Worker {
 		for(label lb: dscmset.getDatapoints()){
 			if(lb.getFeature_v()==LabelType.yesFeature){			
 				for(labelItemsets e1:this.labelSeqList){
-					if((e1.getItemsets().getId()==lb.getData_id())){
+					if(((long)e1.getItemsets().getId()==lb.getData_id())){
 						if(e1.getItemsets().getReferenceCount()==0){	
 							//data has not been covered
 							rs = true;

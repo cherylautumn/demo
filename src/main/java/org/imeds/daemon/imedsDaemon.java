@@ -35,9 +35,15 @@ public class imedsDaemon {
 		logger.info("Load data\\IMEDS\\ImedsDaemonConfig.xml.");
 		ImedsDaemonConfig.loadImedsDaemonConfig(ImedsDaemonConfigPath);
 		
-		logger.info("IMED database connection.");
-		DbInit();
-	//	RInit();
+	
+		if(ImedsDaemonConfig.isOmopDbEnable()){
+			logger.info("IMED database connection.");
+			DbInit();
+		}else{
+			logger.info("Run without IMED database.");
+		}
+
+		RInit();
 		
 	}
 	/*####################################################################################*
@@ -88,8 +94,8 @@ public class imedsDaemon {
 		// TODO Auto-generated method stub
 		singleton = new imedsDaemon();
 		singleton.service();
-		DbClose();
-		//RClose();
+		//DbClose();
+		RClose();
 	}
 
 }

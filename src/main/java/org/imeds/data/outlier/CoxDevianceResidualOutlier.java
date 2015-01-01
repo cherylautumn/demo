@@ -2,6 +2,8 @@ package org.imeds.data.outlier;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -16,6 +18,7 @@ import org.imeds.data.SurvivalDataSetConfig;
 import org.imeds.data.SurvivalTime;
 import org.imeds.db.ImedDB;
 import org.imeds.db.ImedR;
+import org.imeds.feature.selection.discrimItemsets;
 import org.imeds.util.CCIcsvTool;
 import org.imeds.util.ImedDateFormat;
 import org.imeds.util.OSValidator;
@@ -61,16 +64,22 @@ public class CoxDevianceResidualOutlier extends Outlier {
 		
 	}
 	public void genSvlData(){
-		HashMap<Long, SurvivalTime> patientsSurvival =  new HashMap<Long, SurvivalTime>();
+		//HashMap<Long, SurvivalTime> patientsSurvival =  new HashMap<Long, SurvivalTime>();
+		ArrayList<SurvivalTime> patientsSurvival = new ArrayList<SurvivalTime>();
 		getCsvparser().SurvivalTrainDataSetParserDoc(this.cdsc.getSvltargetFileName(), patientsSurvival);
 		for(Date cend: this.cdsc.getCensorDate()){
-			Iterator<Entry<Long,SurvivalTime>> iter = patientsSurvival.entrySet().iterator();
-			
-			while (iter.hasNext()) {					
-				SurvivalTime csvFeature = iter.next().getValue();
-				csvFeature.setCensored_date(cend);
+//			Iterator<Entry<Long,SurvivalTime>> iter = patientsSurvival.entrySet().iterator();
+//			
+//			while (iter.hasNext()) {					
+//				SurvivalTime csvFeature = iter.next().getValue();
+//				csvFeature.setCensored_date(cend);
+//			}
+			for(SurvivalTime st:patientsSurvival){	
+				st.setCensored_date(cend);				
 			}
 			String filename = this.lrFolder+OSValidator.getPathSep()+ImedDateFormat.format(cend)+"svltrainDS.csv";
+			
+			Collections.sort(patientsSurvival);
 			getCsvparser().SurvivalCensoredDataSetCreateDoc(filename,this.cdsc.getSvlcolList(), patientsSurvival);				
 		}
 	}
@@ -80,13 +89,19 @@ public class CoxDevianceResidualOutlier extends Outlier {
 		
     	//String svfilename="/Users/cheryl/DevWorkSpace/demo/data/IMEDS/TestComorbidDS/2010-10-10svltrainDS.csv";
     	//String trainDSname="/Users/cheryl/DevWorkSpace/demo/data/IMEDS/TestComorbidDS/trainDS.csv";
-    	CCIcsvTool.SurvivalDataSetParserDoc(svFileName, this.DataPoints);    	
-    	CCIcsvTool.SurvivalDataSetFeatureParserDoc(this.targetfileName, this.DataPoints) ;
+    	try {
+			CCIcsvTool.SurvivalDataSetParserDoc(svFileName, this.DataPoints);
+			CCIcsvTool.SurvivalDataSetFeatureParserDoc(this.targetfileName, this.DataPoints) ;
+	    	
+			//String rfileName = "/Users/cheryl/DevWorkSpace/demo/data/IMEDS/TestComorbidDS/2010-10-10svltrainDSforR.csv";
+		    CCIcsvTool.SurvivalDataSetCreateDoc(rFileName, this.DataPoints, this.ridx_map);	
+		   	
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}    	
     	
-		//String rfileName = "/Users/cheryl/DevWorkSpace/demo/data/IMEDS/TestComorbidDS/2010-10-10svltrainDSforR.csv";
-	    CCIcsvTool.SurvivalDataSetCreateDoc(rFileName, this.DataPoints, this.ridx_map);	
-	   	
-	
 	}
 	@Override
 	public void oulierGen() {
@@ -109,7 +124,7 @@ public class CoxDevianceResidualOutlier extends Outlier {
 					for(int i=0;i<coxResidual.size();i++){
 						
 						ArrayList<Double> arr= new ArrayList<Double>();
-						arr.add(this.DataPoints.get(ridx_map.get(i)).getCensored()); //original label						
+						arr.add(this.DataPoints.get(ridx_map.get(i)).getfailed()); //original label						
 						arr.add(coxPredict.get(i));		 //predict score
 						arr.add(coxResidual.get(i));					 //residual
 						

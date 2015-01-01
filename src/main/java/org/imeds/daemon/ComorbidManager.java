@@ -18,7 +18,15 @@ public class ComorbidManager extends ImedsManager {
 		cdt = new CCIDictionary(DeyoCCIPath);
 		cdt.buildDictionary();
 		try {
-			cdt.buildCptMap();
+			if(ImedsDaemonConfig.isOmopDbEnable()){
+				logger.info("buildCptMap.");
+		
+				cdt.buildCptMap();
+			}else{
+				logger.info("Run without buildCptMap.");
+			}
+
+		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			logger.error("CCIDictionary build fail"+writeException.toString(e));

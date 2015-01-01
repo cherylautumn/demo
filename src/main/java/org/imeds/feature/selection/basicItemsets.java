@@ -20,8 +20,14 @@ public class basicItemsets<T> {
     		this.referenceCount--;
     	}
     }
+    public void resetReferenceCount() {
+    	synchronized(this.rcMutex) {
+    		this.referenceCount=0;
+    	}
+    }
 
-    public int getReferenceCount() {
+
+	public int getReferenceCount() {
         return this.referenceCount;
     }
 	public Long getId() {
@@ -62,7 +68,7 @@ public class basicItemsets<T> {
 	public basicItemsets( Long id) {
 		this.id = id;
 	}
-	
+
 	public boolean isContained(basicItemsets<T> its){
 		boolean rs = false;
 		int its_idx = 0;
